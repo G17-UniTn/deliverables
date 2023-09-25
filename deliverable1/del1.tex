@@ -1,0 +1,137 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc} % comment when using lualatex
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref,xcolor}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+
+% Title of your project
+\title{Analisi dei Requisiti}
+
+% Name of deliverable
+\newcommand{\deliverableName}{Deliverable Name}
+
+% Group names(s)
+\author{Raffaele \textsc{Castagna}\\
+Alberto \textsc{Rovesti}\\
+Zeno \textsc{Saletti}}
+
+% Group number
+\newcommand{\groupNumber}{G17}
+
+% Any comments for us
+\newcommand{\comments}{Comments for teachers of the course}
+
+% Web address for the project (if any)
+% \newcommand{\homepage}{\url{https://www.ntnu.edu/studies/courses/IT3010}}
+
+% Date for title page, default is today and 
+\date{\today}
+
+
+\makeatletter{}
+
+% PREAMBLE ENDS HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.3mm}} % Defines a new command for horizontal lines, change thickness here
+\center % Centre everything on the page
+
+
+%------------------------------------------------
+%	Logo
+%------------------------------------------------
+\includegraphics[width=0.3\textwidth]{./unioftrento.png}\\[0.5cm]
+%------------------------------------------------
+%	Headings
+%------------------------------------------------
+\textsc{\Large Dipartimento di Ingegneria e Sceienza dell'Informazione}\\[1.5cm]
+
+{\Huge\textbf{Sleep Code}}\\[0.5cm]
+\textsc{\large Progetto per il Corso di Ingegneria del Software}\\[0.5cm]
+
+%------------------------------------------------
+%	Title
+%------------------------------------------------
+
+\HRule\\[0.4cm]
+{\huge\bfseries \@title}\\[0.1cm]
+\HRule\\[1cm]
+
+\begin{minipage}{\textwidth}
+\begin{flushleft}
+\textit{Descrizione:} documento di analisi dei requisiti funzionali, non funzionali, front-end e back-end.\\
+\textit{Numero documento:} D1
+\end{flushleft}
+\end{minipage}\\[1.5cm]
+
+
+
+%------------------------------------------------
+%	Author(s)
+%------------------------------------------------
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+\large
+\textit{Membri del gruppo:}\\
+\@author % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright}
+\large
+\textit{Numero gruppo: }
+\groupNumber
+\end{flushright}
+\end{minipage}
+
+% 	If you don't want a supervisor, uncomment the two lines below and comment the code above
+% 	{\large\textit{Author(s)}}\\
+% 	\@author % Your name
+
+%------------------------------------------------
+%	Date
+%------------------------------------------------
+
+\vfill\vfill
+\textit{Ultima revisione:}
+{\@date}
+\vfill\vfill\vfill
+
+\footnotesize{Comments: \comments}
+
+
+\end{titlepage}
+
+
+\tableofcontents
+
+\newpage
+\section{Obiettivi del progetto}
+\subsection{Premessa}
+Riteniamo sia inadeguato esporre gli obiettivi del progetto senza innanzitutto specificare a \textit{chi} tale progetto intende rivolgersi
+
+\subsection{Obiettivi}
+Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità di giovani informatici un servizio di \textit{esercitazione} mirata alla programmazione e di \textit{raccolta} di problemi inerenti.
+
+Tale servizio si rivolge, in modo particolare, a coloro che sono coinvolti in percorsi di studio attinenti all'ambito informatico, ma anche a chiunque desideri cimentarsi nella risoluzione di piccoli problemi di programmazione. A questo pubblico di singoli individui, che da qui in poi verranno indicati col termine \textit{utenti}, il progetto vuole proporsi come piattaforma per l'esercitazione, l'approfondimento e l'autovalutazione delle proprie conoscenze e abilità di \textit{problem solving}
+legate alla programmazione. Per questo motivo, è essenziale che il servizio si renda utile alla raccolta di quesiti e risorse da offrire agli utenti che desiderano usufruirne per realizzare gli scopi di cui sopra. Per risorse si intendono: i sopracitati problemi, i quali richiedono una soluzione codificata in forma di algoritmo;
+gli strumenti utili alla ricerca e consultazione dei quesiti\footnote{In questo documento, intendiamo quesiti e problemi come termini per indicare la stessa cosa.}, alla scrittura e compilazione di codice (sulla base dei linguaggi di programmazione messi a disposizione), all'esecuzione e alla valutazione della correttezza dell'algoritmo, scritto per mezzo del codice, mediante operazioni di testing automatizzate.
+
+Distinguiamo un'altra categoria di persone di cui il servizio vuole
+
+\section{Requisiti funzionali}
+Il progetto consiste in una piattaforma che dovrà essere accessibile online, da parte dei singoli utenti, mediante credenziali di login.
+
+
+\section{Requisiti non funzionali}
+\section{Design front-end}
+\section{Design back-end}
+
+
+\end{document}
