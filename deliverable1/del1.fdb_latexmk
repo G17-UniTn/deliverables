@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1695803735 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1695803736
+["pdflatex"] 1695804183 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1695804184
   "/etc/texmf/web2c/texmf.cnf" 1670017924 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1695803734 4961 600c4bdfd0888e8385199a536117d3d3 ""
+  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1695804178 3040 e82cf6dbfdd983af72fc6eb3ffb3019d ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -87,10 +87,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1670017928 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1695745363 1407043 8be3ec44ca5f54f94ef0b8268753d863 ""
-  "del1.aux" 1695803736 1728 ac0d7200f359e2f7f00f70cfb3abf593 "pdflatex"
-  "del1.out" 1695803736 1083 6d5f369f3fb15536f45e64765d3f8650 "pdflatex"
-  "del1.tex" 1695803734 4961 600c4bdfd0888e8385199a536117d3d3 ""
-  "del1.toc" 1695803736 672 dd670fd8f6c01165db3e28a1484b6fff "pdflatex"
+  "copertina.tex" 1695804183 1759 1e93e7e76a0217227d95b6c88003a7e9 ""
+  "del1.aux" 1695804184 1728 ac0d7200f359e2f7f00f70cfb3abf593 "pdflatex"
+  "del1.out" 1695804184 1083 6d5f369f3fb15536f45e64765d3f8650 "pdflatex"
+  "del1.tex" 1695804178 3040 e82cf6dbfdd983af72fc6eb3ffb3019d ""
+  "del1.toc" 1695804184 672 dd670fd8f6c01165db3e28a1484b6fff "pdflatex"
   "unioftrento.png" 1695803044 88217 ce7a7e57c161ec060f07f2522437cd53 ""
   (generated)
   "del1.aux"
