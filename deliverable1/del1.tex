@@ -1,28 +1,21 @@
-%% NUOVO COMMENTO CHE DEVE APPARIRE
-%% SPERIAMO FUNZIONI
-
 \documentclass[11pt, a4paper]{article}
 
 %\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % comment when using lualatex
 \usepackage[italian]{babel}
-
-\usepackage{babel}
 \usepackage{fullpage}
 \usepackage{graphicx}
-\usepackage[hidelinks]{hyperref,xcolor}
+\usepackage[hidelinks]{hyperref,xcolor} % link di pagina
 \renewcommand\UrlFont{\color{blue}\rmfamily}
 
 
-% Title of your project
+
 \title{Analisi dei Requisiti}
 
-% Group names(s)
 \author{Raffaele \textsc{Castagna}\\
 Alberto \textsc{Rovesti}\\
 Zeno \textsc{Saletti}}
 
-% Group number
 \newcommand{\groupNumber}{G17}
 
 % Web address for the project (if any)
@@ -35,6 +28,11 @@ Zeno \textsc{Saletti}}
 
 % IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+
+
 \begin{document}
 
 % La pagina di copertina si trova in un file .tex a parte
@@ -42,29 +40,48 @@ Zeno \textsc{Saletti}}
 
 \tableofcontents
 
+
 \newpage
-\section{Introduzione e scopi}
-\subsection{Obiettivi del progetto}
+\section{Introduzione}
 
-
-\subsection{Premessa}
-Riteniamo sia inadeguato esporre gli obiettivi del progetto senza innanzitutto specificare a \textit{chi} tale progetto intende rivolgersi
-
-\subsection{Obiettivi}
+\subsection{Obiettivo del progetto}
 Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità
 di giovani informatici un servizio di \textit{esercitazione} e di
-\textit{raccolta} di problemi mirati alla programmazione.
+\textit{raccolta} di problemi mirati alla programmazione e alla progettazione
+di piccoli algoritmi risolutivi, mediante la scrittura di codice.
 
-Tale servizio si rivolge, in modo particolare, a coloro che sono coinvolti
-in percorsi di studio attinenti all'ambito informatico, ma anche a chiunque
-desideri cimentarsi nella risoluzione di piccoli problemi di programmazione.
-A questo pubblico di singoli individui, che da qui in poi verranno indicati
-col termine \textit{utenti}, il progetto vuole proporsi come piattaforma per l'esercitazione, l'approfondimento e l'autovalutazione delle proprie conoscenze e abilità di \textit{problem solving}
-legate alla programmazione e scrittura di codice. Per questo motivo, è essenziale che il servizio
-si renda utile alla raccolta di quesiti e risorse da offrire agli utenti
-che desiderano usufruirne per realizzare gli scopi di cui sopra.
-Per risorse si intendono: i sopracitati problemi, i quali richiedono
-una soluzione codificata in forma di algoritmo;
+\subsection{Contesto di business?}
+
+
+
+\subsection{Attori coinvolti}
+Per comprendere meglio i requisiti che verranno descritti in seguito (in
+particolar modo quelli funzionali), è innanzitutto essenziale specificare
+il pubblico, insieme alle loro potenziali esigenze, al quale il servizio
+intende rivolgersi.
+Tale servizio vuole rendersi utile soprattutto a coloro che sono coinvolti
+in percorsi di studio attinenti all'ambito informatico, ma specialmente anche
+a chiunque desideri cimentarsi nella risoluzione di piccoli problemi di
+programmazione; pertanto ci si aspetta che chiunque desideri usufruire del
+servizio possieda . Il progetto che verrà sviluppato ha di fatto lo scopo di
+offrire
+
+D'ora in avanti, in questo e nei successivi documenti, questo pubblico di
+singoli individui appena descritti verrà indicato con il termine
+\textit{utenti}.
+
+
+\section*{Note}
+
+il progetto vuole proporsi come piattaforma per
+l'esercitazione, l'approfondimento e l'autovalutazione delle proprie conoscenze
+e abilità di \textit{problem solving} legate alla programmazione e scrittura di
+codice.
+
+Per questo motivo, è essenziale che il servizio si renda utile alla
+raccolta di quesiti e risorse da offrire agli utenti che desiderano usufruirne
+per realizzare gli scopi di cui sopra. Per risorse si intendono: i sopracitati
+problemi, i quali richiedono una soluzione codificata in forma di algoritmo;
 gli strumenti utili alla ricerca e consultazione dei
 quesiti\footnote{In questo documento, intendiamo quesiti e problemi
 come termini per indicare la stessa cosa.}, alla scrittura e
@@ -73,9 +90,11 @@ messi a disposizione), all'esecuzione e alla valutazione della
 correttezza dell'algoritmo, scritto per mezzo del codice, mediante
 opportune operazioni di testing automatizzate.
 
-
 \section{Requisiti funzionali}
-Il progetto consiste in una piattaforma che dovrà essere accessibile online, da parte dei singoli utenti, mediante credenziali di login.
+Vengono di seguito elencati i principali requisiti funzionali della
+piattaforma.
+
+
 
 \section{Requisiti non funzionali}
 
@@ -83,6 +102,5 @@ Il progetto consiste in una piattaforma che dovrà essere accessibile online, da
 
 \section{Design front-end}
 \section{Design back-end}
-
 
 \end{document}
