@@ -50,6 +50,13 @@ Zeno \textsc{Saletti}}
 
 \newpage
 \section{Introduzione}
+\subsection{Scopo del documento}
+Le informazioni contenute in questo documento concorrono ad esporre l'analisi
+dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
+aver specificato gli obiettivi e gli attori coinvolti—utenti finali e
+utilizzatori del frutto di questo progetto—verranno definiti i requisiti
+funzionali e non funzionali; verrà presentata una proposta di design di
+back-end; saranno riportati i servizi di back-end.
 
 
 \subsection{Obiettivo del progetto}
@@ -57,8 +64,6 @@ Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità
 di giovani informatici un servizio online di \textit{esercitazione} e di
 \textit{raccolta} di problemi mirati alla programmazione e alla progettazione
 di piccoli algoritmi risolutivi, mediante la scrittura di codice.
-
-\subsection{Contesto di business?}
 
 \subsection{Attori coinvolti ed esigenze}
 Per comprendere meglio i requisiti che verranno descritti in seguito (in
@@ -70,8 +75,7 @@ in percorsi di studio attinenti all'ambito informatico, ma specialmente anche
 a chiunque desideri cimentarsi nella risoluzione di piccoli problemi di
 programmazione; pertanto ci si aspetta che chiunque desideri usufruire del
 servizio possieda almeno le conoscenze basilari della programmazione. Esempi
-di queste nozioni pregresse, che tuttavia non devono necessariamente essere ampie e approfondite per utilizzare il servizio\footnote{Indubbiamente gli
-utenti più esperti possono trarre vantaggio dal loro bagaglio culturale per
+di queste nozioni pregresse, che tuttavia non devono necessariamente essere ampie e approfondite per utilizzare il servizio\footnote{Gli utenti più esperti possono indubbiamente trarre vantaggio dal loro bagaglio culturale per
 approcciarsi con maggior facilità al servizio.}, sono: cosa si intende per
 algoritmo e linguaggio di programmazione, familiarità nell'uso di qualche
 linguaggio di programmazione, tipi e strutture di dati più comuni.
@@ -86,12 +90,13 @@ esercitarsi, valutare e approfondire le personali conoscenze e abilità di
 D'ora in avanti, in questo e nei successivi documenti, questo pubblico di
 individui appena descritti verrà indicato con il termine \textit{utenti}.
 
+\newpage
 \section{Requisiti funzionali}
 Vengono di seguito elencati i principali requisiti funzionali del progetto.
 Essi sono organizzati secondo uno schema che segue gli obiettivi elencati nei
 paragrafi precedenti. Più in particolare, ogni sottosezione di questa parte
 del documento risponde a diversi scopi precedentemente accennati, suddividendo
-eventuali macro-funzioni in requisiti minori, nel caso di obiettivi più ampi.
+eventuali macro-funzioni in requisiti minori nel caso di obiettivi più ampi.
 
 \subsection*{Accesso al servizio}
 
@@ -101,7 +106,8 @@ Altro requisito funzionale
 
 
 \subsection*{Consultazione dei problemi}
-Il servizio deve mettere a disposizione, tra le altre risorse, un insieme di problemi sui quali l'utente possa esercitarsi. Tali problemi sono 
+Il servizio deve mettere a disposizione, tra le altre risorse, un insieme di problemi sui quali l'utente possa esercitarsi. [come sono fatti i problemi,
+come sono classificati, come vengono ordinati e categorizzati.]
 
 \begin{funcreq}
 L'utente deve poter consultare un catalogo di problemi e navigare al suo
@@ -114,9 +120,32 @@ interno. In particolare, l'utente deve poter:
 \end{enumerate}
 \end{funcreq}
 
-\subsection*{Esercitazione}
+\subsection*{Esercitazione e risoluzione dei problemi}
 \begin{funcreq}
-L'utente deve poter selezionare, attraverso l'apposito catalogo, il problema desiderato e avviare una sessione di esercitazione al fine di risolverlo.
+L'utente deve poter selezionare, attraverso l'apposito catalogo, il problema desiderato e avviare una sessione di esercitazione con lo scopo di risolverlo. A
+tal fine, l'utente deve poter:
+\begin{enumerate}
+    \item Attivare il problema scelto, cioè visualizzarlo ed eseguire le
+    funzionalità mostrate nei prossimi punti.
+    
+    \item Essere al corrente di quale linguaggio di programmazione sia
+    attualmente attivo per la scrittura di codice, tramite un menu dedicato
+    dal quale deve altresì essere possibile selezionare uno dei linguaggi
+    disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi, si veda RNF \ref{scalabilita}}.
+    
+    \item Scrivere, sotto forma di codice nel linguaggio di programmazione
+    scelto, l'algoritmo risolutivo del problema attualmente attivo.
+
+    \item 
+\end{enumerate}
+\end{funcreq}
+
+\begin{funcreq}
+L'utente deve poter verificare la correttezza del codice scritto. In
+particolare, l'utente deve poter:
+\begin{enumerate}
+    \item 
+\end{enumerate}
 \end{funcreq}
 
 
@@ -143,15 +172,12 @@ opportune operazioni di testing automatizzate.
 \end{itemize}
 
 
-Vengono di seguito elencati i principali requisiti funzionali della
-piattaforma.
-
-\subsection{Requisiti generali}
-
 \section{Requisiti non funzionali}
-\textbf{RNF1: } lorem lorem lorem
-\\\\
-\textbf{RNF2: }
+
+\begin{nonfuncreq}
+\label{scalabilita}
+\textbf{Scalabilità:}
+\end{nonfuncreq}
 
 \section{Design front-end}
 

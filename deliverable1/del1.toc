@@ -1,11 +1,10 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 \contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Obiettivo del progetto}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Contesto di business?}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.1}Scopo del documento}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Obiettivo del progetto}{2}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Attori coinvolti ed esigenze}{2}{subsection.1.3}%
-\contentsline {section}{\numberline {2}Requisiti funzionali}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Requisiti generali}{4}{subsection.2.1}%
+\contentsline {section}{\numberline {2}Requisiti funzionali}{3}{section.2}%
 \contentsline {section}{\numberline {3}Requisiti non funzionali}{4}{section.3}%
 \contentsline {section}{\numberline {4}Design front-end}{4}{section.4}%
 \contentsline {section}{\numberline {5}Design back-end}{4}{section.5}%
