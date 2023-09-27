@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1695807001 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1695807001
+["pdflatex"] 1695817644 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1695817645
   "/etc/texmf/web2c/texmf.cnf" 1670017924 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1695807001 3323 894d255ec26527d086c78dd1fecc5db8 ""
+  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1695817644 4274 6f8ca9f064f9e53be8228f1e7728058f ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -59,6 +59,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo" 1636758526 8464 74db94825c407b51399ca17d9bd38a3d ""
   "/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1601931149 46845 3b58f70c6e861a13d927bff09d35ecbc ""
+  "/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty" 1312311212 25776 d28bd6d82f168f8cb2268584b67a2a98 ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1459978653 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1465944070 1224 978390e9c2234eab29404bc21b268d1e ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def" 1601931164 19103 48d29b6e2a64cb717117ef65f107b404 ""
@@ -88,10 +89,10 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1670017928 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1695745363 1407043 8be3ec44ca5f54f94ef0b8268753d863 ""
   "copertina.tex" 1695804183 1759 1e93e7e76a0217227d95b6c88003a7e9 ""
-  "del1.aux" 1695807001 1740 5c310fafb6053176b4b35c0f3b9dc90d "pdflatex"
-  "del1.out" 1695807001 1146 525c37719d430269043c82320125fd96 "pdflatex"
-  "del1.tex" 1695807001 3323 894d255ec26527d086c78dd1fecc5db8 ""
-  "del1.toc" 1695807001 684 2ef9fb8f53313f8b39840fb281627859 "pdflatex"
+  "del1.aux" 1695817645 1877 32856a858cb80953b72012fb02b8fb24 "pdflatex"
+  "del1.out" 1695817645 1362 697be4375597b213110a76d4b27eed4c "pdflatex"
+  "del1.tex" 1695817644 4274 6f8ca9f064f9e53be8228f1e7728058f ""
+  "del1.toc" 1695817645 780 85d0363c1c059683a453a3b34df0b341 "pdflatex"
   "unioftrento.png" 1695803044 88217 ce7a7e57c161ec060f07f2522437cd53 ""
   (generated)
   "del1.aux"

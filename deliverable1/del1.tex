@@ -6,6 +6,7 @@
 \usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref,xcolor} % link di pagina
+\usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
 \renewcommand\UrlFont{\color{blue}\rmfamily}
 
 
@@ -46,15 +47,13 @@ Zeno \textsc{Saletti}}
 
 \subsection{Obiettivo del progetto}
 Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità
-di giovani informatici un servizio di \textit{esercitazione} e di
+di giovani informatici un servizio online di \textit{esercitazione} e di
 \textit{raccolta} di problemi mirati alla programmazione e alla progettazione
 di piccoli algoritmi risolutivi, mediante la scrittura di codice.
 
 \subsection{Contesto di business?}
 
-
-
-\subsection{Attori coinvolti}
+\subsection{Attori coinvolti ed esigenze}
 Per comprendere meglio i requisiti che verranno descritti in seguito (in
 particolar modo quelli funzionali), è innanzitutto essenziale specificare
 il pubblico, insieme alle loro potenziali esigenze, al quale il servizio
@@ -63,28 +62,34 @@ Tale servizio vuole rendersi utile soprattutto a coloro che sono coinvolti
 in percorsi di studio attinenti all'ambito informatico, ma specialmente anche
 a chiunque desideri cimentarsi nella risoluzione di piccoli problemi di
 programmazione; pertanto ci si aspetta che chiunque desideri usufruire del
-servizio possieda . Il progetto che verrà sviluppato ha di fatto lo scopo di
-offrire
+servizio possieda almeno le conoscenze basilari della programmazione. Esempi
+di queste nozioni pregresse, che tuttavia non devono necessariamente essere ampie e approfondite per utilizzare il servizio\footnote{Indubbiamente gli
+utenti più esperti possono trarre vantaggio dal loro bagaglio culturale per
+approcciarsi con maggior facilità al servizio.}, sono: cosa si intende per
+algoritmo e linguaggio di programmazione, familiarità nell'uso di qualche
+linguaggio di programmazione, tipi e strutture di dati più comuni.
+%% PROBLEMA: il servizio NON offre TUTTI i linguaggi di programmazione
+%% esistenti, quindi l'utente potrebbe essere limitato sotto questo
+%% punto di vista.
 
+Di fatto, il progetto che verrà sviluppato ha come scopo principale di
+creare una piattaforma accessibile a singoli utilizzatori che desiderano
+esercitarsi, valutare e approfondire le personali conoscenze e abilità di
+\textit{problem solving} legate alla programmazione.
 D'ora in avanti, in questo e nei successivi documenti, questo pubblico di
-singoli individui appena descritti verrà indicato con il termine
-\textit{utenti}.
+individui appena descritti verrà indicato con il termine \textit{utenti}.
 
 
+\newpage
 \section*{Note}
-
-il progetto vuole proporsi come piattaforma per
-l'esercitazione, l'approfondimento e l'autovalutazione delle proprie conoscenze
-e abilità di \textit{problem solving} legate alla programmazione e scrittura di
-codice.
-
 Per questo motivo, è essenziale che il servizio si renda utile alla
 raccolta di quesiti e risorse da offrire agli utenti che desiderano usufruirne
 per realizzare gli scopi di cui sopra. Per risorse si intendono: i sopracitati
 problemi, i quali richiedono una soluzione codificata in forma di algoritmo;
 gli strumenti utili alla ricerca e consultazione dei
-quesiti\footnote{In questo documento, intendiamo quesiti e problemi
-come termini per indicare la stessa cosa.}, alla scrittura e
+quesiti\footnote{Quesiti e problemi saranno intesi come termini per indicare la stessa cosa, ovvero descrizioni in linguaggio
+naturale di un qualche scenario che richiede di essere risolto per mezzo
+della scrittura di un algoritmo.}, alla scrittura e
 compilazione di codice (sulla base dei linguaggi di programmazione
 messi a disposizione), all'esecuzione e alla valutazione della
 correttezza dell'algoritmo, scritto per mezzo del codice, mediante
@@ -94,11 +99,12 @@ opportune operazioni di testing automatizzate.
 Vengono di seguito elencati i principali requisiti funzionali della
 piattaforma.
 
-
+\subsection{Requisiti generali}
 
 \section{Requisiti non funzionali}
-
-
+\textbf{RNF1: } lorem lorem lorem
+\\\\
+\textbf{RNF2: }
 
 \section{Design front-end}
 \section{Design back-end}
