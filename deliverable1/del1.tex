@@ -7,8 +7,14 @@
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref,xcolor} % link di pagina
 \usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
+
 \renewcommand\UrlFont{\color{blue}\rmfamily}
 
+\usepackage{amsthm}
+\theoremstyle{definition}
+
+\newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
+\newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
 
 
 \title{Analisi dei Requisiti}
@@ -45,6 +51,7 @@ Zeno \textsc{Saletti}}
 \newpage
 \section{Introduzione}
 
+
 \subsection{Obiettivo del progetto}
 Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità
 di giovani informatici un servizio online di \textit{esercitazione} e di
@@ -79,6 +86,42 @@ esercitarsi, valutare e approfondire le personali conoscenze e abilità di
 D'ora in avanti, in questo e nei successivi documenti, questo pubblico di
 individui appena descritti verrà indicato con il termine \textit{utenti}.
 
+\section{Requisiti funzionali}
+Vengono di seguito elencati i principali requisiti funzionali del progetto.
+Essi sono organizzati secondo uno schema che segue gli obiettivi elencati nei
+paragrafi precedenti. Più in particolare, ogni sottosezione di questa parte
+del documento risponde a diversi scopi precedentemente accennati, suddividendo
+eventuali macro-funzioni in requisiti minori, nel caso di obiettivi più ampi.
+
+\subsection*{Accesso al servizio}
+
+\begin{funcreq}
+Altro requisito funzionale
+\end{funcreq}
+
+
+\subsection*{Consultazione dei problemi}
+Il servizio deve mettere a disposizione, tra le altre risorse, un insieme di problemi sui quali l'utente possa esercitarsi. Tali problemi sono 
+
+\begin{funcreq}
+L'utente deve poter consultare un catalogo di problemi e navigare al suo
+interno. In particolare, l'utente deve poter:
+\begin{enumerate}
+    \item Visualizzare tale catalogo in una vista dedicata (si veda la
+    sezione riguardante il design di front-end per ulteriori dettagli).
+    \item Cercare uno o più problemi specifici mediante ricerca per campi (nome,
+    difficoltà).
+\end{enumerate}
+\end{funcreq}
+
+\subsection*{Esercitazione}
+\begin{funcreq}
+L'utente deve poter selezionare, attraverso l'apposito catalogo, il problema desiderato e avviare una sessione di esercitazione al fine di risolverlo.
+\end{funcreq}
+
+
+\subsection*{Valutazione}
+
 
 \newpage
 \section*{Note}
@@ -95,7 +138,11 @@ messi a disposizione), all'esecuzione e alla valutazione della
 correttezza dell'algoritmo, scritto per mezzo del codice, mediante
 opportune operazioni di testing automatizzate.
 
-\section{Requisiti funzionali}
+\begin{itemize}
+    \item 
+\end{itemize}
+
+
 Vengono di seguito elencati i principali requisiti funzionali della
 piattaforma.
 
@@ -107,6 +154,7 @@ piattaforma.
 \textbf{RNF2: }
 
 \section{Design front-end}
+
 \section{Design back-end}
 
 \end{document}
