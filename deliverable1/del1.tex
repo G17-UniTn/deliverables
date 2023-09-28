@@ -56,7 +56,7 @@ dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
 aver specificato gli obiettivi e gli attori coinvolti—utenti finali e
 utilizzatori del frutto di questo progetto—verranno definiti i requisiti
 funzionali e non funzionali; verrà presentata una proposta di design di
-back-end; saranno riportati i servizi di back-end.
+back-end; infine saranno riportati i servizi di back-end.
 
 
 \subsection{Obiettivo del progetto}
@@ -122,8 +122,9 @@ interno. In particolare, l'utente deve poter:
 
 \subsection*{Esercitazione e risoluzione dei problemi}
 \begin{funcreq}
-L'utente deve poter selezionare, attraverso l'apposito catalogo, il problema desiderato e avviare una sessione di esercitazione con lo scopo di risolverlo. A
-tal fine, l'utente deve poter:
+L'utente deve poter selezionare, attraverso l'apposito catalogo, il
+problema desiderato avviando una sessione di esercitazione con lo scopo
+di risolverlo. A tal fine, l'utente deve poter:
 \begin{enumerate}
     \item Attivare il problema scelto, cioè visualizzarlo ed eseguire le
     funzionalità mostrate nei prossimi punti.
@@ -134,42 +135,33 @@ tal fine, l'utente deve poter:
     disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi, si veda RNF \ref{scalabilita}}.
     
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
-    scelto, l'algoritmo risolutivo del problema attualmente attivo.
-
-    \item 
+    scelto, l'algoritmo risolutivo del problema attualmente attivo. La
+    scrittura deve poter essere effettuata in una vista o finestra apposita.
 \end{enumerate}
 \end{funcreq}
 
 \begin{funcreq}
-L'utente deve poter verificare la correttezza del codice scritto. In
-particolare, l'utente deve poter:
+L'utente deve poter verificare che il codice scritto sia sintatticamente
+corretto e pronto per l'esecuzione. Quindi devono essere messe a disposizione
+le seguenti funzionalità:
 \begin{enumerate}
-    \item 
+    \item Compilazione del codice.
+    \item Visualizzazione di avvisi relativi a eventuali errori di sintassi
+    \textit{oppure} di compilazione andata a buon fine.
 \end{enumerate}
 \end{funcreq}
 
+\begin{funcreq}
+L'utente deve poter verificare la correttezza del codice scritto eseguendolo,
+ovvero:
+\begin{enumerate}
+    \item .
+\end{enumerate}
+\end{funcreq}
 
-\subsection*{Valutazione}
+\subsection*{Valutazione della propria carriera}
 
 
-\newpage
-\section*{Note}
-Per questo motivo, è essenziale che il servizio si renda utile alla
-raccolta di quesiti e risorse da offrire agli utenti che desiderano usufruirne
-per realizzare gli scopi di cui sopra. Per risorse si intendono: i sopracitati
-problemi, i quali richiedono una soluzione codificata in forma di algoritmo;
-gli strumenti utili alla ricerca e consultazione dei
-quesiti\footnote{Quesiti e problemi saranno intesi come termini per indicare la stessa cosa, ovvero descrizioni in linguaggio
-naturale di un qualche scenario che richiede di essere risolto per mezzo
-della scrittura di un algoritmo.}, alla scrittura e
-compilazione di codice (sulla base dei linguaggi di programmazione
-messi a disposizione), all'esecuzione e alla valutazione della
-correttezza dell'algoritmo, scritto per mezzo del codice, mediante
-opportune operazioni di testing automatizzate.
-
-\begin{itemize}
-    \item 
-\end{itemize}
 
 
 \section{Requisiti non funzionali}
