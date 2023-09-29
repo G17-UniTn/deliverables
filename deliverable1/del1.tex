@@ -79,9 +79,6 @@ di queste nozioni pregresse, che tuttavia non devono necessariamente essere ampi
 approcciarsi con maggior facilità al servizio.}, sono: cosa si intende per
 algoritmo e linguaggio di programmazione, familiarità nell'uso di qualche
 linguaggio di programmazione, tipi e strutture di dati più comuni.
-%% PROBLEMA: il servizio NON offre TUTTI i linguaggi di programmazione
-%% esistenti, quindi l'utente potrebbe essere limitato sotto questo
-%% punto di vista.
 
 Di fatto, il progetto che verrà sviluppato ha come scopo principale di
 creare una piattaforma accessibile a singoli utilizzatori che desiderano
@@ -99,12 +96,43 @@ ogni sottosezione di questa parte del documento risponde a diversi
 scopi precedentemente accennati, suddividendo eventuali macro-funzioni
 in requisiti minori nel caso di obiettivi di più ampia portata.
 
-\subsection{Accesso}
+\subsection{Gestione accesso e account personale}
 
 \begin{funcreq}
-Altro requisito funzionale
+\textbf{Registrazione:}
+Il sistema deve mettere a disposizione dell'utente anonimo una pagina
+nella quale sia possibile effettuare la registrazione alla piattaforma
+online. Devono essere richiesti i seguenti campi:
+\begin{itemize}
+    \item Indirizzo email.
+    \item Nome utente.
+    \item Password: la password deve essere oscurata durante l'inserimento.
+    Al fine di limitare gli errori di digitazione e l'inserimento di una
+    password che non corrisponde a quella scelta dall'utente, deve essere
+    presente un secondo campo di conferma della password, dove quest'ultima
+    deve essere riscritta.
+\end{itemize}
 \end{funcreq}
 
+\begin{funcreq}
+\textbf{Login:}
+Il sistema deve permettere all'utente già registrato al servizio di
+accedere alla piattaforma mediante l'inserimento dell'indirizzo
+email e la password, impostate in fase di registrazione.
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Logout:}
+L'utente deve poter interrompere una sessione di login.
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Recupero password:}
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Aggiornamento account:}
+\end{funcreq}
 
 \subsection{Consultazione dei problemi}
 
@@ -175,7 +203,7 @@ le seguenti funzionalità:
 \end{funcreq}
 
 \begin{funcreq}
-\textbf{Verifica della correttezza\footnote{La \textit{correttezza} di cui si parla in questo caso riguarda solo l'efficacia risolutiva dell'algoritmo.}:}
+\textbf{Verifica della correttezza dell'algoritmo\footnote{La \textit{correttezza} di cui si parla in questo caso riguarda solo l'efficacia risolutiva dell'algoritmo.}:}
 L'utente deve poter verificare la correttezza del codice scritto eseguendolo
 e testandolo:
 \begin{enumerate}
@@ -211,15 +239,19 @@ che seguono, si raggiunge l'obiettivo dell'autovalutazione delle personali
 capacità dell'utente.
 
 \begin{funcreq}
-\textbf{}
 \end{funcreq}
 
+\begin{funcreq}
+\end{funcreq}
 
 
 \newpage
 \section{Requisiti non funzionali}
+Vengono ora elencati i requisiti non funzionali (RNF) del servizio.
 
-\subsection*{Caratteristiche delle risorse}
+\subsection{Caratteristiche delle risorse}
+Alcuni requisiti funzionali sono dedicati alla descrizione delle principali
+risorse fornite dalla piattaforma, di cui le principali sono i problemi.
 
 \begin{nonfuncreq}
 \label{formatoproblema}
@@ -246,9 +278,14 @@ caratterizzata dai seguenti dati descrittivi:
     \item Nome identificativo: si tratta di una stringa alfanumerica, che
     riprende una o più parole chiave del titolo del problema di cui al
     RNF \ref{formatoproblema}.
+    
     \item Difficoltà: ogni problema possiede un'etichetta (\textit{tag})
-    associata che ne valuta la difficolta in modo indicativo: bassa 
-    intermedia, alta.
+    associata che ne valuta la difficolta in modo indicativo: bassa,
+    intermedia e alta.
+
+    \item Categoria: la categoria indica la principale area di interesse
+    del problema, come ad esempio le strutture di dati di cui tratta
+    (array, grafi e altro).
 \end{itemize}
 \end{nonfuncreq}
 
@@ -269,8 +306,20 @@ disponibilità online del servizio che verrà sviluppato. In particolare:
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
+\label{compatibility}
+\textbf{Compatibilità:}
+La piattaforma del servizio deve essere accessibile mediante i principali
+browser al momento disponibili in commercio.
+%disponibile anche a dispositivi mobili?
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
 \textbf{Usabilità:}
-Le funzionalità 
+Sottolineando nuovamente quanto discusso nella sezione riguardante gli
+attori coinvolti, 
+
+L'utente deve poter usufruire di tutte le funzionalità disponibili, senza
+la necessità di leggere istruzioni d'uso.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
