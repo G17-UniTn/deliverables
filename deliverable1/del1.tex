@@ -49,7 +49,7 @@ Zeno \textsc{Saletti}}
 
 
 \newpage
-\section{Introduzione}
+\section{Introduzione e scopi}
 \subsection{Scopo del documento}
 Le informazioni contenute in questo documento concorrono ad esporre l'analisi
 dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
@@ -92,47 +92,67 @@ individui appena descritti verrà indicato con il termine \textit{utenti}.
 
 \newpage
 \section{Requisiti funzionali}
-Vengono di seguito elencati i principali requisiti funzionali del progetto.
-Essi sono organizzati secondo uno schema che segue gli obiettivi elencati nei
-paragrafi precedenti. Più in particolare, ogni sottosezione di questa parte
-del documento risponde a diversi scopi precedentemente accennati, suddividendo
-eventuali macro-funzioni in requisiti minori nel caso di obiettivi più ampi.
+Vengono di seguito elencati i principali requisiti funzionali (RF)
+del progetto. Essi sono organizzati secondo uno schema che segue gli
+obiettivi elencati nei paragrafi precedenti. Più in particolare,
+ogni sottosezione di questa parte del documento risponde a diversi
+scopi precedentemente accennati, suddividendo eventuali macro-funzioni
+in requisiti minori nel caso di obiettivi di più ampia portata.
 
-\subsection*{Accesso al servizio}
+\subsection{Accesso}
 
 \begin{funcreq}
 Altro requisito funzionale
 \end{funcreq}
 
 
-\subsection*{Consultazione dei problemi}
-Il servizio deve mettere a disposizione, tra le altre risorse, un insieme di problemi sui quali l'utente possa esercitarsi. [come sono fatti i problemi,
-come sono classificati, come vengono ordinati e categorizzati.]
+\subsection{Consultazione dei problemi}
 
 \begin{funcreq}
-L'utente deve poter consultare un catalogo di problemi e navigare al suo
-interno. In particolare, l'utente deve poter:
+\textbf{Consultazione del catalogo dei problemi:}
+Il servizio deve mettere a disposizione un insieme di problemi sui quali
+l'utente possa esercitarsi. L'utente deve poter consultare un catalogo,
+atto a raccogliere i quesiti, e navigare al suo interno. Deve quindi
+essere possibile:
 \begin{enumerate}
-    \item Visualizzare tale catalogo in una vista dedicata (si veda la
-    sezione riguardante il design di front-end per ulteriori dettagli).
-    \item Cercare uno o più problemi specifici mediante ricerca per campi (nome,
-    difficoltà).
+    \item Visualizzare tale catalogo in una vista dedicata.
+    
+    \item Cercare uno o più problemi specifici mediante ricerca filtrata
+    per campi, specificati dai metadati elencati al RNF \ref{metadata},
+    oppure non filtrata.
+
+    \item Selezionare dal catalogo un problema specifico, cosicché la
+    descrizione dell'intero problema possa essere visionata per mezzo
+    delle funzionalità di cui al RF \ref{seeproblem}.
 \end{enumerate}
 \end{funcreq}
 
-\subsection*{Esercitazione e risoluzione dei problemi}
 \begin{funcreq}
+\label{seeproblem}
+\textbf{Consultazione di un problema:}
+Deve essere fornito un visualizzatore del documento contenente le
+informazioni del singolo problema precedentemente selezionato dal
+catalogo. La visualizzazione deve rendere disponibile alla vista
+dell'utente i dati relativi al problema e specificati nel RNF
+\ref{formatoproblema}.
+\end{funcreq}
+
+\subsection{Esercitazione}
+\begin{funcreq}
+\textbf{Avviare una sessione di esercitazione:}
 L'utente deve poter selezionare, attraverso l'apposito catalogo, il
 problema desiderato avviando una sessione di esercitazione con lo scopo
 di risolverlo. A tal fine, l'utente deve poter:
 \begin{enumerate}
-    \item Attivare il problema scelto, cioè visualizzarlo ed eseguire le
-    funzionalità mostrate nei prossimi punti.
+    \item Attivare, dopo averlo visualizzato, il problema scelto. L'attivazione permette di accedere alle funzionalità descritte nei prossimi punti, oltre a incrementare di una unità il numero di tentativi
+    effettuati dall'utente su quel problema (a meno che il problema non
+    sia già stato risolto in precedenza). L'avvio della sessione di
+    esercitazione deve avvenire previa conferma da parte dell'utente.
     
     \item Essere al corrente di quale linguaggio di programmazione sia
     attualmente attivo per la scrittura di codice, tramite un menu dedicato
     dal quale deve altresì essere possibile selezionare uno dei linguaggi
-    disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi, si veda RNF \ref{scalabilita}}.
+    disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi, si veda RNF \ref{scalabilita}.1.}.
     
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
     scelto, l'algoritmo risolutivo del problema attualmente attivo. La
@@ -141,36 +161,148 @@ di risolverlo. A tal fine, l'utente deve poter:
 \end{funcreq}
 
 \begin{funcreq}
+\textbf{Correttezza sintattica del codice:}
 L'utente deve poter verificare che il codice scritto sia sintatticamente
 corretto e pronto per l'esecuzione. Quindi devono essere messe a disposizione
 le seguenti funzionalità:
 \begin{enumerate}
     \item Compilazione del codice.
     \item Visualizzazione di avvisi relativi a eventuali errori di sintassi
-    \textit{oppure} di compilazione andata a buon fine.
+    \textit{oppure} di compilazione andata a buon fine. In caso di errori
+    di scrittura, l'utente deve poter correggere tali errori riscrivendo
+    nell'area destinata al codice.
 \end{enumerate}
 \end{funcreq}
 
 \begin{funcreq}
-L'utente deve poter verificare la correttezza del codice scritto eseguendolo,
-ovvero:
+\textbf{Verifica della correttezza\footnote{La \textit{correttezza} di cui si parla in questo caso riguarda solo l'efficacia risolutiva dell'algoritmo.}:}
+L'utente deve poter verificare la correttezza del codice scritto eseguendolo
+e testandolo:
 \begin{enumerate}
-    \item .
+    \item Il codice deve essere eseguito sottoponendolo ad un certo numero
+    di test cases (al minimo 3),
+    cioè fornendo opportune istanze di input (Per esempio,
+    se un problema richiede di sommare due numeri interi, il codice risolutivo
+    proposto dall'utente verrà eseguito fornendo ad esso coppie di interi
+    e registrando i risultati in output.)
+
+    \item L'utente deve poter verificare quali e quanti test cases sono andati
+    a buon fine. Per ogni test case, solo le istanze in input potranno
+    essere visualizzate. Inoltre, l'utente deve poter riscrivere e
+    perfezionare l'algoritmo e sottoporre ripetutamente il codice ai
+    test cases.
+
+    \item L'utente deve poter terminare la sessione in un tempo finito.
+    Pertanto: nel caso in cui tutti i test cases sono andati a buon fine
+    la sessione di esercitazione deve terminare e la carriera dell'utente
+    deve essere aggiornata di conseguenza, quindi contrassegnando come
+    \textit{risolto} il problema corrente insieme al numero di
+    tentativi impiegati fino all'istante della risoluzione; in caso contrario,
+    l'utente deve avere la possibilità di rinunciare a fornire soluzioni
+    al problema, terminando la sessione di esercitazione.
 \end{enumerate}
 \end{funcreq}
 
-\subsection*{Valutazione della propria carriera}
+\subsection{Gestione profilo}
+Si intende per \textit{carriera} l'insieme dei dati estratti dai tentativi
+effettuati dal singolo utente durante le esercitazioni sui problemi. Tramite
+la definizione di questa carriera, realizzata per mezzo delle funzionalità
+che seguono, si raggiunge l'obiettivo dell'autovalutazione delle personali
+capacità dell'utente.
+
+\begin{funcreq}
+\textbf{}
+\end{funcreq}
 
 
 
-
+\newpage
 \section{Requisiti non funzionali}
+
+\subsection*{Caratteristiche delle risorse}
+
+\begin{nonfuncreq}
+\label{formatoproblema}
+\textbf{Struttura di un problema:}
+Tutti i problemi forniti possiedono:
+\begin{itemize}
+    \item Un titolo.
+
+    \item Un testo, scritto prevalentemente in linguaggio naturale,
+    che descrive uno scenario che richiede di essere risolto per mezzo
+    di un algoritmo. Eventuali immagini e proposizioni matematiche
+    formali possono accompagnare i testi.
+
+    \item Almeno un esempio di input insieme al relativo output che
+    mostra il risultato atteso.
+\end{itemize}
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+\label{metadata}
+\textbf{Metadati dei problemi:} Ogni problema è essenzialmente un'entità
+caratterizzata dai seguenti dati descrittivi:
+\begin{itemize}
+    \item Nome identificativo: si tratta di una stringa alfanumerica, che
+    riprende una o più parole chiave del titolo del problema di cui al
+    RNF \ref{formatoproblema}.
+    \item Difficoltà: ogni problema possiede un'etichetta (\textit{tag})
+    associata che ne valuta la difficolta in modo indicativo: bassa 
+    intermedia, alta.
+\end{itemize}
+\end{nonfuncreq}
+
+\subsection{Caratteristiche di sistema}
 
 \begin{nonfuncreq}
 \label{scalabilita}
 \textbf{Scalabilità:}
+L'infrastruttura del servizio deve essere scalabile e aperta alle esigenze
+derivanti dall'aumento di nuovi utenti. Questo requisito è motivato dalla
+disponibilità online del servizio che verrà sviluppato. In particolare:
+\begin{enumerate}
+    \item Data l'eterogeneità di linguaggi di programmazione esistenti
+    al momento della stesura di questo documento, è importante che il
+    servizio sia in grado di accogliere con l'avanzare del tempo codici
+    scritti in linguaggi differenti.
+\end{enumerate}
 \end{nonfuncreq}
 
+\begin{nonfuncreq}
+\textbf{Usabilità:}
+Le funzionalità 
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+\textbf{Lingua di sistema:}
+Il servizio sarà erogato in lingua italiana. Altrettanto sarà fatto per i
+testi dei problemi.
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+\textbf{Prestazioni:}
+\end{nonfuncreq}
+
+\subsection{Privacy e sicurezza}
+
+\begin{nonfuncreq}
+\textbf{Privacy:}
+Il servizio deve essere progettato e realizzato in ottemperanza delle
+vigenti disposizioni di legge in materia di tutela della privacy e
+trattamento dei dati:
+\begin{enumerate}
+    \item L'applicazione fornita dal servizio deve essere conforme
+    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} per
+    la protezione dei dati.
+\end{enumerate}
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+\textbf{Sicurezza:}
+
+\end{nonfuncreq}
+
+\newpage
 \section{Design front-end}
 
 \section{Design back-end}
