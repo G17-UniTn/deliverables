@@ -82,9 +82,9 @@ algoritmo e linguaggio di programmazione, familiarità nell'uso di qualche
 linguaggio di programmazione, tipi e strutture di dati più comuni.
 
 Di fatto, il progetto che verrà sviluppato ha come scopo principale di
-creare una piattaforma accessibile a singoli utilizzatori che desiderano
-esercitarsi, valutare e approfondire le personali conoscenze e abilità di
-\textit{problem solving} legate alla programmazione.
+creare una piattaforma accessibile online a singoli utilizzatori che
+desiderano esercitarsi, valutare e approfondire le personali
+conoscenze e abilità di \textit{problem solving} legate alla programmazione.
 D'ora in avanti, in questo e nei successivi documenti, questo pubblico di
 individui appena descritti verrà indicato con il termine \textit{utenti}.
 
@@ -96,14 +96,11 @@ risponde a diversi scopi precedentemente accennati, suddividendo
 eventuali macro-funzioni in requisiti minori nel caso di obiettivi
 di più ampia portata.
 
-Le funzionalità 
-
-
-\subsection{Gestione accesso e account personale}
+\subsection{Accesso}
 
 \begin{funcreq}
 \textbf{Registrazione:}
-Il sistema deve mettere a disposizione dell'utente anonimo una pagina
+Il sistema deve mettere a disposizione dei nuovi utenti una pagina
 nella quale sia possibile effettuare la registrazione alla piattaforma
 online. Devono essere richiesti i seguenti campi:
 \begin{itemize}
@@ -112,8 +109,8 @@ online. Devono essere richiesti i seguenti campi:
     \item Password: la password deve essere oscurata durante l'inserimento.
     Al fine di limitare gli errori di digitazione e l'inserimento di una
     password che non corrisponde a quella scelta dall'utente, deve essere
-    presente un secondo campo di conferma della password, dove quest'ultima
-    deve essere riscritta.
+    presente un secondo campo di conferma, dove la password deve essere
+    riscritta.
 \end{itemize}
 \end{funcreq}
 
@@ -122,20 +119,42 @@ online. Devono essere richiesti i seguenti campi:
 \textbf{Login:}
 Il sistema deve permettere all'utente già registrato al servizio di
 accedere alla piattaforma mediante l'inserimento dell'indirizzo
-email e la password, impostate in fase di registrazione.
-\end{funcreq}
-
-\begin{funcreq}
-\textbf{Logout:}
-L'utente deve poter interrompere una sessione di login.
+email e la password, impostate in fase di registrazione. Qualora la
+password inserita non corrisponda a quella dell'account con email
+associata, l'utente non può accedere alla piattaforma e deve essere
+notificato.
 \end{funcreq}
 
 \begin{funcreq}
 \textbf{Recupero password:}
+L'utente registrato deve poter recuperare la password del proprio account
+qualora tale dato dovesse essere dimenticato in fase di login. La procedura
+di recupero deve prevedere:
+\begin{itemize}
+    \item L'invio di un codice di verifica all'indirizzo email specificato
+    dall'utente. L'inserimento dell'email e la richiesta di invio del
+    codice avvengono in una pagina apposita, accessibile da quella di login.
+    Dopo l'invio della richiesta, l'utente deve poter inserire il codice
+    ricevuto.
+
+    \item L'inserimento di una nuova password che, come in fase di registrazione,
+    deve essere scritta e confermata.
+
+    \item La notifica di eventuali errori avvenuti durante la procedura
+    di recupero, quali codice errato e incongruenze nell'inserimento
+    e conferma della nuova password.
+\end{itemize}
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Logout:}
+L'utente registrato e autenticato deve poter interrompere la sessione di
+accesso al servizio effettuando un logout.
 \end{funcreq}
 
 \begin{funcreq}
 \textbf{Aggiornamento account:}
+
 \end{funcreq}
 
 \subsection{Consultazione dei problemi}
@@ -235,17 +254,42 @@ e testandolo:
 \end{enumerate}
 \end{funcreq}
 
-\subsection{Gestione profilo}
-Si intende per \textit{carriera} l'insieme dei dati estratti dai tentativi
-effettuati dal singolo utente durante le esercitazioni sui problemi. Tramite
-la definizione di questa carriera, realizzata per mezzo delle funzionalità
-che seguono, si raggiunge l'obiettivo dell'autovalutazione delle personali
-capacità dell'utente.
+\subsection{Gestione profilo e account}
 
 \begin{funcreq}
+\textbf{Progressi:}
+L'utente deve poter monitorare i propri progressi, accedendo ai dati
+seguenti mediante una pagina dedicata:
+\begin{itemize}
+    \item Problemi risolti e, per ciascuno di essi, il numero di tentativi richiesti.
+    \item Problemi avviati in passato ma non ancora risolti, con relativo
+    numero di tentativi.
+    \item Score globale: una media campionaria dei tentativi richiesti
+    per problema.
+\end{itemize}
 \end{funcreq}
 
 \begin{funcreq}
+\textbf{Preferiti:?}
+
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Modifica email:}
+L'utente autenticato deve poter modificare l'email del proprio account in
+una pagina dedicata, inserendo il nuovo indirizzo al quale sarà inviata la
+richiesta di conferma della modifica. L'email deve cambiare effettivamente solo nel momento in cui l'utente conferma la ricezione del messaggio presso il
+nuovo indirizzo.
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Modifica password:}
+Una volta effettuato l'accesso, l'utente deve poter modificare la password del
+proprio account in una pagina apposita. La password può essere cambiata previo
+inserimento di quella già registrata. La nuova password deve essere inserita
+due volte per conferma. Qualora l'operazione vada a buon fine, verrà inviata
+una conferma all'email associata; in caso di errori l'utente deve essere
+avvisato.
 \end{funcreq}
 
 
