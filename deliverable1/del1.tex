@@ -26,7 +26,7 @@ Zeno \textsc{Saletti}}
 \newcommand{\groupNumber}{G17}
 
 % Web address for the project (if any)
-% \newcommand{\homepage}{\url{https://www.ntnu.edu/studies/courses/IT3010}}
+% \newcommand{\homepage}{\url{https://www.}}
 
 % data
 \date{\today}
@@ -56,14 +56,15 @@ dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
 aver specificato gli obiettivi e gli attori coinvolti—utenti finali e
 utilizzatori del frutto di questo progetto—verranno definiti i requisiti
 funzionali e non funzionali; verrà presentata una proposta di design di
-back-end; infine saranno riportati i servizi di back-end.
+back-end; infine saranno riportati i sistemi di back-end coi quali il servizio
+dovrà interfacciarsi.
 
 
 \subsection{Obiettivo del progetto}
 Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità
-di giovani informatici un servizio online di \textit{esercitazione} e di
-\textit{raccolta} di problemi mirati alla programmazione e alla progettazione
-di piccoli algoritmi risolutivi, mediante la scrittura di codice.
+di giovani informatici un servizio online di \textit{esercitazione} mirata alla
+programmazione e alla progettazione di piccoli algoritmi risolutivi, mediante
+la scrittura di codice.
 
 \subsection{Attori coinvolti ed esigenze}
 Per comprendere meglio i requisiti che verranno descritti in seguito (in
@@ -90,11 +91,13 @@ individui appena descritti verrà indicato con il termine \textit{utenti}.
 \newpage
 \section{Requisiti funzionali}
 Vengono di seguito elencati i principali requisiti funzionali (RF)
-del progetto. Essi sono organizzati secondo uno schema che segue gli
-obiettivi elencati nei paragrafi precedenti. Più in particolare,
-ogni sottosezione di questa parte del documento risponde a diversi
-scopi precedentemente accennati, suddividendo eventuali macro-funzioni
-in requisiti minori nel caso di obiettivi di più ampia portata.
+del progetto. Ogni sottosezione di questa parte del documento
+risponde a diversi scopi precedentemente accennati, suddividendo
+eventuali macro-funzioni in requisiti minori nel caso di obiettivi
+di più ampia portata.
+
+Le funzionalità 
+
 
 \subsection{Gestione accesso e account personale}
 
@@ -115,6 +118,7 @@ online. Devono essere richiesti i seguenti campi:
 \end{funcreq}
 
 \begin{funcreq}
+\label{login}
 \textbf{Login:}
 Il sistema deve permettere all'utente già registrato al servizio di
 accedere alla piattaforma mediante l'inserimento dell'indirizzo
@@ -298,6 +302,10 @@ L'infrastruttura del servizio deve essere scalabile e aperta alle esigenze
 derivanti dall'aumento di nuovi utenti. Questo requisito è motivato dalla
 disponibilità online del servizio che verrà sviluppato. In particolare:
 \begin{enumerate}
+    \item L'infrastruttura del servizio deve essere adattabile a eventuali
+    crescite nel numero di utenti, in modo da prevenire possibili cali di
+    prestazioni eccessivi.
+
     \item Data l'eterogeneità di linguaggi di programmazione esistenti
     al momento della stesura di questo documento, è importante che il
     servizio sia in grado di accogliere con l'avanzare del tempo codici
@@ -309,17 +317,24 @@ disponibilità online del servizio che verrà sviluppato. In particolare:
 \label{compatibility}
 \textbf{Compatibilità:}
 La piattaforma del servizio deve essere accessibile mediante i principali
-browser al momento disponibili in commercio.
-%disponibile anche a dispositivi mobili?
+browser attualmente disponibili in commercio.
 \end{nonfuncreq}
+
 
 \begin{nonfuncreq}
 \textbf{Usabilità:}
-Sottolineando nuovamente quanto discusso nella sezione riguardante gli
-attori coinvolti, 
+La piattaforma del servizio deve permettere all'utente di sfruttare le
+funzionalità disponibili al proprio livello di accesso senza l'ausilio di
+istruzioni scritte e verbose. L'intuitività dell'interfaccia deve essere
+sufficiente a guidare l'utente nella realizzazione dei suoi scopi.
+\end{nonfuncreq}
 
-L'utente deve poter usufruire di tutte le funzionalità disponibili, senza
-la necessità di leggere istruzioni d'uso.
+\begin{nonfuncreq}
+\textbf{Aspetto:}
+L'interfaccia deve presentarsi gradevole alla vista dell'utente, preferendo
+gradazioni cromatiche scure e un contrasto sufficientemente equilibrato,
+al fine di garantire la leggibilità e contribuire alla riduzione
+dell'affaticamento della vista.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -329,27 +344,45 @@ testi dei problemi.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
+\textbf{Affidabilità:}
+
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
 \textbf{Prestazioni:}
 \end{nonfuncreq}
 
 \subsection{Privacy e sicurezza}
 
 \begin{nonfuncreq}
-\textbf{Privacy:}
+\textbf{Privacy e trattamento dei dati:}
 Il servizio deve essere progettato e realizzato in ottemperanza delle
 vigenti disposizioni di legge in materia di tutela della privacy e
 trattamento dei dati:
 \begin{enumerate}
     \item L'applicazione fornita dal servizio deve essere conforme
-    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} per
-    la protezione dei dati.
+    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} per la protezione dei dati.
 \end{enumerate}
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Sicurezza:}
-
+\textbf{Password:}
+La password richiesta agli utenti al momento della registrazione
+(RF \ref{login}) deve avere le seguenti caratteristiche:
+\begin{itemize}
+    \item Lunghezza compresa tra 8 e 64 caratteri.
+    \item Contenere almeno una lettera maiuscola.
+    \item Contenere almeno una lettera minuscola.
+    \item Contenere almeno un numero.
+    \item Contenere almeno un carattere speciale scelto tra i
+    seguenti:
+    \begin{center}
+        \verb|! ? # $ % &  @ * + . , ; : / - = _ \ ( ) [ ] { }|
+    \end{center}
+\end{itemize}
 \end{nonfuncreq}
+
+
 
 \newpage
 \section{Design front-end}
