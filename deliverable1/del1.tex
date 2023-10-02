@@ -15,6 +15,8 @@
 
 \newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
 \newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
+\newtheorem{backend}{BE}
+\newtheorem{frontend}{FE}
 
 
 \title{Analisi dei Requisiti}
@@ -26,7 +28,7 @@ Zeno \textsc{Saletti}}
 \newcommand{\groupNumber}{G17}
 
 % Web address for the project (if any)
-% \newcommand{\homepage}{\url{https://www.ntnu.edu/studies/courses/IT3010}}
+% \newcommand{\homepage}{\url{https://www.}}
 
 % data
 \date{\today}
@@ -56,14 +58,15 @@ dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
 aver specificato gli obiettivi e gli attori coinvolti—utenti finali e
 utilizzatori del frutto di questo progetto—verranno definiti i requisiti
 funzionali e non funzionali; verrà presentata una proposta di design di
-back-end; infine saranno riportati i servizi di back-end.
+back-end; infine saranno riportati i sistemi di back-end coi quali il servizio
+dovrà interfacciarsi.
 
 
 \subsection{Obiettivo del progetto}
 Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità
-di giovani informatici un servizio online di \textit{esercitazione} e di
-\textit{raccolta} di problemi mirati alla programmazione e alla progettazione
-di piccoli algoritmi risolutivi, mediante la scrittura di codice.
+di giovani informatici un servizio online di \textit{esercitazione} mirata alla
+programmazione e alla progettazione di piccoli algoritmi risolutivi, mediante
+la scrittura di codice.
 
 \subsection{Attori coinvolti ed esigenze}
 Per comprendere meglio i requisiti che verranno descritti in seguito (in
@@ -81,63 +84,96 @@ algoritmo e linguaggio di programmazione, familiarità nell'uso di qualche
 linguaggio di programmazione, tipi e strutture di dati più comuni.
 
 Di fatto, il progetto che verrà sviluppato ha come scopo principale di
-creare una piattaforma accessibile a singoli utilizzatori che desiderano
-esercitarsi, valutare e approfondire le personali conoscenze e abilità di
-\textit{problem solving} legate alla programmazione.
+creare una piattaforma accessibile online a singoli utilizzatori che
+desiderano esercitarsi, valutare e approfondire le personali
+conoscenze e abilità di \textit{problem solving} legate alla programmazione.
 D'ora in avanti, in questo e nei successivi documenti, questo pubblico di
 individui appena descritti verrà indicato con il termine \textit{utenti}.
 
 \newpage
 \section{Requisiti funzionali}
 Vengono di seguito elencati i principali requisiti funzionali (RF)
-del progetto. Essi sono organizzati secondo uno schema che segue gli
-obiettivi elencati nei paragrafi precedenti. Più in particolare,
-ogni sottosezione di questa parte del documento risponde a diversi
-scopi precedentemente accennati, suddividendo eventuali macro-funzioni
-in requisiti minori nel caso di obiettivi di più ampia portata.
+del progetto. Ogni sottosezione di questa parte del documento
+risponde a diversi scopi precedentemente accennati, suddividendo
+eventuali macro-funzioni in requisiti minori nel caso di obiettivi
+di più ampia portata.
 
-\subsection{Gestione accesso e account personale}
+\subsection{Accesso}
 
 \begin{funcreq}
-\textbf{Registrazione:}
-Il sistema deve mettere a disposizione dell'utente anonimo una pagina
+\label{signup}
+\textbf{Registrazione }
+Il sistema deve mettere a disposizione dei nuovi utenti una pagina
 nella quale sia possibile effettuare la registrazione alla piattaforma
-online. Devono essere richiesti i seguenti campi:
-\begin{itemize}
-    \item Indirizzo email.
-    \item Nome utente.
-    \item Password: la password deve essere oscurata durante l'inserimento.
-    Al fine di limitare gli errori di digitazione e l'inserimento di una
+online.
+
+\begin{enumerate}
+    \item Devono essere richiesti i seguenti campi:
+    \begin{itemize}
+        \item Indirizzo email.
+        
+        \item Nome utente.
+        
+        \item Password: la password deve essere oscurata durante l'inserimento.
+        e ed essere conforme a quanto specificato nel RNF \ref{legalpassword}.
+    \end{itemize}
+
+    \item L'utente deve essere notificato riguardo a eventuali incongruenze:
+    al fine di limitare gli errori di digitazione e l'inserimento di una
     password che non corrisponde a quella scelta dall'utente, deve essere
-    presente un secondo campo di conferma della password, dove quest'ultima
-    deve essere riscritta.
+    presente un secondo campo di conferma, dove la password deve essere
+    riscritta; un utente non può registrarsi due volte con lo stesso nome
+    utente e con lo stesso indirizzo email.
+\end{enumerate}
+
+\end{funcreq}
+
+\begin{funcreq}
+\label{login}
+\textbf{Login }
+Il sistema deve permettere all'utente già registrato al servizio di
+accedere alla piattaforma mediante l'inserimento dell'indirizzo
+email e la password, impostate in fase di registrazione. Qualora la
+password inserita non corrisponda a quella dell'account con email
+associata, l'utente non può accedere alla piattaforma e deve essere
+notificato di ciò; è comunque possibile ritentare il login [sicurezza?
+n massimo tentativi?].
+\end{funcreq}
+
+\begin{funcreq}
+\label{savepassword}
+\textbf{Recupero password }
+L'utente registrato deve poter recuperare la password del proprio account
+qualora tale dato dovesse essere dimenticato in fase di login. La procedura
+di recupero deve prevedere:
+\begin{itemize}
+    \item L'invio di un codice di verifica all'indirizzo email specificato
+    dall'utente. L'inserimento dell'email e la richiesta di invio del
+    codice avvengono in una pagina apposita, accessibile da quella di login.
+    Dopo l'invio della richiesta, l'utente deve poter inserire il codice
+    ricevuto.
+
+    \item L'inserimento di una nuova password che, come in fase di registrazione,
+    deve essere scritta e confermata.
+
+    \item La notifica di eventuali errori avvenuti durante la procedura
+    di recupero, quali codice errato e incongruenze nell'inserimento
+    e conferma della nuova password (RNF \ref{legalpassword}).
 \end{itemize}
 \end{funcreq}
 
 \begin{funcreq}
-\textbf{Login:}
-Il sistema deve permettere all'utente già registrato al servizio di
-accedere alla piattaforma mediante l'inserimento dell'indirizzo
-email e la password, impostate in fase di registrazione.
-\end{funcreq}
-
-\begin{funcreq}
-\textbf{Logout:}
-L'utente deve poter interrompere una sessione di login.
-\end{funcreq}
-
-\begin{funcreq}
-\textbf{Recupero password:}
-\end{funcreq}
-
-\begin{funcreq}
-\textbf{Aggiornamento account:}
+\label{logout}
+\textbf{Logout }
+L'utente registrato e autenticato deve poter interrompere la sessione di
+accesso al servizio effettuando un logout.
 \end{funcreq}
 
 \subsection{Consultazione dei problemi}
 
 \begin{funcreq}
-\textbf{Consultazione del catalogo dei problemi:}
+\label{probcatalogue}
+\textbf{Consultazione del catalogo dei problemi }
 Il servizio deve mettere a disposizione un insieme di problemi sui quali
 l'utente possa esercitarsi. L'utente deve poter consultare un catalogo,
 atto a raccogliere i quesiti, e navigare al suo interno. Deve quindi
@@ -157,7 +193,7 @@ essere possibile:
 
 \begin{funcreq}
 \label{seeproblem}
-\textbf{Consultazione di un problema:}
+\textbf{Consultazione di un problema }
 Deve essere fornito un visualizzatore del documento contenente le
 informazioni del singolo problema precedentemente selezionato dal
 catalogo. La visualizzazione deve rendere disponibile alla vista
@@ -167,7 +203,8 @@ dell'utente i dati relativi al problema e specificati nel RNF
 
 \subsection{Esercitazione}
 \begin{funcreq}
-\textbf{Avviare una sessione di esercitazione:}
+\label{exesession}
+\textbf{Avviare una sessione di esercitazione }
 L'utente deve poter selezionare, attraverso l'apposito catalogo, il
 problema desiderato avviando una sessione di esercitazione con lo scopo
 di risolverlo. A tal fine, l'utente deve poter:
@@ -189,7 +226,8 @@ di risolverlo. A tal fine, l'utente deve poter:
 \end{funcreq}
 
 \begin{funcreq}
-\textbf{Correttezza sintattica del codice:}
+\label{sintax}
+\textbf{Correttezza sintattica del codice }
 L'utente deve poter verificare che il codice scritto sia sintatticamente
 corretto e pronto per l'esecuzione. Quindi devono essere messe a disposizione
 le seguenti funzionalità:
@@ -203,16 +241,18 @@ le seguenti funzionalità:
 \end{funcreq}
 
 \begin{funcreq}
-\textbf{Verifica della correttezza dell'algoritmo\footnote{La \textit{correttezza} di cui si parla in questo caso riguarda solo l'efficacia risolutiva dell'algoritmo.}:}
+\label{test}
+\textbf{Verifica della correttezza dell'algoritmo\footnote{La \textit{correttezza} di cui si parla in questo caso riguarda solo l'efficacia risolutiva dell'algoritmo.} }
 L'utente deve poter verificare la correttezza del codice scritto eseguendolo
 e testandolo:
 \begin{enumerate}
     \item Il codice deve essere eseguito sottoponendolo ad un certo numero
     di test cases (al minimo 3),
-    cioè fornendo opportune istanze di input (Per esempio,
+    cioè fornendo opportune istanze di input. Per esempio,
     se un problema richiede di sommare due numeri interi, il codice risolutivo
     proposto dall'utente verrà eseguito fornendo ad esso coppie di interi
-    e registrando i risultati in output.)
+    e registrando i risultati in output. [Per ogni problema deve esistere almeno
+    un codice corretto, non visibile agli utenti, ]
 
     \item L'utente deve poter verificare quali e quanti test cases sono andati
     a buon fine. Per ogni test case, solo le istanze in input potranno
@@ -222,8 +262,9 @@ e testandolo:
 
     \item L'utente deve poter terminare la sessione in un tempo finito.
     Pertanto: nel caso in cui tutti i test cases sono andati a buon fine
-    la sessione di esercitazione deve terminare e la carriera dell'utente
-    deve essere aggiornata di conseguenza, quindi contrassegnando come
+    la sessione di esercitazione deve terminare e i progressi contenuti
+    nel profilo dell'utente (RF \ref{stats}) devono essere aggiornati
+    di conseguenza, quindi contrassegnando come
     \textit{risolto} il problema corrente insieme al numero di
     tentativi impiegati fino all'istante della risoluzione; in caso contrario,
     l'utente deve avere la possibilità di rinunciare a fornire soluzioni
@@ -231,17 +272,49 @@ e testandolo:
 \end{enumerate}
 \end{funcreq}
 
-\subsection{Gestione profilo}
-Si intende per \textit{carriera} l'insieme dei dati estratti dai tentativi
-effettuati dal singolo utente durante le esercitazioni sui problemi. Tramite
-la definizione di questa carriera, realizzata per mezzo delle funzionalità
-che seguono, si raggiunge l'obiettivo dell'autovalutazione delle personali
-capacità dell'utente.
+\subsection{Gestione profilo e account}
 
 \begin{funcreq}
+\label{stats}
+\textbf{Progressi }
+L'utente deve poter monitorare i propri progressi, accedendo ai dati
+seguenti mediante una pagina dedicata:
+\begin{itemize}
+    \item Problemi risolti e, per ciascuno di essi, il numero di tentativi richiesti.
+    \item Problemi avviati in passato ma non ancora risolti, con relativo
+    numero di tentativi.
+    \item Score globale: una media campionaria dei tentativi richiesti
+    per problema.
+\end{itemize}
 \end{funcreq}
 
 \begin{funcreq}
+\textbf{Preferiti:?}
+
+\end{funcreq}
+
+
+\begin{funcreq}
+\label{updateaccount}
+\textbf{Aggiornamento account }
+L'utnete registrato e autenticato deve poter modificare i dati chiave del
+proprio account in conformità con i requisiti non funzionali relativi alla
+sicurezza [...]:
+\begin{enumerate}
+\item L'utente deve poter migrare ad un indirizzo email differente. A tale
+indirizzo deve essere inviato un messaggio di conferma, previo inserimento
+della password nella pagina dedicata a questa particolare operazione. L'email
+deve cambiare effettivamente solo nel momento in cui l'utente conferma la
+ricezione del messaggio presso il nuovo indirizzo.
+
+\item L'utente deve poter modificare la password del proprio account.
+La password può essere cambiata previo inserimento di quella attualmente
+associata all'account. La nuova password deve essere digitata due volte
+per conferma e deve rispettare quanto specificato dal RNF \ref{legalpassword}. 
+L'utente deve essere notificato di tale modifica anche tramite
+l'indirizzo email attualmente associato all'account [possibilità di
+disattivare account a causa di azioni sospette?].
+\end{enumerate}
 \end{funcreq}
 
 
@@ -255,7 +328,7 @@ risorse fornite dalla piattaforma, di cui le principali sono i problemi.
 
 \begin{nonfuncreq}
 \label{formatoproblema}
-\textbf{Struttura di un problema:}
+\textbf{Struttura di un problema }
 Tutti i problemi forniti possiedono:
 \begin{itemize}
     \item Un titolo.
@@ -272,20 +345,25 @@ Tutti i problemi forniti possiedono:
 
 \begin{nonfuncreq}
 \label{metadata}
-\textbf{Metadati dei problemi:} Ogni problema è essenzialmente un'entità
+\textbf{Metadati dei problemi } Ogni problema è essenzialmente un'entità
 caratterizzata dai seguenti dati descrittivi:
 \begin{itemize}
+    \item Stato: i problemi già risolti dall'utente sono contrassegnati
+    in un campo \textit{stato} apposito.
+
     \item Nome identificativo: si tratta di una stringa alfanumerica, che
     riprende una o più parole chiave del titolo del problema di cui al
     RNF \ref{formatoproblema}.
     
     \item Difficoltà: ogni problema possiede un'etichetta (\textit{tag})
-    associata che ne valuta la difficolta in modo indicativo: bassa,
+    associata che ne valuta indicativamente la difficolta: bassa,
     intermedia e alta.
 
     \item Categoria: la categoria indica la principale area di interesse
     del problema, come ad esempio le strutture di dati di cui tratta
-    (array, grafi e altro).
+    (array, grafi, code, ecc.).
+
+    \item Soluzione?:
 \end{itemize}
 \end{nonfuncreq}
 
@@ -293,11 +371,15 @@ caratterizzata dai seguenti dati descrittivi:
 
 \begin{nonfuncreq}
 \label{scalabilita}
-\textbf{Scalabilità:}
+\textbf{Scalabilità }
 L'infrastruttura del servizio deve essere scalabile e aperta alle esigenze
 derivanti dall'aumento di nuovi utenti. Questo requisito è motivato dalla
 disponibilità online del servizio che verrà sviluppato. In particolare:
 \begin{enumerate}
+    \item L'infrastruttura del servizio deve essere adattabile a eventuali
+    crescite nel numero di utenti, in modo da prevenire possibili cali di
+    prestazioni eccessivi.
+
     \item Data l'eterogeneità di linguaggi di programmazione esistenti
     al momento della stesura di questo documento, è importante che il
     servizio sia in grado di accogliere con l'avanzare del tempo codici
@@ -307,53 +389,113 @@ disponibilità online del servizio che verrà sviluppato. In particolare:
 
 \begin{nonfuncreq}
 \label{compatibility}
-\textbf{Compatibilità:}
+\textbf{Compatibilità }
 La piattaforma del servizio deve essere accessibile mediante i principali
-browser al momento disponibili in commercio.
-%disponibile anche a dispositivi mobili?
+browser attualmente disponibili in commercio.
+\end{nonfuncreq}
+
+
+\begin{nonfuncreq}
+\textbf{Usabilità }
+La piattaforma del servizio deve permettere all'utente di sfruttare le
+funzionalità disponibili al proprio livello di accesso senza l'ausilio di
+istruzioni scritte e verbose. L'intuitività dell'interfaccia deve essere
+sufficiente a guidare l'utente nella realizzazione dei suoi scopi.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Usabilità:}
-Sottolineando nuovamente quanto discusso nella sezione riguardante gli
-attori coinvolti, 
-
-L'utente deve poter usufruire di tutte le funzionalità disponibili, senza
-la necessità di leggere istruzioni d'uso.
+\textbf{Aspetto }
+L'interfaccia deve presentarsi gradevole alla vista dell'utente, preferendo
+gradazioni cromatiche scure e un contrasto sufficientemente equilibrato,
+al fine di garantire la leggibilità e contribuire alla riduzione
+dell'affaticamento della vista.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Lingua di sistema:}
+\textbf{Lingua di sistema }
 Il servizio sarà erogato in lingua italiana. Altrettanto sarà fatto per i
 testi dei problemi.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Prestazioni:}
+\textbf{Affidabilità }
+
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+\textbf{Prestazioni }
+
 \end{nonfuncreq}
 
 \subsection{Privacy e sicurezza}
 
 \begin{nonfuncreq}
-\textbf{Privacy:}
+\textbf{Privacy e trattamento dei dati }
 Il servizio deve essere progettato e realizzato in ottemperanza delle
 vigenti disposizioni di legge in materia di tutela della privacy e
 trattamento dei dati:
 \begin{enumerate}
     \item L'applicazione fornita dal servizio deve essere conforme
-    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} per
-    la protezione dei dati.
+    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} per la protezione dei dati.
 \end{enumerate}
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Sicurezza:}
-
+\label{legalpassword}
+\textbf{Password }
+In tutti gli scenari nei quali è richiesto l'inserimento di una password,
+devono essere rispettate le seguenti caratteristiche:
+\begin{itemize}
+    \item Lunghezza compresa tra 8 e 64 caratteri.
+    \item Contenere almeno una lettera maiuscola.
+    \item Contenere almeno una lettera minuscola.
+    \item Contenere almeno un numero.
+    \item Contenere almeno un carattere speciale scelto tra i
+    seguenti:
+    \begin{center}
+        \verb|! ? # $ % & @ * + . , ; : / - = _ \ ( ) [ ] { }|
+    \end{center}
+\end{itemize}
 \end{nonfuncreq}
 
+\begin{nonfuncreq}
+\textbf{Integrità e operazioni su dati sensibili }
+L'integrità di dati sensibili dell'account, quali email ma soprattutto password,
+è garantita da opportune procedure di conferma e notifica all'utente.
+Data la natura funzionale di queste operazioni di sicurezza, sono i requisiti
+funzionali relativi alla gestione dei dati sensibili
+(RF \ref{signup}, RF \ref{savepassword}, RF \ref{updateaccount})
+a descrivere il comportamento del servizio nel caso di errori e incongruenze.
+\end{nonfuncreq}
+
+
 \newpage
+
+
 \section{Design front-end}
+\begin{frontend}
+\textbf{Interfaccia di accesso }
+\end{frontend}
+
 
 \section{Design back-end}
+In questa sezione vengono descritti i servizi esterni al progetto che
+concorrono a costituire la struttura di back-end (BE) dell'applicativo.
+
+\begin{backend}
+\textbf{Autenticazione Google }
+\end{backend}
+
+\begin{backend}
+\textbf{Database }
+\end{backend}
+
+\begin{backend}
+\textbf{YouTube? }
+\end{backend}
+
+\begin{backend}
+\textbf{Email }
+\end{backend}
 
 \end{document}
