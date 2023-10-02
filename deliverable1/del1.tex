@@ -124,8 +124,7 @@ accedere alla piattaforma mediante l'inserimento dell'indirizzo
 email e la password, impostate in fase di registrazione. Qualora la
 password inserita non corrisponda a quella dell'account con email
 associata, l'utente non può accedere alla piattaforma e deve essere
-notificato di ciò; è comunque possibile ritentare il login [sicurezza?
-n massimo tentativi?].
+notificato di ciò; è comunque possibile ritentare il login un numero illimitato di volte.
 \end{funcreq}
 
 \begin{funcreq}
@@ -135,18 +134,11 @@ L'utente registrato deve poter recuperare la password del proprio account
 qualora tale dato dovesse essere dimenticato in fase di login. La procedura
 di recupero deve prevedere:
 \begin{itemize}
-    \item L'invio di un codice di verifica all'indirizzo email specificato
-    dall'utente. L'inserimento dell'email e la richiesta di invio del
-    codice avvengono in una pagina apposita, accessibile da quella di login.
-    Dopo l'invio della richiesta, l'utente deve poter inserire il codice
-    ricevuto.
+    \item L'invio di una mail contenente link apposito dove poter modificare la password corrente
+    ad un'altra password conforme al RNF \ref*{legalpassword}.
 
     \item L'inserimento di una nuova password che, come in fase di registrazione,
     deve essere scritta e confermata.
-
-    \item La notifica di eventuali errori avvenuti durante la procedura
-    di recupero, quali codice errato e incongruenze nell'inserimento
-    e conferma della nuova password (RNF \ref{legalpassword}).
 \end{itemize}
 \end{funcreq}
 
@@ -194,18 +186,20 @@ dell'utente i dati relativi al problema e specificati nel RNF
 \label{exesession}
 \textbf{Avviare una sessione di esercitazione }
 L'utente deve poter selezionare, attraverso l'apposito catalogo, il
-problema desiderato avviando una sessione di esercitazione con lo scopo
-di risolverlo. A tal fine, l'utente deve poter:
+problema desiderato, dopodichè dovra essere portato ad una pagina apposita, dove
+l'utente potrà vedere il testo dell'esercizio, i test case per la verifica della correttezza dell'arlgoritmo
+come descritto in RF \ref*{sintax}, una console dove scrivere il codice per risolvere il problema selezionato, e testarlo,
+e appositi selettori per il linguaggio di programmazione desiderato. A tal fine, l'utente deve poter:
 \begin{enumerate}
-    \item Attivare, dopo averlo visualizzato, il problema scelto. L'attivazione permette di accedere alle funzionalità descritte nei prossimi punti, oltre a incrementare di una unità il numero di tentativi
-    effettuati dall'utente su quel problema (a meno che il problema non
-    sia già stato risolto in precedenza). L'avvio della sessione di
-    esercitazione deve avvenire previa conferma da parte dell'utente.
+    \item Attivare e fermare a proprio piacimento un timer apposito per cronometrare il tempo speso
+    per risolvere il quesito scelto.
     
     \item Essere al corrente di quale linguaggio di programmazione sia
     attualmente attivo per la scrittura di codice, tramite un menu dedicato
     dal quale deve altresì essere possibile selezionare uno dei linguaggi
     disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi, si veda RNF \ref{scalabilita}.1.}.
+     //(Non dovrebbe far parte dei RNF? Stiamo parlando di UI design, la parte del "menu" sarebbe da incorporare nel testo principale imo)
+
     
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
     scelto, l'algoritmo risolutivo del problema attualmente attivo. La
@@ -216,12 +210,11 @@ di risolverlo. A tal fine, l'utente deve poter:
 \begin{funcreq}
 \label{sintax}
 \textbf{Correttezza sintattica del codice }
-L'utente deve poter verificare che il codice scritto sia sintatticamente
-corretto e pronto per l'esecuzione. Quindi devono essere messe a disposizione
-le seguenti funzionalità:
+L'utente deve poter verificare che il codice scritto sia corretto e in grando di risolvere il problema.
+ Quindi devono essere messe a disposizione le seguenti funzionalità:
 \begin{enumerate}
     \item Compilazione del codice.
-    \item Visualizzazione di avvisi relativi a eventuali errori di sintassi
+    \item Visualizzazione di avvisi relativi a eventuali errori di compilazione
     \textit{oppure} di compilazione andata a buon fine. In caso di errori
     di scrittura, l'utente deve poter correggere tali errori riscrivendo
     nell'area destinata al codice.
@@ -241,21 +234,14 @@ e testandolo:
     proposto dall'utente verrà eseguito fornendo ad esso coppie di interi
     e registrando i risultati in output.)
 
-    \item L'utente deve poter verificare quali e quanti test cases sono andati
-    a buon fine. Per ogni test case, solo le istanze in input potranno
-    essere visualizzate. Inoltre, l'utente deve poter riscrivere e
+    \item L'utente deve essere in grado di essere notificato se il codice supera tutti i test case oppure se almeno 1
+    test case non è stato superato,in entrambi i casi l'utente verrà notificato attraverso un pop-up apposito. Per ogni test case, sia l'input che l'output desiderato sono visibili.
+    Inoltre, l'utente deve poter riscrivere e
     perfezionare l'algoritmo e sottoporre ripetutamente il codice ai
     test cases.
 
-    \item L'utente deve poter terminare la sessione in un tempo finito.
-    Pertanto: nel caso in cui tutti i test cases sono andati a buon fine
-    la sessione di esercitazione deve terminare e i progressi contenuti
-    nel profilo dell'utente (RF \ref{stats}) devono essere aggiornati
-    di conseguenza, quindi contrassegnando come
-    \textit{risolto} il problema corrente insieme al numero di
-    tentativi impiegati fino all'istante della risoluzione; in caso contrario,
-    l'utente deve avere la possibilità di rinunciare a fornire soluzioni
-    al problema, terminando la sessione di esercitazione.
+    \item Nel caso che l'utente autenticato sia in grado di superare tutti i test case disponibili, il problema dovrà
+    essere contrassegnato come "risolto" nel catalogo di problemi.
 \end{enumerate}
 \end{funcreq}
 
@@ -265,26 +251,25 @@ e testandolo:
 \label{stats}
 \textbf{Progressi }
 L'utente deve poter monitorare i propri progressi, accedendo ai dati
-seguenti mediante una pagina dedicata:
+seguenti: 
 \begin{itemize}
-    \item Problemi risolti e, per ciascuno di essi, il numero di tentativi richiesti.
-    \item Problemi avviati in passato ma non ancora risolti, con relativo
-    numero di tentativi.
-    \item Score globale: una media campionaria dei tentativi richiesti
-    per problema.
+    \item Problemi risolti suddivisi per difficoltà
 \end{itemize}
 \end{funcreq}
 
 \begin{funcreq}
-\textbf{Preferiti:?}
-
+\textbf{Preferiti}
+    \begin{itemize}
+        \item L'utente deve essere in grado di poter aggiungere ad una lista di "preferiti"
+        qualsiasi problema, attraverso un apposito bottone.
+    \end{itemize}
 \end{funcreq}
 
 
 \begin{funcreq}
 \label{updateaccount}
 \textbf{Aggiornamento account }
-L'utnete registrato e autenticato deve poter modificare i dati chiave del
+L'utente registrato e autenticato deve poter modificare i dati chiave del
 proprio account in conformità con i requisiti non funzionali relativi alla
 sicurezza [...]:
 \begin{enumerate}
@@ -325,7 +310,7 @@ Tutti i problemi forniti possiedono:
     di un algoritmo. Eventuali immagini e proposizioni matematiche
     formali possono accompagnare i testi.
 
-    \item Almeno un esempio di input insieme al relativo output che
+    \item Almeno 3 esempi di input insieme al relativo output che
     mostra il risultato atteso.
 \end{itemize}
 \end{nonfuncreq}
@@ -350,7 +335,8 @@ caratterizzata dai seguenti dati descrittivi:
     del problema, come ad esempio le strutture di dati di cui tratta
     (array, grafi, code, ecc.).
 
-    \item Soluzione?:
+    \item Soluzione: un video apposito, non necessariamente in italiano dove poter vedere 
+    come il problema doveva essere svolto.
 \end{itemize}
 \end{nonfuncreq}
 
