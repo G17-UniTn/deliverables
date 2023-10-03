@@ -15,7 +15,8 @@
 
 \newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
 \newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
-
+\newtheorem{backend}{BE}
+\newtheorem{frontend}{FE}
 
 \title{Analisi dei Requisiti}
 
@@ -67,11 +68,7 @@ programmazione e alla progettazione di piccoli algoritmi risolutivi, mediante
 la scrittura di codice.
 
 \subsection{Attori coinvolti ed esigenze}
-Per comprendere meglio i requisiti che verranno descritti in seguito (in
-particolar modo quelli funzionali), è innanzitutto essenziale specificare
-il pubblico, insieme alle loro potenziali esigenze, al quale il servizio
-intende rivolgersi.
-Tale servizio vuole rendersi utile soprattutto a coloro che sono coinvolti
+Il servizio vuole rendersi utile soprattutto a coloro che sono coinvolti
 in percorsi di studio attinenti all'ambito informatico, ma specialmente anche
 a chiunque desideri cimentarsi nella risoluzione di piccoli problemi di
 programmazione; pertanto ci si aspetta che chiunque desideri usufruire del
@@ -124,7 +121,8 @@ accedere alla piattaforma mediante l'inserimento dell'indirizzo
 email e la password, impostate in fase di registrazione. Qualora la
 password inserita non corrisponda a quella dell'account con email
 associata, l'utente non può accedere alla piattaforma e deve essere
-notificato di ciò; è comunque possibile ritentare il login un numero illimitato di volte.
+notificato di tale errore; è comunque possibile ritentare il login un
+numero illimitato di volte.
 \end{funcreq}
 
 \begin{funcreq}
@@ -135,7 +133,7 @@ qualora tale dato dovesse essere dimenticato in fase di login. La procedura
 di recupero deve prevedere:
 \begin{itemize}
     \item L'invio di una mail contenente link apposito dove poter modificare la password corrente
-    ad un'altra password conforme al RNF \ref*{legalpassword}.
+    ad un'altra password conforme al RNF \ref{legalpassword}.
 
     \item L'inserimento di una nuova password che, come in fase di registrazione,
     deve essere scritta e confermata.
@@ -145,8 +143,9 @@ di recupero deve prevedere:
 \begin{funcreq}
 \label{logout}
 \textbf{Logout }
-L'utente registrato e autenticato deve poter interrompere la sessione di
-accesso al servizio effettuando un logout.
+L'utente registrato e autenticato deve poter interrompere la sessione di accesso
+al servizio effettuando un logout, tramite l'interazione con un apposito pulsante.
+Effettuato il logout, l'utente cessa di essere autenticato.
 \end{funcreq}
 
 \subsection{Consultazione dei problemi}
@@ -186,24 +185,32 @@ dell'utente i dati relativi al problema e specificati nel RNF
 \label{exesession}
 \textbf{Avviare una sessione di esercitazione }
 L'utente deve poter selezionare, attraverso l'apposito catalogo, il
-problema desiderato, dopodichè dovra essere portato ad una pagina apposita, dove
-l'utente potrà vedere il testo dell'esercizio, i test case per la verifica della correttezza dell'arlgoritmo
-come descritto in RF \ref*{sintax}, una console dove scrivere il codice per risolvere il problema selezionato, e testarlo,
+problema desiderato. Dopodichè dovrà essere portato ad una pagina apposita, dove
+l'utente potrà vedere il testo dell'esercizio, i test case per la verifica della correttezza dell'algoritmo
+come descritto nel RF \ref{sintax}, una console dove scrivere il codice per risolvere il problema selezionato, e testarlo,
 e appositi selettori per il linguaggio di programmazione desiderato. A tal fine, l'utente deve poter:
 \begin{enumerate}
-    \item Attivare e fermare a proprio piacimento un timer apposito per cronometrare il tempo speso
+    \item Avviare e fermare a proprio piacimento un timer apposito per cronometrare il tempo speso
     per risolvere il quesito scelto.
     
+
     \item Essere al corrente di quale linguaggio di programmazione sia
-    attualmente attivo per la scrittura di codice, tramite un menu dedicato
-    dal quale deve altresì essere possibile selezionare uno dei linguaggi
-    disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi, si veda RNF \ref{scalabilita}.1.}.
-     //(Non dovrebbe far parte dei RNF? Stiamo parlando di UI design, la parte del "menu" sarebbe da incorporare nel testo principale imo)
+    attualmente attivo per la scrittura di codice. Deve altresì essere 
+    possibile selezionare uno dei linguaggi messi a disposizione dalla
+    piattaforma\footnote{Per approfondimenti sulla disponibilità dei
+    linguaggi, si veda RNF \ref{scalabilita}.1.}.
+
+    %\item Essere al corrente di quale linguaggio di programmazione sia
+    %attualmente attivo per la scrittura di codice. tramite un menu dedicato
+    %dal quale deve altresì essere possibile selezionare uno dei linguaggi
+    %disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi,
+    %si veda RNF \ref{scalabilita}.1.}.
+    %//(Non dovrebbe far parte dei RNF? Stiamo parlando di UI design, la parte del "menu" sarebbe da incorporare nel testo principale imo)
 
     
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
     scelto, l'algoritmo risolutivo del problema attualmente attivo. La
-    scrittura deve poter essere effettuata in una vista o finestra apposita.
+    scrittura deve poter essere effettuata in una vista apposita.
 \end{enumerate}
 \end{funcreq}
 
@@ -234,13 +241,12 @@ e testandolo:
     proposto dall'utente verrà eseguito fornendo ad esso coppie di interi
     e registrando i risultati in output.)
 
-    \item L'utente deve essere in grado di essere notificato se il codice supera tutti i test case oppure se almeno 1
-    test case non è stato superato,in entrambi i casi l'utente verrà notificato attraverso un pop-up apposito. Per ogni test case, sia l'input che l'output desiderato sono visibili.
-    Inoltre, l'utente deve poter riscrivere e
-    perfezionare l'algoritmo e sottoporre ripetutamente il codice ai
-    test cases.
+    \item L'utente deve essere in grado di essere notificato se il codice supera tutti i test case oppure se almeno un
+    test case non è stato superato. In entrambi i casi l'utente verrà avvisato. Per ogni test case, sia l'input che l'output
+    desiderato sono visibili.
+    Inoltre, l'utente deve poter riscrivere e perfezionare l'algoritmo e sottoporre ripetutamente il codice ai test cases.
 
-    \item Nel caso che l'utente autenticato sia in grado di superare tutti i test case disponibili, il problema dovrà
+    \item Nel caso in cui l'utente autenticato sia in grado di superare tutti i test case disponibili, il problema dovrà
     essere contrassegnato come "risolto" nel catalogo di problemi.
 \end{enumerate}
 \end{funcreq}
@@ -251,18 +257,18 @@ e testandolo:
 \label{stats}
 \textbf{Progressi }
 L'utente deve poter monitorare i propri progressi, accedendo ai dati
-seguenti: 
+seguenti:
 \begin{itemize}
-    \item Problemi risolti suddivisi per difficoltà
+    \item Il numero totale di problemi risolti.
+    \item Il numero di problemi risolti suddivisi per difficoltà.
 \end{itemize}
 \end{funcreq}
 
 \begin{funcreq}
-\textbf{Preferiti}
-    \begin{itemize}
-        \item L'utente deve essere in grado di poter aggiungere ad una lista di "preferiti"
-        qualsiasi problema, attraverso un apposito bottone.
-    \end{itemize}
+\textbf{Preferiti }
+L'utente deve poter contrassegnare un qualsiasi problema come \textit{preferito}.
+Tale informazione deve essere visibile nel catalogo, accanto ad ogni problema
+contrassegnato in questo modo.
 \end{funcreq}
 
 
@@ -284,8 +290,7 @@ La password può essere cambiata previo inserimento di quella attualmente
 associata all'account. La nuova password deve essere digitata due volte
 per conferma e deve rispettare quanto specificato dal RNF \ref{legalpassword}. 
 L'utente deve essere notificato di tale modifica anche tramite
-l'indirizzo email attualmente associato all'account [possibilità di
-disattivare account a causa di azioni sospette?].
+l'indirizzo email attualmente associato all'account.
 \end{enumerate}
 \end{funcreq}
 
@@ -324,8 +329,7 @@ caratterizzata dai seguenti dati descrittivi:
     in un campo \textit{stato} apposito.
 
     \item Nome identificativo: si tratta di una stringa alfanumerica, che
-    riprende una o più parole chiave del titolo del problema di cui al
-    RNF \ref{formatoproblema}.
+    riprende una o più parole chiave del titolo del problema.
     
     \item Difficoltà: ogni problema possiede un'etichetta (\textit{tag})
     associata che ne valuta indicativamente la difficolta: bassa,
@@ -364,7 +368,7 @@ disponibilità online del servizio che verrà sviluppato. In particolare:
 \label{compatibility}
 \textbf{Compatibilità }
 La piattaforma del servizio deve essere accessibile mediante i principali
-browser attualmente disponibili in commercio.
+browser attualmente disponibili in commercio (Chrome, Edge, Firefox).
 \end{nonfuncreq}
 
 
@@ -397,7 +401,9 @@ testi dei problemi.
 
 \begin{nonfuncreq}
 \textbf{Prestazioni }
-
+%La “User experience” deve essere ai livelli dei moderni siti web, se l’utente si trova in una
+%condizione di connettività normale (4G - WI-FI).
+[decommenta]
 \end{nonfuncreq}
 
 \subsection{Privacy e sicurezza}
@@ -409,7 +415,7 @@ vigenti disposizioni di legge in materia di tutela della privacy e
 trattamento dei dati:
 \begin{enumerate}
     \item L'applicazione fornita dal servizio deve essere conforme
-    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} per la protezione dei dati.
+    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} (GDPR) per la protezione dei dati.
 \end{enumerate}
 \end{nonfuncreq}
 
@@ -443,10 +449,28 @@ e incongruenze.
 \end{nonfuncreq}
 
 
+
 \newpage
-\section{Relazioni tra obiettivi e requisiti}
-[tabella che associa obiettivi e requisiti?]
 \section{Design front-end}
+
 \section{Design back-end}
+
+\begin{backend}
+\textbf{Video YouTube }
+\end{backend}
+
+\begin{backend}
+\textbf{Database (Firebase) }
+
+\end{backend}
+
+\begin{backend}
+\textbf{Sistema di invio email }
+L'invio dei messaggi di posta elettronica, specificati nei re..., sarà gestito
+da servizi di terze parti.
+\end{backend}
+
+
+
 
 \end{document}

@@ -13,6 +13,5 @@
 \contentsline {subsection}{\numberline {3.1}Caratteristiche delle risorse}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Caratteristiche di sistema}{6}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Privacy e sicurezza}{7}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Relazioni tra obiettivi e requisiti}{8}{section.4}%
-\contentsline {section}{\numberline {5}Design front-end}{8}{section.5}%
-\contentsline {section}{\numberline {6}Design back-end}{8}{section.6}%
+\contentsline {section}{\numberline {4}Design front-end}{8}{section.4}%
+\contentsline {section}{\numberline {5}Design back-end}{8}{section.5}%
