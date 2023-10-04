@@ -108,7 +108,7 @@ campi:
     \item Indirizzo email.
     \item Nome utente.
     \item Password: data la sensibilità di questo campo, è importante
-    che siano rispettati i vincoli del \underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}};
+    che siano rispettati i vincoli del \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}};
     inoltre, l'utente deve poter riscrivere la password per confermarla, in
     modo tale da rilevare eventuali errori di digitazione.
 \end{itemize}
@@ -144,7 +144,7 @@ di recupero deve prevedere:
 
     \item L'inserimento (sulla piattaforma) di una nuova password che,
     come in fase di registrazione, deve essere scritta, confermata ed essere
-    conforme al \underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}.
+    conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{itemize}
 \end{funcreq}
 
@@ -167,14 +167,14 @@ atto a raccogliere i quesiti, e navigare al suo interno. Deve quindi
 essere possibile:
 \begin{enumerate}
     \item Visualizzare tale catalogo, che mostra i campi di ogni problema
-    elencato (descritti nel \underbar{\hyperref[metadata]{RNF \ref*{metadata}}}).
+    elencato (descritti nel \textcolor{blue}{\underbar{\hyperref[metadata]{RNF \ref*{metadata}}}}).
     
     \item Cercare uno o più problemi specifici mediante ricerca filtrata
     per campi.
 
     \item Selezionare dal catalogo un problema specifico, cosicché la
     descrizione dell'intero problema possa essere visionata per mezzo
-    delle funzionalità di cui al \underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}.
+    delle funzionalità di cui al \textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}.
 \end{enumerate}
 \end{funcreq}
 
@@ -184,7 +184,7 @@ essere possibile:
 Deve essere fornito un visualizzatore che mostri le informazioni del
 problema precedentemente selezionato dal catalogo. La visualizzazione
 deve rendere disponibile alla vista dell'utente i contenuti del
-problema, specificati nel RNF \ref{formatoproblema}.
+problema, specificati nel \textcolor{blue}{\underbar{\hyperref[formatoproblema]{RNF \ref*{formatoproblema}}}}.
 \end{funcreq}
 
 \subsection{Esercitazione}
@@ -196,9 +196,9 @@ a risolverlo. La sessione di esercitazione deve avvenire in una vista apposita, 
 l'utente deve poter disporre di tutti gli strumenti necessari alla realizzazione
 delle seguenti funzionalità:
 \begin{enumerate}
-    \item Visualizzare il contenuto dell'esercizio (\underbar{\hyperref[formatoproblema]{RNF \ref*{formatoproblema}}}).
+    \item Visualizzare il contenuto dell'esercizio (\textcolor{blue}{\underbar{\hyperref[formatoproblema]{RNF \ref*{formatoproblema}}}}).
     
-    \item Visualizzare i test cases (\underbar{\hyperref[test]{RNF \ref*{test}.2}}).
+    \item Visualizzare i test cases (\textcolor{blue}{\underbar{\hyperref[test]{RNF \ref*{test}.2}}}).
 
     \item Avviare e fermare a proprio piacimento un timer per cronometrare
     il tempo speso per risolvere il quesito scelto.
@@ -207,7 +207,7 @@ delle seguenti funzionalità:
     attualmente attivo per la scrittura di codice. Deve altresì essere 
     possibile selezionare uno dei linguaggi messi a disposizione dalla
     piattaforma\footnote{Per approfondimenti sulla disponibilità dei
-    linguaggi, si veda RNF \ref{scalabilita}.1.}.
+    linguaggi, si veda \textcolor{blue}{\underbar{\hyperref[scalabilita]{RNF \ref*{scalabilita}.2}}}.}.
 
     %\item Essere al corrente di quale linguaggio di programmazione sia
     %attualmente attivo per la scrittura di codice. tramite un menu dedicato
@@ -257,7 +257,7 @@ e testandolo:
     test case disponibili, la sessione di esercitazione deve terminare: deve
     essere visualizzato il tempo impiegato (se il cronometro è attivo) e, qualora
     l'utente sia autenticato, il problema deve essere contrassegnato come
-    \textit{risolto} nel campo \textit{stato} del problema e i progressi (\underbar{\hyperref[stats]{RF \ref*{stats}}}) devono
+    \textit{risolto} nel campo \textit{stato} del problema e i progressi (\textcolor{blue}{\underbar{\hyperref[stats]{RF \ref*{stats}}}}) devono
     essere aggiornati.
 \end{enumerate}
 \end{funcreq}
@@ -305,7 +305,7 @@ ricezione del messaggio presso il nuovo indirizzo.
 \item L'utente deve poter modificare la password del proprio account.
 La password può essere cambiata previo inserimento di quella attualmente
 associata all'account. La nuova password deve essere digitata due volte
-per conferma e deve rispettare quanto specificato dal \underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}. 
+per conferma e deve rispettare quanto specificato dal \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}. 
 L'utente deve essere notificato di tale modifica anche tramite
 l'indirizzo email attualmente associato all'account.
 \end{enumerate}
@@ -532,25 +532,32 @@ autenticato.
 
 %\begin{backend}
 %\textbf{Autenticazione con account google }
+%L'utente potrà scegliere di autenticarsi mediante un account google.
 %\end{backend}
 
 \begin{backend}
-\textbf{Video - YouTube }
+\textbf{Contenuti multimediali }
 Per reperire e riprodurre i video contenenti le soluzioni dei problemi,
 il servizio si affiderà alla piattaforma YouTube.
 \end{backend}
 
 \begin{backend}
-\textbf{Database - Firebase }
-
+\textbf{Database }
+Verrà impiegato il servizio di database Firebase per la memorizzazione
+degli utenti, dei problemi del catalogo e di tutti i dati associati.
 \end{backend}
+% alternativa: mongoDB
 
 \begin{backend}
 \textbf{Sistema di invio email }
-L'invio dei messaggi di posta elettronica, citato in alcuni dei requisiti,
-sarà gestito da servizi di terze parti.
+L'invio dei messaggi di posta elettronica sarà gestito da servizi di terze parti.
 \end{backend}
+% possibili candidati: gmail
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{immaginife/backend.jpg}
+\end{figure}
 
 
 
