@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1696400456 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1696400456
+["pdflatex"] 1696419310 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1696419310
   "/etc/texmf/web2c/texmf.cnf" 1670017924 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/zenos/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1695818584 12644 eee4094d9b0ef7a0f57e819f740c664b ""
-  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1696400455 19902 ae13525eb863e59302a0f8502e2a99f3 ""
+  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1696419309 21257 8f147ef2eb648a350172472f02e85d55 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -66,6 +66,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo" 1636758526 8464 74db94825c407b51399ca17d9bd38a3d ""
   "/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1601931149 46845 3b58f70c6e861a13d927bff09d35ecbc ""
+  "/usr/share/texlive/texmf-dist/tex/latex/float/float.sty" 1137110151 6749 16d2656a1984957e674b149555f1ea1d ""
   "/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty" 1312311212 25776 d28bd6d82f168f8cb2268584b67a2a98 ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1459978653 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1465944070 1224 978390e9c2234eab29404bc21b268d1e ""
@@ -96,10 +97,15 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1695745363 1407043 8be3ec44ca5f54f94ef0b8268753d863 ""
   "UniTrento_logo_ITA_colore.png" 1696331770 29419 f5e8f5d1269cac26457c17f08ff63a16 ""
   "copertina.tex" 1696331845 1821 3fddd6528eb00117e30a1aea92798fee ""
-  "del1.aux" 1696400456 3391 d3206a67cee02d22457eb71cdf8ae906 "pdflatex"
-  "del1.out" 1696400456 2454 04e02d9d10e43ca83efb1fb74c1e93db "pdflatex"
-  "del1.tex" 1696400455 19902 ae13525eb863e59302a0f8502e2a99f3 ""
-  "del1.toc" 1696400456 1317 97c5ab22e2bfc06bfe76127e0bc93cd5 "pdflatex"
+  "del1.aux" 1696419310 3393 745f6391ec6cb9f6d6c8543b2e757820 "pdflatex"
+  "del1.out" 1696419310 2454 04e02d9d10e43ca83efb1fb74c1e93db "pdflatex"
+  "del1.tex" 1696419309 21257 8f147ef2eb648a350172472f02e85d55 ""
+  "del1.toc" 1696419310 1318 a58e4943c729e9df44f64a7b96b13a2d "pdflatex"
+  "immaginife/esercitazione.jpeg" 1696416944 193379 952e2c3b37364e4a7bdca3615a5446ed ""
+  "immaginife/homecatalogo.jpeg" 1696416944 106705 79be67d4384e36b35937bc8edccfcd61 ""
+  "immaginife/login.jpeg" 1696416944 66288 b058b90f4dd7ccfc5857ac4803dfb876 ""
+  "immaginife/logout.jpeg" 1696416944 11095 c76d8eec570ddd598a36aaa3e3aabbcc ""
+  "immaginife/registrazione.jpeg" 1696416944 72898 4b8d56e67591891429964acc3020e3b0 ""
   (generated)
   "del1.aux"
   "del1.log"
