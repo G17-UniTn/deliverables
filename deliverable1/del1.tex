@@ -48,6 +48,7 @@ Zeno \textsc{Saletti}}
 \begin{document}
 
 % La pagina di copertina si trova in un file .tex a parte
+% NON MODIFICARE QUESTO COMANDO!!!
 \input{./copertina.tex}
 
 \tableofcontents
@@ -414,21 +415,23 @@ dell'affaticamento della vista.
 
 \begin{nonfuncreq}
 \textbf{Lingua di sistema }
-Il servizio sarà erogato in lingua italiana. Altrettanto sarà fatto per i
+Il servizio viene erogato in lingua italiana. Altrettanto viene fatto per i
 testi dei problemi. I video relativi alla soluzione dei problemi possono
 essere in italiano oppure in inglese.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Affidabilità }
-
+\textbf{Disponibilità }
+Il downtime annuo della piattaforma non deve eccedere gli intervalli di tempo
+indispensabili a eventuali opere di manutenzione, evitando ove possibile
+interruzioni di servizio inutilmente prolungate.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
 \textbf{Prestazioni }
-%La “User experience” deve essere ai livelli dei moderni siti web, se l’utente si trova in una
-%condizione di connettività normale (4G - WI-FI).
-[decommenta]
+L'esperienza di utilizzo deve poter essere soddisfacente in relazione
+ai livelli di prestazioni dei moderni siti web, purché l'utente utilizzi
+il servizio in condizioni di connettività sufficienti.
 \end{nonfuncreq}
 
 \subsection{Privacy e sicurezza}
@@ -484,7 +487,7 @@ la piattaforma online espone all'utente.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.25]{./immaginife/login.jpeg}
+\includegraphics[scale=0.2]{./immaginife/login.jpeg}
 \end{figure}
 
 \begin{frontend}
@@ -492,9 +495,10 @@ la piattaforma online espone all'utente.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.25]{./immaginife/registrazione.jpeg}
+\includegraphics[scale=0.2]{./immaginife/registrazione.jpeg}
 \end{figure}
 
+\newpage
 \begin{frontend}
 \textbf{Home page }
 Il catalogo e il profilo utente, insieme a tutti i collegamenti che consentono
@@ -503,18 +507,18 @@ contenute in una pagina principale.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.25]{./immaginife/homecatalogo.jpeg}
+\includegraphics[scale=0.2]{./immaginife/homecatalogo.jpeg}
 \end{figure}
 
 \begin{frontend}
 \textbf{Pagina di esercitazione }
+
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.25]{./immaginife/esercitazione.jpeg}
+\includegraphics[scale=0.2]{./immaginife/esercitazione.jpeg}
 \end{figure}
 
-\newpage
 \begin{frontend}
 \textbf{Logout }
 Un pulsante di logout è raggiungibile in ogni momento da parte dell'utente
@@ -525,15 +529,15 @@ autenticato.
 \includegraphics[scale=0.3]{./immaginife/logout.jpeg}
 \end{figure}
 
-
-
 \newpage
 \section{Design back-end}
+Nella sezione seguente vengono elencati i servizi con i quali la piattaforma
+interagisce per ottenere supporto alle sue funzionalità.
 
-%\begin{backend}
-%\textbf{Autenticazione con account google }
-%L'utente potrà scegliere di autenticarsi mediante un account google.
-%\end{backend}
+\begin{backend}
+\textbf{Servizio di autenticazione Google }
+L'utente potrà scegliere di autenticarsi mediante un account Google.
+\end{backend}
 
 \begin{backend}
 \textbf{Contenuti multimediali }
@@ -549,8 +553,8 @@ degli utenti, dei problemi del catalogo e di tutti i dati associati.
 % alternativa: mongoDB
 
 \begin{backend}
-\textbf{Sistema di invio email }
-L'invio dei messaggi di posta elettronica sarà gestito da servizi di terze parti.
+\textbf{Notifica via posta elettronica }
+L'invio dei messaggi email (da parte della piattaforma) sarà gestito da servizi di terze parti.
 \end{backend}
 % possibili candidati: gmail
 

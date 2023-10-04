@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1696421210 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1696421211
+["pdflatex"] 1696439673 "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" "del1.pdf" "del1" 1696439673
   "/etc/texmf/web2c/texmf.cnf" 1670017924 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/zenos/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1695818584 12644 eee4094d9b0ef7a0f57e819f740c664b ""
-  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1696421210 21840 b5e642754c39e99b36a18eb41b08c894 ""
+  "/home/zenos/courses/sengineering/deliverables/deliverable1/del1.tex" 1696439273 22262 a05062ffff4147fca8c9a11fd476703b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -96,11 +96,11 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1670017928 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1695745363 1407043 8be3ec44ca5f54f94ef0b8268753d863 ""
   "UniTrento_logo_ITA_colore.png" 1696331770 29419 f5e8f5d1269cac26457c17f08ff63a16 ""
-  "copertina.tex" 1696331845 1821 3fddd6528eb00117e30a1aea92798fee ""
-  "del1.aux" 1696421210 3393 745f6391ec6cb9f6d6c8543b2e757820 "pdflatex"
-  "del1.out" 1696421210 2454 04e02d9d10e43ca83efb1fb74c1e93db "pdflatex"
-  "del1.tex" 1696421210 21840 b5e642754c39e99b36a18eb41b08c894 ""
-  "del1.toc" 1696421210 1318 a58e4943c729e9df44f64a7b96b13a2d "pdflatex"
+  "copertina.tex" 1696439673 2034 66a87c3930bbfbafcc3610048e0c2c1e ""
+  "del1.aux" 1696439673 3393 532a2459b5c1bc06cd80b9e14abcb7bb "pdflatex"
+  "del1.out" 1696439673 2454 04e02d9d10e43ca83efb1fb74c1e93db "pdflatex"
+  "del1.tex" 1696439273 22262 a05062ffff4147fca8c9a11fd476703b ""
+  "del1.toc" 1696439673 1318 4dfebb15143ccb1edf0e4d4bc080d702 "pdflatex"
   "immaginife/backend.jpg" 1696420584 37707 010ae4055fe9bc6f9de09bbc7efb32f3 ""
   "immaginife/esercitazione.jpeg" 1696416944 193379 952e2c3b37364e4a7bdca3615a5446ed ""
   "immaginife/homecatalogo.jpeg" 1696416944 106705 79be67d4384e36b35937bc8edccfcd61 ""
