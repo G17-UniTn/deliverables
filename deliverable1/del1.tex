@@ -26,6 +26,8 @@ Zeno \textsc{Saletti}}
 
 \newcommand{\groupNumber}{G17}
 
+% —
+
 % Web address for the project (if any)
 % \newcommand{\homepage}{\url{https://www.}}
 
@@ -54,10 +56,9 @@ Zeno \textsc{Saletti}}
 \subsection{Scopo del documento}
 Le informazioni contenute in questo documento concorrono ad esporre l'analisi
 dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
-aver specificato gli obiettivi e gli attori coinvolti—utenti finali e
-utilizzatori del frutto di questo progetto—verranno definiti i requisiti
+aver specificato gli obiettivi e gli attori coinvolti, verranno definiti i requisiti
 funzionali e non funzionali; verrà presentata una proposta di design di
-back-end; infine saranno riportati i sistemi di back-end coi quali il servizio
+back-end; infine saranno riportati i sistemi esterni di back-end coi quali il servizio
 dovrà interfacciarsi.
 
 
@@ -67,7 +68,7 @@ di giovani informatici un servizio online di \textit{esercitazione} mirata alla
 programmazione e alla progettazione di piccoli algoritmi risolutivi, mediante
 la scrittura di codice.
 
-\subsection{Attori coinvolti ed esigenze}
+\subsection{Pubblico di riferimento ed esigenze}
 Il servizio vuole rendersi utile soprattutto a coloro che sono coinvolti
 in percorsi di studio attinenti all'ambito informatico, ma specialmente anche
 a chiunque desideri cimentarsi nella risoluzione di piccoli problemi di
@@ -109,8 +110,10 @@ online. Devono essere richiesti i seguenti campi:
     password che non corrisponde a quella scelta dall'utente, deve essere
     presente un secondo campo di conferma, dove la password deve essere
     riscritta. La password deve in ogni caso essere conforme a quanto
-    specificato nel RNF \ref{legalpassword}.
+    specificato nel \underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}.
 \end{itemize}
+L'utente dotato di un account sarà considerato dal servizio come \textit{utente
+registrato}.
 \end{funcreq}
 
 \begin{funcreq}
@@ -118,10 +121,10 @@ online. Devono essere richiesti i seguenti campi:
 \textbf{Login }
 Il sistema deve permettere all'utente già registrato al servizio di
 accedere alla piattaforma mediante l'inserimento dell'indirizzo
-email e la password, impostate in fase di registrazione. Qualora la
-password inserita non corrisponda a quella dell'account con email
-associata, l'utente non può accedere alla piattaforma e deve essere
-notificato di tale errore; è comunque possibile ritentare il login un
+email e la password, impostate in fase di registrazione. L'utente deve
+essere notificato qualora non sia possibile concludere correttamente
+l'operazione di login, quindi se l'email inserita non sia registrata o
+la password non corrisponda; è comunque possibile ritentare il login un
 numero illimitato di volte.
 \end{funcreq}
 
@@ -132,11 +135,13 @@ L'utente registrato deve poter recuperare la password del proprio account
 qualora tale dato dovesse essere dimenticato in fase di login. La procedura
 di recupero deve prevedere:
 \begin{itemize}
-    \item L'invio di una mail contenente link apposito dove poter modificare la password corrente
-    ad un'altra password conforme al RNF \ref{legalpassword}.
+    \item L'invio di un messaggio all'indirizzo email attualmente associato
+    all'account dell'utente; l'email contiene un link che guida l'utente
+    nella creazione di una nuova password.
 
-    \item L'inserimento di una nuova password che, come in fase di registrazione,
-    deve essere scritta e confermata.
+    \item L'inserimento (in una pagina dedicata) di una nuova password che,
+    come in fase di registrazione, deve essere scritta, confermata ed essere
+    conforme al RNF \ref{legalpassword}.
 \end{itemize}
 \end{funcreq}
 
@@ -144,8 +149,8 @@ di recupero deve prevedere:
 \label{logout}
 \textbf{Logout }
 L'utente registrato e autenticato deve poter interrompere la sessione di accesso
-al servizio effettuando un logout, tramite l'interazione con un apposito pulsante.
-Effettuato il logout, l'utente cessa di essere autenticato.
+al servizio. Questa procedura di \textit{logout} realizza il passaggio dell'utente
+dallo stato \textit{autenticato} a quello \textit{anonimo}.
 \end{funcreq}
 
 \subsection{Consultazione dei problemi}
@@ -158,11 +163,11 @@ l'utente possa esercitarsi. L'utente deve poter consultare un catalogo,
 atto a raccogliere i quesiti, e navigare al suo interno. Deve quindi
 essere possibile:
 \begin{enumerate}
-    \item Visualizzare tale catalogo in una vista dedicata.
+    \item Visualizzare tale catalogo in una vista dedicata. Il catalogo mostra
+    i campi di ogni problema, descritti nel RNF \ref{metadata}.
     
     \item Cercare uno o più problemi specifici mediante ricerca filtrata
-    per campi, specificati dai metadati elencati al RNF \ref{metadata},
-    oppure non filtrata.
+    per campi (specificati dai metadati elencati al RNF \ref{metadata}).
 
     \item Selezionare dal catalogo un problema specifico, cosicché la
     descrizione dell'intero problema possa essere visionata per mezzo
@@ -173,27 +178,28 @@ essere possibile:
 \begin{funcreq}
 \label{seeproblem}
 \textbf{Consultazione di un problema }
-Deve essere fornito un visualizzatore del documento contenente le
-informazioni del singolo problema precedentemente selezionato dal
-catalogo. La visualizzazione deve rendere disponibile alla vista
-dell'utente i dati relativi al problema e specificati nel RNF
-\ref{formatoproblema}.
+Deve essere fornito un visualizzatore che mostri le informazioni del
+problema precedentemente selezionato dal catalogo. La visualizzazione
+deve rendere disponibile alla vista dell'utente i dati relativi al
+problema e specificati nel RNF \ref{formatoproblema}.
 \end{funcreq}
 
 \subsection{Esercitazione}
 \begin{funcreq}
 \label{exesession}
 \textbf{Avviare una sessione di esercitazione }
-L'utente deve poter selezionare, attraverso l'apposito catalogo, il
-problema desiderato. Dopodichè dovrà essere portato ad una pagina apposita, dove
-l'utente potrà vedere il testo dell'esercizio, i test case per la verifica della correttezza dell'algoritmo
-come descritto nel RF \ref{sintax}, una console dove scrivere il codice per risolvere il problema selezionato, e testarlo,
-e appositi selettori per il linguaggio di programmazione desiderato. A tal fine, l'utente deve poter:
+L'utente deve poter scegliere dal catalogo il problema desiderato e cominciare
+a risolverlo. La sessione di esercitazione avviene in una pagina apposita, dove
+l'utente deve poter disporre di tutti gli strumenti necessari alla realizzazione
+delle seguenti funzionalità:
 \begin{enumerate}
-    \item Avviare e fermare a proprio piacimento un timer apposito per cronometrare il tempo speso
-    per risolvere il quesito scelto.
+    \item Visualizzare il contenuto dell'esercizio (RNF \ref{formatoproblema}).
     
+    \item Visualizzare i test cases (RF \ref{test}.2).
 
+    \item Avviare e fermare a proprio piacimento un timer per cronometrare
+    il tempo speso per risolvere il quesito scelto.
+    
     \item Essere al corrente di quale linguaggio di programmazione sia
     attualmente attivo per la scrittura di codice. Deve altresì essere 
     possibile selezionare uno dei linguaggi messi a disposizione dalla
@@ -206,11 +212,9 @@ e appositi selettori per il linguaggio di programmazione desiderato. A tal fine,
     %disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi,
     %si veda RNF \ref{scalabilita}.1.}.
     %//(Non dovrebbe far parte dei RNF? Stiamo parlando di UI design, la parte del "menu" sarebbe da incorporare nel testo principale imo)
-
     
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
-    scelto, l'algoritmo risolutivo del problema attualmente attivo. La
-    scrittura deve poter essere effettuata in una vista apposita.
+    scelto, l'algoritmo risolutivo del problema attualmente attivo.
 \end{enumerate}
 \end{funcreq}
 
@@ -241,14 +245,27 @@ e testandolo:
     proposto dall'utente verrà eseguito fornendo ad esso coppie di interi
     e registrando i risultati in output.)
 
-    \item L'utente deve essere in grado di essere notificato se il codice supera tutti i test case oppure se almeno un
-    test case non è stato superato. In entrambi i casi l'utente verrà avvisato. Per ogni test case, sia l'input che l'output
+    \item L'utente deve essere in grado di essere notificato se il codice supera
+    tutti i test case oppure se almeno un
+    test case non è stato superato. In entrambi i casi l'utente verrà avvisato.
+    Per ogni test case, sia l'input che l'output
     desiderato sono visibili.
-    Inoltre, l'utente deve poter riscrivere e perfezionare l'algoritmo e sottoporre ripetutamente il codice ai test cases.
+    Inoltre, l'utente deve poter riscrivere e perfezionare l'algoritmo e
+    sottoporre ripetutamente il codice ai test cases.
 
-    \item Nel caso in cui l'utente autenticato sia in grado di superare tutti i test case disponibili, il problema dovrà
-    essere contrassegnato come "risolto" nel catalogo di problemi.
+    \item Nel caso in cui l'utente autenticato sia in grado di superare tutti i
+    test case disponibili, la sessione di esercitazione termina: deve
+    essere visualizzato il tempo impiegato e, qualora l'utente sia autenticato,
+    il problema deve essere contrassegnato come \textit{risolto} nel campo
+    \textit{stato} del problema e i progressi devono essere aggiornati.
 \end{enumerate}
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Soluzione }
+Per ogni problema viene messo a disposizione un video che mostra una
+possibile soluzione. Il video è accessibile sia dal catalogo che dalla
+finestra dedicata allo svolgimento del problema.
 \end{funcreq}
 
 \subsection{Gestione profilo e account}
@@ -256,7 +273,7 @@ e testandolo:
 \begin{funcreq}
 \label{stats}
 \textbf{Progressi }
-L'utente deve poter monitorare i propri progressi, accedendo ai dati
+L'utente autenticato deve poter monitorare i propri progressi, accedendo ai dati
 seguenti:
 \begin{itemize}
     \item Il numero totale di problemi risolti.
@@ -339,9 +356,15 @@ caratterizzata dai seguenti dati descrittivi:
     del problema, come ad esempio le strutture di dati di cui tratta
     (array, grafi, code, ecc.).
 
-    \item Soluzione: un video apposito, non necessariamente in italiano dove poter vedere 
-    come il problema doveva essere svolto.
+    \item Soluzione: un video che mostra come il problema potrebbe essere
+    risolto.
+
+    \item Preferito: la marcatura \textit{preferito} è visibile sul problema
+    quando esso compare nel catalogo e quando viene consultato.
 \end{itemize}
+Ai fini della consultazione del catalogo, i filtri applicabili riguardano
+i campi \textit{stato}, \textit{difficoltà}, \textit{categoria}, \textit{preferito}
+e \textit{nome} (quest'ultima mediante barra di ricerca).
 \end{nonfuncreq}
 
 \subsection{Caratteristiche di sistema}
@@ -368,7 +391,8 @@ disponibilità online del servizio che verrà sviluppato. In particolare:
 \label{compatibility}
 \textbf{Compatibilità }
 La piattaforma del servizio deve essere accessibile mediante i principali
-browser attualmente disponibili in commercio (Chrome, Edge, Firefox).
+browser attualmente disponibili in commercio (in particolare Chrome, Edge,
+Firefox).
 \end{nonfuncreq}
 
 
@@ -391,7 +415,8 @@ dell'affaticamento della vista.
 \begin{nonfuncreq}
 \textbf{Lingua di sistema }
 Il servizio sarà erogato in lingua italiana. Altrettanto sarà fatto per i
-testi dei problemi.
+testi dei problemi. I video relativi alla soluzione dei problemi possono
+essere in italiano oppure in inglese.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -456,17 +481,19 @@ e incongruenze.
 \section{Design back-end}
 
 \begin{backend}
-\textbf{Video YouTube }
+\textbf{Video - YouTube }
+Per reperire e riprodurre i video contenenti le soluzioni dei problemi,
+il servizio si affiderà alla piattaforma YouTube.
 \end{backend}
 
 \begin{backend}
-\textbf{Database (Firebase) }
+\textbf{Database - Firebase }
 
 \end{backend}
 
 \begin{backend}
 \textbf{Sistema di invio email }
-L'invio dei messaggi di posta elettronica, specificati nei re..., sarà gestito
+L'invio dei messaggi di posta elettronica, specificati nei requis, sarà gestito
 da servizi di terze parti.
 \end{backend}
 
