@@ -1,18 +1,28 @@
 \documentclass[11pt, a4paper]{article}
 
 %\usepackage[T1]{fontenc}
+%\usepackage{fullpage}
+
 \usepackage[utf8]{inputenc} % comment when using lualatex
 \usepackage[italian]{babel} % lingua e a-capo-sillabato
-%\usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref,xcolor} % link di pagina
 \usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
 \usepackage{float} % per posizionamento immagini
+\usepackage{amsthm}
 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}% Clear header/footer
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
+
+
+%\pagestyle{myheadings}
+%\markright{John Smith\hfill On page styles\hfill}
 
 \renewcommand\UrlFont{\color{blue}\rmfamily}
 
-\usepackage{amsthm}
 \theoremstyle{definition}
 
 \newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
@@ -27,6 +37,7 @@ Alberto \textsc{Rovesti}\\
 Zeno \textsc{Saletti}}
 
 \newcommand{\groupNumber}{G17}
+
 
 % —
 
@@ -430,18 +441,18 @@ essere in italiano oppure in inglese.
 
 \begin{nonfuncreq}
 \textbf{Disponibilità }
-Il downtime annuo della piattaforma non deve eccedere gli intervalli di tempo
-indispensabili a eventuali opere di manutenzione, evitando ove possibile
-interruzioni di servizio inutilmente prolungate.
-%metti qualche numero
+Il downtime annuo della piattaforma non deve eccedere gli intervalli di
+tempo indispensabili a eventuali opere di manutenzione, evitando ove
+possibile interruzioni di servizio inutilmente prolungate.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
 \textbf{Prestazioni }
 L'esperienza di utilizzo deve poter essere soddisfacente in relazione
 ai livelli di prestazioni dei moderni siti web, purché l'utente utilizzi
-il servizio in condizioni di connettività sufficienti. In particolare
-%metti qualche numero
+il servizio in condizioni di connettività sufficienti. In particolare,
+i tempi di reazione relativi a caricamenti e transizioni tra pagine non
+deve eccedere i 2 secondi.
 \end{nonfuncreq}
 
 \subsection{Privacy e sicurezza}
@@ -577,7 +588,7 @@ L'invio dei messaggi email (da parte della piattaforma) sarà gestito da servizi
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{materiale/backend.jpg}
+\includegraphics[scale=0.35]{materiale/backend.jpg}
 \end{figure}
 
 
