@@ -3,7 +3,7 @@
 %\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % comment when using lualatex
 \usepackage[italian]{babel} % lingua e a-capo-sillabato
-\usepackage{fullpage}
+%\usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref,xcolor} % link di pagina
 \usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
@@ -366,7 +366,7 @@ caratterizzata dai seguenti dati descrittivi:
 \end{itemize}
 Ai fini della consultazione del catalogo, i filtri applicabili riguardano
 i campi \textit{stato}, \textit{difficoltà}, \textit{categoria}, \textit{preferito}
-e \textit{nome} (quest'ultima mediante barra di ricerca).
+e \textit{nome}.
 \end{nonfuncreq}
 
 \subsection{Caratteristiche di sistema}
@@ -392,9 +392,14 @@ disponibilità online del servizio che verrà sviluppato. In particolare:
 \begin{nonfuncreq}
 \label{compatibility}
 \textbf{Compatibilità }
-La piattaforma del servizio deve essere accessibile mediante i principali
-browser attualmente disponibili in commercio (in particolare Chrome, Edge,
-Firefox).
+La piattaforma del servizio deve essere accessibile mediante le versioni
+più recenti dei principali browser attualmente disponibili in commercio:
+\begin{itemize}
+    \item Chrome: %da versione
+    \item Firefox: %da versione
+    \item Edge: %da versione
+    \item 
+\end{itemize}
 \end{nonfuncreq}
 
 
@@ -404,6 +409,7 @@ La piattaforma del servizio deve permettere all'utente di sfruttare le
 funzionalità disponibili al proprio livello di accesso senza l'ausilio di
 istruzioni scritte e verbose. L'intuitività dell'interfaccia deve essere
 sufficiente a guidare l'utente nella realizzazione dei suoi scopi.
+% metti qualche numero
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -426,13 +432,15 @@ essere in italiano oppure in inglese.
 Il downtime annuo della piattaforma non deve eccedere gli intervalli di tempo
 indispensabili a eventuali opere di manutenzione, evitando ove possibile
 interruzioni di servizio inutilmente prolungate.
+%metti qualche numero
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
 \textbf{Prestazioni }
 L'esperienza di utilizzo deve poter essere soddisfacente in relazione
 ai livelli di prestazioni dei moderni siti web, purché l'utente utilizzi
-il servizio in condizioni di connettività sufficienti.
+il servizio in condizioni di connettività sufficienti. In particolare
+%metti qualche numero
 \end{nonfuncreq}
 
 \subsection{Privacy e sicurezza}
@@ -446,6 +454,13 @@ trattamento dei dati:
     \item L'applicazione fornita dal servizio deve essere conforme
     al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} (GDPR) per la protezione dei dati.
 \end{enumerate}
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+\textbf{Connessione sicura }
+La comunicazione con il client deve essere protetta da protocolli
+di sicurezza, come \texttt{https}, che consentano di preservare la
+riservatezza dei dati scambiati tra piattaforma e client utente.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
