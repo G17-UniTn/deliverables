@@ -1,0 +1,70 @@
+\documentclass[11pt, a4paper]{article}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{fullpage}
+
+\usepackage[utf8]{inputenc} % comment when using lualatex
+\usepackage[italian]{babel} % lingua e a-capo-sillabato
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref,xcolor} % link di pagina
+\usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
+\usepackage{float} % per posizionamento immagini
+\usepackage{amsthm}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}% Clear header/footer
+\fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
+
+
+%\pagestyle{myheadings}
+%\markright{John Smith\hfill On page styles\hfill}
+
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\theoremstyle{definition}
+
+\newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
+\newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
+\newtheorem{backend}{BE}
+\newtheorem{frontend}{FE}
+
+\title{Use Case Diagrams}
+
+\author{Raffaele \textsc{Castagna}\\
+Alberto \textsc{Rovesti}\\
+Zeno \textsc{Saletti}}
+
+\newcommand{\groupNumber}{G17}
+
+
+% —
+
+% Web address for the project (if any)
+% \newcommand{\homepage}{\url{https://www.}}
+
+% data
+\date{\today}
+
+\makeatletter{}
+
+% IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\begin{document}
+
+% La pagina di copertina si trova in un file .tex a parte
+% NON MODIFICARE QUESTO COMANDO!!!
+\input{materiale/copertina.tex}
+
+\tableofcontents
+
+
+\newpage
+
+\end{document}
