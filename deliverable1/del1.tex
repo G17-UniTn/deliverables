@@ -14,7 +14,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
-\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.0}
 \renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
 
 
@@ -78,9 +78,12 @@ dovrà interfacciarsi.
 
 \subsection{Obiettivo del progetto}
 Il progetto proposto si prefigge, come scopo fondante, di fornire alla comunità
-di giovani informatici un servizio online di \textit{esercitazione} mirata alla
-programmazione e alla progettazione di piccoli algoritmi risolutivi, mediante
-la scrittura di codice.
+di giovani informatici un servizio online di:
+\begin{itemize}
+    \item \textit{esercitazione} mirata alla programmazione e alla progettazione
+    di piccoli algoritmi risolutivi, mediante la scrittura di codice;
+    \item \textit{raccolta} di problemi attinenti.
+\end{itemize}
 
 \subsection{Pubblico di riferimento ed esigenze}
 Il servizio vuole rendersi utile soprattutto a coloro che sono coinvolti
@@ -96,7 +99,9 @@ linguaggio di programmazione, tipi e strutture di dati più comuni.
 Di fatto, il progetto che verrà sviluppato ha come scopo principale di
 creare una piattaforma accessibile online a singoli utilizzatori che
 desiderano esercitarsi, valutare e approfondire le personali
-conoscenze e abilità di \textit{problem solving} legate alla programmazione.
+conoscenze e abilità di \textit{problem solving} legate alla programmazione,
+insieme all'archiviazione di nuovi problemi da rendere disponibili a coloro
+che intendono usufruire del servizio.
 D'ora in avanti, in questo e nei successivi documenti, questo pubblico di
 individui appena descritti verrà indicato con il termine \textit{utenti}.
 
@@ -107,15 +112,31 @@ del progetto. Ogni sottosezione di questa parte del documento
 risponde a diversi scopi precedentemente accennati, suddividendo
 eventuali macro-funzioni in requisiti minori nel caso di obiettivi
 di più ampia portata.
+\\\\
+\noindent Le funzionalità sono inoltre suddivise secondo alcuni livelli di accesso
+degli utenti:
+\begin{itemize}
+    \item \textit{Utente anonimo.}
+    \item \textit{Utente autenticato.}
+    \item \textit{Utente amministratore.}
+\end{itemize}
+Ogni livello è da considerarsi come sottoinsieme di quello precedente;
+ovvero, ad un dato livello, vengono ereditate le funzionalità del livello
+precedente, ma non è possibile accedere alle funzionalità disponibili ai
+livelli superiori.
+
+\begin{center}
+\section*{Utente anonimo}    
+\end{center}
+
 
 \subsection{Accesso}
 
 \begin{funcreq}
 \label{signup}
 \textbf{Registrazione }
-I nuovi utenti, definiti \textit{anonimi}, devono poter registrarsi al
-servizio, ovvero creare un account che richiede la compilazione dei seguenti
-campi:
+I nuovi utenti devono poter registrarsi al servizio, ovvero creare un account che
+richiede la compilazione dei seguenti campi:
 \begin{itemize}
     \item Indirizzo email.
     \item Nome utente.
@@ -158,14 +179,6 @@ di recupero deve prevedere:
     come in fase di registrazione, deve essere scritta, confermata ed essere
     conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{itemize}
-\end{funcreq}
-
-\begin{funcreq}
-\label{logout}
-\textbf{Logout }
-L'utente autenticato deve poter interrompere la sessione di accesso
-al servizio. Questa procedura di \textit{logout} realizza il passaggio dell'utente
-dallo stato autenticato a quello anonimo.
 \end{funcreq}
 
 \subsection{Consultazione dei problemi}
@@ -233,6 +246,7 @@ delle seguenti funzionalità:
 \end{enumerate}
 \end{funcreq}
 
+%\newpage
 \begin{funcreq}
 \label{sintax}
 \textbf{Correttezza sintattica del codice }
@@ -265,12 +279,9 @@ e testandolo:
     Inoltre, l'utente deve poter riscrivere e perfezionare l'algoritmo e
     sottoporre ripetutamente il codice ai test cases.
 
-    \item Nel caso in cui l'utente autenticato sia in grado di superare tutti i
-    test case disponibili, la sessione di esercitazione deve terminare: deve
-    essere visualizzato il tempo impiegato (se il cronometro è attivo) e, qualora
-    l'utente sia autenticato, il problema deve essere contrassegnato come
-    \textit{risolto} nel campo \textit{stato} del problema e i progressi (\textcolor{blue}{\underbar{\hyperref[stats]{RF \ref*{stats}}}}) devono
-    essere aggiornati.
+    \item Nel caso in cui l'utente sia in grado di superare tutti i
+    test case disponibili, la sessione di esercitazione deve terminare.
+    Deve essere visualizzato il tempo impiegato, se il cronometro è attivo.
 \end{enumerate}
 \end{funcreq}
 
@@ -281,24 +292,39 @@ possibile soluzione. Il video è accessibile sia durante la consultazione
 del catalogo sia in una sessione di esercitazione.
 \end{funcreq}
 
-\subsection{Gestione profilo e account}
+\begin{center}
+    \section*{Utente autenticato}
+\end{center}
 
+Nei seguenti requisiti funzionali, si suppone che l'utente appartenga al livello
+di accesso \textit{autenticato}, qualora tale informazione dovesse essere omessa.
+\\
+\subsection{Gestione profilo e account}
 \begin{funcreq}
 \label{stats}
 \textbf{Progressi }
-L'utente autenticato deve poter monitorare i propri progressi, accedendo ai dati
-seguenti:
-\begin{itemize}
-    \item Il numero totale di problemi risolti.
-    \item Il numero di problemi risolti suddivisi per difficoltà.
-\end{itemize}
+\begin{enumerate}
+    \item Il servizio deve prevedere il tracciamento dei progressi dell'utente
+    autenticato, memorizzando i riferimenti ai problemi risolti, incrementandone
+    il numero ad ogni sessione di esercitazione andata a buon fine. Con riferimento
+    al \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.3}}}, dopo la
+    risoluzione, il problema deve inoltre essere contrassegnato come \textit{risolto}
+    (nel rispettivo campo \textit{stato}).
+
+    \item L'utente deve poter monitorare i propri progressi, accedendo ai dati
+    seguenti:
+    \begin{itemize}
+        \item Il numero totale di problemi risolti.
+        \item Il numero di problemi risolti suddivisi per difficoltà.
+    \end{itemize}
+\end{enumerate}
 \end{funcreq}
 
 \begin{funcreq}
 \textbf{Preferiti }
 L'utente deve poter contrassegnare un qualsiasi problema come \textit{preferito}.
 Tale informazione deve essere visibile nel catalogo, accanto ad ogni problema
-contrassegnato in questo modo.
+contrassegnato in questo modo, unicamente al singolo utente.
 \end{funcreq}
 
 
@@ -323,7 +349,36 @@ L'utente deve essere notificato di tale modifica anche tramite
 l'indirizzo email attualmente associato all'account.
 \end{enumerate}
 \end{funcreq}
+    
+\begin{funcreq}
+\label{logout}
+\textbf{Logout }
+L'utente autenticato deve poter interrompere la sessione di accesso
+al servizio. Questa procedura di \textit{logout} realizza il passaggio dell'utente
+dallo stato autenticato a quello anonimo.
+\end{funcreq}
 
+\begin{center}
+    \section*{Utente amministratore}
+\end{center}
+
+\subsection{Gestione catalogo}
+
+\begin{funcreq}
+\textbf{Aggiungere un problema }
+L'utente amministratore deve poter aggiungere un nuovo problema al catalogo,
+specificando i dati necessari descritti nel \textcolor{blue}{\underbar{\hyperref[formatoproblema]{RNF \ref*{formatoproblema}}}}.
+Inoltre, deve essere fornito un codice risolutivo.
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Modificare un problema }
+
+\end{funcreq}
+
+\begin{funcreq}
+\textbf{Eliminare un problema }
+\end{funcreq}
 
 \newpage
 \section{Requisiti non funzionali}
@@ -406,10 +461,9 @@ disponibilità online del servizio che verrà sviluppato. In particolare:
 La piattaforma del servizio deve essere accessibile mediante le versioni
 più recenti dei principali browser attualmente disponibili in commercio:
 \begin{itemize}
-    \item Chrome: %da versione
-    \item Firefox: %da versione
-    \item Edge: %da versione
-    \item 
+    \item Chrome: 117.0.5938.150
+    \item Firefox: 118.0.1
+    \item Edge: 117.0.2045.60
 \end{itemize}
 \end{nonfuncreq}
 
@@ -442,8 +496,19 @@ essere in italiano oppure in inglese.
 \begin{nonfuncreq}
 \textbf{Disponibilità }
 Il downtime annuo della piattaforma non deve eccedere gli intervalli di
-tempo indispensabili a eventuali opere di manutenzione, evitando ove
-possibile interruzioni di servizio inutilmente prolungate.
+tempo indispensabili a eventuali opere di manutenzione \textit{sui componenti
+interni al servizio}, evitando ove possibile interruzioni di servizio
+inutilmente prolungate. Si prevede di non superare un downtime del 2,7\% nel
+primo anno (10 giorni su 365, per un totale di 240 ore) dopo il lancio della
+piattaforma, per poi mantenere il rapporto al di sotto del 0,85\% (poco più
+di 72 ore).
+
+% provare a trovare dati più accurati sul downtime medio dei servizi google
+L'affidabilità e la disponibilità dei servizi terzi, che permettono alla
+piattaforma di funzionare (database, contenuti multimediali e altro),
+permettono di constatare con sicurezza che eventuali interruzioni non dovute
+alla piattaforma in sé contribuiscono in minima parte ai dati stimati
+sopra (si tratta di ordini inferiori alla decina di ore).
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -515,7 +580,7 @@ la piattaforma online espone all'utente.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.2]{materiale/immaginife/login.jpeg}
+\includegraphics[scale=0.22]{materiale/immaginife/login.jpeg}
 \end{figure}
 
 \begin{frontend}
@@ -523,7 +588,7 @@ la piattaforma online espone all'utente.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.2]{materiale/immaginife/registrazione.jpeg}
+\includegraphics[scale=0.22]{materiale/immaginife/registrazione.jpeg}
 \end{figure}
 
 \newpage
@@ -535,7 +600,7 @@ contenute in una pagina principale.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.2]{materiale/immaginife/homecatalogo.jpeg}
+\includegraphics[scale=0.195]{materiale/immaginife/homecatalogo.jpeg}
 \end{figure}
 
 \begin{frontend}
@@ -544,7 +609,7 @@ contenute in una pagina principale.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.2]{materiale/immaginife/esercitazione.jpeg}
+\includegraphics[scale=0.195]{materiale/immaginife/esercitazione.jpeg}
 \end{figure}
 
 \begin{frontend}
@@ -554,7 +619,7 @@ autenticato.
 \end{frontend}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{materiale/immaginife/logout.jpeg}
+\includegraphics[scale=0.2]{materiale/immaginife/logout.jpeg}
 \end{figure}
 
 \newpage
@@ -590,5 +655,12 @@ L'invio dei messaggi email (da parte della piattaforma) sarà gestito da servizi
 \centering
 \includegraphics[scale=0.35]{materiale/backend.jpg}
 \end{figure}
+
+\section{Cronologia}
+Nella cronologia sono riportate le versioni del documento
+\begin{itemize}
+    \item \textit{Versione 1.0:} prima stesura definitiva.
+    \item \textit{Versione 2.0:} definizione dei livelli di accesso e conseguente estensione delle funzionalità.
+\end{itemize}
 
 \end{document}
