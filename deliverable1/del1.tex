@@ -14,7 +14,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
-\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.0}
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.1}
 \renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
 
 
@@ -120,8 +120,10 @@ degli utenti:
     \item \textit{Utente autenticato.}
     \item \textit{Utente amministratore.}
 \end{itemize}
-Ogni livello eredita le funzionalità di quello precedente, ma non può
-accedere a quelle appartenenti ai livelli superiori.
+Si precisa che le funzionalità utilizzabili dall'utente anonimo sono condivise
+con l'utente autenticato. L'utente amministratore non può accedere ad alcuna
+funzionalità descritta all'infuori della propria sezione; gli utenti anonimo e
+autenticato non possono usufruire delle funzionalità presenti a livello amministratore.
 
 \begin{center}
 \section*{Utente anonimo}    
@@ -143,8 +145,8 @@ richiede la compilazione dei seguenti campi:
     inoltre, l'utente deve poter riscrivere la password per confermarla, in
     modo tale da rilevare eventuali errori di digitazione.
 \end{itemize}
-L'utente dotato di un account sarà considerato dal servizio come \textit{utente
-registrato}.
+L'utente dotato di un account sarà considerato dal servizio come
+\textit{utente registrato} (indipendentemente dal suo livello di accesso).
 \end{funcreq}
 
 \begin{funcreq}
@@ -158,7 +160,7 @@ l'operazione di login, quindi se l'email inserita non sia registrata o
 la password non corrisponda; è comunque possibile ritentare il login un
 numero illimitato di volte.
 
-Effettuato il login, l'utente registrato rientra nella categoria degli
+Effettuato il login, l'utente registrato e anonimo rientra nella categoria degli
 \textit{utenti autenticati}.
 \end{funcreq}
 
@@ -296,6 +298,8 @@ del catalogo sia in una sessione di esercitazione.
 
 Nei seguenti requisiti funzionali, si suppone che l'utente appartenga al livello
 di accesso \textit{autenticato}, qualora tale informazione dovesse essere omessa.
+Si sottolinea nuovamente che l'utente autenticato eredita le stesse funzionalità
+accessibili all'utente anonimo.
 \\
 \subsection{Gestione profilo e account}
 \begin{funcreq}
@@ -360,6 +364,10 @@ dallo stato autenticato a quello anonimo.
     \section*{Utente amministratore}
 \end{center}
 
+Le funzionalità elencate di seguito sono usufruibili esclusivamente dall'utente
+amministratore. Inoltre, l'utente amministratore non può accedere alle funzionalità
+precedentemente descritte, cioè quelle caratteristiche dei livelli anonimo e autenticato.
+\\
 \subsection{Gestione catalogo}
 
 \begin{funcreq}
@@ -654,11 +662,13 @@ L'invio dei messaggi email (da parte della piattaforma) sarà gestito da servizi
 \includegraphics[scale=0.35]{materiale/backend.jpg}
 \end{figure}
 
+\newpage
 \section{Cronologia}
 Nella cronologia sono riportate le versioni del documento
 \begin{itemize}
     \item \textit{Versione 1.0:} prima stesura definitiva.
     \item \textit{Versione 2.0:} definizione dei livelli di accesso e conseguente estensione delle funzionalità.
+    \item \textit{Versione 2.1:} ridefinizione delle funzionalità del livello amministratore.
 \end{itemize}
 
 \end{document}
