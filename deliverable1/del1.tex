@@ -167,7 +167,7 @@ Effettuato il login, l'utente registrato e anonimo rientra nella categoria degli
 \begin{funcreq}
 \label{savepassword}
 \textbf{Recupero password }
-L'utente registrato deve poter recuperare la password del proprio account
+L'utente registrato e anonimo deve poter recuperare la password del proprio account
 qualora tale dato dovesse essere dimenticato in fase di login. La procedura
 di recupero deve prevedere:
 \begin{itemize}
@@ -176,7 +176,7 @@ di recupero deve prevedere:
     nella creazione di una nuova password.
 
     \item L'inserimento (sulla piattaforma) di una nuova password che,
-    come in fase di registrazione, deve essere scritta, confermata ed essere
+    come in fase di registrazione, deve essere scritta, confermata e
     conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{itemize}
 \end{funcreq}
@@ -194,19 +194,27 @@ essere possibile:
     \item Visualizzare tale catalogo, che mostra i campi di ogni problema
     elencato:
     \begin{itemize}
-        \item \textit{Stato:} l'utente anonimo non può visualizzare
-        questo campo. Per l'utente autenticato, lo stato del problema
-        viene marcato come \textit{risolto} qualora il problema sia
-        stato
-        \item \textit{Nome:}
-        \item \textit{Difficoltà:}
-        \item \textit{Categoria:}
-        \item \textit{Soluzione:}
-        \item \textit{Preferito:}
+        \item \textit{Nome.}
+        
+        \item \textit{Difficoltà:} vengono definiti tre livelli indicativi
+        della difficoltà: bassa, intermedia, alta.
+        
+        \item \textit{Categoria:} si tratta della principale area di interesse
+        del problema, come ad esempio le strutture di dati coinvolte
+        (ad esempio array e grafi), oppure l'obiettivo principale (come ricerca
+        e ordinamento).
+
+        \item \textit{Suggerimento:} viene messo a disposizione, per ogni
+        problema nel catalogo, un video in cui vengono trattate nozioni che
+        possono aiutare ad affrontare il problema, suggerendo quindi all'utente un
+        possibile approccio all'elaborazione della soluzione specifica del
+        problema.
     \end{itemize}
     
-    \item Cercare uno o più problemi specifici mediante ricerca filtrata
-    per campi.
+    \item Cercare uno o più problemi specifici mediante ricerca filtrata per campi
+    precedentemente elencati.
+    Ai fini della consultazione del catalogo, i filtri applicabili riguardano i
+    campi \textit{nome, difficoltà, categoria}.
 
     \item Selezionare dal catalogo un problema specifico, cosicché la
     descrizione dell'intero problema possa essere visionata per mezzo
@@ -220,7 +228,8 @@ essere possibile:
 Deve essere fornito un visualizzatore che mostri le informazioni del
 problema precedentemente selezionato dal catalogo. La visualizzazione
 deve rendere disponibile alla vista dell'utente i contenuti del
-problema, specificati nel \textcolor{blue}{\underbar{\hyperref[formatoproblema]{RF \ref*{formatoproblema}}}}.
+problema, specificati nel
+\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}}}}.
 \end{funcreq}
 
 
@@ -241,36 +250,6 @@ Tutti i problemi forniti devono possiedere:
 \end{itemize}
 \end{funcreq}
 
-\begin{funcreq}
-\label{metadata}
-\textbf{Metadati dei problemi } Ogni problema è essenzialmente un'entità
-caratterizzata dai seguenti dati descrittivi:
-\begin{itemize}
-    \item Stato: i problemi già risolti dall'utente sono contrassegnati
-    in un campo \textit{stato} apposito.
-
-    \item Nome identificativo: si tratta di una stringa alfanumerica, che
-    riprende una o più parole chiave del titolo del problema.
-    
-    \item Difficoltà: ogni problema possiede un'etichetta (\textit{tag})
-    associata che ne valuta indicativamente la difficolta: bassa,
-    intermedia e alta.
-
-    \item Categoria: la categoria indica la principale area di interesse
-    del problema, come ad esempio le strutture di dati di cui tratta
-    (array, grafi, code, ecc.).
-
-    \item Soluzione: un video che mostra come il problema potrebbe essere
-    risolto.
-
-    \item Preferito: la marcatura \textit{preferito} è visibile sul problema
-    quando esso compare nel catalogo e quando viene consultato.
-\end{itemize}
-Ai fini della consultazione del catalogo, i filtri applicabili riguardano
-i campi \textit{stato}, \textit{difficoltà}, \textit{categoria}, \textit{preferito}
-e \textit{nome}.
-\end{funcreq}
-
 \subsection{Esercitazione}
 \begin{funcreq}
 \label{exesession}
@@ -284,8 +263,8 @@ delle seguenti funzionalità:
     
     \item Visualizzare i test cases (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}}).
 
-    \item Avviare e fermare a proprio piacimento un timer per cronometrare
-    il tempo speso per risolvere il quesito scelto.
+    \item Avviare e fermare a proprio piacimento un timer per mantenere traccia
+    del tempo speso per risolvere il quesito scelto.
     
     \item Essere al corrente di quale linguaggio di programmazione sia
     attualmente attivo per la scrittura di codice. Deve altresì essere 
@@ -293,15 +272,10 @@ delle seguenti funzionalità:
     piattaforma\footnote{Per approfondimenti sulla disponibilità dei
     linguaggi, si veda \textcolor{blue}{\underbar{\hyperref[scalabilita]{RNF \ref*{scalabilita}.2}}}.}.
 
-    %\item Essere al corrente di quale linguaggio di programmazione sia
-    %attualmente attivo per la scrittura di codice. tramite un menu dedicato
-    %dal quale deve altresì essere possibile selezionare uno dei linguaggi
-    %disponibili\footnote{Per approfondimenti sulla disponibilità dei linguaggi,
-    %si veda RNF \ref{scalabilita}.1.}.
-    %//(Non dovrebbe far parte dei RNF? Stiamo parlando di UI design, la parte del "menu" sarebbe da incorporare nel testo principale imo)
-    
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
     scelto, l'algoritmo risolutivo del problema attualmente attivo.
+
+    \item Accedere al suggerimento (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}).
 \end{enumerate}
 \end{funcreq}
 
@@ -344,13 +318,6 @@ e testandolo:
 \end{enumerate}
 \end{funcreq}
 
-\begin{funcreq}
-\textbf{Soluzione }
-Per ogni problema viene messo a disposizione un video che mostra una
-possibile soluzione. Il video è accessibile sia durante la consultazione
-del catalogo sia in una sessione di esercitazione.
-\end{funcreq}
-
 \begin{center}
     \section*{Utente autenticato}
 \end{center}
@@ -360,13 +327,30 @@ di accesso \textit{autenticato}, qualora tale informazione dovesse essere omessa
 Si sottolinea nuovamente che l'utente autenticato eredita le stesse funzionalità
 accessibili all'utente anonimo.
 \\
-\subsection{Gestione profilo e account}
+\begin{funcreq}
+    \textbf{Metadati aggiuntivi }
+    Oltre ai campi descrittivi specificati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}},
+    l'utente autenticato deve poter visualizzare e influenzare i seguenti dati aggiuntivi di
+    ogni problema:
+    \begin{enumerate}
+        \item \textit{Stato:} i problemi risolti dall'utente devono essere contrassegnati,
+        grazie alla disponibilità di questo ulteriore campo.
+    
+        \item \textit{Preferito:} l'utente che desidera tener traccia dei problemi
+        per lui rilevanti deve poter contrassegnare tali problemi come preferiti.
+    \end{enumerate}
+    Le informazioni riguardanti questi campi sono visibili all'utente autenticato,
+    sia durante la consultazione del catalogo che del singolo problema, e disponibili
+    per effettuare ricerche filtrate.
+\end{funcreq}
+
+\subsection{Gestione del profilo e dell'account}
 \begin{funcreq}
 \label{stats}
 \textbf{Progressi }
 \begin{enumerate}
     \item Il servizio deve prevedere il tracciamento dei progressi dell'utente
-    autenticato, memorizzando i riferimenti ai problemi risolti, incrementandone
+    autenticato, memorizzando i riferimenti ai problemi risolti e incrementandone
     il numero ad ogni sessione di esercitazione andata a buon fine. Con riferimento
     al \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.3}}}, dopo la
     risoluzione, il problema deve inoltre essere contrassegnato come \textit{risolto}
@@ -379,13 +363,6 @@ accessibili all'utente anonimo.
         \item Il numero di problemi risolti suddivisi per difficoltà.
     \end{itemize}
 \end{enumerate}
-\end{funcreq}
-
-\begin{funcreq}
-\textbf{Preferiti }
-L'utente deve poter contrassegnare un qualsiasi problema come \textit{preferito}.
-Tale informazione deve essere visibile nel catalogo, accanto ad ogni problema
-contrassegnato in questo modo, unicamente al singolo utente.
 \end{funcreq}
 
 
@@ -431,36 +408,22 @@ precedentemente descritte, cioè quelle caratteristiche dei livelli anonimo e au
 
 \begin{funcreq}
 \textbf{Aggiungere un problema }
-L'utente amministratore deve poter aggiungere un nuovo problema al catalogo,
-fornendo informazioni riguardanti le seguenti caratteristiche:
-\begin{enumerate}
-    \item Struttura del problema: raccoglie le informazioni utili all'utente
-    in fase di consultazione del problema ed esercitazione.
-    \begin{itemize}
-        \item Titolo.
-        \item Testo: scritto prevalentemente in linguaggio naturale,
-        descrive uno scenario che richiede di essere risolto per mezzo di
-        un algoritmo. Eventuali immagini e proposizioni matematiche possono
-        accompagnare i testi.
-        \item Almeno tre esempi di input, insieme al relativo output corretto
-        che mostra il risultato atteso.
-    \end{itemize}
-
-    \item Metadati: rappresentano i campi che descrivono ulteriormente il
-    problema. Devono essere visibili nel catalogo.
-    \begin{itemize}
-        \item 
-    \end{itemize}
-\end{enumerate}
+L'utente amministratore deve poter aggiungere un nuovo problema al catalogo.
+La struttura del problema deve essere conforme a quanto descritto nel
+\textcolor{blue}{\underbar{\hyperref[formatoproblema]{RNF \ref*{formatoproblema}}}}
+e, all'atto dell'inserimento nel catalogo, devono essere specificati i campi
+elencati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RNF \ref*{probcatalogue}.1}}}.
 \end{funcreq}
 
 \begin{funcreq}
 \textbf{Modificare un problema }
-
+L'utente amministratore deve poter modificare sia i campi descrittivi del
+problema, sia il suo contenuto (la struttura).
 \end{funcreq}
 
 \begin{funcreq}
 \textbf{Eliminare un problema }
+L'utente amministratore deve poter eliminare un problema dal catalogo.
 \end{funcreq}
 
 \newpage
