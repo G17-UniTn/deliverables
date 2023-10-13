@@ -6,10 +6,13 @@
 \usepackage[utf8]{inputenc} % comment when using lualatex
 \usepackage[italian]{babel} % lingua e a-capo-sillabato
 \usepackage{graphicx}
-\usepackage[hidelinks]{hyperref,xcolor} % link di pagina
+\usepackage[hidelinks]{hyperref} % link di pagina
 \usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
 \usepackage{float} % per posizionamento immagini
-\usepackage{amsthm}
+\usepackage{amsthm} % per ambienti stile teorema
+\usepackage{tabularx} %tabelle
+\usepackage[table]{xcolor} %colore caselle
+\usepackage{enumitem} %additional commands for lists
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -30,7 +33,7 @@
 \newtheorem{backend}{BE}
 \newtheorem{frontend}{FE}
 
-\title{Use Case Diagrams}
+\title{Specifica dei Requisiti}
 
 \author{Raffaele \textsc{Castagna}\\
 Alberto \textsc{Rovesti}\\
@@ -43,6 +46,7 @@ Zeno \textsc{Saletti}}
 
 % Web address for the project (if any)
 % \newcommand{\homepage}{\url{https://www.}}
+
 
 % data
 \date{\today}
@@ -64,7 +68,77 @@ Zeno \textsc{Saletti}}
 
 \tableofcontents
 
-
 \newpage
+
+\section*{Scopo del documento}
+Il presente documento riporta la specifica dei requisiti di sistema
+del progetto SleepCode ricorrendo a diagrammi realizzati secono lo
+Unified Modeling Language (UML) e tabelle.
+
+\section{Requisiti funzionali}
+In questa sezione vengono descritti i requisiti funzionali (RF) del
+servizio utilizzando alcuni Use Case Diagrams (UCD) scritti in UML,
+eventualmente arricchiti da descrizioni in linguaggio naturale.
+
+\section{Requisiti non funzionali}
+Nella presente sezione sono riportati i requisiti non funzionali (RNF)
+del sistema utilizzando tabelle strutturate e specificando misure che
+consentano di effettuare facilmente delle verifiche quantitative.
+
+\subsection{Caratteristiche di sistema}
+
+\begin{nonfuncreq}
+\textbf{Scalabilità }
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Compatibilità }
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Usabilità }
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Aspetto }
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Lingua }
+    \begin{center}
+        \footnotesize
+        \begin{tabularx}{\textwidth}{|X||X||X|}
+            \hline
+            \cellcolor{red!70}Proprietà & \cellcolor{red!70}Descrizione & \cellcolor{red!70}Misura\\
+            Lingua di sistema           & Lingua presente nell'interfaccia e nelle risorse fornite dal servizio. & L'interfaccia generale della piattaforma conterrà testo in italiano (100\%); la totalità dei problemi può essere scritta scegliendo tra lingua italiana oppure inglese; le risorse multimediali (video-suggerimento) devono essere in italiano oppure in inglese.\\
+            \hline
+        \end{tabularx}
+    \end{center}
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Disponibilità }
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Prestazioni }
+\end{nonfuncreq}
+
+\subsection{Privacy e sicurezza}
+
+\begin{nonfuncreq}
+    \textbf{Privacy e trattamento dei dati }
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Connessione sicura }
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+    \textbf{Password strength }
+\end{nonfuncreq}
+
+\section{Analisi del contesto}
+\section{Analisi dei componenti}
 
 \end{document}
