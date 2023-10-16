@@ -489,30 +489,36 @@ essere in italiano oppure in inglese.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Disponibilità }
-Il downtime annuo della piattaforma non deve eccedere gli intervalli di
-tempo indispensabili a eventuali opere di manutenzione \textit{sui componenti
-interni al servizio}, evitando ove possibile interruzioni di servizio
-inutilmente prolungate. Si prevede di non superare un downtime del 2,7\% nel
-primo anno (10 giorni su 365, per un totale di 240 ore) dopo il lancio della
-piattaforma, per poi mantenere il rapporto al di sotto del 0,85\% (poco più
-di 72 ore).
-
-% provare a trovare dati più accurati sul downtime medio dei servizi google
-L'affidabilità e la disponibilità dei servizi terzi, che permettono alla
-piattaforma di funzionare (database, contenuti multimediali e altro),
-permettono di constatare con sicurezza che eventuali interruzioni non dovute
-alla piattaforma in sé contribuiscono in minima parte ai dati stimati
-sopra (si tratta di ordini inferiori alla decina di ore).
-\end{nonfuncreq}
-
-\begin{nonfuncreq}
 \textbf{Prestazioni }
 L'esperienza di utilizzo deve poter essere soddisfacente in relazione
 ai livelli di prestazioni dei moderni siti web, purché l'utente utilizzi
 il servizio in condizioni di connettività sufficienti. In particolare,
 i tempi di reazione relativi a caricamenti e transizioni tra pagine non
 deve eccedere i 2 secondi.
+\end{nonfuncreq}
+
+\subsection{Affidabilità}
+
+\begin{nonfuncreq}
+\label{downtime}
+\textbf{Downtime }
+Il downtime annuo della piattaforma non deve eccedere gli intervalli di
+tempo indispensabili a eventuali opere di manutenzione e aggiornamento
+\textit{sui componenti interni al servizio}, evitando ove possibile
+interruzioni di servizio inutilmente prolungate. Si prevede di non superare
+un downtime del 2,7\% nel primo anno (10 giorni su 365, per un totale di 240
+ore) dopo il lancio della piattaforma, per poi mantenere il rapporto al di
+sotto del 0,85\% (circa 72 ore).
+\end{nonfuncreq}
+
+\begin{nonfuncreq}
+\textbf{Disponibilità }
+\label{disponibilita}
+Il progetto sviluppato ha il 98\% di probabilità di non guastarsi entro le
+prime 8.000 ore di funzionamento. La disponibilità dei servizi terzi, sui
+quali il progetto si affida (database, contenuti multimediali), permette di
+trascurare eventuali variazioni di tempo aggiuntive riguardanti le
+interruzioni di servizio inattese.
 \end{nonfuncreq}
 
 \subsection{Privacy e sicurezza}
