@@ -81,6 +81,69 @@ servizio utilizzando alcuni Use Case Diagrams (UCD) scritti in UML,
 eventualmente arricchiti da descrizioni in linguaggio naturale.
 
 
+\subsection{Accesso}
+\begin{itemize}
+    \item \textbf{RF 1.} Registrazione
+    \item \textbf{RF 2.} Login
+    \item \textbf{RF 3.} Recupero password
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{materiale/accesso.pdf}
+\caption{UCD dello scenario di accesso al servizio}
+\end{figure}
+
+\subsubsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
+\subsubsection*{Descrizione Use Case \textit{Recuperare la password}}
+
+
+
+\newpage
+\subsection{Consultazione dei problemi}
+\begin{itemize}
+    \item \textbf{RF 4.} Consultazione del catalogo dei problemi
+    \item \textbf{RF 5.} Consultazione di un problema
+    \item \textbf{RF 9.} Metadati aggiuntivi
+    \item \textbf{RF 10.} Progressi
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.81]{materiale/consulta-catalogo.pdf}
+\caption{UCD dello scenario della consultazione dei problemi}
+\end{figure}
+
+
+\newpage
+\subsection{Esercitazione}
+\begin{itemize}
+    \item \textbf{RF 6.} Avviare l'esercitazione
+    \item \textbf{RF 7.} Correttezza sintattica del codice
+    \item \textbf{RF 8.} Correttezza dell'algoritmo
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.57]{materiale/esercitazione.pdf}    
+\end{figure}
+
+\subsubsection*{Descrizione Use Case \textit{Registrare i progressi}}
+
+\newpage
+\subsection{Gestione del profilo e dell'account}
+\begin{itemize}
+    \item \textbf{RF 10.} Progressi
+    \item \textbf{RF 11.} Aggiornamento dei dati dell'account
+    \item \textbf{RF 12.} Logout
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{materiale/gestione-account.pdf}
+\caption{UCD dello scenario}
+\end{figure}
+
 \newpage
 \section{Requisiti non funzionali}
 Nella presente sezione sono riportati i requisiti non funzionali (RNF)
@@ -153,7 +216,7 @@ consentano di effettuare facilmente delle verifiche quantitative.
             \hline
             \cellcolor{red!70}Proprietà & \cellcolor{red!70}Descrizione & \cellcolor{red!70}Misura\\
             \hline
-            Colore & Gamma cromatica dell'interfaccia e distribuzione del colore. La scelta ricade su colori, tinte (aggiunta di bianco) e sfumature (aggiunta di nero) che mirano a limitare l'affaticamento della vista. & Colori caldi; colori freddi presenti in sfumature scure; colori freddi accesi presenti solo in aree ristrette.\\
+            Colore & Gamma cromatica dell'interfaccia e distribuzione del colore. La scelta ricade su colori, tinte (aggiunta di bianco) e sfumature (aggiunta di nero) che mirano a limitare l'affaticamento della vista. & Colori caldi; colori freddi presenti in sfumature scure; colori freddi accesi presenti al più in aree ristrette (pulsanti e icone).\\
             \hline
             Contrasto & Accostamento dei colori all'interno dell'interfaccia utente. Mira alla leggibilità e alla limitazione dell'affaticamento della vista. & Regola dei complementari; cerchio di Itten.\\
             \hline
@@ -266,7 +329,40 @@ consentano di effettuare facilmente delle verifiche quantitative.
     \end{center}
 \end{nonfuncreq}
 
+
+
+
+
+
+\newpage
 \section{Analisi del contesto}
+% riguarda il backend e i componenti esterni al sistema: tutto il codice che utilizzate ma che non avete scritto voi
+% flusso di informazioni tra il nostro sistema e quelli esterni
+
+\subsection{Utenti e sistemi esterni} % chi interagisce, chi usa e chi supporta (sia software che umano)
+\subsubsection{User}
+\subsubsection{Database}
+\subsubsection{...}
+
+
+\subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
+
+% INVIO DI EMAIL per recupero password
+% freccia da utente a sistema: richiesta recupero password
+% freccia da sistema a utente: form
+% freccia da utente a sistema: email nuova
+% (di mezzo potrebbe essere meglio mettere il database che verifica l'email)
+% freccia da sistema a servizio mail: INDIRIZZO MAIL untente, mittente, oggetto, testo, allegati (contenuto in generale) incluso LINK AL FORM DELLA PIATTAFORMA PER IL RESET PASSWORD
+
+% 
+
+
+
+
+
+
+
+\newpage
 \section{Analisi dei componenti}
 
 \end{document}
