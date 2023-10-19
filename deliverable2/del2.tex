@@ -13,25 +13,26 @@
 \usepackage{tabularx} %tabelle
 \usepackage[table]{xcolor} %colore caselle
 \usepackage{enumitem} %additional commands for lists
-
 \usepackage{fancyhdr}
+
+
+
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
 \fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
+\setlength{\headheight}{22pt}
 
+\renewcommand\UrlFont{\color{blue}\rmfamily} % colore link
 
-%\pagestyle{myheadings}
-%\markright{John Smith\hfill On page styles\hfill}
-
-\renewcommand\UrlFont{\color{blue}\rmfamily}
-
-\theoremstyle{definition}
-
+\theoremstyle{definition} % stile dei newtheorem (non italizzati)
 \newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
 \newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
 \newtheorem{backend}{BE}
 \newtheorem{frontend}{FE}
+
+
+
 
 \title{Specifica dei Requisiti}
 
@@ -41,12 +42,8 @@ Zeno \textsc{Saletti}}
 
 \newcommand{\groupNumber}{G17}
 
-
-% —
-
 % Web address for the project (if any)
 % \newcommand{\homepage}{\url{https://www.}}
-
 
 % data
 \date{\today}
@@ -54,9 +51,6 @@ Zeno \textsc{Saletti}}
 \makeatletter{}
 
 % IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 
 
 
@@ -94,9 +88,63 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
 \caption{UCD dello scenario di accesso al servizio}
 \end{figure}
 
+\hrule
 \subsubsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
-\subsubsection*{Descrizione Use Case \textit{Recuperare la password}}
+\begin{description}
+    \item[Titolo:] Registrazione account
+    
+    \item[Riassunto:] Questo Use Case descrive come l'utente anonimo deve
+    effettuare la registrazione sulla piattaforma.
 
+    \item[Descrizione:]
+    \begin{enumerate}
+        \item[]
+        \item L'utente anonimo accede alla pagina dedicata e sceglie tra la registrazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.
+        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme (RNF). \verb|[exception 1]|\verb|[exception 2]|\verb|[exception 3]|
+        \item La password deve essere confermata reinserendola in un secondo campo.
+        \item L'account viene registrato dal servizio di database.
+    \end{enumerate}
+    
+    \item[Exceptions:]
+    \begin{itemize}
+        \item[]
+        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account già registrato, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+    \end{itemize}
+    
+    %\item[Extensions:]
+\end{description}
+
+\subsubsection*{Descrizione Use Case \textit{Recuperare la password}}
+\begin{description}
+    \item[Titolo:] Recupero password
+    
+    \item[Riassunto:] Questo Use Case descrive come l'utente anonimo e
+    registrato alla piattaforma, facendo affidamento al sistema di credenziali
+    interno, può recuperare il proprio account qualora la password venisse dimenticata.
+
+    \item[Descrizione:]
+    \begin{enumerate}
+        \item[]
+        \item L'utente accede alla pagina di recupero, per mezzo di quella di login.
+        \item La pagina indica all'utente di inserire l'email di recupero, ovvero quella associata all'account. \verb|[exception 1]|
+        \item Il sistema richiede al servizio di posta elettronica l'invio di un link di recupero mediane un messaggio email, specificando l'indirizzo fornito dall'utente.
+        \item Il link guida l'utente dal messaggio alla pagina del sistema dedicata alla creazione di una nuova password.
+        \item L'utente inserisce una nuova password conforme e la conferma, inserendola nuovamente. \verb|[exception 2]|\verb|[exception 3]|
+        \item Il servizio di database provvede all'aggiornamento della password.
+    \end{enumerate}
+    
+    \item[Exceptions:]
+    \begin{itemize}
+        \item[]
+        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account non registrato, il recupero non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+    \end{itemize}
+    
+    %\item[Extensions:]
+\end{description}
 
 
 \newpage
