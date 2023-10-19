@@ -271,38 +271,42 @@ delle seguenti funzionalità:
 \end{enumerate}
 \end{funcreq}
 
-%\newpage
-\begin{funcreq}
-\label{sintax}
-\textbf{Correttezza sintattica del codice }
-L'utente deve poter verificare che il codice scritto sia corretto e in grando di essere eseguito in maniera appropriata.
-Quindi devono essere messe a disposizione le seguenti funzionalità:
-\begin{enumerate}
-    \item Compilazione del codice.
-    \item Visualizzazione di avvisi relativi a eventuali errori di compilazione
-    \textit{oppure} di compilazione andata a buon fine. In caso di errori
-    di scrittura, l'utente deve poter correggere tali errori riscrivendo
-    nell'area destinata al codice.
-\end{enumerate}
-\end{funcreq}
+
+%\begin{funcreq}
+%\label{sintax}
+%\textbf{Correttezza sintattica del codice }
+%L'utente deve poter verificare che il codice scritto sia corretto e in grando di essere eseguito in maniera appropriata.
+%Quindi devono essere messe a disposizione le seguenti funzionalità:
+%\begin{enumerate}
+%    \item Compilazione del codice.
+%    \item Visualizzazione di avvisi relativi a eventuali errori di compilazione
+%    \textit{oppure} di compilazione andata a buon fine. In caso di errori
+%    di scrittura, l'utente deve poter correggere tali errori riscrivendo
+%    nell'area destinata al codice.
+%\end{enumerate}
+%\end{funcreq}
 
 \begin{funcreq}
 \label{test}
-\textbf{Verifica della correttezza dell'algoritmo\footnote{La \textit{correttezza} di cui si parla in questo caso riguarda solo l'efficacia risolutiva dell'algoritmo.} }
+\textbf{Verifica della correttezza dell'algoritmo }
 L'utente deve poter verificare la correttezza del codice scritto eseguendolo
 e testandolo:
 \begin{enumerate}
     \item Il codice deve essere eseguito sottoponendolo ad un certo numero
-    di test cases (al minimo 3),
-    cioè fornendo opportune istanze di input (Per esempio,
-    se un problema richiede di sommare due numeri interi, il codice risolutivo
-    proposto dall'utente verrà eseguito fornendo ad esso coppie di interi
-    e registrando i risultati in output.)
+    di test cases (al minimo 3), cioè fornendo opportune istanze di input
+    (Per esempio, se un problema richiede di sommare due numeri interi, il
+    codice risolutivo proposto dall'utente verrà eseguito fornendo ad esso
+    coppie di interi e registrando i risultati in output.)
 
-    \item L'utente deve poter conoscere l'esito dei test case e, per ognuno
-    di questi, l'input e l'output atteso sono visibili.
-    Inoltre, l'utente deve poter riscrivere e perfezionare l'algoritmo e
-    sottoporre ripetutamente il codice ai test cases.
+    \item L'utente deve poter conoscere l'esito dei test case—per ognuno
+    di questi, l'input e l'output atteso sono visibili. Inoltre, l'utente
+    deve poter riscrivere e perfezionare l'algoritmo e sottoporre ripetutamente
+    il codice ai test cases.
+    
+    Nel caso in cui l'esito dei test cases dovesse risultare negativo, l'utente
+    viene avvisato senza fare riferimento agli errori commessi, siano essi
+    relativi alla correttezza sintattica del codice oppure riguardanti la
+    correttezza risolutiva dell'algoritmo.
 
     \item Nel caso in cui l'utente sia in grado di superare tutti i
     test case disponibili, la sessione di esercitazione deve terminare.
@@ -657,6 +661,7 @@ Nella cronologia sono riportate le versioni del documento
     \item \textit{Versione 1.0:} prima stesura definitiva.
     \item \textit{Versione 2.0:} definizione dei livelli di accesso e conseguente estensione delle funzionalità.
     \item \textit{Versione 2.1:} ridefinizione delle funzionalità del livello amministratore.
+    \item \textit{Versione 2.2:} eliminazione RF sulla correttezza sintattica del codice; aggiornato il ruolo amministratore.
 \end{itemize}
 
 \end{document}
