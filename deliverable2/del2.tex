@@ -112,8 +112,6 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
         \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
         \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
     \end{itemize}
-    
-    %\item[Extensions:]
 \end{description}
 
 \subsubsection*{Descrizione Use Case \textit{Recuperare la password}}
@@ -153,7 +151,10 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
     \item \textbf{RF 4.} Consultazione del catalogo dei problemi
     \item \textbf{RF 5.} Consultazione di un problema
     \item \textbf{RF 8.} Metadati aggiuntivi
-    \item \textbf{RF 9.} Progressi
+    \item \textbf{RF 9.3.} Progressi
+\end{itemize}
+\subsection*{Modifica del catalogo dei problemi}
+\begin{itemize}
     \item \textbf{RF 12.} Aggiungere un problema
     \item \textbf{RF 13.} Modificare un problema
     \item \textbf{RF 14.} Eliminare un problema
@@ -162,9 +163,61 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.55]{materiale/consulta-catalogo.pdf}
-\caption{UCD dello scenario della consultazione dei problemi}
+\caption{UCD dello scenario della consultazione dei problemi e della modifica del catalogo}
 \end{figure}
 \hrule
+
+\subsubsection*{Descrizione Use Case \textit{Aggiungere problemi}}
+\begin{description}
+    \item[Titolo:] Aggiungere un problema
+    
+    \item[Riassunto:] Questo Use Case descrive come l'utente amministratore
+    deve aggiungere nuovi problemi al catalogo.
+
+    \item[Descrizione:]
+    \begin{enumerate}
+        \item[]
+        \item L'utente amministratore accede alla pagina del catalogo e sceglie di aggiungere un nuovo problema.
+        \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno tre esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link al video-suggerimento.
+        \item L'utente conferma la creazione del problema, che viene quindi aggiunto al catalogo; alternativamente, l'utente può scegliere di annullare la creazione del nuovo problema, previo avviso e conferma da parte del sistema.\texttt{[exception 1]}\texttt{[exception 2]}
+    \end{enumerate}
+    
+    \item[Exceptions:]
+    \begin{itemize}
+        \item[]
+        \item \verb|[exception 1]| Se tra i dati strutturali del problema è presente almeno un campo non compilato, l'aggiunta del problema al catalogo non viene eseguita e l'utente viene avvisato.
+        \item \verb|[exception 2]| Se è presente almeno un campo vuoto tra quelli destinati ai dati descrittivi del problema, l'operazione non può essere completata e l'utente viene avvisato.
+    \end{itemize}
+\end{description}
+
+\subsubsection*{Descrizione Use Case \textit{Modificare problemi}}
+\begin{description}
+    \item[Titolo:] Modificare un problema
+    
+    \item[Riassunto:] Questo Use Case descrive come l'utente amministratore
+    deve modificare i problemi.
+
+    \item[Descrizione:]
+    \begin{enumerate}
+        \item[]
+        \item L'utente amministratore accede alla pagina del catalogo e seleziona un problema da modificare.
+        \item L'utente modifica i campi strutturali (titolo, descrizione, esempi di input e output) e descrittivi (nome, difficoltà, categoria e link al video-suggerimento) del problema.
+        \item L'utente conferma la modifica del problema, che verrà poi aggiornato nel catalogo, oppure conferma di annullare la modifica.\texttt{[exception 1]}
+    \end{enumerate}
+    
+    \item[Exceptions:]
+    \begin{itemize}
+        \item[]
+        \item \verb|[exception 1]| Se tra i dati strutturali del problema è presente almeno un campo non compilato, l'aggiunta del problema al catalogo non viene eseguita e l'utente viene avvisato.
+        \item \verb|[exception 2]| Se è presente almeno un campo vuoto tra quelli destinati ai dati descrittivi del problema, l'operazione non può essere completata e l'utente viene avvisato.
+    \end{itemize}
+
+    \item[Extensions:]
+    \begin{itemize}
+        \item[]
+        \item \verb|[extension 1]|
+    \end{itemize}
+\end{description}
 
 \newpage
 \subsection{Esercitazione}
