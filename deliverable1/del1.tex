@@ -114,16 +114,16 @@ eventuali macro-funzioni in requisiti minori nel caso di obiettivi
 di più ampia portata.
 \\\\
 \noindent Le funzionalità sono inoltre suddivise secondo alcuni livelli di accesso
-degli utenti:
+degli utenti (di seguito in ordine "crescente"):
 \begin{itemize}
     \item \textit{Utente anonimo.}
     \item \textit{Utente autenticato.}
     \item \textit{Utente amministratore.}
 \end{itemize}
-Si precisa che le funzionalità utilizzabili dall'utente anonimo sono condivise
-con l'utente autenticato. L'utente amministratore non può accedere ad alcuna
-funzionalità descritta all'infuori della propria sezione; gli utenti anonimo e
-autenticato non possono usufruire delle funzionalità presenti a livello amministratore.
+Si precisa che un utente presente ad un dato livello di accesso può usufurire
+delle funzionalità disponibili a quel livello \textit{più} le funzionalità
+presenti al livello inferiore. Non è invece possibile utilizzare le funzionalità
+messe a disposizione a livelli superiori.
 
 \begin{center}
 \section*{Utente anonimo}    
@@ -340,7 +340,7 @@ accessibili all'utente anonimo.
     per effettuare ricerche filtrate.
 \end{funcreq}
 
-\newpage
+
 \subsection{Gestione del profilo e dell'account}
 \begin{funcreq}
 \label{stats}
@@ -397,10 +397,9 @@ dallo stato autenticato a quello anonimo.
     \section*{Utente amministratore}
 \end{center}
 
-Le funzionalità elencate di seguito sono usufruibili esclusivamente dall'utente
-amministratore. Inoltre, l'utente amministratore non può accedere alle funzionalità
-precedentemente descritte, cioè quelle caratteristiche dei livelli anonimo e autenticato.
-\\
+%Le funzionalità elencate di seguito sono usufruibili esclusivamente dall'utente
+%amministratore. Inoltre, l'utente amministratore non può accedere alle funzionalità
+%precedentemente descritte, cioè quelle caratteristiche dei livelli anonimo e autenticato.
 \subsection{Gestione del catalogo dei problemi}
 
 \begin{funcreq}
