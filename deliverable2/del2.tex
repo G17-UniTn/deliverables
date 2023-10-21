@@ -441,26 +441,45 @@ consentano di effettuare facilmente delle verifiche quantitative.
 \section{Analisi del contesto}
 % riguarda il backend e i componenti esterni al sistema: tutto il codice che utilizzate ma che non avete scritto voi
 % flusso di informazioni tra il nostro sistema e quelli esterni
+In questa sezione viene descritto il contesto di funzionamento del sistema
+\textit{SleepCode} e come esso interagisce  con gli attori esterni. Si
+ricorre qui ad una descrizione testuale seguita da una rappresentazione
+grafica mediante Context Diagram (Figura \ref{contextdiagram}).
 
 \subsection{Utenti e sistemi esterni} % chi interagisce, chi usa e chi supporta (sia software che umano)
-\subsubsection{User}
-\subsubsection{Database}
-\subsubsection{...}
+\subsubsection{Utente}
+L'utente rappresenta l'attore che usufruisce delle funzionalità del servizio
+—viene descritto nei requisiti dal \textbf{RF 1} al \textbf{RF 7} per quanto
+concerne il livello anonimo e quelli superiori; dal \textbf{RF 8} al
+\textbf{RF 11} in relazione ai livelli autenticato e amministratore; \textbf{RF 12},
+\textbf{RF 13}, \textbf{RF 14} per quanto riguarda il livello amministratore.
 
+\subsubsection{Firebase DB}
+Il servizio di database impiegato per gestire le credenziali e l'account
+degli utenti registrati alla piattaforma—come specificato in \textbf{RF 1},
+\textbf{RF 2}, \textbf{RF 3}, \textbf{9}, \textbf{10}—e per gestire il
+catalogo dei problemi—\textbf{RF 12}, \textbf{RF 13}, \textbf{RF 14}.
+
+\subsubsection{Google Sign-In}
+Servizio di autenticazione alternativo al sistema di credenziali interno
+(\textbf{RF 1}, \textbf{RF 2}).
+
+\subsubsection{YouTube}
+Il servizio di contenuti multimediali che fornisce i video con i quali
+integrare i problemi—\textbf{RF 4.1}, \textbf{RF 7.6}.
+
+\subsubsection{Servizio di posta elettronica}
+Sistema di notifica utilizzato per effettuare le operazioni di recupero
+dell'account (\textbf{RF 3}) e di migrazione a nuovo indirizzo di posta
+elettronica da associare all'account (\textbf{RF 10}).
 
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
-
-% INVIO DI EMAIL per recupero password
-% freccia da utente a sistema: richiesta recupero password
-% freccia da sistema a utente: form
-% freccia da utente a sistema: email nuova
-% (di mezzo potrebbe essere meglio mettere il database che verifica l'email)
-% freccia da sistema a servizio mail: INDIRIZZO MAIL untente, mittente, oggetto, testo, allegati (contenuto in generale) incluso LINK AL FORM DELLA PIATTAFORMA PER IL RESET PASSWORD
-
-% 
-
-
-
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{materiale/contextdiagram.pdf}
+\caption{Context Diagram della piattaforma \textit{SleepCode}}
+\label{contextdiagram}
+\end{figure}
 
 
 
