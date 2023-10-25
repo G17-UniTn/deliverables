@@ -71,8 +71,9 @@ Unified Modeling Language (UML) e tabelle.
 
 \section{Requisiti funzionali}
 In questa sezione vengono descritti i requisiti funzionali (RF) del
-servizio utilizzando alcuni Use Case Diagrams (UCD) scritti in UML,
-eventualmente arricchiti da descrizioni in linguaggio naturale.
+servizio utilizzando alcuni Use Case Diagrams (UCD) disegnati secondo
+gli standard UML, eventualmente arricchiti da descrizioni in linguaggio
+naturale.
 
 
 \subsection{Accesso}
@@ -84,7 +85,7 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/accesso.pdf}
+\includegraphics[scale=0.65]{materiale/ucaccesso.pdf}
 \caption{UCD dello scenario di accesso al servizio}
 \end{figure}
 
@@ -162,7 +163,7 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{materiale/consulta-catalogo.pdf}
+\includegraphics[scale=0.55]{materiale/ucproblemi.pdf}
 \caption{UCD dello scenario della consultazione dei problemi e della modifica del catalogo}
 \end{figure}
 \hrule
@@ -179,14 +180,15 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
         \item[]
         \item L'utente amministratore accede alla pagina del catalogo e sceglie di aggiungere un nuovo problema.
         \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno tre esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link al video-suggerimento.
+        \item L'utente inserisce almeno 3 test cases; ogni test case consiste in un dato in input e il rispettivo output corretto.
         \item L'utente conferma la creazione del problema, che viene quindi aggiunto al catalogo; alternativamente, l'utente può scegliere di annullare la creazione del nuovo problema, previo avviso e conferma da parte del sistema.\texttt{[exception 1]}\texttt{[exception 2]}
     \end{enumerate}
     
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se tra i dati strutturali del problema è presente almeno un campo non compilato, l'aggiunta del problema al catalogo non viene eseguita e l'utente viene avvisato.
-        \item \verb|[exception 2]| Se è presente almeno un campo vuoto tra quelli destinati ai dati descrittivi del problema, l'operazione non può essere completata e l'utente viene avvisato.
+        \item \texttt{[exception 1]} Se tra i dati strutturali e descrittivi del problema è presente almeno un campo non compilato, l'aggiunta del problema al catalogo non viene eseguita e l'utente viene avvisato.
+        \item \texttt{[exception 2]}
     \end{itemize}
 \end{description}
 
@@ -202,14 +204,15 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
         \item[]
         \item L'utente amministratore accede alla pagina del catalogo e seleziona un problema da modificare.
         \item L'utente modifica i campi strutturali (titolo, descrizione, esempi di input e output) e descrittivi (nome, difficoltà, categoria e link al video-suggerimento) del problema.
-        \item L'utente conferma la modifica del problema, che verrà poi aggiornato nel catalogo, oppure conferma di annullare la modifica.\texttt{[exception 1]}
+        \item L'utente modifica i test cases, aggiungendone eventualmente più di 3.
+        \item L'utente conferma la modifica del problema, che verrà poi aggiornato nel catalogo, oppure conferma di annullare la modifica.\texttt{[exception 1]} \texttt{[exception 2]}
     \end{enumerate}
     
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se tra i dati strutturali del problema è presente almeno un campo non compilato, l'aggiunta del problema al catalogo non viene eseguita e l'utente viene avvisato.
-        \item \verb|[exception 2]| Se è presente almeno un campo vuoto tra quelli destinati ai dati descrittivi del problema, l'operazione non può essere completata e l'utente viene avvisato.
+        \item \texttt{[exception 1]} Se tra i dati strutturali e descrittivi del problema è presente almeno un campo non compilato, la modifica del problema non viene eseguita e l'utente viene avvisato.
+        \item \texttt{[exception 2]} Se il numero di test cases forniti è minore di 3, il problema non può essere modificato e l'utente viene notificato.
     \end{itemize}
 
     \item[Extensions:]
@@ -229,8 +232,11 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.57]{materiale/esercitazione.pdf}
+\includegraphics[scale=0.57]{materiale/ucesercitazione.pdf}
 \end{figure}
+
+\subsubsection*{Descrizione Use Case \textit{Effettuare l'esercitazione}}
+% qualche diagrammino più appropriato sarebbe bello
 
 \subsubsection*{Descrizione Use Case \textit{Registrare i progressi}}
 
@@ -244,15 +250,15 @@ eventualmente arricchiti da descrizioni in linguaggio naturale.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{materiale/gestione-account.pdf}
+\includegraphics[scale=0.8]{materiale/ucaccount.pdf}
 \caption{UCD dello scenario}
 \end{figure}
 
 \newpage
 \section{Requisiti non funzionali}
 Nella presente sezione sono riportati i requisiti non funzionali (RNF)
-del sistema utilizzando tabelle strutturate e specificando misure che
-consentano di effettuare facilmente delle verifiche quantitative.
+del sistema utilizzando tabelle strutturate. Per ogni requisito vengono
+specificat
 
 \subsection{Caratteristiche di sistema}
 
@@ -266,7 +272,9 @@ consentano di effettuare facilmente delle verifiche quantitative.
         \hline
         Elaborazione con un numero crescente di utenti. & Capacità del sistema di gestire un numero crescente di utenti in simultanea. & Viene garantito l'accesso in simultanea di almeno 300 utenti nel primo anno dal lancio.\\
         \hline
-        Memorizzazione dei dati degli utenti & Capacità del sistema di gestire i dati generati da un numero crescente di utenti utilizzatori. & Capacità sufficiente per almeno 400 utenti. \\
+        Memorizzazione dei dati degli utenti & Capacità del sistema di gestire i dati generati da un numero crescente di utenti utilizzatori. & Capacità sufficiente per almeno 400 utenti.\\
+        \hline
+        Linguaggi di programmazione & Capacità di supportare un numero crescente di linguaggi di programmazione, utili alla scrittura degli algoritmi risolutivi. & Al lancio della piattaforma, vengono supportate le versioni maggiormente utilizzate dei linguaggi di programmazione più popolari (C++11). Il sistema può gestire algoritmi scritti in almeno 5 linguaggi differenti.\\
         \hline
     \end{tabularx}
 \end{center}
@@ -311,7 +319,6 @@ consentano di effettuare facilmente delle verifiche quantitative.
     \end{center}
 \end{nonfuncreq}
 
-\newpage
 \begin{nonfuncreq}
     \textbf{Aspetto }
     \begin{center}
@@ -442,9 +449,9 @@ consentano di effettuare facilmente delle verifiche quantitative.
 % riguarda il backend e i componenti esterni al sistema: tutto il codice che utilizzate ma che non avete scritto voi
 % flusso di informazioni tra il nostro sistema e quelli esterni
 In questa sezione viene descritto il contesto di funzionamento del sistema
-\textit{SleepCode} e come esso interagisce  con gli attori esterni. Si
-ricorre qui ad una descrizione testuale seguita da una rappresentazione
-grafica mediante Context Diagram (Figura \ref{contextdiagram}).
+\textit{SleepCode} e come esso interagisce con gli attori esterni. Si
+ricorre ad una descrizione testuale riassunta in una rappresentazione
+grafica mediante un Diagramma di Contesto (Figura \ref{contextdiagram}).
 
 \subsection{Utenti e sistemi esterni} % chi interagisce, chi usa e chi supporta (sia software che umano)
 \subsubsection{Utente}
@@ -452,21 +459,22 @@ L'utente rappresenta l'attore che usufruisce delle funzionalità del servizio
 —viene descritto nei requisiti dal \textbf{RF 1} al \textbf{RF 7} per quanto
 concerne il livello anonimo e quelli superiori; dal \textbf{RF 8} al
 \textbf{RF 11} in relazione ai livelli autenticato e amministratore; \textbf{RF 12},
-\textbf{RF 13}, \textbf{RF 14} per quanto riguarda il livello amministratore.
+\textbf{RF 13} e \textbf{RF 14} per quanto riguarda il livello amministratore.
 
 \subsubsection{Firebase DB}
 Il servizio di database impiegato per gestire le credenziali e l'account
-degli utenti registrati alla piattaforma—come specificato in \textbf{RF 1},
-\textbf{RF 2}, \textbf{RF 3}, \textbf{9}, \textbf{10}—e per gestire il
+degli utenti registrati alla piattaforma—i requisiti coinvolti sono: \textbf{RF 1},
+\textbf{RF 2}, \textbf{RF 3}, \textbf{RF 9}, \textbf{RF 10}—e per gestire il
 catalogo dei problemi—\textbf{RF 12}, \textbf{RF 13}, \textbf{RF 14}.
 
 \subsubsection{Google Sign-In}
 Servizio di autenticazione alternativo al sistema di credenziali interno
-(\textbf{RF 1}, \textbf{RF 2}).
+—\textbf{RF 1}, \textbf{RF 2}.
 
 \subsubsection{YouTube}
-Il servizio di contenuti multimediali che fornisce i video con i quali
-integrare i problemi—\textbf{RF 4.1}, \textbf{RF 7.6}.
+Il servizio di contenuti multimediali che fornisce i video che integrano
+i problemi, mettendo a disposizione dell'utente un suggerimento per lo
+svolgimento dell'esercizio—\textbf{RF 4.1}, \textbf{RF 6.6}.
 
 \subsubsection{Servizio di posta elettronica}
 Sistema di notifica utilizzato per effettuare le operazioni di recupero
@@ -476,15 +484,34 @@ elettronica da associare all'account (\textbf{RF 10}).
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{materiale/contextdiagram.pdf}
+\includegraphics[scale=0.5]{materiale/context-diagram.pdf}
 \caption{Context Diagram della piattaforma \textit{SleepCode}}
 \label{contextdiagram}
 \end{figure}
 
+L'utente esegue la registrazione o il login compilando i campi richiesti
+dai rispettivi form forniti dalla piattaforma (\textbf{RF}, \textbf{RF}).
+In caso di login, l'utente viene autorizzato ad accedere al livello di
+utente autenticato.
 
 
 
 \newpage
 \section{Analisi dei componenti}
+% diagramma componenti -> si intende componenti INTERNI AL SISTEMA:
+
+% vantaggi componenti: se cambia uno degli attori (in particolare software)
+% basta cambiare il rispettivo compnente con il quale si interfaccia
+
+% il sistema non sarà un programma monolitico che si occupa di tutto con un unico codice
+% provo a dividere il mio sistema in componenti e ragiono su come le informazioni vengono passate tra i componenti
+
+Nella sezione seguente viene descritta l'architettura interna del sistema
+rilevandone i componenti, definiti nei loro compiti sulla base dei requisiti
+analizzati nelle sezioni e nei documenti precedenti. L'architettura viene
+qui mostrata attraverso un Diagramma dei Componenti, che evidenzia
+l'interconnessione tra i componenti interni, le interfacce presenti tra di
+essi e quelle esposte agli attori esterni. Segue una descrizione testuale
+e più dettagliata di ogni componente.
 
 \end{document}
