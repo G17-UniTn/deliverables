@@ -154,7 +154,7 @@ naturale.
     \item \textbf{RF 8.} Metadati aggiuntivi
     \item \textbf{RF 9.1.} Progressi
 \end{itemize}
-\subsection*{Modifica del catalogo dei problemi}
+\subsection*{2.5\texttt{ }\textit{ } Gestione del catalogo dei problemi}
 \begin{itemize}
     \item \textbf{RF 12.} Aggiungere un problema
     \item \textbf{RF 13.} Modificare un problema
@@ -188,7 +188,7 @@ naturale.
     \begin{itemize}
         \item[]
         \item \texttt{[exception 1]} Se tra i dati strutturali e descrittivi del problema è presente almeno un campo non compilato, l'aggiunta del problema al catalogo non viene eseguita e l'utente viene avvisato.
-        \item \texttt{[exception 2]}
+        \item \texttt{[exception 2]} Se il numero di test cases forniti è minore di 3, il problema non può essere aggiunto e l'utente viene notificato.
     \end{itemize}
 \end{description}
 
@@ -251,8 +251,14 @@ naturale.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{materiale/ucaccount.pdf}
-\caption{UCD dello scenario}
+\caption{UCD dello scenario con le funzionalità aggiuntive dell'utente autenticato}
 \end{figure}
+\hrule
+
+\subsubsection*{Descrizione Use Case \textit{Aggiornare l'indirizzo email dell'account}}
+\subsubsection*{Descrizione Use Case \textit{Aggiornare la password dell'account}}
+
+
 
 \newpage
 \section{Requisiti non funzionali}
@@ -484,15 +490,36 @@ elettronica da associare all'account (\textbf{RF 10}).
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{materiale/context-diagram.pdf}
+\hspace*{-1.8cm}
+\includegraphics[scale=0.6]{materiale/contextdiagram.pdf}
 \caption{Context Diagram della piattaforma \textit{SleepCode}}
 \label{contextdiagram}
 \end{figure}
 
-L'utente esegue la registrazione o il login compilando i campi richiesti
-dai rispettivi form forniti dalla piattaforma (\textbf{RF}, \textbf{RF}).
-In caso di login, l'utente viene autorizzato ad accedere al livello di
-utente autenticato.
+L'utente può richiedere di effettuare la registrazione alla piattaforma
+(\textbf{RF 1}), scegliendo di inviare i dati necessari per creare un
+account di sistema o di collegare il proprio account Google. Il sistema
+provvede a inviare la conferma dell'operazione di registrazione.
+
+L'utente registrato può inviare i dati necessari al login (\textbf{RF 2}) sulla piattaforma,
+inserendo quindi le credenziali di sistema oppure richiedendo l'autenticazione
+con Google. Il sistema risponde con l'autorizzazione all'accesso.
+
+In caso di richiesta di recupero dell'account (\textbf{RF 3}) da parte di un utente
+registrato, il sistema riceve l'indirizzo email di recupero. Dall'email
+l'utente può collegarsi alla pagina di recupero, nella quale inserire la
+nuova password dell'account.
+\\\\
+I video che l'utente intende visualizzare vengono richiesti a YouTube da
+parte del sistema.
+\\\\
+Google Sign-In fornisce l'autorizzazione al collegamento e all'accesso
+mediante account Google, richiesti da utenti in sede di registrazione o
+login.
+\\\\
+La piattaforma fornisce al sistema di posta elettronica i dati necessari
+per notificare e guidare l'utente che intende effettuare alcune operazioni,
+ovvero la registrazione e la modifica dei dati dell'account.
 
 
 
@@ -513,5 +540,9 @@ qui mostrata attraverso un Diagramma dei Componenti, che evidenzia
 l'interconnessione tra i componenti interni, le interfacce presenti tra di
 essi e quelle esposte agli attori esterni. Segue una descrizione testuale
 e più dettagliata di ogni componente.
+
+
+\subsection{Definizione dei componenti}
+\subsection{Diagramma dei componenti}
 
 \end{document}
