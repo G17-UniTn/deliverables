@@ -10,13 +10,13 @@
 \usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
 \usepackage{float} % per posizionamento immagini
 \usepackage{amsthm}
-
 \usepackage{fancyhdr}
+
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
-\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.1}
-\renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
-
+\fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
+\setlength{\headheight}{22pt}
 
 %\pagestyle{myheadings}
 %\markright{John Smith\hfill On page styles\hfill}
@@ -114,16 +114,16 @@ eventuali macro-funzioni in requisiti minori nel caso di obiettivi
 di più ampia portata.
 \\\\
 \noindent Le funzionalità sono inoltre suddivise secondo alcuni livelli di accesso
-degli utenti:
+degli utenti (di seguito in ordine "crescente"):
 \begin{itemize}
     \item \textit{Utente anonimo.}
     \item \textit{Utente autenticato.}
     \item \textit{Utente amministratore.}
 \end{itemize}
-Si precisa che le funzionalità utilizzabili dall'utente anonimo sono condivise
-con l'utente autenticato. L'utente amministratore non può accedere ad alcuna
-funzionalità descritta all'infuori della propria sezione; gli utenti anonimo e
-autenticato non possono usufruire delle funzionalità presenti a livello amministratore.
+Si precisa che un utente presente ad un dato livello di accesso può usufurire
+delle funzionalità disponibili a quel livello \textit{più} le funzionalità
+presenti al livello inferiore. Non è invece possibile utilizzare le funzionalità
+messe a disposizione a livelli superiori.
 
 \begin{center}
 \section*{Utente anonimo}    
@@ -228,15 +228,7 @@ essere possibile:
 Deve essere fornito un visualizzatore che mostri le informazioni del
 problema precedentemente selezionato dal catalogo. La visualizzazione
 deve rendere disponibile alla vista dell'utente i contenuti del
-problema, specificati nel
-\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}}}}.
-\end{funcreq}
-
-
-\begin{funcreq}
-\label{formatoproblema}
-\textbf{Struttura di un problema }
-Tutti i problemi forniti devono possiedere:
+problema:
 \begin{itemize}
     \item Un titolo.
 
@@ -259,7 +251,7 @@ a risolverlo. La sessione di esercitazione deve avvenire in una vista apposita, 
 l'utente deve poter disporre di tutti gli strumenti necessari alla realizzazione
 delle seguenti funzionalità:
 \begin{enumerate}
-    \item Visualizzare il contenuto dell'esercizio (\textcolor{blue}{\underbar{\hyperref[formatoproblema]{RF \ref*{formatoproblema}}}}).
+    \item Visualizzare il contenuto dell'esercizio (\textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}).
     
     \item Visualizzare i test cases (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}}).
 
@@ -279,38 +271,42 @@ delle seguenti funzionalità:
 \end{enumerate}
 \end{funcreq}
 
-%\newpage
-\begin{funcreq}
-\label{sintax}
-\textbf{Correttezza sintattica del codice }
-L'utente deve poter verificare che il codice scritto sia corretto e in grando di essere eseguito in maniera appropriata.
-Quindi devono essere messe a disposizione le seguenti funzionalità:
-\begin{enumerate}
-    \item Compilazione del codice.
-    \item Visualizzazione di avvisi relativi a eventuali errori di compilazione
-    \textit{oppure} di compilazione andata a buon fine. In caso di errori
-    di scrittura, l'utente deve poter correggere tali errori riscrivendo
-    nell'area destinata al codice.
-\end{enumerate}
-\end{funcreq}
+
+%\begin{funcreq}
+%\label{sintax}
+%\textbf{Correttezza sintattica del codice }
+%L'utente deve poter verificare che il codice scritto sia corretto e in grando di essere eseguito in maniera appropriata.
+%Quindi devono essere messe a disposizione le seguenti funzionalità:
+%\begin{enumerate}
+%    \item Compilazione del codice.
+%    \item Visualizzazione di avvisi relativi a eventuali errori di compilazione
+%    \textit{oppure} di compilazione andata a buon fine. In caso di errori
+%    di scrittura, l'utente deve poter correggere tali errori riscrivendo
+%    nell'area destinata al codice.
+%\end{enumerate}
+%\end{funcreq}
 
 \begin{funcreq}
 \label{test}
-\textbf{Verifica della correttezza dell'algoritmo\footnote{La \textit{correttezza} di cui si parla in questo caso riguarda solo l'efficacia risolutiva dell'algoritmo.} }
+\textbf{Verifica della correttezza dell'algoritmo }
 L'utente deve poter verificare la correttezza del codice scritto eseguendolo
 e testandolo:
 \begin{enumerate}
     \item Il codice deve essere eseguito sottoponendolo ad un certo numero
-    di test cases (al minimo 3),
-    cioè fornendo opportune istanze di input (Per esempio,
-    se un problema richiede di sommare due numeri interi, il codice risolutivo
-    proposto dall'utente verrà eseguito fornendo ad esso coppie di interi
-    e registrando i risultati in output.)
+    di test cases (al minimo 3), cioè fornendo opportune istanze di input
+    (Per esempio, se un problema richiede di sommare due numeri interi, il
+    codice risolutivo proposto dall'utente verrà eseguito fornendo ad esso
+    coppie di interi e registrando i risultati in output.)
 
-    \item L'utente deve poter conoscere l'esito dei test case e, per ognuno
-    di questi, l'input e l'output atteso sono visibili.
-    Inoltre, l'utente deve poter riscrivere e perfezionare l'algoritmo e
-    sottoporre ripetutamente il codice ai test cases.
+    \item L'utente deve poter conoscere l'esito dei test case—per ognuno
+    di questi, l'input e l'output atteso sono visibili. Inoltre, l'utente
+    deve poter riscrivere e perfezionare l'algoritmo e sottoporre ripetutamente
+    il codice ai test cases.
+    
+    Nel caso in cui l'esito dei test cases dovesse risultare negativo, l'utente
+    viene avvisato senza fare riferimento agli errori commessi, siano essi
+    relativi alla correttezza sintattica del codice oppure riguardanti la
+    correttezza risolutiva dell'algoritmo.
 
     \item Nel caso in cui l'utente sia in grado di superare tutti i
     test case disponibili, la sessione di esercitazione deve terminare.
@@ -344,17 +340,18 @@ accessibili all'utente anonimo.
     per effettuare ricerche filtrate.
 \end{funcreq}
 
+
 \subsection{Gestione del profilo e dell'account}
 \begin{funcreq}
 \label{stats}
 \textbf{Progressi }
 \begin{enumerate}
     \item Il servizio deve prevedere il tracciamento dei progressi dell'utente
-    autenticato, memorizzando i riferimenti ai problemi risolti e incrementandone
-    il numero ad ogni sessione di esercitazione andata a buon fine. Con riferimento
-    al \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.3}}}, dopo la
-    risoluzione, il problema deve inoltre essere contrassegnato come \textit{risolto}
-    (nel rispettivo campo \textit{stato}).
+    autenticato, incrementando il numero di problemi risolti ad ogni sessione
+    di esercitazione andata a buon fine: con riferimento al
+    \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.3}}},
+    dopo la risoluzione, il problema deve inoltre essere contrassegnato come
+    \textit{risolto} (nel rispettivo campo \textit{stato}).
 
     \item L'utente deve poter monitorare i propri progressi, accedendo ai dati
     seguenti:
@@ -400,19 +397,22 @@ dallo stato autenticato a quello anonimo.
     \section*{Utente amministratore}
 \end{center}
 
-Le funzionalità elencate di seguito sono usufruibili esclusivamente dall'utente
-amministratore. Inoltre, l'utente amministratore non può accedere alle funzionalità
-precedentemente descritte, cioè quelle caratteristiche dei livelli anonimo e autenticato.
-\\
+%Le funzionalità elencate di seguito sono usufruibili esclusivamente dall'utente
+%amministratore. Inoltre, l'utente amministratore non può accedere alle funzionalità
+%precedentemente descritte, cioè quelle caratteristiche dei livelli anonimo e autenticato.
 \subsection{Gestione del catalogo dei problemi}
 
 \begin{funcreq}
 \textbf{Aggiungere un problema }
 L'utente amministratore deve poter aggiungere un nuovo problema al catalogo.
 La struttura del problema deve essere conforme a quanto descritto nel
-\textcolor{blue}{\underbar{\hyperref[formatoproblema]{RNF \ref*{formatoproblema}}}}
+\textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}
 e, all'atto dell'inserimento nel catalogo, devono essere specificati i campi
-elencati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RNF \ref*{probcatalogue}.1}}}.
+elencati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}.
+
+Inoltre, devon essere forniti almeno 3 test cases (questi saranno impiegati
+come da \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.1}}});
+ogni test case consiste in un dato in input e il rispettivo output corretto.
 \end{funcreq}
 
 \begin{funcreq}
@@ -654,7 +654,7 @@ L'invio dei messaggi email (da parte della piattaforma) sarà gestito da servizi
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.35]{materiale/backend.jpg}
+\includegraphics[scale=0.35]{materiale/immaginife/backend.pdf}
 \end{figure}
 
 \newpage
@@ -664,6 +664,7 @@ Nella cronologia sono riportate le versioni del documento
     \item \textit{Versione 1.0:} prima stesura definitiva.
     \item \textit{Versione 2.0:} definizione dei livelli di accesso e conseguente estensione delle funzionalità.
     \item \textit{Versione 2.1:} ridefinizione delle funzionalità del livello amministratore.
+    \item \textit{Versione 2.2:} eliminazione RF sulla correttezza sintattica del codice; aggiornato il ruolo amministratore.
 \end{itemize}
 
 \end{document}
