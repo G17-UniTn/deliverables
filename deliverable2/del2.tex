@@ -66,13 +66,22 @@ Zeno \textsc{Saletti}}
 
 \section*{Scopo del documento}
 Il presente documento riporta la specifica dei requisiti di sistema
-del progetto SleepCode ricorrendo a diagrammi realizzati secono lo
-Unified Modeling Language (UML) e tabelle.
+del progetto SleepCode. Viene in particolare estesa la descrizione
+in linguaggio naturale, impiegato nel documento di Analisi dei Requisiti
+(\textit{D1}), attraverso strumenti di modellazione più formali—diagrammi
+realizzati secondo gli standard indicati da \textit{Unified Modeling Language}
+(UML) per quanto riguarda i requisiti funzionali; tabelle strutturate
+per i requisiti non funzionali.
 
+In ultima analisi, contemplando i suddetti requisiti, viene presentato il
+design del sistema ricorrendo a diagrammi di contesto e dei componenti.
+
+
+\newpage
 \section{Requisiti funzionali}
 In questa sezione vengono descritti i requisiti funzionali (RF) del
-servizio utilizzando alcuni Use Case Diagrams (UCD) disegnati secondo
-gli standard UML, eventualmente arricchiti da descrizioni in linguaggio
+servizio utilizzando Use Case Diagrams (UCD) e Swimlane Diagrams (SD), disegnati secondo
+gli standard UML, ed eventualmente arricchiti da descrizioni in linguaggio
 naturale.
 
 
@@ -82,15 +91,14 @@ naturale.
     \item \textbf{RF 2.} Login
     \item \textbf{RF 3.} Recupero password
 \end{itemize}
-
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/ucdiagrams/ucaccesso.pdf}
+\hspace*{-0.7cm}
+\includegraphics[scale=0.84]{materiale/ucdiagrams/ucaccesso.pdf}
 \caption{UCD dello scenario di accesso al servizio}
 \end{figure}
 
-\hrule
-\subsubsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
+\subsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
 \begin{description}
     \item[Titolo:] Registrazione account
     
@@ -100,9 +108,9 @@ naturale.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente anonimo accede alla pagina dedicata e sceglie tra la registrazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.
-        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme (RNF). \verb|[exception 1]|\verb|[exception 2]|\verb|[exception 3]|
-        \item La password deve essere confermata reinserendola in un secondo campo.
+        \item L'utente anonimo accede alla pagina dedicata e sceglie tra la registrazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme (RNF). \verb|[exception 1]|\verb|[exception 2]|
+        \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 3]|
         \item L'account viene registrato dal servizio di database.
     \end{enumerate}
     
@@ -113,9 +121,43 @@ naturale.
         \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
         \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
     \end{itemize}
+
+    \item[Extensions:]
+    \begin{itemize}
+        \item[]
+        \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un proprio account Google, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
+    \end{itemize}
 \end{description}
 
-\subsubsection*{Descrizione Use Case \textit{Recuperare la password}}
+\subsection*{Descrizione Use Case \textit{Effettuare il login}}
+\begin{description}
+    \item[Titolo:] Login
+    
+    \item[Riassunto:] Questo Use Case descrive come l'utente anonimo e registrato deve
+    effettuare il login sulla piattaforma.
+
+    \item[Descrizione:]
+    \begin{enumerate}
+        \item[]
+        \item L'utente anonimo accede alla pagina dedicata e sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password.\texttt{[exception 1]}
+    \end{enumerate}
+    
+    \item[Exceptions:]
+    \begin{itemize}
+        \item[]
+        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account già registrato, la registrazione non può proseguire e l'utente viene avvisato.
+    \end{itemize}
+
+    \item[Extensions:]
+    \begin{itemize}
+        \item[]
+        \item \texttt{[extension 1]} Qualora l'utente disponga di un account Google collegato alla piattaforma, è possibile effettuare il login
+        mediante autenticazione Google e seguendo le indicazioni fornite dal suo servizio.
+    \end{itemize}
+\end{description}
+
+\subsection*{Descrizione Use Case \textit{Recuperare la password}}
 \begin{description}
     \item[Titolo:] Recupero password
     
@@ -128,7 +170,7 @@ naturale.
         \item[]
         \item L'utente accede alla pagina di recupero, per mezzo di quella di login.
         \item La pagina indica all'utente di inserire l'email di recupero, ovvero quella associata all'account. \verb|[exception 1]|
-        \item Il sistema richiede al servizio di posta elettronica l'invio di un link di recupero mediane un messaggio email, specificando l'indirizzo fornito dall'utente.
+        \item Il sistema richiede al servizio di posta elettronica l'invio di un link di recupero mediane un messaggio email, specificando l'indirizzo fornito dall'utente e il contenuto del messaggio.
         \item Il link guida l'utente dal messaggio alla pagina del sistema dedicata alla creazione di una nuova password.
         \item L'utente inserisce una nuova password conforme e la conferma, inserendola nuovamente. \verb|[exception 2]|\verb|[exception 3]|
         \item Il servizio di database provvede all'aggiornamento della password.
@@ -163,12 +205,12 @@ naturale.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{materiale/ucdiagrams/ucproblemi.pdf}
+\hspace*{-0.5cm}
+\includegraphics[scale=0.57]{materiale/ucdiagrams/ucproblemi.pdf}
 \caption{UCD dello scenario della consultazione dei problemi e della modifica del catalogo}
 \end{figure}
-\hrule
 
-\subsubsection*{Descrizione Use Case \textit{Aggiungere problemi}}
+\subsection*{Descrizione Use Case \textit{Aggiungere problemi}}
 \begin{description}
     \item[Titolo:] Aggiungere un problema
     
@@ -214,12 +256,6 @@ naturale.
         \item \texttt{[exception 1]} Se tra i dati strutturali e descrittivi del problema è presente almeno un campo non compilato, la modifica del problema non viene eseguita e l'utente viene avvisato.
         \item \texttt{[exception 2]} Se il numero di test cases forniti è minore di 3, il problema non può essere modificato e l'utente viene notificato.
     \end{itemize}
-
-    \item[Extensions:]
-    \begin{itemize}
-        \item[]
-        \item \verb|[extension 1]|
-    \end{itemize}
 \end{description}
 
 \newpage
@@ -232,13 +268,15 @@ naturale.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.57]{materiale/ucdiagrams/ucesercitazione.pdf}
+\hspace*{-1cm}
+\includegraphics[scale=0.8]{materiale/ucdiagrams/ucesercitazione.pdf}
+\caption{UCD con riferimenti ai requisiti relativi all'esercitazione}
 \end{figure}
 
-\subsubsection*{Descrizione Use Case \textit{Effettuare l'esercitazione}}
+\subsection*{Descrizione Use Case \textit{Effettuare l'esercitazione}}
 % qualche diagrammino più appropriato sarebbe bello
 
-\subsubsection*{Descrizione Use Case \textit{Registrare i progressi}}
+\subsection*{Descrizione Use Case \textit{Registrare i progressi}}
 
 \newpage
 \subsection{Gestione del profilo e dell'account}
@@ -250,25 +288,32 @@ naturale.
 
 \begin{figure}[H]
 \centering
+\hspace*{-1.4cm}
 \includegraphics[scale=0.8]{materiale/ucdiagrams/ucaccount.pdf}
 \caption{UCD dello scenario con le funzionalità aggiuntive dell'utente autenticato}
 \end{figure}
-\hrule
 
-\subsubsection*{Descrizione Use Case \textit{Aggiornare l'indirizzo email dell'account}}
+\newpage
+\subsection*{Swimlane Diagram per \textit{Aggiornare l'indirizzo email dell'account}}
+La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all' aggiornamento
+dell'indirizzo di posta elettronica di un utente registrato con credenziali di sistema
+e autenticato, evidenziando la procedura mediante uno Swimlane Diagram.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/swimlaneemail.pdf}
-\caption{Swimlane Diagram dello scenario di aggiornamento dell'indirizzo email}
+\includegraphics[scale=0.65]{materiale/ucdiagrams/swimlaneemail.pdf}
+\caption{SD dello scenario di aggiornamento dell'indirizzo email}
 \label{slemail}
 \end{figure}
 
 
 
-\subsubsection*{Descrizione Use Case \textit{Aggiornare la password dell'account}}
+\subsection*{Swimlane Diagram per \textit{Aggiornare la password dell'account}}
+La Figura \ref{slpassword} fa riferimento allo Use Case relativo all'aggiornamento
+della password dell'account di un utente registrato con credenziali di sistema e autenticato.
+
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/swimlanepassword.pdf}
+\includegraphics[scale=0.65]{materiale/ucdiagrams/swimlanepassword.pdf}
 \caption{Swimlane Diagram dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
@@ -276,9 +321,11 @@ naturale.
 
 \newpage
 \section{Requisiti non funzionali}
-Nella presente sezione sono riportati i requisiti non funzionali (RNF)
-del sistema utilizzando tabelle strutturate. Per ogni requisito vengono
-specificat
+Di seguito sono riportati i requisiti non funzionali (RNF)
+del sistema, all'interno di tabelle strutturate. Per ogni requisito vengono
+specificate una o più proprietà con una descrizione più esplicita,
+oltre ad un indice di misura utile alla valutazione oggettiva
+e quantitativa di tali requisiti.
 
 \subsection{Caratteristiche di sistema}
 
@@ -294,7 +341,7 @@ specificat
         \hline
         Memorizzazione dei dati degli utenti & Capacità del sistema di gestire i dati generati da un numero crescente di utenti utilizzatori. & Capacità sufficiente per almeno 400 utenti.\\
         \hline
-        Linguaggi di programmazione & Capacità di supportare un numero crescente di linguaggi di programmazione, utili alla scrittura degli algoritmi risolutivi. & Al lancio della piattaforma, vengono supportate le versioni maggiormente utilizzate dei linguaggi di programmazione più popolari (C++11). Il sistema può gestire algoritmi scritti in almeno 5 linguaggi differenti.\\
+        Eterogeneità dei linguaggi di programmazione & Capacità di supportare un numero crescente di linguaggi di programmazione, utili alla scrittura degli algoritmi risolutivi. & Al lancio della piattaforma, vengono supportate le versioni maggiormente utilizzate dei linguaggi di programmazione più popolari (C++11). Il sistema può gestire algoritmi scritti in almeno 5 linguaggi differenti.\\
         \hline
     \end{tabularx}
 \end{center}
@@ -522,6 +569,23 @@ In caso di richiesta di recupero dell'account (\textbf{RF 3}) da parte di un ute
 registrato, il sistema riceve l'indirizzo email di recupero. Dall'email
 l'utente può collegarsi alla pagina di recupero, nella quale inserire la
 nuova password dell'account.
+
+L'utente riceve il catalogo e i dati in esso contenuti (\textbf{RF 4}, \textbf{RF 5},
+\textbf{RF 8}). L'utente propaga al proprio account le modifiche
+apportate ai preferiti (\textbf{RF 8}) e al catalogo stesso (\textbf{RF 12}, \textbf{RF 13}, \textbf{RF 14}), riceve le informazioni sui progressi personali (\textbf{RF 9})
+e può inviare una richiesta di logout (\textbf{RF 11}).
+
+Durante un'esercitazione, l'utente può inviare il codice scritto e ricevere dati
+relativi all'esito dell'esecuzione di tale codice; può essere inoltre richiesta la
+visualizzazione del video-suggerimento (\textbf{RF 6}, \textbf{RF 7}).
+
+Per apportare modifiche ai dati del proprio account (\textbf{RF 10}), l'utente
+deve poter inviare le richieste specifiche, come quelle di modifica della password
+o migrazione dell'indirizzo email, e fornire le nuove credenziali.
+\\\\
+Firebase DB provvede alla memorizzazione del catalogo (con relativi problemi) e dei
+dati relativi agli utenti registrati ed eventualmente autenticati (credenziali
+interne, preferiti, progressi) e alla ricezione di modifiche apportate a questi oggetti.
 \\\\
 I video che l'utente intende visualizzare vengono richiesti a YouTube da
 parte del sistema.
