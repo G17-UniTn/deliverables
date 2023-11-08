@@ -146,7 +146,7 @@ naturale.
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account già registrato, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 1]| Se le credenziali fornite non sono valide, il login non può essere eseguito e l'utente viene avvisato.
     \end{itemize}
 
     \item[Extensions:]
@@ -273,10 +273,30 @@ naturale.
 \caption{UCD con riferimenti ai requisiti relativi all'esercitazione}
 \end{figure}
 
-\subsection*{Descrizione Use Case \textit{Effettuare l'esercitazione}}
-% qualche diagrammino più appropriato sarebbe bello
+\subsection*{Descrizione dell'esercitazione}
+La Figura mostra lo swimlane diagram che descrive gli
+use case relativi alla sessione di esercitazione. In particolare,
+viene mostrato in modo più preciso lo use case \textit{Effettuare
+l'esercitazione}, insieme a quelli correlati.
 
-\subsection*{Descrizione Use Case \textit{Registrare i progressi}}
+Si intende soprattutto evidenziare la sequenza nella quale si
+susseguono eventuali azioni opzionali o eseguibili in parallelo,
+oltre alla reazione di altri attori (YouTube, Firebase DB) in
+risposta alla particolare categoria di utenti coinvolti, come in
+\textit{Registrare i progressi}, e alle scelte da loro effettuate
+(si fa riferimento agli use case \textit{Avviare e interrompere un
+cronometro}, \textit{Aprire il video di suggerimento}).
+
+\begin{figure}[H]
+\centering
+\hspace*{-1.4cm}
+\includegraphics[scale=0.5]{materiale/acesercitazione.pdf}
+\label{acexercise}
+\caption{Swimlane Diagram, arricchito da elementi di Activity Diagram,
+per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
+e \textit{Registrare i progressi}}
+\end{figure}
+
 
 \newpage
 \subsection{Gestione del profilo e dell'account}
