@@ -1,0 +1,74 @@
+\documentclass[11pt, a4paper]{article}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{fullpage}
+
+\usepackage[utf8]{inputenc} % comment when using lualatex
+\usepackage[italian]{babel} % lingua e a-capo-sillabato
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref} % link di pagina
+\usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
+\usepackage{float} % per posizionamento immagini
+\usepackage{amsthm} % per ambienti stile teorema
+\usepackage{tabularx} %tabelle
+\usepackage[table]{xcolor} %colore caselle
+\usepackage{enumitem} %additional commands for lists
+\usepackage{fancyhdr}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}% Clear header/footer
+\fancyhead[C]{\footnotesize\textit{Documento:} D3 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
+\setlength{\headheight}{22pt}
+
+\renewcommand\UrlFont{\color{blue}\rmfamily} % colore link
+
+\theoremstyle{definition} % stile dei newtheorem (non italizzati)
+\newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
+\newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
+\newtheorem{backend}{BE}
+\newtheorem{frontend}{FE}
+
+
+
+
+\title{...}
+
+\author{Raffaele \textsc{Castagna}\\
+Alberto \textsc{Rovesti}\\
+Zeno \textsc{Saletti}}
+
+\newcommand{\groupNumber}{G17}
+
+% Web address for the project (if any)
+% \newcommand{\homepage}{\url{https://www.}}
+
+% data
+\date{\today}
+
+\makeatletter{}
+
+% IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+% La pagina di copertina si trova in un file .tex a parte
+% NON MODIFICARE QUESTO COMANDO!!!
+\input{materiale/elementi-copertina/copertina.tex}
+
+\tableofcontents
+
+\newpage
+
+\section*{Scopo del documento}
+Lorem ipsum
+
+
+\newpage
+\section{Lorem ipsum}
+
+\end{document}
