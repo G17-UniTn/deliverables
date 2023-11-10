@@ -14,6 +14,7 @@
 \usepackage[table]{xcolor} %colore caselle
 \usepackage{enumitem} %additional commands for lists
 \usepackage{fancyhdr}
+\usepackage[font=footnotesize,labelfont=bf]{caption} % small caption font-size
 
 
 
@@ -93,9 +94,8 @@ naturale.
 \end{itemize}
 \begin{figure}[H]
 \centering
-\hspace*{-0.7cm}
-\includegraphics[scale=0.84]{materiale/ucdiagrams/ucaccesso.pdf}
-\caption{UCD dello scenario di accesso al servizio}
+\includegraphics[scale=0.7]{materiale/ucdiagrams/ucaccesso.pdf}
+\caption{UCD relativo all'accesso al servizio}
 \end{figure}
 
 \subsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
@@ -140,7 +140,7 @@ naturale.
     \begin{enumerate}
         \item[]
         \item L'utente anonimo accede alla pagina dedicata e sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
-        \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password.\texttt{[exception 1]}
+        \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password, che saranno verificati grazie al servizio di database.\texttt{[exception 1]}
     \end{enumerate}
     
     \item[Exceptions:]
@@ -205,9 +205,9 @@ naturale.
 
 \begin{figure}[H]
 \centering
-\hspace*{-0.5cm}
+\hspace*{-1cm}
 \includegraphics[scale=0.57]{materiale/ucdiagrams/ucproblemi.pdf}
-\caption{UCD dello scenario della consultazione dei problemi e della modifica del catalogo}
+\caption{UCD relativo alla consultazione dei problemi e alla modifica del catalogo}
 \end{figure}
 
 \subsection*{Descrizione Use Case \textit{Aggiungere problemi}}
@@ -291,7 +291,7 @@ cronometro}, \textit{Aprire il video di suggerimento}).
 \centering
 \hspace*{-0.48cm}
 \includegraphics[scale=0.444]{materiale/acesercitazione.pdf}
-\caption{Swimlane Diagram, arricchito da elementi di Activity Diagram,
+\caption{SD, arricchito da elementi di Activity Diagram,
 per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
 e \textit{Registrare i progressi}}
 \label{acexercise}
@@ -310,7 +310,7 @@ e \textit{Registrare i progressi}}
 \centering
 \hspace*{-1.4cm}
 \includegraphics[scale=0.8]{materiale/ucdiagrams/ucaccount.pdf}
-\caption{UCD dello scenario con le funzionalità aggiuntive dell'utente autenticato}
+\caption{UCD relativo alle funzionalità aggiuntive dell'utente autenticato}
 \end{figure}
 
 \newpage
@@ -334,7 +334,7 @@ della password dell'account di un utente registrato con credenziali di sistema e
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.65]{materiale/ucdiagrams/swimlanepassword.pdf}
-\caption{Swimlane Diagram dello scenario di aggiornamento della password}
+\caption{SD dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
 
