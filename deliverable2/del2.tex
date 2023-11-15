@@ -14,6 +14,7 @@
 \usepackage[table]{xcolor} %colore caselle
 \usepackage{enumitem} %additional commands for lists
 \usepackage{fancyhdr}
+\usepackage[font=footnotesize,labelfont=bf]{caption} % small caption font-size
 
 
 
@@ -93,9 +94,8 @@ naturale.
 \end{itemize}
 \begin{figure}[H]
 \centering
-\hspace*{-0.7cm}
-\includegraphics[scale=0.84]{materiale/ucdiagrams/ucaccesso.pdf}
-\caption{UCD dello scenario di accesso al servizio}
+\includegraphics[scale=0.7]{materiale/ucdiagrams/ucaccesso.pdf}
+\caption{UCD relativo all'accesso al servizio}
 \end{figure}
 
 \subsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
@@ -109,7 +109,7 @@ naturale.
     \begin{enumerate}
         \item[]
         \item L'utente anonimo accede alla pagina dedicata e sceglie tra la registrazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
-        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme (RNF). \verb|[exception 1]|\verb|[exception 2]|
+        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme (RNF 11). \verb|[exception 1]|\verb|[exception 2]|
         \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 3]|
         \item L'account viene registrato dal servizio di database.
     \end{enumerate}
@@ -140,13 +140,13 @@ naturale.
     \begin{enumerate}
         \item[]
         \item L'utente anonimo accede alla pagina dedicata e sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
-        \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password.\texttt{[exception 1]}
+        \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password, che saranno verificati grazie al servizio di database.\texttt{[exception 1]}
     \end{enumerate}
     
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account già registrato, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 1]| Se le credenziali fornite non sono valide, il login non può essere eseguito e l'utente viene avvisato.
     \end{itemize}
 
     \item[Extensions:]
@@ -205,9 +205,9 @@ naturale.
 
 \begin{figure}[H]
 \centering
-\hspace*{-0.5cm}
+\hspace*{-1cm}
 \includegraphics[scale=0.57]{materiale/ucdiagrams/ucproblemi.pdf}
-\caption{UCD dello scenario della consultazione dei problemi e della modifica del catalogo}
+\caption{UCD relativo alla consultazione dei problemi e alla modifica del catalogo}
 \end{figure}
 
 \subsection*{Descrizione Use Case \textit{Aggiungere problemi}}
@@ -268,15 +268,35 @@ naturale.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1cm}
-\includegraphics[scale=0.8]{materiale/ucdiagrams/ucesercitazione.pdf}
+\hspace*{-1.8cm}
+\includegraphics[scale=0.9]{materiale/ucdiagrams/ucesercitazione.pdf}
 \caption{UCD con riferimenti ai requisiti relativi all'esercitazione}
 \end{figure}
 
-\subsection*{Descrizione Use Case \textit{Effettuare l'esercitazione}}
-% qualche diagrammino più appropriato sarebbe bello
+\subsection*{Descrizione dell'esercitazione}
+La Figura \ref{acexercise} mostra lo swimlane diagram che descrive gli
+use case relativi alla sessione di esercitazione. In particolare,
+viene mostrato in modo più preciso lo use case \textit{Effettuare
+l'esercitazione}, insieme a quelli correlati.
 
-\subsection*{Descrizione Use Case \textit{Registrare i progressi}}
+Si intende soprattutto evidenziare la sequenza nella quale si
+susseguono eventuali azioni opzionali o eseguibili in parallelo,
+oltre alla reazione di altri attori (YouTube, Firebase DB) in
+risposta alla particolare categoria di utenti coinvolti, come in
+\textit{Registrare i progressi}, e alle scelte da loro effettuate
+(si fa riferimento agli use case \textit{Avviare e interrompere un
+cronometro}, \textit{Aprire il video di suggerimento}).
+
+\begin{figure}[H]
+\centering
+\hspace*{-0.48cm}
+\includegraphics[scale=0.444]{materiale/acesercitazione.pdf}
+\caption{SD, arricchito da elementi di Activity Diagram,
+per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
+e \textit{Registrare i progressi}}
+\label{acexercise}
+\end{figure}
+
 
 \newpage
 \subsection{Gestione del profilo e dell'account}
@@ -290,7 +310,7 @@ naturale.
 \centering
 \hspace*{-1.4cm}
 \includegraphics[scale=0.8]{materiale/ucdiagrams/ucaccount.pdf}
-\caption{UCD dello scenario con le funzionalità aggiuntive dell'utente autenticato}
+\caption{UCD relativo alle funzionalità aggiuntive dell'utente autenticato}
 \end{figure}
 
 \newpage
@@ -314,7 +334,7 @@ della password dell'account di un utente registrato con credenziali di sistema e
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.65]{materiale/ucdiagrams/swimlanepassword.pdf}
-\caption{Swimlane Diagram dello scenario di aggiornamento della password}
+\caption{SD dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
 
