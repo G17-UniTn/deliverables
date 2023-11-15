@@ -640,6 +640,121 @@ e più dettagliata di ogni componente.
 
 
 \subsection{Definizione dei componenti}
-\subsection{Diagramma dei componenti}
+In questa sezione andremo a descrivere i vari componenti e le interfaccie presenti all'interno del diagramma dei componenti riportato nella prossima sezione.
+\subsubsection{Utente non autenticato}
+L'utente non autenticato è un qualsiasi utente collegato al sito che non si sia ancora autenticato tramite il sistema di login/registrazione descritto nel \textbf{RF 2}.\\
+L'utente non autenticato ha disponibile a sè tutte le funzioni del sito tranne alcune funzioni che verranno descritte in componenti futuri.\\
+\\
+\textbf{Interfaccie fornite}\\
+\underline{Indirizzamento al sito}: Un qualsiasi utente che prova a connettersi al sito dovrà essere reindirizzato alla Home Page.
+\subsubsection{Home Page}
+Il componente si occupa di rendere accessibile la navigazione del sito, avrà dei bottoni apposta per il login (il componente di login è raffigurato nel 2 diagramma), e la visualizzazione del catalogo dei problemi.
+\\\\\textbf{Interfaccie fornite}\\
+\underline{Richiesta Pagina Problemi}: Un qualsiasi utente connesso al sito deve poter accedere al catalogo dei problemi, indipendetemente se autenticato o no.
+\subsubsection{Catalogo Dei Problemi}
+Il seguente componente deve permettere a un qualsiasi utente, autenticato o no, di accedere alla pagina di un specifico problema, attivare un timer per la sessione di allenamento,
+accedere ai video con le soluzioni dei problemi, e filtrare i problemi in base alla categoria.
+\\\\\textbf{Interfaccie richieste}\\
+\underline{Video Soluzioni}: I video delle soluzioni vengono hostati su un altra piattaforma (Youtube),quindi dobbiamo richiedere il permesso di visualizzare i video attraverso l'API di Youtube.
+\\\\
+\underline{Filtro Problemi}: L'utente a sua discrezione può decidere se applicare dei filtri per avere una lista di problemi basata su dei tag predefiniti, di default nessun filtro è applicato.
+\\\\
+\textbf{Interfaccie Fornite}
+\\
+\underline{Richiesta Home Page}: L'utente deve essere in grado di tornare alla Home Page.
+\\\\
+\underline{Timer attivo/non attivo}: L'utente deve essere in grado, a suo piacimento, di attivare o disattivere il timer di allenamento.
+\\\\
+\underline{Richiesta di un problema specifico}: L'utente deve essere in grado di poter accedere a qualsiasi problema presente sul catalogo
+
+\subsubsection{Utente Amministratore}
+L'utente amministratore ha gli stessi privilegi forniti all'utente autenticato e non, l'unico privilegio che possiede in più è il permesso di modificare il catalogo,
+per modifica si intende sia aggiungere che rimuovere un qualsiasi problema.
+\\\\\textbf{Interfaccie Fornite}\\
+\underline{Modifica Catalogo}: Un utente amministratore deve essere in grado di poter modificare il catalogo a suo piacimento.
+
+\subsubsection{Pagina Problema Specifico}
+Dopo aver specificato a quale problema si vuole accedere, l'utente verra indirizzato ad una pagina dove poter visualizzare il testo del problema,inserire codice e sottometterlo,e se
+si è autenticati aggiungerlo ai problemi preferiti,inoltre se l'utente autentico riesce a risolvere il problema, lo stato del problema dovrà essere riflesso nel catalogo.
+\\\\\textbf{Interfaccie Fornite}\\
+\underline{Sottomisione Codice}: Attraverso un bottone apposito l'utente autenticato o non, dovrà poter sottomettere il codice per la valutazione.
+\\
+\underline{Aggiornamento Stato Problema}: Se l'utente è in grado di risolvere il problema, allora lo "stato" del problema dovrà essere aggiornato, in modo che un utente autenticato sia in grado di riconoscere i problemi già svolti.
+\\
+\underline{Richiesta Home Page}: Un qualsiasi utente, autenticato o non, deve essere in grado di tornare al catalogo dei problemi.
+\\\\\textbf{Interfaccie Richieste}
+\\\underline{Codice}: Un qualsiasi utente deve essere in grado di poter scrivere (nelle aree opportune) testo,che poi verrà interpretato come codice nel linguaggio di programmazione specificato.
+\subsubsection{Utente Autenticato}
+L'utente autenticato possiede tutti i privilegi di un utente non autenticato, l'unico privilegio in più rispetto ad un utente non autenticato è il tracciamento dei preferiti e dei problemi svolti.
+\\\\\textbf{Interfaccie Fornite}
+\\
+\underline{Aggiungere ai Preferiti}: Un utente autenticato deve essere in grado di aggiungere tra i preferiti un qualsiasi Problema.
+
+\subsubsection{Pagina Autenticazione}:
+La pagina di autenticazione è accessibile all'utente in qualsiasi momento,indipendetemente dalla pagina in cui si trova, dentro questa pagina
+l'utente avrà a disposizione dei campi dove immettere email e password, un link per il recupero password, e dei bottoni dove poter decidere se eseguire login o registrazione.
+\\\\\textbf{Interfaccie Richieste}
+\\underline{Credenziali}: L'utente deve poter immetere le proprie credenziali (tupla di password e email).
+\\\\\textbf{Interfaccie Fornite}
+\underline{Login}: L'utente deve essere in grado di poter effetuare il login attraverso apposito bottone.
+\\
+\underbar{Registrazione}: L'utente deve essere in grado di effettuare la registrazione tramite apposito bottone.
+\\
+\underbar{Richiesta Recupero password}: L'utente deve essere in grado di poter iniziare la procedura di recupero password.
+\subsubsection{Autenticazione}
+Tramite questo componente siamo in grado di autenticare l'utente, indipendetemente se si è registrato tramite Google oppure tramite il nostro sistema di registrazione.
+\\\\textbf{Interfaccie Richieste}
+\underbar{Richiesta Autenticazione Google}: Se l'utente decide di effettuare il login/registrazione tramite Google, deve essere in grado di farlo, perciò comunicheremo tramite apposite API Google.
+\\
+\underbar{Risposta Autenticazione Google}: Risposta fornite da Google.
+\\
+\underbar{Richiesta Autenticazione}: Se l'utente decide di effetuare login/registrazione tramite il sistema implementato da noi, deve poter farlo tramite vie apposite.
+\\
+\underbar{Risposta Autenticazione}: Risposta dell'autenticazione
+\\\\\textbf{Interfaccie Fornite}\\
+\underline{Credenziali Account}: Email e password Forniti dall'utente durante login/registrazione
+\subsubsection{Gestore Account}
+Tramite questo componenti raggrupiamo tutti gli utenti autenticati, e di conseguenza forniamo le azioni disponibili solo ad utenti autenticati.
+\\\\\textbf{Interfaccie Fornite}
+\\\underline{Esito}: Forniamo l'esito dell'accesso.
+\\\underline{Richiesta Modifica Password}: tramite bottone apposito l'utente deve essere in grado di poter iniziare il processo di modifica password.
+\\\underline{Richiesta Modifica Email}: tramite bottone apposito l'utente deve essere in grado di iniziare la procedure di modifica email.
+\\\underbar{Logout}: l'utente deve essere in grado di effetuare il logout.
+
+\subsubsection{Modifica Password}
+Tramite questo componente l'utente deve essere in grado di modificare la propria password fornendo le nuove credenziali.
+\\\\\textbf{Interfaccie Fornite}\\
+\underline{Nuove Credenziali}: L'utente deve essere in grado di modificare le proprie credenziali, perciò dovremmo notificare il database delle nuove credenziali
+\\\\\textbf{Interfaccie Richieste}\\
+\underline{Esito}: Notifichiamo l'utente se l'esito è stato positivo\\\\
+\underline{Nuova Password}: l'utente deve dare una nuova password che sia conforme alle regola stabilite.
+
+\subsubsection{Modifica Email}
+Tramite questo componente l'utente deve essere in grado di modificare la propria email fornendo le nuove credenziali.
+\\\\\textbf{Interfaccie Fornite}\\
+\underline{Nuove Credenziali}: L'utente deve essere in grado di modificare le proprie credenziali, perciò dovremmo notificare il database delle nuove credenziali
+\\\\\textbf{Interfaccie Richieste}\\
+\underline{Esito}: Notifichiamo l'utente se l'esito è stato positivo
+\\\\
+\underline{Nuova Email}: l'utente deve dare una nuova email che sia conforme alle regola stabilite.
+
+\subsubsection{Pagina Recupero Password}
+Tramite questo componente l'utente sarà in grado di recuperare il proprio account a patto che l'email inserita sia valida.
+\\\\\textbf{Interfaccie Fornite}\\
+\underline{Invio Email Recupero Password}: una email di recupero password verrà inviata all'utente all'email specificata
+\\\\\textbf{Interfaccie Richieste}\\
+\underbar{Email}: L'utente deve fornire un indirizzo email.
+\subsection{Diagrammi dei componenti}
+\begin{center}
+    \includegraphics[width=1.2\textwidth]{materiale/site-ux.jpg}
+\end{center}
+  
+\begin{center}
+    \includegraphics[width=1.2\textwidth]{materiale/login-component.jpg}
+\end{center}
+    
+
+    
+
 
 \end{document}
