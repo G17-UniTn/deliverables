@@ -640,7 +640,43 @@ e più dettagliata di ogni componente.
 
 
 \subsection{Definizione dei componenti}
-In questa sezione andremo a descrivere i vari componenti e le interfaccie presenti all'interno del diagramma dei componenti riportato nella prossima sezione.
+In questa sezione sono descritti i componenti e le interfacce presenti
+all'interno del Diagramma dei Componenti.
+
+\subsubsection{Utente anonimo}
+\begin{description}
+    \item[Descrizione:]
+    \item[Interfacce fornite:]
+\end{description}
+
+\subsubsection{Home Page}
+\begin{description}
+    \item[Descrizione:] il componente si occupa di guidare l'utente nella
+    navigazione, esponendo dunque sul front-end le funzionalità relative
+    alla visualizzazione del catalogo e al reindirizzamento ad altre pagine
+    (visualizzatore del problema e area di esercitazione, login). Se l'utente
+    è autenticato, questo componente ha il compito di mostrare i progressi e
+    i preferiti dell'utente.
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+        \item \underline{Richiesta pagina problemi:}
+    \end{itemize}
+\end{description}
+
+\subsubsection{Utente autenticato}
+\subsubsection{Utente amministratore}
+\subsubsection{Pagina di autenticazione}
+\subsubsection{Catalogo dei problemi}
+\subsubsection{Pagina problema}
+
+\subsubsection{Sistema di autenticazione}
+\subsubsection{Gestore account}
+
+
+\newpage
+\subsection{Definizione dei componenti}
+In questa sezione sono descritti i vari componenti e interfaccie presenti all'interno del diagramma riportato nella prossima sezione.
 \subsubsection{Utente non autenticato}
 L'utente non autenticato è un qualsiasi utente collegato al sito che non si sia ancora autenticato tramite il sistema di login/registrazione descritto nel \textbf{RF 2}.\\
 L'utente non autenticato ha disponibile a sè tutte le funzioni del sito tranne alcune funzioni che verranno descritte in componenti futuri.\\
@@ -746,10 +782,12 @@ Tramite questo componente l'utente sarà in grado di recuperare il proprio accou
 \underbar{Email}: L'utente deve fornire un indirizzo email.
 \subsection{Diagrammi dei componenti}
 \begin{center}
+    \hspace*{-1cm}
     \includegraphics[width=1.2\textwidth]{materiale/site-ux.jpg}
 \end{center}
   
 \begin{center}
+    \hspace*{-1cm}
     \includegraphics[width=1.2\textwidth]{materiale/login-component.jpg}
 \end{center}
     
