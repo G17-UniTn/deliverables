@@ -606,7 +606,9 @@ la piattaforma online espone all'utente.
 \textbf{Home page }
 Il catalogo e il profilo utente, insieme a tutti i collegamenti che consentono
 di usufruire della maggior parte delle funzionalità del servizio, sono
-contenute in una pagina principale.
+contenute in una pagina principale. Il seguente mock-up mostra la vista che si
+presenta ad un utente autenticato (è presente il campo \textit{stato}, oltre all'icona
+per contrassegnare i \textit{preferiti}).
 \end{frontend}
 \begin{figure}[H]
 \centering
@@ -615,11 +617,25 @@ contenute in una pagina principale.
 
 \begin{frontend}
 \textbf{Pagina di esercitazione }
-
+Una pagina dedicata raccoglie le funzionalità di consultazione dettagliata
+del problema e risoluzione di quest'ultimo.
 \end{frontend}
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.195]{materiale/immaginife/esercitazione.jpeg}
+\end{figure}
+
+\newpage
+
+\begin{frontend}
+\textbf{Editor del catalogo }
+La seguente figura mostra l'interfaccia che si presenta ad un utente
+amministratore nel momento in cui desidera modificare il catalogo dei
+problemi.
+\end{frontend}
+\begin{figure}[H]
+\centering
+%\includegraphics[scale=0.5]{materiale/immaginife/boh.jpeg}
 \end{figure}
 
 \begin{frontend}
@@ -635,7 +651,7 @@ autenticato.
 \newpage
 \section{Design back-end}
 Nella sezione seguente vengono elencati i servizi con i quali la piattaforma
-interagisce per ottenere supporto alle sue funzionalità.
+interagisce per ottenere supporto e realizzare in tal modo le sue funzionalità.
 
 \begin{backend}
 \textbf{Servizio di autenticazione Google }
@@ -657,7 +673,7 @@ degli utenti, dei problemi del catalogo e di tutti i dati associati.
 
 \begin{backend}
 \textbf{Notifica via posta elettronica }
-L'invio dei messaggi email (da parte della piattaforma) sarà gestito da servizi di terze parti.
+L'invio dei messaggi email sarà gestito da servizi di posta elettronica di terze parti.
 \end{backend}
 % possibili candidati: gmail
 
