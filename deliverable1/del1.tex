@@ -14,7 +14,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
-\fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.1}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -66,14 +66,14 @@ Zeno \textsc{Saletti}}
 
 
 \newpage
-\section{Introduzione e scopi}
+\section{Introduzione}
 \subsection{Scopo del documento}
 Le informazioni contenute in questo documento concorrono ad esporre l'analisi
 dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
-aver specificato gli obiettivi e gli attori coinvolti, verranno definiti i requisiti
+aver specificato gli obiettivi e il pubblico di riferimento, verranno definiti i requisiti
 funzionali e non funzionali; verrà presentata una proposta di design di
-back-end; infine saranno riportati i sistemi esterni di back-end coi quali il servizio
-dovrà interfacciarsi.
+front-end; infine saranno riportati i servizi esterni di back-end coi quali il
+sistema dovrà interagire.
 
 
 \subsection{Obiettivo del progetto}
@@ -138,16 +138,19 @@ messe a disposizione a livelli superiori.
 I nuovi utenti devono poter registrarsi al servizio, ovvero creare un account che
 richiede la compilazione dei seguenti campi:
 \begin{itemize}
-    \item Indirizzo email.
     \item Nome utente.
+    \item Indirizzo di posta elettronica.
     \item Password: data la sensibilità di questo campo, è importante
     che siano rispettati i vincoli del \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}};
     inoltre, l'utente deve poter riscrivere la password per confermarla, in
     modo tale da rilevare eventuali errori di digitazione.
 \end{itemize}
-L'utente dotato di un account sarà considerato dal servizio come
-\textit{utente registrato} (indipendentemente dal suo livello di accesso).
+In alternativa, l'utente deve poter effettuare la registrazione collegando un account
+Google.
 \end{funcreq}
+
+\noindent Si denoterà con l'aggettivo \textit{registrato} un qualsiasi
+utente che abbia precedentemente effettuato la registrazione.
 
 \begin{funcreq}
 \label{login}
@@ -159,26 +162,28 @@ essere notificato qualora non sia possibile concludere correttamente
 l'operazione di login, quindi se l'email inserita non sia registrata o
 la password non corrisponda; è comunque possibile ritentare il login un
 numero illimitato di volte.
+\end{funcreq}
 
+\noindent
 Effettuato il login, l'utente registrato e anonimo rientra nella categoria degli
 \textit{utenti autenticati}.
-\end{funcreq}
 
 \begin{funcreq}
 \label{savepassword}
 \textbf{Recupero password }
-L'utente registrato e anonimo deve poter recuperare la password del proprio account
-qualora tale dato dovesse essere dimenticato in fase di login. La procedura
-di recupero deve prevedere:
+L'utente registrato e anonimo deve poter recuperare la password del proprio
+account qualora tale dato dovesse essere dimenticato in fase di login. La
+procedura di recupero deve prevedere:
 \begin{itemize}
     \item L'invio di un messaggio all'indirizzo email attualmente associato
-    all'account dell'utente; l'email contiene un link che guida l'utente
-    nella creazione di una nuova password.
+    all'account dell'utente—l'email contiene un collegamento ipertestuale
+    che reindirizza l'utente ad una pagina dedicata, sulla piattaforma, nella
+    quale completare l'operazione di recupero.
 
-    \item L'inserimento (sulla piattaforma) di una nuova password che,
-    come in fase di registrazione, deve essere scritta, confermata e
-    conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
+    \item L'inserimento di una nuova password nella pagina dedicata. La password, come in fase di
+    registrazione, deve essere confermata e conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{itemize}
+
 \end{funcreq}
 
 \subsection{Consultazione dei problemi}
@@ -191,8 +196,8 @@ l'utente possa esercitarsi. L'utente deve poter consultare un catalogo,
 atto a raccogliere i quesiti, e navigare al suo interno. Deve quindi
 essere possibile:
 \begin{enumerate}
-    \item Visualizzare tale catalogo, che mostra i campi di ogni problema
-    elencato:
+    \item Visualizzare tale catalogo, che mostra i campi \textit{descrittivi}
+    di ogni problema elencato:
     \begin{itemize}
         \item \textit{Nome.}
         
@@ -201,7 +206,7 @@ essere possibile:
         
         \item \textit{Categoria:} si tratta della principale area di interesse
         del problema, come ad esempio le strutture di dati coinvolte
-        (ad esempio array e grafi), oppure l'obiettivo principale (come ricerca
+        (array, grafi, ecc.), oppure l'obiettivo principale (come ricerca
         e ordinamento).
 
         \item \textit{Suggerimento:} viene messo a disposizione, per ogni
@@ -211,8 +216,7 @@ essere possibile:
         problema.
     \end{itemize}
     
-    \item Cercare uno o più problemi specifici mediante ricerca filtrata per campi
-    precedentemente elencati.
+    \item Cercare uno o più problemi specifici mediante ricerca filtrata per campi.
     Ai fini della consultazione del catalogo, i filtri applicabili riguardano i
     campi \textit{nome, difficoltà, categoria}.
 
@@ -228,28 +232,31 @@ essere possibile:
 Deve essere fornito un visualizzatore che mostri le informazioni del
 problema precedentemente selezionato dal catalogo. La visualizzazione
 deve rendere disponibile alla vista dell'utente i contenuti del
-problema:
+problema (\textit{dati strutturali}):
 \begin{itemize}
     \item Un titolo.
 
     \item Un testo, scritto prevalentemente in linguaggio naturale,
     che descrive uno scenario che richiede di essere risolto per mezzo
     di un algoritmo. Eventuali immagini e proposizioni matematiche
-    formali possono accompagnare i testi.
+    possono accompagnare i testi.
 
-    \item Almeno 3 esempi di input insieme al relativo output corretto,
-    che mostra il risultato atteso.
+    \item Almeno due esempi di input insieme al relativo output corretto,
+    che mostra il risultato atteso\footnote{Non si devono confondere questi \textit{esempi}
+    con i \textit{test cases} (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}})}.
 \end{itemize}
+Qualora l'utente desideri consultare il problema, vengono contemporaneamente
+messe a dispoizione le funzionalità di cui al \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}}}}.
 \end{funcreq}
 
 \subsection{Esercitazione}
 \begin{funcreq}
 \label{exesession}
-\textbf{Avviare una sessione di esercitazione }
+\textbf{Avviare un'esercitazione }
 L'utente deve poter scegliere dal catalogo il problema desiderato e cominciare
-a risolverlo. La sessione di esercitazione deve avvenire in una vista apposita, dove
-l'utente deve poter disporre di tutti gli strumenti necessari alla realizzazione
-delle seguenti funzionalità:
+a risolverlo. L'esercitazione deve avvenire in una vista apposita, dove
+l'utente deve poter disporre di tutti gli strumenti necessari alla risoluzione
+del problema, accedendo alle seguenti funzionalità:
 \begin{enumerate}
     \item Visualizzare il contenuto dell'esercizio (\textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}).
     
@@ -265,9 +272,9 @@ delle seguenti funzionalità:
     linguaggi, si veda \textcolor{blue}{\underbar{\hyperref[scalabilita]{RNF \ref*{scalabilita}.2}}}.}.
 
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
-    scelto, l'algoritmo risolutivo del problema attualmente attivo.
+    scelto, l'algoritmo risolutivo del problema selezionato.
 
-    \item Accedere al suggerimento (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}).
+    \item Visualizzare il suggerimento (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}).
 \end{enumerate}
 \end{funcreq}
 
@@ -286,6 +293,7 @@ delle seguenti funzionalità:
 %\end{enumerate}
 %\end{funcreq}
 
+\newpage
 \begin{funcreq}
 \label{test}
 \textbf{Verifica della correttezza dell'algoritmo }
@@ -296,7 +304,7 @@ e testandolo:
     di test cases (al minimo 3), cioè fornendo opportune istanze di input
     (Per esempio, se un problema richiede di sommare due numeri interi, il
     codice risolutivo proposto dall'utente verrà eseguito fornendo ad esso
-    coppie di interi e registrando i risultati in output.)
+    coppie di interi e registrando i suoi risultati di output.)
 
     \item L'utente deve poter conoscere l'esito dei test case—per ognuno
     di questi, l'input e l'output atteso sono visibili. Inoltre, l'utente
@@ -309,8 +317,8 @@ e testandolo:
     correttezza risolutiva dell'algoritmo.
 
     \item Nel caso in cui l'utente sia in grado di superare tutti i
-    test case disponibili, la sessione di esercitazione deve terminare.
-    Deve essere visualizzato il tempo impiegato, se il cronometro è attivo.
+    test case disponibili, deve essere mostrato il tempo impiegato,
+    registrato dal cronometro.
 \end{enumerate}
 \end{funcreq}
 
@@ -333,14 +341,14 @@ accessibili all'utente anonimo.
         grazie alla disponibilità di questo ulteriore campo.
     
         \item \textit{Preferito:} l'utente che desidera tener traccia dei problemi
-        per lui rilevanti deve poter contrassegnare tali problemi come preferiti.
+        per lui rilevanti deve poter contrassegnare tali problemi come \textit{preferiti}.
     \end{enumerate}
     Le informazioni riguardanti questi campi sono visibili all'utente autenticato,
-    sia durante la consultazione del catalogo che del singolo problema, e disponibili
-    per effettuare ricerche filtrate.
+    sia durante la consultazione del catalogo che del singolo problema.
+    %e disponibili per effettuare ricerche filtrate?
 \end{funcreq}
 
-
+\newpage
 \subsection{Gestione del profilo e dell'account}
 \begin{funcreq}
 \label{stats}
@@ -351,7 +359,8 @@ accessibili all'utente anonimo.
     di esercitazione andata a buon fine: con riferimento al
     \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.3}}},
     dopo la risoluzione, il problema deve inoltre essere contrassegnato come
-    \textit{risolto} (nel rispettivo campo \textit{stato}).
+    \textit{risolto} (nel rispettivo campo \textit{stato} visibile nel catalogo
+    e nella pagina di consultazione ed esercitazione di quel problema).
 
     \item L'utente deve poter monitorare i propri progressi, accedendo ai dati
     seguenti:
@@ -367,7 +376,7 @@ accessibili all'utente anonimo.
 \label{updateaccount}
 \textbf{Aggiornamento account }
 L'utente registrato e autenticato deve poter modificare i dati chiave del
-proprio account in conformità con le opportune procedure di sicurezza:
+proprio account in conformità con alcune procedure di sicurezza opportune:
 \begin{enumerate}
 \item L'utente deve poter migrare ad un indirizzo email differente. A tale
 indirizzo deve essere inviato un messaggio di conferma, previo inserimento
@@ -411,19 +420,19 @@ e, all'atto dell'inserimento nel catalogo, devono essere specificati i campi
 elencati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}.
 
 Inoltre, devono essere forniti almeno 3 test cases (questi saranno impiegati
-come da \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.1}}});
+come descritto dal \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.1}}});
 ogni test case consiste in un dato in input e il rispettivo output corretto.
 \end{funcreq}
 
 \begin{funcreq}
 \textbf{Modificare un problema }
 L'utente amministratore deve poter modificare sia i campi descrittivi del
-problema, sia il suo contenuto (la struttura).
+problema, sia i dati strutturali (il contenuto).
 \end{funcreq}
 
 \begin{funcreq}
 \textbf{Eliminare un problema }
-L'utente amministratore deve poter eliminare un problema dal catalogo.
+L'utente amministratore deve poter eliminare i problemi dal catalogo.
 \end{funcreq}
 
 \newpage
@@ -597,7 +606,9 @@ la piattaforma online espone all'utente.
 \textbf{Home page }
 Il catalogo e il profilo utente, insieme a tutti i collegamenti che consentono
 di usufruire della maggior parte delle funzionalità del servizio, sono
-contenute in una pagina principale.
+contenute in una pagina principale. Il seguente mock-up mostra la vista che si
+presenta ad un utente autenticato (è presente il campo \textit{stato}, oltre all'icona
+per contrassegnare i \textit{preferiti}).
 \end{frontend}
 \begin{figure}[H]
 \centering
@@ -606,11 +617,25 @@ contenute in una pagina principale.
 
 \begin{frontend}
 \textbf{Pagina di esercitazione }
-
+Una pagina dedicata raccoglie le funzionalità di consultazione dettagliata
+del problema e risoluzione di quest'ultimo.
 \end{frontend}
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.195]{materiale/immaginife/esercitazione.jpeg}
+\end{figure}
+
+\newpage
+
+\begin{frontend}
+\textbf{Editor del catalogo }
+La seguente figura mostra l'interfaccia che si presenta ad un utente
+amministratore nel momento in cui desidera modificare il catalogo dei
+problemi.
+\end{frontend}
+\begin{figure}[H]
+\centering
+%\includegraphics[scale=0.5]{materiale/immaginife/boh.jpeg}
 \end{figure}
 
 \begin{frontend}
@@ -626,7 +651,7 @@ autenticato.
 \newpage
 \section{Design back-end}
 Nella sezione seguente vengono elencati i servizi con i quali la piattaforma
-interagisce per ottenere supporto alle sue funzionalità.
+interagisce per ottenere supporto e realizzare in tal modo le sue funzionalità.
 
 \begin{backend}
 \textbf{Servizio di autenticazione Google }
@@ -648,7 +673,7 @@ degli utenti, dei problemi del catalogo e di tutti i dati associati.
 
 \begin{backend}
 \textbf{Notifica via posta elettronica }
-L'invio dei messaggi email (da parte della piattaforma) sarà gestito da servizi di terze parti.
+L'invio dei messaggi email sarà gestito da servizi di posta elettronica di terze parti.
 \end{backend}
 % possibili candidati: gmail
 
