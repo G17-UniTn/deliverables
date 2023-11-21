@@ -1,8 +1,5 @@
 \documentclass[11pt, a4paper]{article}
 
-%\usepackage[T1]{fontenc}
-%\usepackage{fullpage}
-
 \usepackage[utf8]{inputenc} % comment when using lualatex
 \usepackage[italian]{babel} % lingua e a-capo-sillabato
 \usepackage{graphicx}
@@ -15,11 +12,11 @@
 \usepackage{enumitem} %additional commands for lists
 \usepackage{fancyhdr}
 \usepackage[font=footnotesize,labelfont=bf]{caption} % small caption font-size
+\usepackage{afterpage} %fancy does not include page numbers by default
 
-
-
-\pagestyle{fancy}
 \fancyhf{}% Clear header/footer
+\pagestyle{fancy}
+
 \fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
@@ -63,8 +60,8 @@ Zeno \textsc{Saletti}}
 
 \tableofcontents
 
+\afterpage{\cfoot{\thepage}}
 \newpage
-
 \section*{Scopo del documento}
 Il presente documento riporta la specifica dei requisiti di sistema
 del progetto SleepCode. Viene in particolare estesa la descrizione
@@ -567,7 +564,14 @@ Sistema di notifica utilizzato per effettuare le operazioni di recupero
 dell'account (\textbf{RF 3}) e di migrazione a nuovo indirizzo di posta
 elettronica da associare all'account (\textbf{RF 10}).
 
+\newpage
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
+La Figura \ref{contextdiagram} mostra il diagramma di contesto per il
+servizio \textit{SleepCode}. Seguono alcune descrizioni più dettagliate,
+che chiariscono il significato delle informazioni scambiate tra il sistema
+e gli attori esterni ad esso, facendo anche riferimento ai requisiti
+funzionali che vengono soddisfatti grazie a tali interazioni.
+
 \begin{figure}[H]
 \centering
 \hspace*{-1.8cm}
@@ -576,6 +580,7 @@ elettronica da associare all'account (\textbf{RF 10}).
 \label{contextdiagram}
 \end{figure}
 
+\subsubsection*{Utente}
 L'utente può richiedere di effettuare la registrazione alla piattaforma
 (\textbf{RF 1}), scegliendo di inviare i dati necessari per creare un
 account di sistema o di collegare il proprio account Google. Il sistema
@@ -593,7 +598,9 @@ nuova password dell'account.
 L'utente riceve il catalogo e i dati in esso contenuti (\textbf{RF 4}, \textbf{RF 5},
 \textbf{RF 8}). L'utente propaga al proprio account le modifiche
 apportate ai preferiti (\textbf{RF 8}) e al catalogo stesso (\textbf{RF 12}, \textbf{RF 13}, \textbf{RF 14}), riceve le informazioni sui progressi personali (\textbf{RF 9})
-e può inviare una richiesta di logout (\textbf{RF 11}).
+e può inviare una richiesta di logout (\textbf{RF 11}). Ovviamente
+i dati che realizzano il profilo dell'utente, quali stato dei problemi,
+preferiti e progressi, sono visibili all'utente.
 
 Durante un'esercitazione, l'utente può inviare il codice scritto e ricevere dati
 relativi all'esito dell'esecuzione di tale codice; può essere inoltre richiesta la
@@ -601,19 +608,25 @@ visualizzazione del video-suggerimento (\textbf{RF 6}, \textbf{RF 7}).
 
 Per apportare modifiche ai dati del proprio account (\textbf{RF 10}), l'utente
 deve poter inviare le richieste specifiche, come quelle di modifica della password
-o migrazione dell'indirizzo email, e fornire le nuove credenziali.
-\\\\
+o migrazione dell'indirizzo email, e fornire le nuove credenziali. Il
+sistema richiede la conferma di tali operazioni mediante l'invio, da parte
+dell'utente, delle opportune credenziali.
+
+\subsubsection*{Firebase DB}
 Firebase DB provvede alla memorizzazione del catalogo (con relativi problemi) e dei
 dati relativi agli utenti registrati ed eventualmente autenticati (credenziali
 interne, preferiti, progressi) e alla ricezione di modifiche apportate a questi oggetti.
-\\\\
-I video che l'utente intende visualizzare vengono richiesti a YouTube da
-parte del sistema.
-\\\\
+
+\subsubsection*{Google Sign-In}
 Google Sign-In fornisce l'autorizzazione al collegamento e all'accesso
 mediante account Google, richiesti da utenti in sede di registrazione o
 login.
-\\\\
+
+\subsubsection*{YouTube}
+I video che l'utente intende visualizzare vengono richiesti a YouTube da
+parte del sistema.
+
+\subsubsection*{Servizio di posta elettronica}
 La piattaforma fornisce al sistema di posta elettronica i dati necessari
 per notificare e guidare l'utente che intende effettuare alcune operazioni,
 ovvero la registrazione e la modifica dei dati dell'account.
