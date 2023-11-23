@@ -643,12 +643,93 @@ e più dettagliata di ogni componente.
 In questa sezione sono descritti i componenti e le interfacce presenti
 all'interno del Diagramma dei Componenti.
 
-\subsubsection{Utente anonimo}
+
+\subsubsection{Pagina di accesso}
 \begin{description}
-    \item[Descrizione:]
+    \item[Descrizione:] questo componente ha il compito
+    principale di interagire con l'utente al fine di guidarlo
+    nelle procedure di accesso alla piattaforma.
+    La pagina di accesso si occupa della raccolta dei dati
+    utili ad effettuare il login e la registrazione
+    di un nuovo account. Essa offre inoltre la possibilità di
+    richiedere il recupero dell'account.
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+        \item \underline{Credenziali:} la pagina di accesso
+        richiede l'inserimento delle credenziali necessarie
+        per il login (una tupla email-password) e per la
+        registrazione (nome utente, email, password).
+
+        \item \underline{Richiesta registrazione:} con tale
+        interfaccia esposta all'utente, il componente è in grado
+        di distinguere dal login l'operazione di registrazione,
+        richiedendo, tramite l'interfaccia Credenziali, i dati
+        opportuni.
+
+        \item \underline{Richiesta recupero account:} il componente
+        permette all'utente di avviare la procedura di recupero
+        dell'account.
+
+        \item \underline{Richiesta Google:} con questa interfaccia,
+        la pagina di autenticazione può riconoscere che l'utente
+        intende registrarsi o autenticarsi mediante un account
+        Google.
+
+        \item \underline{Autorizzazione:} l'autorizzazione, da
+        parte dell'apposito sistema di autenticazione, consente
+        alla Pagina di Accesso di stabilire se il login o la
+        registrazione sono andate a buon fine. In questo modo, si
+        conferma all'utente l'accesso alla piattaforma, oppure lo
+        si avvisa di eventuali errori.
+    \end{itemize}
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+        \item \underline{Login:} la pagina risponde ad una registrazione
+        o autenticazione andata a buon fine portando a termine un'operazione
+        di login. Questa interfaccia consente al sistema di distinguere
+        la transizione dello stato di un utente da anonimo ad autenticato.
+
+        \item \underline{Credenziali di accesso:} le credenziali per il login,
+        raccolte precedentemente, vengono inoltrate a componenti preposti alla
+        loro convalida.
+
+        \item \underline{Credenziali di registrazione:} le credenziali necessarie
+        alla registrazione, raccolte precedentemente, vengono inoltrate 
+
+        \item \underline{Richiesta Google:} questa interfaccia permette alla
+        pagina di accesso di comunicare il fatto che l'utente intende registrarsi
+        o autenticarsi con un account Google.
+
+        \item \underline{Richiesta recupero account:} il componente inoltra
+        ad un altro componente la richiesta di recupero account, in modo tale
+        da effettuare separatamente questa operazione.
+    \end{itemize}
+\end{description}
+
+\subsubsection{Sistema di autenticazione}
+\begin{description}
+    \item[Descrizione:] il Sistema di Autenticazione provvede a dialogare
+    con gli attori esterni Firebase e Google per convalidare i dati di accesso
+    e di registrazione.
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+        \item \underline{Credenziali di accesso:}
+        \item \underline{Credenziali di registrazione:}
+        \item \underline{Richiesta Google:}
+        \item \underline{Esito corrispondenza:}
+        \item \underline{Autorizzazione:}
+        \item \underline{Esito registrazione:}
+    \end{itemize}
+
     \item[Interfacce fornite:]
 \end{description}
 
+
+\newpage
 \subsubsection{Home Page}
 \begin{description}
     \item[Descrizione:] il componente si occupa di guidare l'utente nella
