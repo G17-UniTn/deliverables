@@ -276,6 +276,10 @@ del problema, accedendo alle seguenti funzionalità:
 
     \item Visualizzare il suggerimento (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}).
 \end{enumerate}
+L'esercitazione non è da confondersi come "sessione" registrabile dalla
+piattaforma. In altre parole, l'utente può accedere all'area di esercitazione
+(selezionando un problema) e abbandonarla in qualsiasi momento, ma nessun
+dato cronologico o di altra natura, riguardo a tali azioni, deve essere memorizzato.
 \end{funcreq}
 
 
@@ -375,22 +379,18 @@ accessibili all'utente anonimo.
 \begin{funcreq}
 \label{updateaccount}
 \textbf{Aggiornamento account }
-L'utente registrato e autenticato deve poter modificare i dati chiave del
-proprio account in conformità con alcune procedure di sicurezza opportune:
+L'utente registrato e autenticato mediante il sistema di credenziali interno
+deve poter modificare i dati identificativi del proprio account, ovvero indirizzo
+email e password:
 \begin{enumerate}
-\item L'utente deve poter migrare ad un indirizzo email differente. A tale
-indirizzo deve essere inviato un messaggio di conferma, previo inserimento
-della password. L'email
-deve cambiare effettivamente solo nel momento in cui l'utente conferma la
-ricezione del messaggio presso il nuovo indirizzo.
+\item L'utente deve poter migrare ad un indirizzo email differente. La modifica
+deve avvenire previo inserimento della password attualmente in uso.
 
 \item L'utente deve poter modificare la password del proprio account.
 La password può essere cambiata previo inserimento di quella attualmente
 associata all'account. La nuova password deve essere digitata due volte
 per conferma e deve rispettare quanto specificato dal
-\textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}. 
-L'utente deve essere notificato di tale modifica anche tramite
-l'indirizzo email attualmente associato all'account.
+\textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{enumerate}
 \end{funcreq}
     
