@@ -309,31 +309,39 @@ e \textit{Registrare i progressi}}
 \begin{figure}[H]
 \centering
 \hspace*{-1.4cm}
-\includegraphics[scale=0.8]{materiale/ucdiagrams/ucaccount.pdf}
+\includegraphics[scale = 0.8]{materiale/ucdiagrams/ucaccount.pdf}
 \caption{UCD relativo alle funzionalità aggiuntive dell'utente autenticato}
 \end{figure}
 
+
+
 \newpage
-\subsection*{Swimlane Diagram per \textit{Aggiornare l'indirizzo email dell'account}}
-La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all' aggiornamento
+\subsection*{\textit{Aggiornare l'indirizzo email dell'account}}
+La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all'aggiornamento
 dell'indirizzo di posta elettronica di un utente registrato con credenziali di sistema
-e autenticato, evidenziando la procedura mediante uno Swimlane Diagram.
+e autenticato, evidenziando i passi della procedura mediante uno Swimlane Diagram.
+Le condizioni \textit{annulla operazione} e \textit{conferma operazione}
+sottolineano il fatto che l'utente può interrompere la procedura di migrazione
+qualora lo ritenga opportuno.
+
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/ucdiagrams/swimlaneemail.pdf}
+\includegraphics[scale = 0.9]{materiale/ucdiagrams/swimlaneemail.pdf}
 \caption{SD dello scenario di aggiornamento dell'indirizzo email}
 \label{slemail}
 \end{figure}
 
-
-
-\subsection*{Swimlane Diagram per \textit{Aggiornare la password dell'account}}
+\subsection*{\textit{Aggiornare la password dell'account}}
 La Figura \ref{slpassword} fa riferimento allo Use Case relativo all'aggiornamento
 della password dell'account di un utente registrato con credenziali di sistema e autenticato.
+Durante il processo di aggiornamento, l'utente ha la facoltà di interrompere
+la procedura qualora non intenda più modificare la password. Da qui il
+significato delle condizioni \textit{annulla operazione} e \textit{conferma
+operazione}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/ucdiagrams/swimlanepassword.pdf}
+\includegraphics[scale=0.85]{materiale/ucdiagrams/swimlanepassword.pdf}
 \caption{SD dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
