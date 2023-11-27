@@ -643,7 +643,7 @@ e più dettagliata di ogni componente.
 In questa sezione sono descritti i componenti e le interfacce presenti
 all'interno del Diagramma dei Componenti.
 
-
+\iffalse
 \subsubsection{Pagina di accesso}
 \begin{description}
     \item[Descrizione:] questo componente ha il compito
@@ -707,7 +707,6 @@ all'interno del Diagramma dei Componenti.
         da effettuare separatamente questa operazione.
     \end{itemize}
 \end{description}
-
 \subsubsection{Sistema di autenticazione}
 \begin{description}
     \item[Descrizione:] il Sistema di Autenticazione provvede a dialogare
@@ -727,9 +726,18 @@ all'interno del Diagramma dei Componenti.
 
     \item[Interfacce fornite:]
 \end{description}
+\fi
 
 
-\newpage
+
+
+
+
+
+
+
+
+
 \subsubsection{Home Page}
 \begin{description}
     \item[Descrizione:] il componente si occupa di guidare l'utente nella
@@ -748,41 +756,238 @@ all'interno del Diagramma dei Componenti.
 \subsubsection{Utente autenticato}
 \subsubsection{Utente amministratore}
 \subsubsection{Pagina di autenticazione}
+
+
 \subsubsection{Catalogo dei problemi}
-\subsubsection{Pagina problema}
+\begin{description}
+    \item[Descrizione:] questo componente consente ad un qualsiasi utente
+    (anonimo, autenticato e amministratore) di consultare la lista di problemi
+    disponibili sulla piattaforma, oltre a permettere di selezionare un singolo
+    problema per aprirlo e iniziare a risolverlo, passando quindi alla Pagina di
+    Esercitazione (Sezione \ref{exepag}).
+    Il Catalogo facilita la navigazione visualizzando i dati descrittivi di ogni
+    problema (nome, categoria, difficoltà), permettendo anche di eseguire ricerche
+    filtrate per nome o altri campi; consente di visualizzare i suggerimenti senza
+    la necessità di aprire il problema; mostra lo stato di ogni problema e i
+    preferiti alla vista dell'utente autenticato (e amministratore); fornisce gli
+    strumenti utili agli utenti amministratori per aggiungere, modificare ed
+    eliminare i problemi del catalogo.
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Lista dei problemi:} il Catalogo ha innanzitutto il compito di
+        mostrare i problemi memorizzati grazie al servizio di database impiegato. Per questo
+        motivo, questa interfaccia consente al catalogo di recuperare dal database i
+        problemi disponibili.
+
+        \item \underline{Filtro:} il Catalogo rileva i filtri di ricerca selezionati
+        dall'utente, cosicché i problemi che corrispondono ai criteri di ricerca possano
+        essere visualizzati. I filtri includono la ricerca per nome, per difficoltà e categoria.
+
+        \item \underline{Richiesta suggerimento:} questa interfaccia permette all'utente
+        di visualizzare il video-suggerimento associato al problema in questione.
+
+        \item \underline{Video:} il Catalogo interagisce con YouTube per ottenere il
+        video-suggerimento da visualizzare su richiesta dell'utente.
+
+        \item \underline{Modifica preferiti:} gli utenti autenticati possono interagire
+        con il Catalogo al fine di contrassegnare come preferiti i problemi visualizzati.
+        Mediante questa interfaccia è altresì possibile rimuovere un problema dai preferiti.
+
+        \item \underline{Modifica problema:} il catalogo accetta eventuali modifiche
+        che vengono richieste da utenti amministratori. Da questa interfaccia, il
+        Catalogo consente agli amministratori di aggiungere, modificare o eliminare
+        i problemi del catalogo.
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+        
+        \item \underline{Lista:} il Catalogo visualizza la lista dei problemi e i
+        dati descrittivi affini di ogni problema.
+
+        \item \underline{Visualizzazione suggerimento:} il Catalogo visualizza il
+        video suggerimento relativo ad uno specifico problema e richiesto precedentemente
+        dall'utente.
+
+        \item \underline{Richiesta problema:} il Catalogo rileva la selezione di
+        un problema consentendo all'utente di accedere alla pagina dedicata alla
+        consultazione ed esercitazione (Pagina Esercitazione, Sezione \ref{exepag}).
+        
+        \item \underline{Stato:} lo stato dei problemi risolti è visibile all'utente
+        autenticato. Il Catalogo segnala eventuali problemi risolti
+        mediante un apposito simbolo in un campo \textit{stato}.
+
+        \item \underline{Preferiti:} i preferiti vengono visualizzati qualora
+        l'utente che naviga il Catalogo sia già autenticato. Il Catalogo consente
+        di riconoscere i preferiti visualizzando un apposito simbolo in un campo
+        \textit{preferiti}.
+
+        \item \underline{Modifiche problemi:} il Catalogo comunica al database eventuali
+        modifiche apportate alla lista dei problemi.
+    \end{itemize}
+\end{description}
+
+%\subsubsection{Video Player?}
+%\begin{description}
+%    \item[Descrizione:] questo componente si occupa di interagire con l'attore esterno
+%    YouTube, inviando le richieste dei video di suggerimento, ricevendo tali video e
+%    permettendo la loro visualizzazione sulla piattaforma.
+%
+%    \item[Interfacce richieste:]
+%    \begin{itemize}
+%        \item[]
+%
+%        \item \underline{Richiesta suggerimento:} questa interfaccia permette ad altri
+%        componenti interni (Pagina Esercitazione e Catalogo) di inviare le richieste di
+%        visualizzazione dei suggerimenti.
+%
+%        \item \underline{Video:} questa interfaccia rappresenta il punto di ricezione
+%        del video di YouTube, che poi verrà visualizzato all'interno della piattaforma.
+%    \end{itemize}
+%
+%    \item[Interfacce fornite:]
+%    \begin{itemize}
+%        \item[]
+%
+%        \item \underline{Richiesta video:}
+%        \item \underline{Visualizzazione video:}
+%    \end{itemize}
+%\end{description}
+
+\subsubsection{Pagina di Esercitazione}\label{exepag}
+\begin{description}
+    \item[Descrizione:] il componente consente di consultare il contenuto del problema
+    precedentemente selezionato nel catalogo. Inoltre, la Pagina di Esercitazione mette
+    a disposizione gli strumenti utili alla risoluzione dell'esercizio, provvede alla
+    gestione della sottomissione del codice e avvisa l'utente circa la correttezza dell'algoritmo.
+    Qualora il codice sia corretto, questo componente si occupa di aggiornare i progressi
+    dell'utente (autenticato) che ha risolto il problema, insieme allo stato di quest'ultimo
+    in relazione all'utente.
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Problema:} per operare, il componente deve ricevere il problema
+        selezionato nel catalogo.
+
+        \item \underline{Scelta linguaggio:} il componente riconosce dall'utente il
+        linguaggio di programmazione scelto per scrivere il codice (i linguaggi disponibili
+        sono mostrati mediante un'interfaccia descritta tra le \textit{interfacce fornite}).
+
+        \item \underline{Codice:} il codice scritto dall'utente viene raccolto
+        per sottoporlo ai test cases.
+
+        \item \underline{Avvia-ferma cronometro:} è possibile avviare o fermare su
+        richiesta il cronometro. Se avviato almeno una volta, il cronometro sarà considerato
+        \textit{attivo}.
+
+        \item \underline{Richiesta suggerimento:}
+        \item \underline{Richiesta video:}
+        \item \underline{Esci:} su richiesta dell'utente, deve essere possibile uscire
+        dalla pagina di esercitazione. L'uscita comporta la disattivazione del
+        cronometro: se l'utente accede di nuovo alla pagina di esercitazione,
+        il cronometro non mantiene gli stati di eventuali esercitazioni precedenti.
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Visualizzazione contenuto:} il problema viene visualizzato nella
+        totalità dei suoi contenuti: titolo, testo, esempi.
+
+        \item \underline{Linguaggi disponibili:} il componente mostra all'utente quali
+        linguaggi di programmazione sono disponibili.
+
+        \item \underline{Visualizzazione suggerimento:}
+
+        \item \underline{Cronometro:} viene visualizzato il tempo registrato dal
+        cronometro.
+
+        \item \underline{Tempo impiegato:} se il cronometro è attivo, ovvero se esso è
+        stato avviato almeno una volta durante la navigazione nella pagina di esercitazione,
+        il tempo registrato viene mostrato nel momento in cui viene risolto il problema,
+        cioè qualora tutti i test cases vengono risolti.
+
+        \item \underline{Aggiorna progressi:} in caso di esito positivo di tutti i
+        test cases, il componente ha il compito di comunicare al database l'aggiornamento
+        dello stato del problema in relazione all'utente che lo ha risolto, oltre a
+        incrementare i progressi di quello stesso utente.
+    \end{itemize}
+\end{description}
 
 \subsubsection{Sistema di autenticazione}
+\begin{description}
+    \item[Descrizione:]
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+
+        \item
+    \end{itemize}
+\end{description}
+
+
 \subsubsection{Gestore account}
+\begin{description}
+    \item[Descrizione:]
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+
+        \item
+    \end{itemize}
+\end{description}
 
 
 \newpage
-\subsection{Definizione dei componenti}
-In questa sezione sono descritti i vari componenti e interfaccie presenti all'interno del diagramma riportato nella prossima sezione.
-\subsubsection{Utente non autenticato}
-L'utente non autenticato è un qualsiasi utente collegato al sito che non si sia ancora autenticato tramite il sistema di login/registrazione descritto nel \textbf{RF 2}.\\
-L'utente non autenticato ha disponibile a sè tutte le funzioni del sito tranne alcune funzioni che verranno descritte in componenti futuri.\\
-\\
-\textbf{Interfaccie fornite}\\
-\underline{Indirizzamento al sito}: Un qualsiasi utente che prova a connettersi al sito dovrà essere reindirizzato alla Home Page.
-\subsubsection{Home Page}
-Il componente si occupa di rendere accessibile la navigazione del sito, avrà dei bottoni apposta per il login (il componente di login è raffigurato nel 2 diagramma), e la visualizzazione del catalogo dei problemi.
-\\\\\textbf{Interfaccie fornite}\\
-\underline{Richiesta Pagina Problemi}: Un qualsiasi utente connesso al sito deve poter accedere al catalogo dei problemi, indipendetemente se autenticato o no.
-\subsubsection{Catalogo Dei Problemi}
-Il seguente componente deve permettere a un qualsiasi utente, autenticato o no, di accedere alla pagina di un specifico problema, attivare un timer per la sessione di allenamento,
-accedere ai video con le soluzioni dei problemi, e filtrare i problemi in base alla categoria.
-\\\\\textbf{Interfaccie richieste}\\
-\underline{Video Soluzioni}: I video delle soluzioni vengono hostati su un altra piattaforma (Youtube),quindi dobbiamo richiedere il permesso di visualizzare i video attraverso l'API di Youtube.
-\\\\
-\underline{Filtro Problemi}: L'utente a sua discrezione può decidere se applicare dei filtri per avere una lista di problemi basata su dei tag predefiniti, di default nessun filtro è applicato.
-\\\\
-\textbf{Interfaccie Fornite}
-\\
-\underline{Richiesta Home Page}: L'utente deve essere in grado di tornare alla Home Page.
-\\\\
-\underline{Timer attivo/non attivo}: L'utente deve essere in grado, a suo piacimento, di attivare o disattivere il timer di allenamento.
-\\\\
-\underline{Richiesta di un problema specifico}: L'utente deve essere in grado di poter accedere a qualsiasi problema presente sul catalogo
+%\subsubsection{Utente non autenticato}
+%L'utente non autenticato è un qualsiasi utente collegato al sito che non si sia ancora autenticato tramite il sistema di login/registrazione descritto nel \textbf{RF 2}.\\
+%L'utente non autenticato ha disponibile a sè tutte le funzioni del sito tranne alcune funzioni che verranno descritte in componenti futuri.\\
+%\\
+%\textbf{Interfaccie fornite}\\
+%\underline{Indirizzamento al sito}: Un qualsiasi utente che prova a connettersi al sito dovrà essere reindirizzato alla Home Page.
+%\subsubsection{Home Page}
+%Il componente si occupa di rendere accessibile la navigazione del sito, avrà dei bottoni apposta per il login (il componente di login è raffigurato nel 2 diagramma), e la visualizzazione del catalogo dei problemi.
+%\\\\\textbf{Interfaccie fornite}\\
+%\underline{Richiesta Pagina Problemi}: Un qualsiasi utente connesso al sito deve poter accedere al catalogo dei problemi, indipendetemente se autenticato o no.
+
+%\subsubsection{Catalogo Dei Problemi}
+%Il seguente componente deve permettere a un qualsiasi utente, autenticato o no, di accedere alla pagina di un specifico problema, attivare un timer per la sessione di allenamento,
+%accedere ai video con le soluzioni dei problemi, e filtrare i problemi in base alla categoria.
+%\\\\\textbf{Interfaccie richieste}\\
+%\underline{Video Soluzioni}: I video delle soluzioni vengono hostati su un altra piattaforma (Youtube),quindi dobbiamo richiedere il permesso di visualizzare i video attraverso l'API di Youtube.
+%\\\\
+%\underline{Filtro Problemi}: L'utente a sua discrezione può decidere se applicare dei filtri per avere una lista di problemi basata su dei tag predefiniti, di default nessun filtro è applicato.
+%\\\\
+%\textbf{Interfaccie Fornite}
+%\\
+%\underline{Richiesta Home Page}: L'utente deve essere in grado di tornare alla Home Page.
+%\\\\
+%\underline{Timer attivo/non attivo}: L'utente deve essere in grado, a suo piacimento, di attivare o disattivere il timer di allenamento.
+%\\\\
+%\underline{Richiesta di un problema specifico}: L'utente deve essere in grado di poter accedere a qualsiasi problema presente sul catalogo
 
 \subsubsection{Utente Amministratore}
 L'utente amministratore ha gli stessi privilegi forniti all'utente autenticato e non, l'unico privilegio che possiede in più è il permesso di modificare il catalogo,
@@ -790,17 +995,18 @@ per modifica si intende sia aggiungere che rimuovere un qualsiasi problema.
 \\\\\textbf{Interfaccie Fornite}\\
 \underline{Modifica Catalogo}: Un utente amministratore deve essere in grado di poter modificare il catalogo a suo piacimento.
 
-\subsubsection{Pagina Problema Specifico}
-Dopo aver specificato a quale problema si vuole accedere, l'utente verra indirizzato ad una pagina dove poter visualizzare il testo del problema,inserire codice e sottometterlo,e se
-si è autenticati aggiungerlo ai problemi preferiti,inoltre se l'utente autentico riesce a risolvere il problema, lo stato del problema dovrà essere riflesso nel catalogo.
-\\\\\textbf{Interfaccie Fornite}\\
-\underline{Sottomisione Codice}: Attraverso un bottone apposito l'utente autenticato o non, dovrà poter sottomettere il codice per la valutazione.
-\\
-\underline{Aggiornamento Stato Problema}: Se l'utente è in grado di risolvere il problema, allora lo "stato" del problema dovrà essere aggiornato, in modo che un utente autenticato sia in grado di riconoscere i problemi già svolti.
-\\
-\underline{Richiesta Home Page}: Un qualsiasi utente, autenticato o non, deve essere in grado di tornare al catalogo dei problemi.
-\\\\\textbf{Interfaccie Richieste}
-\\\underline{Codice}: Un qualsiasi utente deve essere in grado di poter scrivere (nelle aree opportune) testo,che poi verrà interpretato come codice nel linguaggio di programmazione specificato.
+%\subsubsection{Pagina Problema Specifico}
+%Dopo aver specificato a quale problema si vuole accedere, l'utente verra indirizzato ad una pagina dove poter visualizzare il testo del problema,inserire codice e sottometterlo,e se
+%si è autenticati aggiungerlo ai problemi preferiti,inoltre se l'utente autentico riesce a risolvere il problema, lo stato del problema dovrà essere riflesso nel catalogo.
+%\\\\\textbf{Interfaccie Fornite}\\
+%\underline{Sottomisione Codice}: Attraverso un bottone apposito l'utente autenticato o non, dovrà poter sottomettere il codice per la valutazione.
+%\\
+%\underline{Aggiornamento Stato Problema}: Se l'utente è in grado di risolvere il problema, allora lo "stato" del problema dovrà essere aggiornato, in modo che un utente autenticato sia in grado di riconoscere i problemi già svolti.
+%\\
+%\underline{Richiesta Home Page}: Un qualsiasi utente, autenticato o non, deve essere in grado di tornare al catalogo dei problemi.
+%\\\\\textbf{Interfaccie Richieste}
+%\\\underline{Codice}: Un qualsiasi utente deve essere in grado di poter scrivere (nelle aree opportune) testo,che poi verrà interpretato come codice nel linguaggio di programmazione specificato.
+
 \subsubsection{Utente Autenticato}
 L'utente autenticato possiede tutti i privilegi di un utente non autenticato, l'unico privilegio in più rispetto ad un utente non autenticato è il tracciamento dei preferiti e dei problemi svolti.
 \\\\\textbf{Interfaccie Fornite}
