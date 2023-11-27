@@ -14,6 +14,7 @@
 \usepackage[table]{xcolor} %colore caselle
 \usepackage{enumitem} %additional commands for lists
 \usepackage{fancyhdr}
+\usepackage[font=footnotesize,labelfont=bf]{caption} % small caption font-size
 
 
 
@@ -65,12 +66,51 @@ Zeno \textsc{Saletti}}
 \newpage
 
 \section*{Scopo del documento}
-Lorem ipsum
+In questo documento viene riportata la definizione dell'architettura del
+progetto \textit{SleepCode} impiegando diagrammi delle classi, realizzati
+secondo gli standard di Unified Modeling Language (UML), e codice Object
+Constraint Language (OCL). Nel documento precedente (D2, \textit{Specifica
+dei Requisiti}) sono stati presentati il diagramma degli use case, quello
+di contesto e infine il diagramma dei componenti. Considerando tale
+progettazione, viene ora definita l'architettura del sistema specificando
+in modo più dettagliato le classi che dovranno essere implementate sotto forma di
+codice, insieme alla logica che regola il comportamento del software che
+si intende realizzare.
+
+Il linguaggio UML, utilizzato per descrivere le classi, è supportato da
+codice OCL, impiegato invece per specificare gli aspetti logici citati sopra
+che non sarebbero esprimibili formalmente mediante i soli diagrammi delle
+classi.
 
 
 \newpage
 \section{Diagramma delle classi}
+Nella presente sezione vengono illustrate in linguaggio UML le classi
+previste dal progetto \textit{SleepCode}. Ogni componente del diagramma
+dei componenti, presente nel documento D2, viene qui rappresentato
+in forma di una o più classi. Le classi individuate sono costituite
+da un nome, un insieme di attributi che identificano i dati gestiti dalla
+classe stessa e una lista di metodi che definiscono le operazioni
+eseguibili da quella classe. Eventuali relazioni tra classi sono evidenziate
+da alcune associazioni.
+
+
 \section{Codice in Object Constraint Language}
+Nella sezione che segue viene descritta formalmente la logica prevista
+nel comportamento di alcune classi, in relazione alle loro operazioni
+possibili. Il codice OCL impiegato consente di esprimere tale logica,
+non descrivibile con i soli diagrammi delle classi in UML.
+
+
 \section{Diagramma delle classi con codice OCL}
+In Figura \ref{umlocl} è riportato un diagramma che mostra nell'insieme
+sia le classi individuate che il relativo codice OCL.
+
+\begin{figure}[H]
+\centering
+%\includegraphics[options]{name}
+\caption{Diagramma delle classi arricchito dal codice OCL}
+\label{umlocl}
+\end{figure}
 
 \end{document}
