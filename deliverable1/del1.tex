@@ -262,9 +262,9 @@ del problema, accedendo alle seguenti funzionalità:
     
     \item Visualizzare i test cases (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}}).
 
-    \item Avviare e fermare a proprio piacimento un timer per mantenere traccia
-    del tempo speso per risolvere il quesito scelto.
-    
+    \item Avviare, fermare e reimpostare a 0 secondi un cronometro per
+    mantenere traccia del tempo speso per risolvere il quesito scelto.
+
     \item Essere al corrente di quale linguaggio di programmazione sia
     attualmente attivo per la scrittura di codice. Deve altresì essere 
     possibile selezionare uno dei linguaggi messi a disposizione dalla
@@ -319,10 +319,6 @@ e testandolo:
     viene avvisato senza fare riferimento agli errori commessi, siano essi
     relativi alla correttezza sintattica del codice oppure riguardanti la
     correttezza risolutiva dell'algoritmo.
-
-    \item Nel caso in cui l'utente sia in grado di superare tutti i
-    test case disponibili, deve essere mostrato il tempo impiegato,
-    registrato dal cronometro.
 \end{enumerate}
 \end{funcreq}
 
@@ -338,7 +334,7 @@ accessibili all'utente anonimo.
 \begin{funcreq}
     \textbf{Metadati aggiuntivi }
     Oltre ai campi descrittivi specificati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}},
-    l'utente autenticato deve poter visualizzare e influenzare i seguenti dati aggiuntivi di
+    l'utente autenticato deve poter visualizzare e influenzare i seguenti dati aggiuntivi in
     ogni problema:
     \begin{enumerate}
         \item \textit{Stato:} i problemi risolti dall'utente devono essere contrassegnati,
@@ -348,8 +344,11 @@ accessibili all'utente anonimo.
         per lui rilevanti deve poter contrassegnare tali problemi come \textit{preferiti}.
     \end{enumerate}
     Le informazioni riguardanti questi campi sono visibili all'utente autenticato,
-    sia durante la consultazione del catalogo che del singolo problema.
-    %e disponibili per effettuare ricerche filtrate?
+    sia durante la consultazione del catalogo che del singolo problema. Si sottolinea
+    che \textit{stato} e \textit{preferito} non sono attributi del problema in sé,
+    bensì essi caratterizzazno la relazione tra un particolare utente autenticato e i
+    problemi: ogni utente ha un proprio insieme di problemi preferiti e risolti,
+    potenzialmente diverso da quelli di altri.
 \end{funcreq}
 
 \newpage
@@ -358,12 +357,12 @@ accessibili all'utente anonimo.
 \label{stats}
 \textbf{Progressi }
 \begin{enumerate}
-    \item Il servizio deve prevedere il tracciamento dei progressi dell'utente
-    autenticato, incrementando il numero di problemi risolti ad ogni sessione
-    di esercitazione andata a buon fine: con riferimento al
-    \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.3}}},
-    dopo la risoluzione, il problema deve inoltre essere contrassegnato come
-    \textit{risolto} (nel rispettivo campo \textit{stato} visibile nel catalogo
+    \item Il servizio deve prevedere il tracciamento dei progressi di ogni
+    utente autenticato, incrementando il numero di problemi risolti ad ogni
+    sessione di esercitazione andata a buon fine: con riferimento al
+    \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}}}},
+    dopo la risoluzione, il problema deve essere contrassegnato come
+    \textit{risolto} (ciò modifica il campo \textit{stato} visibile nel catalogo
     e nella pagina di consultazione ed esercitazione di quel problema).
 
     \item L'utente deve poter monitorare i propri progressi, accedendo ai dati
