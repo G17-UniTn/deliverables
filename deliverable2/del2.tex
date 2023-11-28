@@ -109,7 +109,7 @@ naturale.
     \begin{enumerate}
         \item[]
         \item L'utente anonimo accede alla pagina dedicata e sceglie tra la registrazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
-        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme (RNF 11). \verb|[exception 1]|\verb|[exception 2]|
+        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme. \verb|[exception 1]|\verb|[exception 2]|
         \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 3]|
         \item L'account viene registrato dal servizio di database.
     \end{enumerate}
@@ -168,20 +168,19 @@ naturale.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente accede alla pagina di recupero, per mezzo di quella di login.
+        \item L'utente accede alla pagina di recupero, attraverso quella di login.
         \item La pagina indica all'utente di inserire l'email di recupero, ovvero quella associata all'account. \verb|[exception 1]|
         \item Il sistema richiede al servizio di posta elettronica l'invio di un link di recupero mediane un messaggio email, specificando l'indirizzo fornito dall'utente e il contenuto del messaggio.
         \item Il link guida l'utente dal messaggio alla pagina del sistema dedicata alla creazione di una nuova password.
-        \item L'utente inserisce una nuova password conforme e la conferma, inserendola nuovamente. \verb|[exception 2]|\verb|[exception 3]|
+        \item L'utente inserisce una nuova password conforme e la conferma, inserendola nuovamente. \verb|[exception 2]|
         \item Il servizio di database provvede all'aggiornamento della password.
     \end{enumerate}
     
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account non registrato, il recupero non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 1]| Se l'email inserita non è associata ad alcun account registrato, il recupero non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 2]| Se la password non è conforme, oppure se i campi di inserimento e conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
     \end{itemize}
     
     %\item[Extensions:]
@@ -283,20 +282,18 @@ Si intende soprattutto evidenziare la sequenza nella quale si
 susseguono eventuali azioni opzionali o eseguibili in parallelo,
 oltre alla reazione di altri attori (YouTube, Firebase DB) in
 risposta alla particolare categoria di utenti coinvolti, come in
-\textit{Registrare i progressi}, e alle scelte da loro effettuate
-(si fa anche riferimento agli use case \textit{Avviare e interrompere un
-cronometro}, \textit{Aprire il video di suggerimento}).
+\textit{Registrare i progressi}, e alle scelte da loro effettuate,
+come \textit{Avviare e interrompere un cronometro} e \textit{Aprire
+il video di suggerimento}.
 
 Dal momento che l'utente può decidere di uscire dall'area di esercitazione
-in qualsiasi momento, si sottolinea che il processo descritto nel diagramma
+a propria discrezione, si sottolinea che il processo descritto nel diagramma
 può essere interrotto in qualsiasi momento (ciò è indicato dalla codizione
-\textit{Esci}). Inoltre, una volta attivato
-il cronometro, esso può essere fermato e riavviato in qualsiasi momento
-su richiesta dell'utente.
+\textit{Esci} nel diagramma).
 
 \begin{figure}[H]
 \centering
-\hspace*{-0.48cm}
+\hspace*{-0.5cm}
 \includegraphics[scale=0.47]{materiale/acesercitazione.pdf}
 \caption{SD, arricchito da elementi di Activity Diagram,
 per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
