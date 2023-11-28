@@ -94,7 +94,113 @@ classe stessa e una lista di metodi che definiscono le operazioni
 eseguibili da quella classe. Eventuali relazioni tra classi sono evidenziate
 da alcune associazioni.
 
+\subsection{Utenti}
+L'attore che nel diagramma di contesto usufruisce delle funzionalità offerte
+dal servizio è l'utente. Come descritto nei documenti di Analisi dei Requisiti (D1)
+e Specifica dei Requisiti (D2), esistono tre categorie di utenti: anonimo, autenticato
+e amministratore.
 
+Dal momento che tutte queste categorie condividono alcune funzionalità, è stata
+creata una classe \texttt{Utente}, che logicamente corrisponde alla categoria
+degli utenti anonimi, ovvero utenti che non hanno effettuato il login. Di fatto,
+non è prevista la memorizzazione di alcuna informazione riguardo a questa categoria
+di utenti (non sono previsti attributi), e le uniche operazioni disponibili sono:
+\begin{itemize}
+    \item \texttt{login()}: richiesta di accesso.
+    \item \texttt{signUp()}: richiesta di registrazione.
+    \item \texttt{recuperaAccount()}: richiesta di avvio della procedura di recupero account.
+\end{itemize}
+Da questa prima classe viene definita, mediante generalizzazione, la classe
+\texttt{UtenteAutenticato}, che aggiunge metodi e attributi accessibili previo
+login:
+\begin{itemize}
+    \item \texttt{user\_id}: dal momento che email e password dell'account di sistema
+    possono essere modificate dall'utente autenticato, la classe contiene questo
+    attributo con ruolo di identificatore univoco.
+
+    \item \texttt{username, email, password}: i dati richiesti per creare un
+    account. In caso di autenticazione con Google, è richiesto che la classe
+    memorizzi solo l'indirizzo email impiegato.
+
+    \item \texttt{isGoogle}: parametro che distingue gli account collegati con
+    Google da account registrati con il meccanismo di credenziali interne.
+
+    \item \texttt{risolti[*]}: insieme che raccoglie gli identificatori dei problemi
+    risolti dall'utente.
+
+    \item \texttt{preferiti[*]}: insieme degli identificatori dei problemi
+    contrassegnati come preferiti, da parte dell'utente.
+
+    \item \texttt{logout()}: richiesta di logout.
+    
+    \item \texttt{setEmail, setPassword}: procedure utili a modificare le credenziali
+    dell'account. Oltre alle nuove credenziali, viene richiesta, per questioni di sicurezza,
+    la password attualmente in uso. Entrambi i metodi restituiscono una risposta
+    di tipo booleana per segnalare il successo o l'insuccesso delle rispettive operazioni.
+
+    \item \texttt{setPreferito}: questo metodo provvede ad aggiungere o
+    eliminare dalla lista dei preferiti dell'utente il problema fornito: se
+    presente, il suo identificatore viene rimosso dalla lista, altrimenti
+    viene aggiunto.
+
+    \item \texttt{getPreferiti}: affinché l'utente possa vedere i preferiti
+    della sua lista, questo metodo permette di restituire questo dato.
+
+    \item \texttt{getNumeroRisolti, getRisoltiPerDifficolta}: questi metodi
+    permettono di fornire informazioni riguardo ai progressi dell'utente.
+\end{itemize}
+Infine, un'ulteriore generalizzazione specifica le funzionalità aggiuntive
+dell'utente amministratore, ovvero metodi utili alla gestione dei problemi
+disponibili nel catalogo:
+\begin{itemize}
+    \item \texttt{aggiungiProblema}
+    \item \texttt{modificaProblema}
+    \item \texttt{eliminaProblema}
+\end{itemize}
+Nella Figura \ref{utenti} sono mostrate in linguaggio UML le classi
+sopra descritte.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.7]{materiale/class-utenti.pdf}
+\caption{Definizione della classe \texttt{Utente}}
+\label{utenti}
+\end{figure}
+
+
+
+
+
+
+
+\newpage
+\subsection{Gestione autenticazione}
+Nel diagramma di contesto, l'autenticazione si avvale di due sistemi
+subordinati: \textit{Firebase DB}, che si occupa di memorizzare gli account
+registrati con sistema di autenticazione interno, e \textit{Google SignIn},
+con il quale è possibile, per un utente, effettuare la registrazione o
+l'autenticazione mediante un account Google.
+
+Il componente \textit{Gestione Autenticazione} del rispettivo diagramma si
+occupa di interagire con tali sistemi esterni in modo da convalidare le
+operazioni di registrazione e autenticazione. Per questo motivo, nel diagramma
+delle classi viene individuata la classe \texttt{Autenticazione}:
+\begin{itemize}
+    \item \texttt{autorizzato}: questo attributo mantiene lo stato dell'autorizzazione
+    dell'utente
+    \item \texttt{isGoogle}:
+    \item \texttt{registraAccount}: questo metodo esegue la registrazione
+    comunicando con il servizio di database.
+    \item \texttt{autentica}: l'autenticazione mediante credenziali interne
+    avviene grazie a questo metodo.
+    \item \texttt{registraGoogle}
+    \item \texttt{autenticaGoogle}
+\end{itemize}
+Tutti i metodi comunicano all'esterno l'esito delle loro operazioni mediante
+un valore booleano di ritorno.
+
+
+\newpage
 \section{Codice in Object Constraint Language}
 Nella sezione che segue viene descritta formalmente la logica prevista
 nel comportamento di alcune classi, in relazione alle loro operazioni
