@@ -78,21 +78,23 @@ design del sistema ricorrendo a diagrammi di contesto e dei componenti.
 \newpage
 \section{Requisiti funzionali}
 In questa sezione vengono descritti i requisiti funzionali (RF) del
-servizio utilizzando Use Case Diagrams (UCD) e Swimlane Diagrams (SD), disegnati secondo
-gli standard UML, ed eventualmente arricchiti da descrizioni in linguaggio
-naturale.
+progetto utilizzando Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
+disegnati secondo gli standard UML, ed eventualmente arricchiti da
+descrizioni in linguaggio naturale\footnote{Gli use cases più semplici
+presenti nei diagrammi non vengono descritti in altri modi, essendo
+autoesplicativi.}.
 
+\subsection{Accesso e autenticazione}
+La Figura \ref{access} mostra gli use cases che rappresentano i seguenti
+requisiti funzionali descritti nel documento D1: \textbf{RF 1}-Registrazione,
+\textbf{RF 2}-Login, \textbf{RF 3}-Autenticazione Google, \textbf{RF 4}-Recupero
+password.
 
-\subsection{Accesso}
-\begin{itemize}
-    \item \textbf{RF 1.} Registrazione
-    \item \textbf{RF 2.} Login
-    \item \textbf{RF 3.} Recupero password
-\end{itemize}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.7]{materiale/ucdiagrams/ucaccesso.pdf}
-\caption{UCD relativo all'accesso al servizio}
+\includegraphics[scale=0.72]{materiale/ucdiagrams/ucaccesso.pdf}
+\caption{UCD relativo ai RF inerenti all'accesso alla piattaforma}
+\label{access}
 \end{figure}
 
 \subsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
@@ -105,27 +107,29 @@ naturale.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente anonimo accede alla pagina dedicata e sceglie tra la registrazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
-        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme (RNF 11). \verb|[exception 1]|\verb|[exception 2]|
-        \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 3]|
-        \item L'account viene registrato dal servizio di database.
+        \item L'utente anonimo accede alla pagina dedicata, raggiungibile da quella di login, e sceglie tra la modalità di registrazione con il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email e una password conforme. \verb|[exception 1]|
+        \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 2]|
+        \item I dati vengono raccolti e il relativo account viene registrato dal servizio di database.\texttt{[exception 3]}
     \end{enumerate}
     
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account già registrato, la registrazione non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \texttt{[exception 1]} Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \texttt{[exception 2]} Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \texttt{[exception 3]} Se l'email inserita dall'utente risulta essere già impiegata in un altro account, la registrazione non può proseguire e l'utente viene avvisato.
     \end{itemize}
 
     \item[Extensions:]
     \begin{itemize}
         \item[]
         \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un proprio account Google, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
+        In questo caso, oltre a scegliere l'email come previsto dal servizio di Google, l'utente specifica l'username.
     \end{itemize}
 \end{description}
 
+\newpage
 \subsection*{Descrizione Use Case \textit{Effettuare il login}}
 \begin{description}
     \item[Titolo:] Login
@@ -165,20 +169,19 @@ naturale.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente accede alla pagina di recupero, per mezzo di quella di login.
+        \item L'utente accede alla pagina di recupero, attraverso quella di login.
         \item La pagina indica all'utente di inserire l'email di recupero, ovvero quella associata all'account. \verb|[exception 1]|
         \item Il sistema richiede al servizio di posta elettronica l'invio di un link di recupero mediane un messaggio email, specificando l'indirizzo fornito dall'utente e il contenuto del messaggio.
         \item Il link guida l'utente dal messaggio alla pagina del sistema dedicata alla creazione di una nuova password.
-        \item L'utente inserisce una nuova password conforme e la conferma, inserendola nuovamente. \verb|[exception 2]|\verb|[exception 3]|
+        \item L'utente inserisce una nuova password conforme e la conferma, inserendola nuovamente. \verb|[exception 2]|
         \item Il servizio di database provvede all'aggiornamento della password.
     \end{enumerate}
     
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account non registrato, il recupero non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 1]| Se l'email inserita non è associata ad alcun account registrato, il recupero non può proseguire e l'utente viene avvisato.
+        \item \verb|[exception 2]| Se la password non è conforme, oppure se i campi di inserimento e conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
     \end{itemize}
     
     %\item[Extensions:]
@@ -186,27 +189,32 @@ naturale.
 
 
 \newpage
-\subsection{Consultazione dei problemi}
-\begin{itemize}
-    \item \textbf{RF 4.} Consultazione del catalogo dei problemi
-    \item \textbf{RF 5.} Consultazione di un problema
-    \item \textbf{RF 8.} Metadati aggiuntivi
-    \item \textbf{RF 9.1.} Progressi
-\end{itemize}
-\subsection*{2.5\texttt{ }\textit{ } Gestione del catalogo dei problemi}
-\begin{itemize}
-    \item \textbf{RF 12.} Aggiungere un problema
-    \item \textbf{RF 13.} Modificare un problema
-    \item \textbf{RF 14.} Eliminare un problema
-\end{itemize}
+\subsection{Consultazione dei problemi e profilo}
+In Figura \ref{catalogueprobs} sono mostrati gli use cases che illustrano
+le funzionalità che interessano l'utente (anonimo, autenticato e amministratore)
+nell'ambito della constultazione e manipolazione del catalogo e del contenuto
+dei problemi. In particolar modo, sono stati isolate nel diagramma le funzionalità
+fruibili nella home page e nella pagina di consultazione
+del singolo problema (si vedano \textbf{FE 3}, \textbf{FE 4} e \textbf{FE pagina edit catalogo} nel documento D1).
+
+I requisiti descritti sono: \textbf{RF 5} - Consultazione del catalogo,
+\textbf{RF 6} - Consultazione di un problema, \textbf{RF 10} - Metadati aggiuntivi,
+\textbf{RF 11.2} - Visualizzare i Progressi, \textbf{RF 12}  Aggiungere un problema,
+\textbf{RF 13} - Modificare un problema, \textbf{RF 14} - Eliminare un problema.
+Questi ultimi tre, relativi all'utente amministratore, sono riassunti nello use case
+\textit{Modificare il catalogo dei problemi}, che include le tre azioni opzionali (da
+cui le clausole \texttt{extend} nel diagramma).
+
 
 \begin{figure}[H]
 \centering
-\hspace*{-1cm}
-\includegraphics[scale=0.57]{materiale/ucdiagrams/ucproblemi.pdf}
-\caption{UCD relativo alla consultazione dei problemi e alla modifica del catalogo}
+\hspace*{-2cm}
+\includegraphics[scale=0.75]{materiale/ucdiagrams/ucproblemi.pdf}
+\caption{UCD relativo alla consultazione dei problemi, modifica del catalogo e visualizzazione progressi}
+\label{catalogueprobs}
 \end{figure}
 
+\newpage
 \subsection*{Descrizione Use Case \textit{Aggiungere problemi}}
 \begin{description}
     \item[Titolo:] Aggiungere un problema
@@ -218,7 +226,7 @@ naturale.
     \begin{enumerate}
         \item[]
         \item L'utente amministratore accede alla pagina del catalogo e sceglie di aggiungere un nuovo problema.
-        \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno tre esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link al video-suggerimento.
+        \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno due esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link al video-suggerimento.
         \item L'utente inserisce almeno 3 test cases; ogni test case consiste in un dato in input e il rispettivo output corretto.
         \item L'utente conferma la creazione del problema, che viene quindi aggiunto al catalogo; alternativamente, l'utente può scegliere di annullare la creazione del nuovo problema, previo avviso e conferma da parte del sistema.\texttt{[exception 1]}\texttt{[exception 2]}
     \end{enumerate}
@@ -257,17 +265,18 @@ naturale.
 
 \newpage
 \subsection{Esercitazione}
-\begin{itemize}
-    \item \textbf{RF 6.} Avviare l'esercitazione
-    \item \textbf{RF 7.} Correttezza dell'algoritmo
-    \item \textbf{RF 9.1.} Registrare i progressi
-\end{itemize}
+La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
+che in qualche modo fanno parte del contesto di esercitazione su uno specifico problema. Pertanto,
+i requisiti rappresentati qui sono i seguenti: \textbf{RF 7} - Effettuare l'esercitazione,
+\textbf{RF 8} - Verifica della correttezza dell'algoritmo, \textbf{RF 11.1} - Registrazione dei
+Progressi.
 
 \begin{figure}[H]
 \centering
 \hspace*{-1.8cm}
 \includegraphics[scale=0.9]{materiale/ucdiagrams/ucesercitazione.pdf}
 \caption{UCD con riferimenti ai requisiti relativi all'esercitazione}
+\label{esercitaz}
 \end{figure}
 
 \subsection*{Descrizione dell'esercitazione}
@@ -280,14 +289,19 @@ Si intende soprattutto evidenziare la sequenza nella quale si
 susseguono eventuali azioni opzionali o eseguibili in parallelo,
 oltre alla reazione di altri attori (YouTube, Firebase DB) in
 risposta alla particolare categoria di utenti coinvolti, come in
-\textit{Registrare i progressi}, e alle scelte da loro effettuate
-(si fa riferimento agli use case \textit{Avviare e interrompere un
-cronometro}, \textit{Aprire il video di suggerimento}).
+\textit{Registrare i progressi}, e alle scelte da loro effettuate,
+come \textit{Avviare e interrompere un cronometro} e \textit{Aprire
+il video di suggerimento}.
+
+Dal momento che l'utente può decidere di uscire dall'area di esercitazione
+a propria discrezione, si sottolinea che il processo descritto nel diagramma
+può essere interrotto in qualsiasi momento (ciò è indicato dalla codizione
+\textit{Esci} nel diagramma).
 
 \begin{figure}[H]
 \centering
-\hspace*{-0.48cm}
-\includegraphics[scale=0.444]{materiale/acesercitazione.pdf}
+\hspace*{-0.5cm}
+\includegraphics[scale=0.47]{materiale/acesercitazione.pdf}
 \caption{SD, arricchito da elementi di Activity Diagram,
 per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
 e \textit{Registrare i progressi}}
@@ -306,31 +320,39 @@ e \textit{Registrare i progressi}}
 \begin{figure}[H]
 \centering
 \hspace*{-1.4cm}
-\includegraphics[scale=0.8]{materiale/ucdiagrams/ucaccount.pdf}
+\includegraphics[scale = 0.8]{materiale/ucdiagrams/ucaccount.pdf}
 \caption{UCD relativo alle funzionalità aggiuntive dell'utente autenticato}
 \end{figure}
 
+
+
 \newpage
-\subsection*{Swimlane Diagram per \textit{Aggiornare l'indirizzo email dell'account}}
-La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all' aggiornamento
+\subsection*{\textit{Aggiornare l'indirizzo email dell'account}}
+La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all'aggiornamento
 dell'indirizzo di posta elettronica di un utente registrato con credenziali di sistema
-e autenticato, evidenziando la procedura mediante uno Swimlane Diagram.
+e autenticato, evidenziando i passi della procedura mediante uno Swimlane Diagram.
+Le condizioni \textit{annulla operazione} e \textit{conferma operazione}
+sottolineano il fatto che l'utente può interrompere la procedura di migrazione
+qualora lo ritenga opportuno.
+
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/ucdiagrams/swimlaneemail.pdf}
+\includegraphics[scale = 0.9]{materiale/ucdiagrams/swimlaneemail.pdf}
 \caption{SD dello scenario di aggiornamento dell'indirizzo email}
 \label{slemail}
 \end{figure}
 
-
-
-\subsection*{Swimlane Diagram per \textit{Aggiornare la password dell'account}}
+\subsection*{\textit{Aggiornare la password dell'account}}
 La Figura \ref{slpassword} fa riferimento allo Use Case relativo all'aggiornamento
 della password dell'account di un utente registrato con credenziali di sistema e autenticato.
+Durante il processo di aggiornamento, l'utente ha la facoltà di interrompere
+la procedura qualora non intenda più modificare la password. Da qui il
+significato delle condizioni \textit{annulla operazione} e \textit{conferma
+operazione}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{materiale/ucdiagrams/swimlanepassword.pdf}
+\includegraphics[scale=0.85]{materiale/ucdiagrams/swimlanepassword.pdf}
 \caption{SD dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
