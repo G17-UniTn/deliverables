@@ -81,21 +81,23 @@ design del sistema ricorrendo a diagrammi di contesto e dei componenti.
 \newpage
 \section{Requisiti funzionali}
 In questa sezione vengono descritti i requisiti funzionali (RF) del
-servizio utilizzando Use Case Diagrams (UCD) e Swimlane Diagrams (SD), disegnati secondo
-gli standard UML, ed eventualmente arricchiti da descrizioni in linguaggio
-naturale.
+progetto utilizzando Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
+disegnati secondo gli standard UML, ed eventualmente arricchiti da
+descrizioni in linguaggio naturale\footnote{Gli use cases più semplici
+presenti nei diagrammi non vengono descritti in altri modi, essendo
+autoesplicativi.}.
 
+\subsection{Accesso e autenticazione}
+La Figura \ref{access} mostra gli use cases che rappresentano i seguenti
+requisiti funzionali descritti nel documento D1: \textbf{RF 1}-Registrazione,
+\textbf{RF 2}-Login, \textbf{RF 3}-Autenticazione Google, \textbf{RF 4}-Recupero
+password.
 
-\subsection{Accesso}
-\begin{itemize}
-    \item \textbf{RF 1.} Registrazione
-    \item \textbf{RF 2.} Login
-    \item \textbf{RF 3.} Recupero password
-\end{itemize}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.7]{materiale/ucdiagrams/ucaccesso.pdf}
-\caption{UCD relativo all'accesso al servizio}
+\includegraphics[scale=0.72]{materiale/ucdiagrams/ucaccesso.pdf}
+\caption{UCD relativo ai RF inerenti all'accesso alla piattaforma}
+\label{access}
 \end{figure}
 
 \subsection*{Descrizione Use Case \textit{Registrare un nuovo account}}
@@ -108,27 +110,29 @@ naturale.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente anonimo accede alla pagina dedicata e sceglie tra la registrazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
-        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email valida e una password conforme. \verb|[exception 1]|\verb|[exception 2]|
-        \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 3]|
-        \item L'account viene registrato dal servizio di database.
+        \item L'utente anonimo accede alla pagina dedicata, raggiungibile da quella di login, e sceglie tra la modalità di registrazione con il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email e una password conforme. \verb|[exception 1]|
+        \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 2]|
+        \item I dati vengono raccolti e il relativo account viene registrato dal servizio di database.\texttt{[exception 3]}
     \end{enumerate}
     
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \verb|[exception 1]| Se l'email inserita è malformata, inesistente o associata ad un account già registrato, la registrazione non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 2]| Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
-        \item \verb|[exception 3]| Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \texttt{[exception 1]} Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \texttt{[exception 2]} Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \texttt{[exception 3]} Se l'email inserita dall'utente risulta essere già impiegata in un altro account, la registrazione non può proseguire e l'utente viene avvisato.
     \end{itemize}
 
     \item[Extensions:]
     \begin{itemize}
         \item[]
         \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un proprio account Google, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
+        In questo caso, oltre a scegliere l'email come previsto dal servizio di Google, l'utente specifica l'username.
     \end{itemize}
 \end{description}
 
+\newpage
 \subsection*{Descrizione Use Case \textit{Effettuare il login}}
 \begin{description}
     \item[Titolo:] Login
@@ -188,27 +192,32 @@ naturale.
 
 
 \newpage
-\subsection{Consultazione dei problemi}
-\begin{itemize}
-    \item \textbf{RF 4.} Consultazione del catalogo dei problemi
-    \item \textbf{RF 5.} Consultazione di un problema
-    \item \textbf{RF 8.} Metadati aggiuntivi
-    \item \textbf{RF 9.1.} Progressi
-\end{itemize}
-\subsection*{2.5\texttt{ }\textit{ } Gestione del catalogo dei problemi}
-\begin{itemize}
-    \item \textbf{RF 12.} Aggiungere un problema
-    \item \textbf{RF 13.} Modificare un problema
-    \item \textbf{RF 14.} Eliminare un problema
-\end{itemize}
+\subsection{Consultazione dei problemi e profilo}
+In Figura \ref{catalogueprobs} sono mostrati gli use cases che illustrano
+le funzionalità che interessano l'utente (anonimo, autenticato e amministratore)
+nell'ambito della constultazione e manipolazione del catalogo e del contenuto
+dei problemi. In particolar modo, sono stati isolate nel diagramma le funzionalità
+fruibili nella home page e nella pagina di consultazione
+del singolo problema (si vedano \textbf{FE 3}, \textbf{FE 4} e \textbf{FE pagina edit catalogo} nel documento D1).
+
+I requisiti descritti sono: \textbf{RF 5} - Consultazione del catalogo,
+\textbf{RF 6} - Consultazione di un problema, \textbf{RF 10} - Metadati aggiuntivi,
+\textbf{RF 11.2} - Visualizzare i Progressi, \textbf{RF 12}  Aggiungere un problema,
+\textbf{RF 13} - Modificare un problema, \textbf{RF 14} - Eliminare un problema.
+Questi ultimi tre, relativi all'utente amministratore, sono riassunti nello use case
+\textit{Modificare il catalogo dei problemi}, che include le tre azioni opzionali (da
+cui le clausole \texttt{extend} nel diagramma).
+
 
 \begin{figure}[H]
 \centering
-\hspace*{-1cm}
-\includegraphics[scale=0.57]{materiale/ucdiagrams/ucproblemi.pdf}
-\caption{UCD relativo alla consultazione dei problemi e alla modifica del catalogo}
+\hspace*{-2cm}
+\includegraphics[scale=0.75]{materiale/ucdiagrams/ucproblemi.pdf}
+\caption{UCD relativo alla consultazione dei problemi, modifica del catalogo e visualizzazione progressi}
+\label{catalogueprobs}
 \end{figure}
 
+\newpage
 \subsection*{Descrizione Use Case \textit{Aggiungere problemi}}
 \begin{description}
     \item[Titolo:] Aggiungere un problema
@@ -220,7 +229,7 @@ naturale.
     \begin{enumerate}
         \item[]
         \item L'utente amministratore accede alla pagina del catalogo e sceglie di aggiungere un nuovo problema.
-        \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno tre esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link al video-suggerimento.
+        \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno due esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link al video-suggerimento.
         \item L'utente inserisce almeno 3 test cases; ogni test case consiste in un dato in input e il rispettivo output corretto.
         \item L'utente conferma la creazione del problema, che viene quindi aggiunto al catalogo; alternativamente, l'utente può scegliere di annullare la creazione del nuovo problema, previo avviso e conferma da parte del sistema.\texttt{[exception 1]}\texttt{[exception 2]}
     \end{enumerate}
@@ -259,17 +268,18 @@ naturale.
 
 \newpage
 \subsection{Esercitazione}
-\begin{itemize}
-    \item \textbf{RF 6.} Effettuare l'esercitazione
-    \item \textbf{RF 7.} Correttezza dell'algoritmo
-    \item \textbf{RF 9.1.} Registrare i progressi
-\end{itemize}
+La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
+che in qualche modo fanno parte del contesto di esercitazione su uno specifico problema. Pertanto,
+i requisiti rappresentati qui sono i seguenti: \textbf{RF 7} - Effettuare l'esercitazione,
+\textbf{RF 8} - Verifica della correttezza dell'algoritmo, \textbf{RF 11.1} - Registrazione dei
+Progressi.
 
 \begin{figure}[H]
 \centering
 \hspace*{-1.8cm}
 \includegraphics[scale=0.9]{materiale/ucdiagrams/ucesercitazione.pdf}
 \caption{UCD con riferimenti ai requisiti relativi all'esercitazione}
+\label{esercitaz}
 \end{figure}
 
 \subsection*{Descrizione dell'esercitazione}
