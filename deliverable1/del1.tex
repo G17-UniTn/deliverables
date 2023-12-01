@@ -11,10 +11,11 @@
 \usepackage{float} % per posizionamento immagini
 \usepackage{amsthm}
 \usepackage{fancyhdr}
+\usepackage[font=small,labelfont=bf]{caption} % small font for caption (and bold Figure word)
 
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
-\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.1}
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.3}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -107,66 +108,70 @@ individui appena descritti verrà indicato con il termine \textit{utenti}.
 
 \newpage
 \section{Requisiti funzionali}
-Vengono di seguito elencati i principali requisiti funzionali (RF)
+Vengono di seguito elencati i requisiti funzionali (RF)
 del progetto. Ogni sottosezione di questa parte del documento
 risponde a diversi scopi precedentemente accennati, suddividendo
-eventuali macro-funzioni in requisiti minori nel caso di obiettivi
+eventuali macro-funzionalità in requisiti minori nel caso di obiettivi
 di più ampia portata.
 \\\\
 \noindent Le funzionalità sono inoltre suddivise secondo alcuni livelli di accesso
 degli utenti (di seguito in ordine "crescente"):
 \begin{itemize}
-    \item \textit{Utente anonimo.}
-    \item \textit{Utente autenticato.}
-    \item \textit{Utente amministratore.}
+    \item \textit{Utente anonimo} (Sezioni 2.1, 2.2, 2.3).
+    \item \textit{Utente autenticato} (Sezione 2.4).
+    \item \textit{Utente amministratore} (Sezione 2.5).
 \end{itemize}
 Si precisa che un utente presente ad un dato livello di accesso può usufurire
 delle funzionalità disponibili a quel livello \textit{più} le funzionalità
 presenti al livello inferiore. Non è invece possibile utilizzare le funzionalità
-messe a disposizione a livelli superiori.
+messe a disposizione a eventuali livelli superiori.
 
 \begin{center}
 \section*{Utente anonimo}    
 \end{center}
 
 
-\subsection{Accesso}
+\subsection{Accesso e autenticazione}
+
 
 \begin{funcreq}
 \label{signup}
-\textbf{Registrazione }
+\textbf{Registrazione\footnote{Si denoterà con l'aggettivo \textit{registrato} un qualsiasi
+utente che abbia precedentemente effettuato la registrazione e pertanto dotato di un account.} }
 I nuovi utenti devono poter registrarsi al servizio, ovvero creare un account che
 richiede la compilazione dei seguenti campi:
 \begin{itemize}
-    \item Nome utente.
-    \item Indirizzo di posta elettronica.
+    \item Nome utente (\textit{username}).
+    \item Indirizzo di posta elettronica (\textit{email}).
     \item Password: data la sensibilità di questo campo, è importante
-    che siano rispettati i vincoli del \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}};
+    che siano rispettati i vincoli riportati in \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}};
     inoltre, l'utente deve poter riscrivere la password per confermarla, in
     modo tale da rilevare eventuali errori di digitazione.
 \end{itemize}
-In alternativa, l'utente deve poter effettuare la registrazione collegando un account
-Google.
 \end{funcreq}
-
-\noindent Si denoterà con l'aggettivo \textit{registrato} un qualsiasi
-utente che abbia precedentemente effettuato la registrazione.
 
 \begin{funcreq}
 \label{login}
 \textbf{Login }
-Il sistema deve permettere all'utente già registrato al servizio di
-accedere alla piattaforma mediante l'inserimento dell'indirizzo
-email e la password, impostate in fase di registrazione. L'utente deve
+Il sistema deve permettere all'utente registrato di autenticarsi,
+accedendo al proprio account, mediante l'inserimento dell'indirizzo
+email e la password impostate in fase di registrazione. L'utente deve
 essere notificato qualora non sia possibile concludere correttamente
-l'operazione di login, quindi se l'email inserita non sia registrata o
-la password non corrisponda; è comunque possibile ritentare il login un
-numero illimitato di volte.
+l'operazione di login, quindi se l'email inserita non è associata ad alcun
+account registrato in precedenza oppure se la password è errata;
+è comunque possibile ritentare il login un numero illimitato di volte.
+Effettuato il login, l'utente accede alle funzionalità del livello \textit{autenticato}.
 \end{funcreq}
 
-\noindent
-Effettuato il login, l'utente registrato e anonimo rientra nella categoria degli
-\textit{utenti autenticati}.
+\begin{funcreq}
+\label{google}
+\textbf{Autenticazione Google }
+L'utente deve poter registrarsi ed effettuare il login sulla piattaforma
+utilizzando un account Google, qualora non intenda ricorrere al sistema di
+autenticazione interno descritto precedentemente (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup}}}}, \textcolor{blue}{\underbar{\hyperref[login]{RF \ref*{login}}}}).
+In caso di registrazione, oltre alle operazioni previste dal servizio Google
+(come la scelta dell'indirizzo email), l'utente deve solo specificare un username.
+\end{funcreq}
 
 \begin{funcreq}
 \label{savepassword}
@@ -183,7 +188,10 @@ procedura di recupero deve prevedere:
     \item L'inserimento di una nuova password nella pagina dedicata. La password, come in fase di
     registrazione, deve essere confermata e conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{itemize}
-
+Il recupero deve essere accessibile a tutti gli utenti registrati mediante
+sistema di credenziali interno (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup}}}}, \textcolor{blue}{\underbar{\hyperref[login]{RF \ref*{login}}}}),
+e non riguarda gli utenti registratisi mediante autenticazione Google
+(\textcolor{blue}{\underbar{\hyperref[google]{RF \ref*{google}}}}).
 \end{funcreq}
 
 \subsection{Consultazione dei problemi}
@@ -199,15 +207,15 @@ essere possibile:
     \item Visualizzare tale catalogo, che mostra i campi \textit{descrittivi}
     di ogni problema elencato:
     \begin{itemize}
-        \item \textit{Nome.}
+        \item \textit{Nome:} una parola chiave priva di spazi.
         
-        \item \textit{Difficoltà:} vengono definiti tre livelli indicativi
-        della difficoltà: bassa, intermedia, alta.
+        \item \textit{Difficoltà:} i problemi sono categorizzati in base alla
+        loro difficoltà. Vengono definiti tre livelli indicativi:
+        bassa, intermedia, alta.
         
-        \item \textit{Categoria:} si tratta della principale area di interesse
-        del problema, come ad esempio le strutture di dati coinvolte
-        (array, grafi, ecc.), oppure l'obiettivo principale (come ricerca
-        e ordinamento).
+        \item \textit{Tags:} un insieme di parole chiave che individuano una
+        o più aree di interesse affrontate nel problema (ad esempio ricerca,
+        grafi, ordinamento, hashing, ecc.)
 
         \item \textit{Suggerimento:} viene messo a disposizione, per ogni
         problema nel catalogo, un video in cui vengono trattate nozioni che
@@ -218,10 +226,10 @@ essere possibile:
     
     \item Cercare uno o più problemi specifici mediante ricerca filtrata per campi.
     Ai fini della consultazione del catalogo, i filtri applicabili riguardano i
-    campi \textit{nome, difficoltà, categoria}.
+    campi \textit{nome, difficoltà, tags}.
 
-    \item Selezionare dal catalogo un problema specifico, cosicché la
-    descrizione dell'intero problema possa essere visionata per mezzo
+    \item Selezionare dal catalogo un problema specifico, cosicché
+    il contenuto dell'intero problema possa essere visionato per mezzo
     delle funzionalità di cui al \textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}.
 \end{enumerate}
 \end{funcreq}
@@ -229,7 +237,7 @@ essere possibile:
 \begin{funcreq}
 \label{seeproblem}
 \textbf{Consultazione di un problema }
-Deve essere fornito un visualizzatore che mostri le informazioni del
+Deve essere fornito un visualizzatore che mostra le informazioni del
 problema precedentemente selezionato dal catalogo. La visualizzazione
 deve rendere disponibile alla vista dell'utente i contenuti del
 problema (\textit{dati strutturali}):
@@ -252,7 +260,7 @@ messe a dispoizione le funzionalità di cui al \textcolor{blue}{\underbar{\hyper
 \subsection{Esercitazione}
 \begin{funcreq}
 \label{exesession}
-\textbf{Avviare un'esercitazione }
+\textbf{Effettuare un'esercitazione }
 L'utente deve poter scegliere dal catalogo il problema desiderato e cominciare
 a risolverlo. L'esercitazione deve avvenire in una vista apposita, dove
 l'utente deve poter disporre di tutti gli strumenti necessari alla risoluzione
@@ -261,9 +269,6 @@ del problema, accedendo alle seguenti funzionalità:
     \item Visualizzare il contenuto dell'esercizio (\textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}).
     
     \item Visualizzare i test cases (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}}).
-
-    \item Avviare, fermare e reimpostare a 0 secondi un cronometro per
-    mantenere traccia del tempo speso per risolvere il quesito scelto.
 
     \item Essere al corrente di quale linguaggio di programmazione sia
     attualmente attivo per la scrittura di codice. Deve altresì essere 
@@ -279,7 +284,8 @@ del problema, accedendo alle seguenti funzionalità:
 L'esercitazione non è da confondersi come "sessione" registrabile dalla
 piattaforma. In altre parole, l'utente può accedere all'area di esercitazione
 (selezionando un problema) e abbandonarla in qualsiasi momento, ma nessun
-dato cronologico o di altra natura, riguardo a tali azioni, deve essere memorizzato.
+dato cronologico o di altra natura, riguardo a tali azioni, deve essere memorizzato,
+nemmeno nel caso in cui l'utente in questione sia autenticato.
 \end{funcreq}
 
 
@@ -297,7 +303,6 @@ dato cronologico o di altra natura, riguardo a tali azioni, deve essere memorizz
 %\end{enumerate}
 %\end{funcreq}
 
-\newpage
 \begin{funcreq}
 \label{test}
 \textbf{Verifica della correttezza dell'algoritmo }
@@ -305,16 +310,15 @@ L'utente deve poter verificare la correttezza del codice scritto eseguendolo
 e testandolo:
 \begin{enumerate}
     \item Il codice deve essere eseguito sottoponendolo ad un certo numero
-    di test cases (al minimo 3), cioè fornendo opportune istanze di input
-    (Per esempio, se un problema richiede di sommare due numeri interi, il
-    codice risolutivo proposto dall'utente verrà eseguito fornendo ad esso
-    coppie di interi e registrando i suoi risultati di output.)
+    di test cases, cioè fornendo opportune istanze di input e controllando
+    l'output restituito. Il numero minimo di test cases per ogni problema
+    corrisponde a 3.
 
     \item L'utente deve poter conoscere l'esito dei test case—per ognuno
     di questi, l'input e l'output atteso sono visibili. Inoltre, l'utente
     deve poter riscrivere e perfezionare l'algoritmo e sottoporre ripetutamente
     il codice ai test cases.
-    
+
     Nel caso in cui l'esito dei test cases dovesse risultare negativo, l'utente
     viene avvisato senza fare riferimento agli errori commessi, siano essi
     relativi alla correttezza sintattica del codice oppure riguardanti la
@@ -322,6 +326,18 @@ e testandolo:
 \end{enumerate}
 \end{funcreq}
 
+\begin{funcreq}
+    \textbf{Cronometro: }
+    L'utente deve poter tenere traccia del tempo trascorso sulla piattaforma,
+    ad esempio per conoscere il tempo impiegato per risolvere un problema.
+    Quindi, l'utente deve poter avviare, interrompere e reimpostare a 0 secondi un
+    cronometro. Il cronometro è disponibile in qualsiasi momento, sia durante
+    la navigazione nel catalogo che durante la consultazione del problema
+    e l'esercitazione.
+\end{funcreq}
+% cosa succede al cronometro se faccio altre cose tipo logout login e così via?
+
+\newpage
 \begin{center}
     \section*{Utente autenticato}
 \end{center}
@@ -329,7 +345,7 @@ e testandolo:
 Nei seguenti requisiti funzionali, si suppone che l'utente appartenga al livello
 di accesso \textit{autenticato}, qualora tale informazione dovesse essere omessa.
 Si sottolinea nuovamente che l'utente autenticato eredita le stesse funzionalità
-accessibili all'utente anonimo.
+accessibili all'utente anonimo e descritte precedentemente.
 \\
 \begin{funcreq}
     \textbf{Metadati aggiuntivi }
@@ -348,14 +364,18 @@ accessibili all'utente anonimo.
     che \textit{stato} e \textit{preferito} non sono attributi del problema in sé,
     bensì essi caratterizzazno la relazione tra un particolare utente autenticato e i
     problemi: ogni utente ha un proprio insieme di problemi preferiti e risolti,
-    potenzialmente diverso da quelli di altri.
+    potenzialmente diverso da quelli di altri utenti registrati.
 \end{funcreq}
 
-\newpage
-\subsection{Gestione del profilo e dell'account}
+\subsection{Gestione del profilo}
+Indichiamo con il termine \textit{profilo} tutti i dati relativi all'attività
+di un utente registrato e/o autenticato sulla piattaforma. Sono dunque inclusi
+l'\textit{account} e i \textit{progressi} (\textcolor{blue}{\underbar{\hyperref[stats]{RF \ref*{stats}}}}).
+
 \begin{funcreq}
 \label{stats}
-\textbf{Progressi }
+\textbf{Progressi } risolvendo i problemi, l'utente autenticato può migliorare
+i propri \textit{progressi}.
 \begin{enumerate}
     \item Il servizio deve prevedere il tracciamento dei progressi di ogni
     utente autenticato, incrementando il numero di problemi risolti ad ogni
@@ -363,7 +383,7 @@ accessibili all'utente anonimo.
     \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}}}},
     dopo la risoluzione, il problema deve essere contrassegnato come
     \textit{risolto} (ciò modifica il campo \textit{stato} visibile nel catalogo
-    e nella pagina di consultazione ed esercitazione di quel problema).
+    e nell'area di consultazione ed esercitazione di quel problema).
 
     \item L'utente deve poter monitorare i propri progressi, accedendo ai dati
     seguenti:
@@ -477,8 +497,8 @@ La piattaforma del servizio deve permettere all'utente di sfruttare le
 funzionalità disponibili al proprio livello di accesso senza l'ausilio di
 istruzioni scritte e verbose. L'intuitività dell'interfaccia deve essere
 sufficiente a guidare l'utente nella realizzazione dei suoi scopi,
-permettendo di imparare almeno il 90\% delle funzionalità del servizio in
-meno di 30 minuti. 
+permettendo di venire a conoscenza di almeno il 90\% delle funzionalità del
+servizio in meno di 30 minuti. 
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -486,14 +506,18 @@ meno di 30 minuti.
 L'interfaccia deve presentarsi gradevole alla vista dell'utente, preferendo
 gradazioni cromatiche scure e un contrasto sufficientemente equilibrato,
 al fine di garantire la leggibilità e contribuire alla riduzione
-dell'affaticamento della vista.
+dell'affaticamento della vista. Una motivazione a supporto di questo requisito
+è il potenziale rischio di sessioni di navigazione eccessivamente prolungate sulla piattaforma.
 \end{nonfuncreq}
 
+%QUESTIONE LINGUA: dato che gli amministratori possono essere persone qualunque, chi garantisce che scriveranno testi e useranno video-suggerimento in ita/eng? specifichiamo una policy?
 \begin{nonfuncreq}
 \textbf{Lingua di sistema }
-Il servizio viene erogato in lingua italiana. Altrettanto viene fatto per i
-testi dei problemi. I video relativi alla soluzione dei problemi possono
-essere in italiano oppure in inglese.
+Il servizio viene erogato in lingua italiana.
+
+%Altrettanto viene fatto per i
+%testi dei problemi. I video relativi alla soluzione dei problemi possono
+%essere in italiano oppure in inglese.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -502,7 +526,7 @@ L'esperienza di utilizzo deve poter essere soddisfacente in relazione
 ai livelli di prestazioni dei moderni siti web, purché l'utente utilizzi
 il servizio in condizioni di connettività sufficienti. In particolare,
 i tempi di reazione relativi a caricamenti e transizioni tra pagine non
-deve eccedere i 2 secondi.
+deve eccedere, indicativamente, i 2 secondi.
 \end{nonfuncreq}
 
 \subsection{Affidabilità}
@@ -552,8 +576,8 @@ riservatezza dei dati scambiati tra piattaforma e client utente.
 \begin{nonfuncreq}
 \label{legalpassword}
 \textbf{Password strength }
-In tutti gli scenari nei quali è richiesto l'inserimento di una password,
-devono essere rispettate le seguenti caratteristiche:
+In tutti gli scenari nei quali è richiesta la creazione di una password,
+la stringa inserita deve rispettare le seguenti caratteristiche:
 \begin{itemize}
     \item Lunghezza compresa tra 8 e 64 caratteri.
     \item Contenere almeno una lettera maiuscola.
@@ -649,36 +673,45 @@ autenticato.
 
 \newpage
 \section{Design back-end}
-Nella sezione seguente vengono elencati i servizi con i quali la piattaforma
-interagisce per ottenere supporto e realizzare in tal modo le sue funzionalità.
+Nella sezione seguente vengono elencati i servizi esterni con i quali
+la piattaforma \textit{SleepCode} interagisce per funzionare
+correttamente, o per ricevere supporto mirato a soddisfare i propri requisiti.
+In Figura \ref{backend} viene riassunto l'insieme di questi servizi esterni
+e il ruolo che essi svolgono nell'interazione, in ambito back-end (BE),
+con il progetto da realizzare.
 
 \begin{backend}
-\textbf{Servizio di autenticazione Google }
-L'utente potrà scegliere di autenticarsi mediante un account Google.
+\textbf{Servizio di autenticazione alternativo }
+L'utente può scegliere di registrarsi e accedere all'account sulla piattaforma
+mediante un account Google. Questo servizio offre all'utente un meccanismo di
+autenticazione alternativo al sistema di credenziali interno, realizzando quando
+descritto in \textcolor{blue}{\underbar{\hyperref[google]{RF \ref*{google}}}}.
 \end{backend}
 
 \begin{backend}
 \textbf{Contenuti multimediali }
-Per reperire e riprodurre i video contenenti le soluzioni dei problemi,
-il servizio si affiderà alla piattaforma YouTube.
+Per reperire e riprodurre i video contenenti i suggerimenti dei problemi (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}),
+il servizio si ricorre alla piattaforma YouTube.
 \end{backend}
 
 \begin{backend}
 \textbf{Database }
-Verrà impiegato il servizio di database Firebase per la memorizzazione
-degli utenti, dei problemi del catalogo e di tutti i dati associati.
+La memorizzazione degli account degli utenti, dei problemi disponibili
+nel catalogo e dei dati annessi si affida al servizio di database offerto
+da Firebase.
 \end{backend}
-% alternativa: mongoDB
 
 \begin{backend}
 \textbf{Notifica via posta elettronica }
-L'invio dei messaggi email sarà gestito da servizi di posta elettronica di terze parti.
+L'invio dei messaggi email, ai fini del recupero dell'account (\textcolor{blue}{\underbar{\hyperref[savepassword]{RF \ref*{savepassword}}}}), viene gestito da servizi di posta elettronica di terze parti.
 \end{backend}
 % possibili candidati: gmail
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.35]{materiale/immaginife/backend.pdf}
+\caption{Diagramma di back-end con i servizi esterni su cui il progetto si appoggia}
+\label{backend}
 \end{figure}
 
 %\newpage
@@ -689,6 +722,7 @@ L'invio dei messaggi email sarà gestito da servizi di posta elettronica di terz
 %    \item \textit{Versione 2.0:} definizione dei livelli di accesso e conseguente estensione delle funzionalità.
 %    \item \textit{Versione 2.1:} ridefinizione delle funzionalità del livello amministratore.
 %    \item \textit{Versione 2.2:} eliminazione RF sulla correttezza sintattica del codice; aggiornato il ruolo amministratore.
+%    \item \textit{Versione 2.3:} chiarificazioni sul ruolo e sulle funzionalità del cronometro.
 %\end{itemize}
 
 \end{document}
