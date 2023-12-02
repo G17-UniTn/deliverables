@@ -356,7 +356,8 @@ operazione}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.85]{materiale/ucdiagrams/swimlanepassword.pdf}
+\hspace*{-0.7cm}
+\includegraphics[scale = 0.95]{materiale/ucdiagrams/swimlanepassword.pdf}
 \caption{SD dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
@@ -560,35 +561,41 @@ e quantitativa di tali requisiti.
 In questa sezione viene descritto il contesto di funzionamento del sistema
 \textit{SleepCode} e come esso interagisce con gli attori esterni. Si
 ricorre ad una descrizione testuale riassunta in una rappresentazione
-grafica mediante un Diagramma di Contesto (Figura \ref{contextdiagram}).
+grafica mediante un Diagramma di Contesto (Figura \ref{contextdiagram}),
+nel quale sono specificati, ad alto livello, i flussi di informazioni
+essenziali al funzionamento del sistema.
 
 \subsection{Utenti e sistemi esterni} % chi interagisce, chi usa e chi supporta (sia software che umano)
+Sono elencati di seguito gli attori esterni che compongono il contesto
+del sistema in sviluppo. Essi fanno riferimento ad alcuni dei requisiti
+funzionali definiti nel documento D1.
+
 \subsubsection{Utente}
 L'utente rappresenta l'attore che usufruisce delle funzionalità del servizio
-—viene descritto nei requisiti dal \textbf{RF 1} al \textbf{RF 7} per quanto
-concerne il livello anonimo e quelli superiori; dal \textbf{RF 8} al
-\textbf{RF 11} in relazione ai livelli autenticato e amministratore; \textbf{RF 12},
-\textbf{RF 13} e \textbf{RF 14} per quanto riguarda il livello amministratore.
+—viene descritto nei requisiti dal \textbf{RF 1} al \textbf{RF 9} per quanto
+concerne il livello anonimo e quelli superiori; dal \textbf{RF 10} al
+\textbf{RF 13} in relazione ai livelli autenticato e amministratore; \textbf{RF 14},
+\textbf{RF 15} e \textbf{RF 16} per quanto riguarda il livello amministratore.
 
-\subsubsection{Firebase DB}
-Il servizio di database impiegato per gestire le credenziali e l'account
+\subsubsection{Firebase}
+Il servizio di database impiegato per gestire le credenziali e il profilo
 degli utenti registrati alla piattaforma—i requisiti coinvolti sono: \textbf{RF 1},
-\textbf{RF 2}, \textbf{RF 3}, \textbf{RF 9}, \textbf{RF 10}—e per gestire il
-catalogo dei problemi—\textbf{RF 12}, \textbf{RF 13}, \textbf{RF 14}.
+\textbf{RF 2}, \textbf{RF 3}, \textbf{RF 4}, \textbf{RF 9}, \textbf{RF 10}—e per gestire il
+catalogo dei problemi—\textbf{RF 14}, \textbf{RF 15}, \textbf{RF 16}.
 
 \subsubsection{Google Sign-In}
-Servizio di autenticazione alternativo al sistema di credenziali interno
-—\textbf{RF 1}, \textbf{RF 2}.
+Il servizio di autenticazione alternativo al sistema di credenziali interno
+—\textbf{RF 3}.
 
 \subsubsection{YouTube}
 Il servizio di contenuti multimediali che fornisce i video che integrano
-i problemi, mettendo a disposizione dell'utente un suggerimento per lo
-svolgimento dell'esercizio—\textbf{RF 4.1}, \textbf{RF 6.6}.
+i problemi del catalogo, mettendo a disposizione dell'utente un suggerimento per lo
+svolgimento dell'esercizio—\textbf{RF 5.1}.
+%\textbf{RF 7.5}??
 
 \subsubsection{Servizio di posta elettronica}
-Sistema di notifica utilizzato per effettuare le operazioni di recupero
-dell'account (\textbf{RF 3}) e di migrazione a nuovo indirizzo di posta
-elettronica da associare all'account (\textbf{RF 10}).
+Sistema di notifica sul quale il progetto si poggia per creare un
+meccanismo di recupero dell'account—\textbf{RF 4}.
 
 \newpage
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
@@ -600,7 +607,7 @@ funzionali che vengono soddisfatti grazie a tali interazioni.
 
 \begin{figure}[H]
 \centering
-\hspace*{-2.6cm}
+\hspace*{-2.4cm}
 \includegraphics[scale=0.65]{materiale/contextdiagram.pdf}
 \caption{Context Diagram della piattaforma \textit{SleepCode}}
 \label{contextdiagram}
@@ -638,9 +645,9 @@ o migrazione dell'indirizzo email, e fornire le nuove credenziali. Il
 sistema richiede la conferma di tali operazioni mediante l'invio, da parte
 dell'utente, delle opportune credenziali.
 
-\subsubsection*{Firebase DB}
-Firebase DB provvede alla memorizzazione del catalogo (con relativi problemi) e dei
-dati relativi agli utenti registrati ed eventualmente autenticati (credenziali
+\subsubsection*{Firebase}
+Firebase provvede alla memorizzazione del catalogo (con relativi problemi) e dei
+dati associati agli utenti registrati ed eventualmente autenticati (credenziali
 interne, preferiti, progressi) e alla ricezione di modifiche apportate a questi oggetti.
 
 \subsubsection*{Google Sign-In}
