@@ -201,8 +201,8 @@ del singolo problema (si vedano \textbf{FE 3}, \textbf{FE 4} e \textbf{FE pagina
 
 I requisiti descritti sono: \textbf{RF 5} - Consultazione del catalogo,
 \textbf{RF 6} - Consultazione di un problema, \textbf{RF 10} - Metadati aggiuntivi,
-\textbf{RF 11.2} - Visualizzare i Progressi, \textbf{RF 12}  Aggiungere un problema,
-\textbf{RF 13} - Modificare un problema, \textbf{RF 14} - Eliminare un problema.
+\textbf{RF 11.2} - Visualizzare i Progressi, \textbf{RF 14}  Aggiungere un problema,
+\textbf{RF 15} - Modificare un problema, \textbf{RF 16} - Eliminare un problema.
 Questi ultimi tre, relativi all'utente amministratore, sono riassunti nello use case
 \textit{Modificare il catalogo dei problemi}, che include le tre azioni opzionali (da
 cui le clausole \texttt{extend} nel diagramma).
@@ -210,8 +210,8 @@ cui le clausole \texttt{extend} nel diagramma).
 
 \begin{figure}[H]
 \centering
-\hspace*{-2cm}
-\includegraphics[scale=0.75]{materiale/ucdiagrams/ucproblemi.pdf}
+\hspace*{-1.5cm}
+\includegraphics[scale=0.68]{materiale/ucdiagrams/ucproblemi.pdf}
 \caption{UCD relativo alla consultazione dei problemi, modifica del catalogo e visualizzazione progressi}
 \label{catalogueprobs}
 \end{figure}
@@ -307,18 +307,22 @@ e \textit{Registrare i progressi}}
 
 
 \newpage
-\subsection{Gestione del profilo e dell'account}
-\begin{itemize}
-    \item \textbf{RF 9.2.} Progressi
-    \item \textbf{RF 10.} Aggiornamento dei dati dell'account
-    \item \textbf{RF 11.} Logout
-\end{itemize}
+\subsection{Gestione dell'account}
+In Figura \ref{accountfig} sono riassunti gli use cases che descrivono
+le operazioni possibili per gli utenti dotati di account. Come già accennato
+nel documento D1, \textit{Aggiornare l'indirizzo email dell'account} e
+\textit{Aggiornare la password dell'account} sono possibili solo a utenti
+autenticati con sistema di credenziali interno. Questo fatto è appunto
+sottolineato dalla presenza dell'attore \textit{Firebase}. Si fa riferimento
+ai seguenti requisiti funzionali:
+\textbf{RF 12} - Aggiornamento account, \textbf{RF 13} - Logout
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.4cm}
-\includegraphics[scale = 0.8]{materiale/ucdiagrams/ucaccount.pdf}
-\caption{UCD relativo alle funzionalità aggiuntive dell'utente autenticato}
+%\hspace*{-1.8cm}
+\includegraphics[scale = 0.95]{materiale/ucdiagrams/ucaccount.pdf}
+\caption{UCD relativo alle funzionalità dell'account}
+\label{accountfig}
 \end{figure}
 
 
