@@ -66,7 +66,7 @@ Zeno \textsc{Saletti}}
 Il presente documento riporta la specifica dei requisiti di sistema
 del progetto SleepCode. Viene in particolare estesa la descrizione
 in linguaggio naturale, impiegato nel documento di Analisi dei Requisiti
-(\textit{D1}), attraverso strumenti di modellazione più formali—diagrammi
+(D1), attraverso strumenti di modellazione più formali—diagrammi
 realizzati secondo gli standard indicati da \textit{Unified Modeling Language}
 (UML) per quanto riguarda i requisiti funzionali; tabelle strutturate
 per i requisiti non funzionali.
@@ -78,7 +78,9 @@ design del sistema ricorrendo a diagrammi di contesto e dei componenti.
 \newpage
 \section{Requisiti funzionali}
 In questa sezione vengono descritti i requisiti funzionali (RF) del
-progetto utilizzando Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
+progetto, evidenziando la partecipazione degli attori esterni, ovvero
+l'utente finale e i servizi esterni a supporto del progetto. A tal
+proposito, vengono utilizzati Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
 disegnati secondo gli standard UML, ed eventualmente arricchiti da
 descrizioni in linguaggio naturale\footnote{Gli use cases più semplici
 presenti nei diagrammi non vengono descritti in altri modi, essendo
@@ -86,13 +88,13 @@ autoesplicativi.}.
 
 \subsection{Accesso e autenticazione}
 La Figura \ref{access} mostra gli use cases che rappresentano i seguenti
-requisiti funzionali descritti nel documento D1: \textbf{RF 1}-Registrazione,
+requisiti funzionali: \textbf{RF 1}-Registrazione,
 \textbf{RF 2}-Login, \textbf{RF 3}-Autenticazione Google, \textbf{RF 4}-Recupero
 password.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.72]{materiale/ucdiagrams/ucaccesso.pdf}
+\includegraphics[scale=0.67]{materiale/ucdiagrams/ucaccesso.pdf}
 \caption{UCD relativo ai RF inerenti all'accesso alla piattaforma}
 \label{access}
 \end{figure}
@@ -264,44 +266,39 @@ cui le clausole \texttt{extend} nel diagramma).
 \end{description}
 
 \newpage
-\subsection{Esercitazione}
+\subsection{Esercitazione e strumenti integrati}
 La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
 che in qualche modo fanno parte del contesto di esercitazione su uno specifico problema. Pertanto,
 i requisiti rappresentati qui sono i seguenti: \textbf{RF 7} - Effettuare l'esercitazione,
 \textbf{RF 8} - Verifica della correttezza dell'algoritmo, \textbf{RF 11.1} - Registrazione dei
-Progressi.
+Progressi. Tra gli altri strumenti disponibili insieme all'esercitazione,
+vengono anche inclusi in questo diagramma gli use cases associati al
+\textbf{RF 9} - Cronometro (si ricorda che il cronometro è indipendente dagli
+use cases dell'esercitazione, come appunto rispecchiato nel diagramma).
 
 \begin{figure}[H]
 \centering
 \hspace*{-1.8cm}
-\includegraphics[scale=0.9]{materiale/ucdiagrams/ucesercitazione.pdf}
+\includegraphics[scale=0.94]{materiale/ucdiagrams/ucesercitazione.pdf}
 \caption{UCD con riferimenti ai requisiti relativi all'esercitazione}
 \label{esercitaz}
 \end{figure}
 
+\newpage
 \subsection*{Descrizione dell'esercitazione}
-La Figura \ref{acexercise} mostra lo swimlane diagram che descrive gli
-use case relativi alla sessione di esercitazione. In particolare,
-viene mostrato in modo più preciso lo use case \textit{Effettuare
-l'esercitazione}, insieme a quelli correlati.
-
-Si intende soprattutto evidenziare la sequenza nella quale si
-susseguono eventuali azioni opzionali o eseguibili in parallelo,
-oltre alla reazione di altri attori (YouTube, Firebase DB) in
-risposta alla particolare categoria di utenti coinvolti, come in
-\textit{Registrare i progressi}, e alle scelte da loro effettuate,
-come \textit{Avviare e interrompere un cronometro} e \textit{Aprire
-il video di suggerimento}.
-
+La complessità di alcune operazioni relative all'esercitazione è
+catturata dalla Figura \ref{acexercise}.
 Dal momento che l'utente può decidere di uscire dall'area di esercitazione
 a propria discrezione, si sottolinea che il processo descritto nel diagramma
-può essere interrotto in qualsiasi momento (ciò è indicato dalla codizione
-\textit{Esci} nel diagramma).
+può essere interrotto in qualsiasi momento—ciò è indicato dalla codizione
+\textit{Esci} nel diagramma. La corsia \textit{Firebase} descrive le
+attività previste dallo use case \textit{Registrare i progressi}
+presente in Figura \ref{esercitaz}.
 
 \begin{figure}[H]
 \centering
-\hspace*{-0.5cm}
-\includegraphics[scale=0.47]{materiale/acesercitazione.pdf}
+\hspace*{-1cm}
+\includegraphics[scale=0.6]{materiale/sldesercitazione.pdf}
 \caption{SD, arricchito da elementi di Activity Diagram,
 per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
 e \textit{Registrare i progressi}}
