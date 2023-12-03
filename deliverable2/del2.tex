@@ -48,6 +48,13 @@ Zeno \textsc{Saletti}}
 
 \makeatletter{}
 
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 % IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -58,7 +65,7 @@ Zeno \textsc{Saletti}}
 % NON MODIFICARE QUESTO COMANDO!!!
 \input{materiale/elementi-copertina/copertina.tex}
 
-\tableofcontents
+\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione del testo:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice.}
 
 \afterpage{\cfoot{\thepage}}
 \newpage
