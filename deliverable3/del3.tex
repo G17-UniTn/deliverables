@@ -20,6 +20,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
+\fancyfoot[C]{\thepage} %add page number
 \fancyhead[C]{\footnotesize\textit{Documento:} D3 \hfill SleepCode \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
@@ -51,6 +52,13 @@ Zeno \textsc{Saletti}}
 
 \makeatletter{}
 
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 % IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -61,7 +69,7 @@ Zeno \textsc{Saletti}}
 % NON MODIFICARE QUESTO COMANDO!!!
 \input{materiale/elementi-copertina/copertina.tex}
 
-\tableofcontents
+\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione del testo:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice.}
 
 \newpage
 
@@ -78,13 +86,13 @@ codice, insieme alla logica che regola il comportamento del software che
 si intende realizzare.
 
 Il linguaggio UML, utilizzato per descrivere le classi, è supportato da
-codice OCL, impiegato invece per specificare gli aspetti logici citati sopra
-che non sarebbero esprimibili formalmente mediante i soli diagrammi delle
+codice OCL, impiegato invece per catturare gli aspetti logici citati sopra,
+che non sarebbero altrimenti esprimibili formalmente mediante i soli diagrammi delle
 classi.
 
 
 \newpage
-\section{Diagramma delle classi}
+\section{Definizione delle classi}
 Nella presente sezione vengono illustrate in linguaggio UML le classi
 previste dal progetto \textit{SleepCode}. Ogni componente del diagramma
 dei componenti, presente nel documento D2, viene qui rappresentato
@@ -201,16 +209,17 @@ un valore booleano di ritorno.
 
 
 \newpage
-\section{Codice in Object Constraint Language}
+\section{Specifiche in codice OCL}
 Nella sezione che segue viene descritta formalmente la logica prevista
 nel comportamento di alcune classi, in relazione alle loro operazioni
 possibili. Il codice OCL impiegato consente di esprimere tale logica,
 non descrivibile con i soli diagrammi delle classi in UML.
 
-
+\newpage
 \section{Diagramma delle classi con codice OCL}
 In Figura \ref{umlocl} è riportato un diagramma che mostra nell'insieme
-sia le classi individuate che il relativo codice OCL.
+sia le classi individuate che il relativo codice OCL, definiti nelle
+sezioni precedenti.
 
 \begin{figure}[H]
 \centering
