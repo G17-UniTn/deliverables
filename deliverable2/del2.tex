@@ -692,7 +692,7 @@ recupero dell'account (\textbf{RF 4}).
 % il sistema non sarà un programma monolitico che si occupa di tutto con un unico codice
 % provo a dividere il mio sistema in componenti e ragiono su come le informazioni vengono passate tra i componenti
 
-Nella sezione seguente viene descritta l'architettura interna del sistema
+Nella presente sezione viene descritta l'architettura interna del sistema
 rilevandone i componenti, definiti nei loro compiti sulla base dei requisiti
 analizzati nelle sezioni e nei documenti precedenti. L'architettura viene
 qui mostrata attraverso un Diagramma dei Componenti (Figura \ref{compdiagram}), che evidenzia
@@ -700,100 +700,18 @@ l'interconnessione tra i componenti interni, le interfacce presenti tra di
 essi e quelle esposte agli attori esterni. Segue una descrizione testuale
 e più dettagliata di ogni componente.
 
+\subsection{Diagramma dei componenti}
+\begin{figure}[H]
+\centering
+%\includegraphics[]{}
+\caption{Diagramma dei Componenti del sistema \textit{SleepCode}}
+\label{compdiagram}
+\end{figure}
 
-\subsection{Definizione dei componenti}
+\newpage
+\subsection{Definizione e descrizione dei componenti}
 In questa sezione sono descritti i componenti e le interfacce presenti
 all'interno del Diagramma dei Componenti.
-
-\iffalse
-\subsubsection{Pagina di Autenticazione}
-\begin{description}
-    \item[Descrizione:] questo componente ha il compito
-    principale di interagire con l'utente al fine di guidarlo
-    nelle procedure di accesso alla piattaforma.
-    La Pagina di Autenticazione si occupa della raccolta dei dati
-    utili ad effettuare il login e la registrazione
-    di un nuovo account. Essa offre inoltre la possibilità di
-    richiedere il recupero dell'account.
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-        \item \underline{Credenziali:} la pagina di accesso
-        richiede l'inserimento delle credenziali necessarie
-        per il login (una tupla email-password) e per la
-        registrazione (nome utente, email, password).
-
-        \item \underline{Richiesta registrazione:} con tale
-        interfaccia esposta all'utente, il componente è in grado
-        di distinguere dal login l'operazione di registrazione,
-        richiedendo, tramite l'interfaccia Credenziali, i dati
-        opportuni.
-
-        \item \underline{Richiesta Google:} con questa interfaccia,
-        la Pagina di Autenticazione può riconoscere che l'utente
-        intende registrarsi o autenticarsi mediante un account
-        Google.
-
-        \item \underline{Autorizzazione:} l'autorizzazione, da
-        parte dell'apposito Sistema di Autenticazione, consente
-        alla Pagina di Accesso di stabilire se il login o la
-        registrazione sono andate a buon fine. In questo modo, si
-        conferma all'utente l'accesso alla piattaforma, oppure lo
-        si avvisa di eventuali errori.
-
-        \item \underline{Richiesta recupero account:} dalla Pagina
-        di Autenticazione, l'utente fornisce una richiesta di
-        recupero dell'account qualora la password dovesse essere
-        dimenticata. Con questa interfaccia, il componente provvede
-        all'avvio della procedura di recupero.
-    \end{itemize}
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-        \item \underline{Login:} la pagina risponde ad una registrazione
-        o autenticazione andata a buon fine portando a termine un'operazione
-        di login. Questa interfaccia consente al sistema di distinguere
-        la transizione dello stato di un utente da anonimo ad autenticato.
-
-        \item \underline{Credenziali di accesso:} le credenziali per il login,
-        raccolte precedentemente, vengono inoltrate a componenti preposti alla
-        loro convalida.
-
-        \item \underline{Credenziali di registrazione:} le credenziali necessarie
-        alla registrazione, raccolte precedentemente, vengono inoltrate 
-
-        \item \underline{Richiesta Google:} questa interfaccia permette alla
-        pagina di accesso di comunicare il fatto che l'utente intende registrarsi
-        o autenticarsi con un account Google.
-
-        \item \underline{Richiesta recupero account:} il componente inoltra
-        al componente Pagina di Recupero la richiesta di recupero account, in modo
-        tale da effettuare separatamente questa operazione.
-    \end{itemize}
-\end{description}
-\fi
-
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-
-\subsubsection{Home Page}
-\begin{description}
-    \item[Descrizione:] il componente si occupa di guidare l'utente nella
-    navigazione, esponendo dunque sul front-end le funzionalità relative
-    al reindirizzamento ad altre pagine: Pagina di Autenticazione, Catalogo, pagina
-    di eserictazione e consultazione dei problemi. Se l'utente è autenticato,
-    questo componente ha il compito di mostrare i progressi dell'utente.
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-        \item \underline{Richiesta pagina di autenticazione:}
-        \item \underline{Richiesta catalogo:}
-        \item \underline{Richiesta}
-    \end{itemize}
-\end{description}
 
 \begin{center}
     \rule{5cm}{1pt}
@@ -818,6 +736,105 @@ all'interno del Diagramma dei Componenti.
         \item \underline{Login:}
         \item \underline{Registrazione:}
         \item \underline{Conferma login:}
+    \end{itemize}
+\end{description}
+
+\begin{center}
+    \rule{5cm}{1pt}
+\end{center}
+
+
+\subsubsection{Sistema di Autenticazione}
+\begin{description}
+    \item[Descrizione:] il Sistema di Autenticazione provvede ad
+    autorizzare le operazioni di login e registrazione alla piattaforma.
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Login:} il componente riceve la richiesta di
+        login, contenente le credenziali (email, password).
+
+        \item \underline{Registrazione:} il componente riceve la richiesta
+        di registrazione, insieme ai dati necessari (username, email, password).
+
+        \item \underline{Richiesta Google:} il componente è in grado di
+        distinguere le richieste di login e registrazione con Google.
+
+        \item \underline{Risposta autenticazione:} il componente riceve
+        dal database l'esito dell'autenticazione delle credenziali fornite.
+        In questa interfaccia sono compresi sia l'esito dell'operazione di
+        autenticazione ai fini del login, che di quella di memorizzazione
+        di nuove credenziali ai fini della registrazione. In entrambi i casi,
+        l'interfaccia è dedicata alla comunicazione col database.
+
+        \item \underline{Risposta autenticazione Google:} il componente
+        riceve la risposta di autenticazione da parte di Google.
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Richiesta autenticazione:} questa interfaccia viene
+        utilizzata per il login e la registrazione con credenziali interne.
+        Tramite l'interfaccia, il componente comunica al database le
+        credenziali fornite dalla Pagina di Autenticazione per memorizzarle
+        nel caso della registrazione
+
+        \item \underline{Richiesta autenticazione Google:} il componente
+        interagisce con il servizio di autenticazione Google nel caso
+        di login o registrazione con account Google.
+
+        \item \underline{Conferma login:} tramite questa risposta di autorizzazione,
+        il Sistema di Autenticazione comunica agli altri componenti l'esito
+        del login.
+
+        \item \underline{Conferma registrazione:} il componente comunica
+        l'esito della registrazione alla Pagina di Autenticazione.
+    \end{itemize}
+\end{description}
+
+\subsubsection{Pagina di Recupero}
+\begin{description}
+    \item[Descrizione:] il componente Pagina di Recupero si occupa dell'operazione
+    di recupero dell'account, al fine di assistere eventuali utenti, registrati
+    con sistema di credenziali interno, che hanno dimenticato la propria
+    password. La Pagina di Recupero si avvale del supporto del servizio di
+    posta elettronica, per guidare l'utente nel recupero dell'account.
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Richiesta recupero account:} dalla Pagina di Autenticazione,
+        il componente riceve la richiesta di recupero, attivando così la procedura.
+
+        \item \underline{Email di recupero:} viene richiesta all'utente l'email
+        dell'account da recuperare e del quale reimpostare la password.
+
+        \item \underline{Nuova password:} viene richiesta la nuova password per
+        l'account da recuperare (questa interfaccia è disponibile solo dopo il momento
+        in cui l'utente ha effettuato il collegamento mediante il link fornito dal messaggio di
+        recupero, vedi \textit{Invio email di recupero} in \textit{interfacce fornite}).
+
+        \item \underline{Aggiorna password:} il componente comunica al database
+        che la password dell'account recuperato è stata aggiornata.
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Invio email di recupero:} la Pagina di Recupero
+        richiede al servizio di posta elettronica di inviare un messaggio
+        contenente, tra le altre informazioni, un link di recupero (il link
+        consentirà poi all'utente di ritornare alla Pagina di Recupero per
+        reimpostare la password).
+
+        \item \underline{Esito:} il componente avvisa l'utente riguardo
+        a eventuali errori avvenuti durante l'operazione di recupero.
     \end{itemize}
 \end{description}
 
@@ -934,33 +951,6 @@ all'interno del Diagramma dei Componenti.
     \end{itemize}
 \end{description}
 
-%\subsubsection{Video Player?}
-%\begin{description}
-%    \item[Descrizione:] questo componente si occupa di interagire con l'attore esterno
-%    YouTube, inviando le richieste dei video di suggerimento, ricevendo tali video e
-%    permettendo la loro visualizzazione sulla piattaforma.
-%
-%    \item[Interfacce richieste:]
-%    \begin{itemize}
-%        \item[]
-%
-%        \item \underline{Richiesta suggerimento:} questa interfaccia permette ad altri
-%        componenti interni (Pagina Esercitazione e Catalogo) di inviare le richieste di
-%        visualizzazione dei suggerimenti.
-%
-%        \item \underline{Video:} questa interfaccia rappresenta il punto di ricezione
-%        del video di YouTube, che poi verrà visualizzato all'interno della piattaforma.
-%    \end{itemize}
-%
-%    \item[Interfacce fornite:]
-%    \begin{itemize}
-%        \item[]
-%
-%        \item \underline{Richiesta video:}
-%        \item \underline{Visualizzazione video:}
-%    \end{itemize}
-%\end{description}
-
 \begin{center}
     \rule{5cm}{1pt}
 \end{center}
@@ -1030,106 +1020,6 @@ all'interno del Diagramma dei Componenti.
     \rule{5cm}{1pt}
 \end{center}
 
-\subsubsection{Pagina di Recupero}
-\begin{description}
-    \item[Descrizione:] il componente Pagina di Recupero si occupa dell'operazione
-    di recupero dell'account, al fine di assistere eventuali utenti, registrati
-    con sistema di credenziali interno, che hanno dimenticato la propria
-    password. La Pagina di Recupero si avvale del supporto del servizio di
-    posta elettronica, per guidare l'utente nel recupero dell'account.
-
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Richiesta recupero account:} dalla Pagina di Autenticazione,
-        il componente riceve la richiesta di recupero, attivando così la procedura.
-
-        \item \underline{Email di recupero:} viene richiesta all'utente l'email
-        dell'account da recuperare e del quale reimpostare la password.
-
-        \item \underline{Nuova password:} viene richiesta la nuova password per
-        l'account da recuperare (questa interfaccia è disponibile solo dopo il momento
-        in cui l'utente ha effettuato il collegamento mediante il link fornito dal messaggio di
-        recupero, vedi \textit{Invio email di recupero} in \textit{interfacce fornite}).
-
-        \item \underline{Aggiorna password:} il componente comunica al database
-        che la password dell'account recuperato è stata aggiornata.
-    \end{itemize}
-
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Invio email di recupero:} la Pagina di Recupero
-        richiede al servizio di posta elettronica di inviare un messaggio
-        contenente, tra le altre informazioni, un link di recupero (il link
-        consentirà poi all'utente di ritornare alla Pagina di Recupero per
-        reimpostare la password).
-
-        \item \underline{Esito:} il componente avvisa l'utente riguardo
-        a eventuali errori avvenuti durante l'operazione di recupero.
-    \end{itemize}
-\end{description}
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-\subsubsection{Sistema di Autenticazione}
-\begin{description}
-    \item[Descrizione:] il Sistema di Autenticazione provvede ad
-    autorizzare le operazioni di login e registrazione alla piattaforma.
-
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Login:} il componente riceve la richiesta di
-        login, contenente le credenziali (email, password).
-
-        \item \underline{Registrazione:} il componente riceve la richiesta
-        di registrazione, insieme ai dati necessari (username, email, password).
-
-        \item \underline{Richiesta Google:} il componente è in grado di
-        distinguere le richieste di login e registrazione con Google.
-
-        \item \underline{Risposta autenticazione:} il componente riceve
-        dal database l'esito dell'autenticazione delle credenziali fornite.
-        In questa interfaccia sono compresi sia l'esito dell'operazione di
-        autenticazione ai fini del login, che di quella di memorizzazione
-        di nuove credenziali ai fini della registrazione. In entrambi i casi,
-        l'interfaccia è dedicata alla comunicazione col database.
-
-        \item \underline{Risposta autenticazione Google:} il componente
-        riceve la risposta di autenticazione da parte di Google.
-    \end{itemize}
-
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Richiesta autenticazione:} questa interfaccia viene
-        utilizzata per il login e la registrazione con credenziali interne.
-        Tramite l'interfaccia, il componente comunica al database le
-        credenziali fornite dalla Pagina di Autenticazione per memorizzarle
-        nel caso della registrazione
-
-        \item \underline{Richiesta autenticazione Google:} il componente
-        interagisce con il servizio di autenticazione Google nel caso
-        di login o registrazione con account Google.
-
-        \item \underline{Conferma login:} tramite questa risposta di autorizzazione,
-        il Sistema di Autenticazione comunica agli altri componenti l'esito
-        del login.
-
-        \item \underline{Conferma registrazione:} il componente comunica
-        l'esito della registrazione alla Pagina di Autenticazione.
-    \end{itemize}
-\end{description}
-
-
-\newpage
 %\subsubsection{Utente non autenticato}
 %L'utente non autenticato è un qualsiasi utente collegato al sito che non si sia ancora autenticato tramite il sistema di login/registrazione descritto nel \textbf{RF 2}.\\
 %L'utente non autenticato ha disponibile a sè tutte le funzioni del sito tranne alcune funzioni che verranno descritte in componenti futuri.\\
@@ -1245,14 +1135,74 @@ all'interno del Diagramma dei Componenti.
 %    \hspace*{-1cm}
 %    \includegraphics[width=1.2\textwidth]{materiale/login-component.jpg}
 %\end{center}
-    
-\begin{figure}[H]
-\centering
-%\includegraphics[]{}
-\caption{Diagramma dei Componenti}
-\label{compdiagram}
-\end{figure}
-    
+
+\iffalse
+\subsubsection{Pagina di Autenticazione}
+\begin{description}
+    \item[Descrizione:] questo componente ha il compito
+    principale di interagire con l'utente al fine di guidarlo
+    nelle procedure di accesso alla piattaforma.
+    La Pagina di Autenticazione si occupa della raccolta dei dati
+    utili ad effettuare il login e la registrazione
+    di un nuovo account. Essa offre inoltre la possibilità di
+    richiedere il recupero dell'account.
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+        \item \underline{Credenziali:} la pagina di accesso
+        richiede l'inserimento delle credenziali necessarie
+        per il login (una tupla email-password) e per la
+        registrazione (nome utente, email, password).
+
+        \item \underline{Richiesta registrazione:} con tale
+        interfaccia esposta all'utente, il componente è in grado
+        di distinguere dal login l'operazione di registrazione,
+        richiedendo, tramite l'interfaccia Credenziali, i dati
+        opportuni.
+
+        \item \underline{Richiesta Google:} con questa interfaccia,
+        la Pagina di Autenticazione può riconoscere che l'utente
+        intende registrarsi o autenticarsi mediante un account
+        Google.
+
+        \item \underline{Autorizzazione:} l'autorizzazione, da
+        parte dell'apposito Sistema di Autenticazione, consente
+        alla Pagina di Accesso di stabilire se il login o la
+        registrazione sono andate a buon fine. In questo modo, si
+        conferma all'utente l'accesso alla piattaforma, oppure lo
+        si avvisa di eventuali errori.
+
+        \item \underline{Richiesta recupero account:} dalla Pagina
+        di Autenticazione, l'utente fornisce una richiesta di
+        recupero dell'account qualora la password dovesse essere
+        dimenticata. Con questa interfaccia, il componente provvede
+        all'avvio della procedura di recupero.
+    \end{itemize}
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+        \item \underline{Login:} la pagina risponde ad una registrazione
+        o autenticazione andata a buon fine portando a termine un'operazione
+        di login. Questa interfaccia consente al sistema di distinguere
+        la transizione dello stato di un utente da anonimo ad autenticato.
+
+        \item \underline{Credenziali di accesso:} le credenziali per il login,
+        raccolte precedentemente, vengono inoltrate a componenti preposti alla
+        loro convalida.
+
+        \item \underline{Credenziali di registrazione:} le credenziali necessarie
+        alla registrazione, raccolte precedentemente, vengono inoltrate 
+
+        \item \underline{Richiesta Google:} questa interfaccia permette alla
+        pagina di accesso di comunicare il fatto che l'utente intende registrarsi
+        o autenticarsi con un account Google.
+
+        \item \underline{Richiesta recupero account:} il componente inoltra
+        al componente Pagina di Recupero la richiesta di recupero account, in modo
+        tale da effettuare separatamente questa operazione.
+    \end{itemize}
+\end{description}
+\fi
 
 
 \end{document}
