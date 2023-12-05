@@ -95,8 +95,8 @@ autoesplicativi.}.
 
 \subsection{Accesso e autenticazione}
 La Figura \ref{access} mostra gli use cases che rappresentano i seguenti
-requisiti funzionali: \textbf{RF 1}-Registrazione,
-\textbf{RF 2}-Login, \textbf{RF 3}-Autenticazione Google, \textbf{RF 4}-Recupero
+requisiti funzionali: \textbf{RF 1} - Registrazione,
+\textbf{RF 2} - Login, \textbf{RF 3} - Autenticazione Google, \textbf{RF 4} - Recupero
 password.
 
 \begin{figure}[H]
@@ -120,6 +120,7 @@ password.
         \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email e una password conforme. \verb|[exception 1]|
         \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 2]|
         \item I dati vengono raccolti e il relativo account viene registrato dal servizio di database.\texttt{[exception 3]}
+        \item L'utente riceve una conferma circa l'esito dell'operazione di registrazione.
     \end{enumerate}
     
     \item[Exceptions:]
@@ -133,7 +134,7 @@ password.
     \item[Extensions:]
     \begin{itemize}
         \item[]
-        \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un proprio account Google, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
+        \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un account Google in suo possesso, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
         In questo caso, oltre a scegliere l'email come previsto dal servizio di Google, l'utente specifica l'username.
     \end{itemize}
 \end{description}
@@ -149,8 +150,9 @@ password.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente anonimo accede alla pagina dedicata e sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item L'utente anonimo sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
         \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password, che saranno verificati grazie al servizio di database.\texttt{[exception 1]}
+        \item L'utente riceve la conferma di login.
     \end{enumerate}
     
     \item[Exceptions:]
@@ -273,19 +275,18 @@ cui le clausole \texttt{extend} nel diagramma).
 \end{description}
 
 \newpage
-\subsection{Esercitazione e strumenti integrati}
+\subsection{Esercitazione}
 La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
 che in qualche modo fanno parte del contesto di esercitazione su uno specifico problema. Pertanto,
 i requisiti rappresentati qui sono i seguenti: \textbf{RF 7} - Effettuare l'esercitazione,
 \textbf{RF 8} - Verifica della correttezza dell'algoritmo, \textbf{RF 11.1} - Registrazione dei
-Progressi. In aggiunta agli strumenti disponibili per effettuare l'esercitazione,
-vengono anche inclusi in questo diagramma gli use cases associati al
-\textbf{RF 9} - Cronometro (si ricorda che il cronometro è indipendente dagli
-use cases dell'esercitazione, come appunto rispecchiato nel diagramma).
+Progressi, \textbf{RF 9} - Cronometro. Dal punto di vista del frontend, il diagramma
+raccoglie gran parte delle funzionalità utilizzabili interagendo nelle aree
+visibili in \textbf{FE 4} (si veda il documento D1).
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.2cm}
+\hspace*{-1.5cm}
 \includegraphics[scale=0.91]{materiale/ucdiagrams/ucesercitazione.pdf}
 \caption{UCD con riferimenti ai requisiti relativi ai tools di esercitazione e al cronometro}
 \label{esercitaz}
@@ -293,19 +294,22 @@ use cases dell'esercitazione, come appunto rispecchiato nel diagramma).
 
 \newpage
 \subsection*{Descrizione dell'esercitazione}
-La complessità di alcune operazioni relative all'esercitazione è
+La complessità delle operazioni relative all'esercitazione è
 catturata dalla Figura \ref{acexercise}.
-Dal momento che l'utente può decidere di uscire dall'area di esercitazione
-a propria discrezione, si sottolinea che il processo descritto nel diagramma
-può essere interrotto in qualsiasi momento—ciò è indicato dalla codizione
+Dato che l'utente può decidere di uscire dall'area di esercitazione
+a propria discrezione, il processo descritto nel diagramma
+può essere interrotto in qualsiasi momento—come indicato dalla codizione
 \textit{Esci} nel diagramma. La corsia \textit{Firebase} descrive le
-attività previste dallo use case \textit{Registrare i progressi}
-presente in Figura \ref{esercitaz}.
+attività previste dallo use case \textit{Registrare i progressi} (Figura \ref{esercitaz}),
+tenendo ovviamente in conto l'utente autenticato del quale aggiornare
+i progressi.
+Si assume che l'attività \textit{Visualizza cronometro} includa
+implicitamente le funzionalità descritte dal relativo use case.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1cm}
-\includegraphics[scale=0.6]{materiale/sldesercitazione.pdf}
+\hspace*{-0.4cm}
+\includegraphics[scale=0.57]{materiale/ucdiagrams/sldesercitazione.pdf}
 \caption{SD, arricchito da elementi di Activity Diagram,
 per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
 e \textit{Registrare i progressi}}
@@ -703,7 +707,8 @@ e più dettagliata di ogni componente.
 \subsection{Diagramma dei componenti}
 \begin{figure}[H]
 \centering
-%\includegraphics[]{}
+\hspace*{-3cm}
+\includegraphics[scale = 0.86]{materiale/componentdiagram.pdf}
 \caption{Diagramma dei Componenti del sistema \textit{SleepCode}}
 \label{compdiagram}
 \end{figure}
