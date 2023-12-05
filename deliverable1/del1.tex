@@ -146,12 +146,12 @@ messe a disposizione a eventuali livelli superiori.
 \label{signup}
 \textbf{Registrazione\footnote{Si denoterà con l'aggettivo \textit{registrato} un qualsiasi
 utente che abbia precedentemente effettuato la registrazione e pertanto dotato di un account.} }
-I nuovi utenti devono poter registrarsi al servizio, ovvero creare un account che
+I nuovi utenti devono poter registrarsi al servizio, ovvero creare un \textit{account} che
 richiede la compilazione dei seguenti campi:
 \begin{itemize}
     \item Nome utente (\textit{username}).
     \item Indirizzo di posta elettronica (\textit{email}).
-    \item Password: data la sensibilità di questo campo, è importante
+    \item \textit{Password}: data la sensibilità di questo campo, è importante
     che siano rispettati i vincoli riportati in \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}};
     inoltre, l'utente deve poter riscrivere la password per confermarla, in
     modo tale da rilevare eventuali errori di digitazione.
@@ -175,7 +175,7 @@ Effettuato il login, l'utente accede alle funzionalità del livello \textit{aute
 \label{google}
 \textbf{Autenticazione Google }
 L'utente deve poter registrarsi ed effettuare il login sulla piattaforma
-utilizzando un account Google, qualora non intenda ricorrere al sistema di
+utilizzando un account Google, qualora non si intenda ricorrere al sistema di
 autenticazione interno descritto precedentemente (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup}}}}, \textcolor{blue}{\underbar{\hyperref[login]{RF \ref*{login}}}}).
 In caso di registrazione, oltre alle operazioni previste dal servizio Google
 (come la scelta dell'indirizzo email), l'utente deve solo specificare un username.
@@ -253,14 +253,13 @@ problema (\textit{dati strutturali}):
 \begin{itemize}
     \item Un titolo.
 
-    \item Un testo, scritto prevalentemente in linguaggio naturale,
-    che descrive uno scenario che richiede di essere risolto per mezzo
-    di un algoritmo. Eventuali immagini e proposizioni matematiche
-    possono accompagnare i testi.
+    \item Un testo che descrive uno scenario che richiede di essere
+    risolto per mezzo di un algoritmo. Eventuali immagini e proposizioni
+    matematiche possono accompagnare i testi.
 
-    \item Almeno due esempi di input insieme al relativo output corretto,
-    che mostra il risultato atteso\footnote{Non si devono confondere questi \textit{esempi}
-    con i \textit{test cases} (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}})}.
+    \item Almeno due esempi\footnote{Non si devono confondere questi \textit{esempi}
+    con i \textit{test cases} (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}})}
+    di esecuzione, ognuno costituito da un input e il relativo output atteso.
 \end{itemize}
 Qualora l'utente desideri consultare il problema, vengono contemporaneamente
 messe a dispoizione le funzionalità di cui al \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}}}}.
@@ -276,8 +275,6 @@ l'utente deve poter disporre di tutti gli strumenti necessari alla risoluzione
 del problema, accedendo alle seguenti funzionalità:
 \begin{enumerate}
     \item Visualizzare il contenuto dell'esercizio (\textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}).
-    
-    \item Visualizzare i test cases (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}}).
 
     \item Essere al corrente di quale linguaggio di programmazione sia
     attualmente attivo per la scrittura di codice. Deve altresì essere 
@@ -288,13 +285,17 @@ del problema, accedendo alle seguenti funzionalità:
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
     scelto, l'algoritmo risolutivo del problema selezionato.
 
+    \item Richiedere la sottoposizione del codice scritto e visualizzare i test cases insieme al loro esito (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}}}}).
+
+    \item Utilizzare un cronometro (\textcolor{blue}{\underbar{\hyperref[chrono]{RF \ref*{chrono}}}}).
+    
     %\item Visualizzare il suggerimento (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}).
 \end{enumerate}
-L'esercitazione non è da confondersi come "sessione" registrabile dalla
-piattaforma. In altre parole, l'utente può accedere all'area di esercitazione
-(selezionando un problema) e abbandonarla in qualsiasi momento, ma nessun
-dato cronologico o di altra natura, riguardo a tali azioni, deve essere memorizzato,
-nemmeno nel caso in cui l'utente in questione sia autenticato.
+L'esercitazione non è da confondersi come "sessione" della quale la piattaforma
+registra lo stato. In altre parole, l'utente può accedere all'area di
+esercitazione (selezionando un problema) e abbandonarla in qualsiasi momento, ma
+nessun dato cronologico o di altra natura, riguardo a tali azioni, deve essere
+memorizzato, nemmeno nel caso in cui l'utente in questione sia autenticato.
 \end{funcreq}
 
 
@@ -331,20 +332,19 @@ e testandolo:
     Nel caso in cui l'esito dei test cases dovesse risultare negativo, l'utente
     viene avvisato senza fare riferimento agli errori commessi, siano essi
     relativi alla correttezza sintattica del codice oppure riguardanti la
-    correttezza risolutiva dell'algoritmo.
+    correttezza risolutiva dell'algoritmo—l'output fornito non è corretto.
 \end{enumerate}
 \end{funcreq}
 
 \begin{funcreq}
-    \textbf{Cronometro: }
-    L'utente deve poter tenere traccia del tempo trascorso sulla piattaforma,
-    ad esempio per conoscere il tempo impiegato per risolvere un problema.
-    Quindi, l'utente deve poter avviare, interrompere e reimpostare a 0 secondi un
-    cronometro. Il cronometro è disponibile in qualsiasi momento, sia durante
-    la navigazione nel catalogo che durante la consultazione del problema
-    e l'esercitazione.
+    \label{chrono}
+    \textbf{Cronometro }
+    L'utente deve poter tenere traccia del tempo impiegato per risolvere un problema.
+    Pertanto, deve essere possibile avviare, interrompere e reimpostare a 0 secondi un
+    cronometro. Il cronometro è disponibile durante l'esercitazione, dopo aver scelto
+    il problema da risolvere, insieme a tutti gli altri strumenti descritti in
+    \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}}}}.
 \end{funcreq}
-% cosa succede al cronometro se faccio altre cose tipo logout login e così via?
 
 \newpage
 \begin{center}
@@ -355,7 +355,13 @@ Nei seguenti requisiti funzionali, si suppone che l'utente appartenga al livello
 di accesso \textit{autenticato}, qualora tale informazione dovesse essere omessa.
 Si sottolinea nuovamente che l'utente autenticato eredita le stesse funzionalità
 accessibili all'utente anonimo e descritte precedentemente.
+In questo e nei documenti successivi, indichiamo con il termine \textit{profilo}
+tutti i dati relativi all'attività di un utente registrato e/o autenticato sulla
+piattaforma. Sono dunque inclusi l'\textit{account} (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup}}}}) e i \textit{progressi}
+(\textcolor{blue}{\underbar{\hyperref[stats]{RF \ref*{stats}}}}).
 \\
+\subsection{Gestione del profilo}
+
 \begin{funcreq}
     \textbf{Metadati aggiuntivi }
     Oltre ai campi descrittivi specificati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}},
@@ -376,10 +382,6 @@ accessibili all'utente anonimo e descritte precedentemente.
     potenzialmente diverso da quelli di altri utenti registrati.
 \end{funcreq}
 
-\subsection{Gestione del profilo}
-Indichiamo con il termine \textit{profilo} tutti i dati relativi all'attività
-di un utente registrato e/o autenticato sulla piattaforma. Sono dunque inclusi
-l'\textit{account} e i \textit{progressi} (\textcolor{blue}{\underbar{\hyperref[stats]{RF \ref*{stats}}}}).
 
 \begin{funcreq}
 \label{stats}
