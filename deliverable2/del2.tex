@@ -101,7 +101,7 @@ password.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.67]{materiale/ucdiagrams/ucaccesso.pdf}
+\includegraphics[scale=0.63]{materiale/ucdiagrams/ucaccesso.pdf}
 \caption{UCD relativo ai RF inerenti all'accesso alla piattaforma}
 \label{access}
 \end{figure}
@@ -331,7 +331,7 @@ ai seguenti requisiti funzionali:
 \begin{figure}[H]
 \centering
 %\hspace*{-1.8cm}
-\includegraphics[scale = 0.95]{materiale/ucdiagrams/ucaccount.pdf}
+\includegraphics[scale = 0.88]{materiale/ucdiagrams/ucaccount.pdf}
 \caption{UCD relativo alle funzionalità dell'account}
 \label{accountfig}
 \end{figure}
@@ -620,15 +620,16 @@ meccanismo di recupero dell'account—\textbf{RF 4}.
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
 La Figura \ref{contextdiagram} mostra il diagramma di contesto per il
 servizio \textit{SleepCode}. Seguono alcune descrizioni più dettagliate
-che chiariscono il significato delle informazioni scambiate tra il sistema
-e gli attori esterni ad esso. Viene inoltre fatto riferimento ai requisiti
-funzionali che vengono soddisfatti grazie a tali interazioni. Proprio nei
-requisiti funzionali citati vengono rilevati i dati e le informazioni
-scambiate tra attori esterni e sistema.
+che chiariscono il significato, per lo più ad alto livello, dell
+informazioni scambiate tra il sistema e gli attori esterni ad esso.
+Viene inoltre fatto riferimento ai requisiti funzionali che vengono
+soddisfatti grazie a tali interazioni. Proprio dai requisiti funzionali
+citati vengono rilevati i dati e le informazioni scambiate tra attori
+esterni e sistema.
 
 \begin{figure}[H]
 \centering
-\hspace*{-2.4cm}
+\hspace*{-2.1cm}
 \includegraphics[scale=0.65]{materiale/contextdiagram.pdf}
 \caption{Context Diagram della piattaforma \textit{SleepCode}}
 \label{contextdiagram}
@@ -876,24 +877,49 @@ all'interno del Diagramma dei Componenti.
 
 \subsubsection{Pagina di Recupero}
 \begin{description}
-    \item[Descrizione:]
+    \item[Descrizione:] il componente si occupa dell'operazione
+    di recupero dell'account, offrendo assistenza a eventuali utenti,
+    registrati con sistema di credenziali interno, che hanno dimenticato
+    la propria password. La Pagina di Recupero si avvale del supporto
+    del servizio di posta elettronica, per guidare l'utente nel recupero
+    dell'account.
 
     \item[Interfacce richieste:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Richiesta recupero account:}
-        \item \underline{Email di recupero:}
-        \item \underline{Nuova password:}
+        \item \underline{Richiesta recupero account:} il componente
+        agisce su richiesta dell'utente. Per scelte architetturali,
+        questa richiesta proviene dal componente intermediario
+        \textit{Pagina di Autenticazione}.
+
+        \item \underline{Email di recupero:} l'utente fornisce l'email
+        associata all'account che si intende recuperare.
+
+        \item \underline{Nuova password:} dall'utente, il componente
+        ottiene la nuova password. L'inserimento include anche la
+        conferma della password, come descritto nel documento D1.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Invio messaggio di recupero:}
+        \item \underline{Invio messaggio di recupero:} questa interfaccia
+        rappresenta l'interazione del componente verso
+        il servizio esterno di posta elettronica. Da qui, il
+        componente richiede l'invio del messaggio di recupero,
+        specificando inoltre l'email fornita dall'utente e il
+        contenuto del messaggio.
+
         \item \underline{Esito:}
-        \item \underline{Aggiornamento password:}
+
+        \item \underline{Aggiornamento password:} la Pagina di
+        Recupero indica al database che la password dell'account
+        deve essere modificata. L'interfaccia fornisce dunque
+        la nuova password, allegata ad una richiesta di modifica
+        delle credenziali presso l'account con email precedentemente
+        specificata dall'utente.
     \end{itemize}
 \end{description}
 
@@ -970,26 +996,81 @@ all'interno del Diagramma dei Componenti.
         \textit{nome}, \textit{tag(s)}, \textit{difficoltà}.
 
         \item \underline{Selezione problema:} il Catalogo rileva la
-        selezione di un problema specificato dall'utetne
+        selezione di un problema specificato dall'utetne, così da
+        poter avviare un'esercitazione su quel problema (il componente
+        \textit{Pagina di Esercitazione} si occupa dell'esercitazione).
 
-        \item \underline{Autorizzazione:}
-        \item \underline{Modifiche preferiti:}
-        \item \underline{Modifiche catalogo:}
-        \item \underline{Preferiti:}
-        \item \underline{Problemi risolti:}
+        \item \underline{Autorizzazione:} ricevendo l'autorizzazione
+        da parte del Sistema di Autenticazione, il Catalogo può adattare
+        la modalità di visualizzazione della lista dei problemi sulla
+        base del profilo (preferiti, progressi) dell'eventuale utente
+        autenticato. Inoltre, questa interfaccia indica al Catalogo
+        se l'utente ha il permesso di modificare la lista dei problemi,
+        riconoscendo l'accesso di un utente amministratore.
+
+        \item \underline{Preferiti:} da questa interfaccia il Catalogo
+        ottiene informazioni sui problemi preferiti dell'utente
+        eventualmente autenticato, potendo così visualizzarli sulla
+        lista, nel campo dedicato.
+
+        \item \underline{Modifiche preferiti:} il Catalogo riceve
+        dall'utente richieste di modifica dei preferiti, quali
+        l'aggiunta o la rimozione di problemi specifici selezionati
+        dalla lista.
+
+        \item \underline{Problemi risolti:} il Catalogo riceve la
+        lista di problemi risolti contenuti nel profilo dell'utente
+        autenticato, in modo da poter contrassegnare tali problemi
+        nel campo \textit{stato} durante la consultazione del
+        catalogo.
+
+        \item \underline{Modifiche catalogo:} da questa interfaccia,
+        il Catalogo riceve i dati necessari per aggiungere o modificare
+        un problema selezionato dall'utente amministratore, come
+        descritto nelle specifiche dei requisiti funzionali. Infine,
+        sempre da questa interfaccia vengono accolte richieste di
+        eliminazione di problemi da parte di utenti amministratori.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Lista:}
-        \item \underline{Hint:}
-        \item \underline{Richiesta video:}
-        \item \underline{Problema:}
-        \item \underline{Stati:}
-        \item \underline{Preferiti:}
-        \item \underline{Modifiche preferiti:}
+        \item \underline{Lista:} il Catalogo mette a disposizione
+        dell'utente la lista di problemi disponibili sulla piattaforma.
+        Questa interfaccia include i dati descrittivi di ogni problema.
+
+        \item \underline{Richiesta video:} il Catalogo interagisce con
+        YouTube per inviare la richiesta del video corrispondente al
+        suggerimento selezionato dall'utente.
+
+        \item \underline{Hint:} (indichiamo brevemente con \textit{hint}
+        il \textit{suggerimento}) il Catalogo visualizza il suggerimento
+        richiesto dall'utente.
+
+        \item \underline{Problema:} una volta che l'utente sceglie quale
+        problema egli intende risolvere, il Catalogo fornisce tutti i
+        dati di quel problema al componente \textit{Pagina di Esercitazione}.
+
+        \item \underline{Stati:} sulla base del profilo ottenuto
+        dal componente \textit{Gestore Utente}, il Catalogo rende
+        visibile all'utente autenticato il campo \textit{stato},
+        dove vengono contrassegnati i problemi risolti dall'utente
+        autenticato.
+
+        \item \underline{Preferiti:} come per lo stato, questa
+        interfaccia si riferisce alla visualizzazione, verso l'utente
+        autenticato, dei problemi preferiti, come sempre in un
+        campo dedicato durante la visualizzazione della lista.
+
+        \item \underline{Modifiche preferiti:} questa interfaccia
+        si occupa di comunicare al Gestore Utente le modifiche
+        apportate ai preferiti, su richiesta dell'utente autenticato
+        che naviga nel catalogo dei problemi.
+
+        \item \underline{Modifiche catalogo:} questa interfaccia
+        comunica al database le modifiche apportate al catalogo
+        da parte dell'utente amministratore.
     \end{itemize}
 \end{description}
 
@@ -1041,11 +1122,7 @@ all'interno del Diagramma dei Componenti.
 \iffalse
 \subsubsection*{Pagina di Recupero}
 \begin{description}
-    \item[Descrizione:] il componente Pagina di Recupero si occupa dell'operazione
-    di recupero dell'account, al fine di assistere eventuali utenti, registrati
-    con sistema di credenziali interno, che hanno dimenticato la propria
-    password. La Pagina di Recupero si avvale del supporto del servizio di
-    posta elettronica, per guidare l'utente nel recupero dell'account.
+    \item[Descrizione:] 
 
     \item[Interfacce richieste:]
     \begin{itemize}
