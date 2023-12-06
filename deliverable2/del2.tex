@@ -929,28 +929,71 @@ all'interno del Diagramma dei Componenti.
 
 \subsubsection{Gestore Utente}
 \begin{description}
-    \item[Descrizione:]
+    \item[Descrizione:] il Gestore Utente raccoglie le funzionalità
+    associate principalmente all'utente autenticato, dedicandosi dunque alla
+    gestione del profilo (account, progressi e preferiti). In generale, questo
+    componente deriva dalla scelta architetturale di gestire la disponibilità
+    delle funzionalità fruibili dall'utente sulla base dei livelli di accesso
+    anonimo e autenticato, definiti nel documento D1.
 
     \item[Interfacce richieste:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Modifiche preferiti:}
-        \item \underline{Nuove credenziali:}
-        \item \underline{Richiesta logout:}
+        \item \underline{Autorizzazione:} il Gestore Utente richiede l'autorizzazione
+        prodotta dal Sistema di Autenticazione, in modo da rendere disponibili o
+        meno le funzionalità accessibili a livello autenticato.
+
+        \item \underline{Richiesta logout:} l'utente può richiedere il logout
+        con questa interfaccia fornita dal componente.
+
+        \item \underline{Modifiche preferiti:} questa interfaccia riceve le
+        modifiche apportate ai preferiti dell'utente durante la navigazione
+        nel catalogo, consentendo di aggiungere o rimuovere preferiti dal
+        profilo.
+
+        \item \underline{Nuove credenziali:} attraverso questa interfaccia,
+        l'utente può fornire le nuove credenziali del suo account (email e
+        password), con lo scopo di aggiornarlo.
+
+        \item \underline{Problema risolto:} da questa interfaccia, il Gestore
+        Utente viene avvisato del fatto che l'utente ha risolto un problema.
+        Sulla base dell'autorizzazione, che determina la distinzione tra
+        utenti anonimi e autenticati, il componente può dunque valutare se
+        sia necessario aggiornare i progressi dell'utente eventualmente autenticato.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Preferiti:}
-        \item \underline{Modifiche preferiti:}
-        \item \underline{Progressi:}
-        \item \underline{Aggiorna progressi:}
-        \item \underline{Problemi risolti:}
-        \item \underline{Nuove credenziali:}
-        \item \underline{Aggiorna credenziali:}
+        \item \underline{Preferiti:} il componente comunica al Catalogo la
+        lista di problemi preferiti dell'utente autenticato, in modo da
+        evidenziarli durante la navigazione.
+
+        \item \underline{Modifiche preferiti:} le modifiche dei preferiti
+        vengono memorizzate.
+
+        \item \underline{Progressi:} il componente mostra i progressi dell'utente,
+        come descritto in \textbf{RF ??}.
+
+        \item \underline{Aggiorna progressi:} questa interfaccia comunica al
+        database di aggiornare i progressi dell'utente autenticato, nel caso
+        in cui egli abbia risolto un problema.
+
+        \item \underline{Problemi risolti:} il componente comunica al Catalogo
+        quali sono i problemi risolti dall'utente autentiato, in modo da
+        evidenziarli durante la navigazione.
+
+        \item \underline{Aggiorna credenziali:} il componente interagisce con
+        il database per aggiornare le credenziali dell'account, sulla base delle
+        modifiche richieste dall'utente.
+        
+        \item \underline{Logout:} questa interfaccia propaga al
+        Sistema di Autenticazione la richiesta di logout dell'utente autenticato.
+        Questa interfaccia evidenzia come l'architettura stessa preveda che,
+        dopo il logout, sia necessario eseguire il login passando ai componenti
+        di competenza (Pagina e Sistema di Autenticazione).
     \end{itemize}
 \end{description}
 
@@ -980,8 +1023,8 @@ all'interno del Diagramma dei Componenti.
         \item \underline{Problemi:} il Catalogo ottiene la lista dei problemi
         memorizzati dal database.
 
-        \item \underline{Richiesta hint\footnote{I suggerimenti sono
-        qui denotati brevemente col termine inglese \textit{hint}.}:}
+        \item \underline{Richiesta hint:}\footnote{I suggerimenti sono
+        qui denotati brevemente col termine \textit{hint}.}
         con questa interfaccia, il Catalogo rileva le richieste dei
         suggerimenti associati ai problemi.
 
@@ -1080,173 +1123,10 @@ all'interno del Diagramma dei Componenti.
 
 \subsubsection{Pagina di Esercitazione}
 \begin{description}
-    \item[Descrizione:]
-
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Problema:}
-        \item \underline{Selezione linguaggio:}
-        \item \underline{Codice:}
-        \item \underline{Richiesta submit:}
-        \item \underline{Start/stop/reset cronometro:}
-    \end{itemize}
-
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Contenuto problema:}
-        \item \underline{Linguaggi:}
-        \item \underline{Test cases:} (sia esito che input-output previsti dal test)
-        \item \underline{Tempo:}
-        \item \underline{Problema risolto:}
-    \end{itemize}
-\end{description}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\iffalse
-\subsubsection*{Pagina di Recupero}
-\begin{description}
-    \item[Descrizione:] 
-
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Richiesta recupero account:} dalla Pagina di Autenticazione,
-        il componente riceve la richiesta di recupero, attivando così la procedura.
-
-        \item \underline{Email di recupero:} viene richiesta all'utente l'email
-        dell'account da recuperare e del quale reimpostare la password.
-
-        \item \underline{Nuova password:} viene richiesta la nuova password per
-        l'account da recuperare (questa interfaccia è disponibile solo dopo il momento
-        in cui l'utente ha effettuato il collegamento mediante il link fornito dal messaggio di
-        recupero, vedi \textit{Invio email di recupero} in \textit{interfacce fornite}).
-
-        \item \underline{Aggiorna password:} il componente comunica al database
-        che la password dell'account recuperato è stata aggiornata.
-    \end{itemize}
-
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Invio email di recupero:} la Pagina di Recupero
-        richiede al servizio di posta elettronica di inviare un messaggio
-        contenente, tra le altre informazioni, un link di recupero (il link
-        consentirà poi all'utente di ritornare alla Pagina di Recupero per
-        reimpostare la password).
-
-        \item \underline{Esito:} il componente avvisa l'utente riguardo
-        a eventuali errori avvenuti durante l'operazione di recupero.
-    \end{itemize}
-\end{description}
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-\subsubsection*{Catalogo}
-\begin{description}
-    \item[Descrizione:]
-
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Lista dei problemi:} il Catalogo ha il compito di
-        mostrare i problemi memorizzati grazie al servizio di database impiegato.
-        Per questo motivo, questa interfaccia consente al catalogo di recuperare
-        dal database i problemi disponibili.
-
-        \item \underline{Filtro:} il Catalogo rileva i filtri di ricerca selezionati
-        dall'utente, cosicché i problemi che corrispondono ai criteri di ricerca possano
-        essere visualizzati. I filtri includono la ricerca per nome, per difficoltà e categoria.
-
-        \item \underline{Richiesta suggerimento:} questa interfaccia permette all'utente
-        di visualizzare il video-suggerimento associato al problema in questione.
-
-        \item \underline{Video:} il Catalogo interagisce con YouTube per ottenere il
-        video-suggerimento da visualizzare su richiesta dell'utente.
-
-        \item \underline{Conferma login:} il Catalogo richiede l'esito dell'operazione di
-        login in modo da mostrare i preferiti e lo stato dei problemi associati
-        all'utente autenticato.
-
-        \item \underline{Preferiti:} il Catalogo riceve i preferiti dell'utente autenticato,
-        in modo da visualizzarli nella lista dei problemi.
-        
-        \item \underline{Problemi risolti:} il Catalogo riceve i problemi risolti dall'utente,
-        cosicché lo stato dei problemi sia visibile nella lista.
-
-        \item \underline{Modifica preferiti:} gli utenti autenticati possono interagire
-        con il Catalogo al fine di contrassegnare come preferiti i problemi visualizzati.
-        Mediante questa interfaccia è altresì possibile rimuovere un problema dai preferiti.
-
-        \item \underline{Modifica problema:} il Catalogo accetta eventuali modifiche
-        che vengono richieste da utenti amministratori. Da questa interfaccia, il
-        Catalogo consente agli amministratori di aggiungere, modificare o eliminare
-        i problemi del catalogo.
-    \end{itemize}
-
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-        
-        \item \underline{Lista:} il Catalogo visualizza la lista dei problemi e i
-        dati descrittivi affini di ogni problema.
-
-        \item \underline{Visualizzazione suggerimento:} il Catalogo visualizza il
-        video suggerimento relativo ad uno specifico problema e richiesto precedentemente
-        dall'utente.
-
-        \item \underline{Richiesta problema:} il Catalogo rileva la selezione di
-        un problema consentendo all'utente di accedere alla pagina dedicata alla
-        consultazione ed esercitazione (Pagina Esercitazione, Sezione \ref{exepag}).
-        
-        \item \underline{Stato:} lo stato dei problemi risolti è visibile all'utente
-        autenticato. Il Catalogo segnala eventuali problemi risolti
-        mediante un apposito simbolo in un campo \textit{stato}.
-
-        \item \underline{Preferiti:} i preferiti vengono visualizzati qualora
-        l'utente che naviga il Catalogo sia già autenticato. Il Catalogo consente
-        di riconoscere i preferiti visualizzando un apposito simbolo in un campo
-        \textit{preferiti}.
-
-        \item \underline{Modifiche preferiti:} il Catalogo comunica al database le
-        modifiche approtate ai preferiti di un particolare utente.
-
-        \item \underline{Modifiche problemi:} il Catalogo comunica al database eventuali
-        modifiche apportate alla lista dei problemi.
-    \end{itemize}
-\end{description}
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-\subsubsection*{Pagina di Esercitazione}\label{exepag}
-\begin{description}
     \item[Descrizione:] il componente consente di consultare il contenuto del problema
     precedentemente selezionato nel catalogo. Inoltre, la Pagina di Esercitazione mette
     a disposizione gli strumenti utili alla risoluzione dell'esercizio, provvede alla
-    gestione della sottomissione del codice e avvisa l'utente circa la correttezza dell'algoritmo.
+    gestione della sottoposizione del codice e avvisa l'utente circa la correttezza dell'algoritmo.
     Qualora il codice sia corretto, questo componente si occupa di aggiornare i progressi
     dell'utente (autenticato) che ha risolto il problema, insieme allo stato di quest'ultimo
     in relazione all'utente in esame.
@@ -1255,58 +1135,47 @@ all'interno del Diagramma dei Componenti.
     \begin{itemize}
         \item[]
 
-        \item \underline{Problema:} per operare, il componente deve ricevere il problema
-        selezionato nel catalogo.
+        \item \underline{Problema:} per operare, la Pagina di Esercitazione
+        deve ricevere il problema selezionato precedentemente dal Catalogo.
 
-        \item \underline{Scelta linguaggio:} il componente riconosce dall'utente il
+        \item \underline{Selezione linguaggio:} il componente riconosce dall'utente il
         linguaggio di programmazione scelto per scrivere il codice (i linguaggi disponibili
         sono mostrati mediante un'interfaccia descritta tra le \textit{interfacce fornite}).
 
-        \item \underline{Codice:} il codice scritto dall'utente viene raccolto
-        per sottoporlo ai test cases.
+        \item \underline{Codice:} il componente ricevei il codice scritto
+        dall'utente, in modo da poterlo sottoporre ai test cases.
 
-        \item \underline{Avvia-ferma cronometro:} su richiesta, è possibile avviare, fermare o
-        reimpostare a 0 il cronometro.
+        \item \underline{Richiesta submit:} dall'utente, la Pagina di Esercitazione
+        riceve la richiesta di sottoposizione del codice.
 
-        \item \underline{Richiesta suggerimento:}
-    
-        \item \underline{Video:}
-
-        \item \underline{Conferma login:} la Pagina di Esercitazione richiede l'esito
-        del login da parte del Sistema di Autenticazione, cosicché i progressi dell'utente
-        autenticato possano essere aggiornati.
+        \item \underline{Start/stop/reset cronometro:} il cronometro integrato
+        può essere manipolato dall'utente mediante questa interfaccia.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Visualizzazione contenuto:} il problema viene visualizzato nella
-        totalità dei suoi contenuti: titolo, testo, esempi.
+        \item \underline{Contenuto problema:} il componente si occupa di mostrare
+        all'utente il contenuto del problema scelto (si intendono i dati strutturali:
+        titolo, testo, esempi).
 
-        \item \underline{Linguaggi disponibili:} il componente mostra all'utente quali
-        linguaggi di programmazione sono disponibili per scrivere il codice.
+        \item \underline{Linguaggi:} la Pagina di Esercitazione mostra quali
+        linguaggi di programmazione sono disponibili e selezionabili dall'utente.
 
-        \item \underline{Visualizzazione suggerimento:}
+        \item \underline{Test cases:} il componente visualizza i test cases
+        (input fornito e output restituito dall'algoritmo scritto), insieme ai
+        loro esiti.
 
-        \item \underline{Cronometro:} viene visualizzato il tempo registrato dal
-        cronometro.
+        \item \underline{Tempo:} il componente si occupa di mostrare il tempo
+        registrato dal cronometro.
 
-        \item \underline{Esito:} il componente comunica all'utente l'esito dell'esecuzione
-        del codice scritto e sottoposto.
-
-        \item \underline{Aggiorna progressi:} in caso di esito positivo di tutti i
-        test cases, il componente ha il compito di comunicare al database l'aggiornamento
-        dello stato del problema in relazione all'utente \textit{autenticato} che lo ha
-        risolto, oltre a incrementare i progressi di quello stesso utente.
+        \item \underline{Problema risolto:} nel caso in cui tutti i test cases
+        fossero corretti, in seguito ad una sottoposizione, il componente comunica
+        tale informazione ad altri componenti (si veda \textit{Gestore Utente}) per
+        mezzo di questa interfaccia.
     \end{itemize}
 \end{description}
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-\fi
 
 %\subsubsection{Utente non autenticato}
 %L'utente non autenticato è un qualsiasi utente collegato al sito che non si sia ancora autenticato tramite il sistema di login/registrazione descritto nel \textbf{RF 2}.\\
