@@ -1,0 +1,81 @@
+\documentclass[11pt, a4paper]{article}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{fullpage}
+
+\usepackage[utf8]{inputenc} % comment when using lualatex
+\usepackage[italian]{babel} % lingua e a-capo-sillabato
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref,xcolor} % link di pagina
+\usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
+\usepackage{float} % per posizionamento immagini
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\usepackage[font=small,labelfont=bf]{caption} % small font for caption (and bold Figure word)
+
+\pagestyle{fancy}
+\fancyhf{}% Clear header/footer
+\fancyfoot[C]{\thepage} %add page number
+\fancyhead[C]{\footnotesize\textit{Documento:} D5 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
+\setlength{\headheight}{22pt}
+
+%\pagestyle{myheadings}
+%\markright{John Smith\hfill On page styles\hfill}
+
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\theoremstyle{definition}
+
+\newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
+\newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
+\newtheorem{backend}{BE}
+\newtheorem{frontend}{FE}
+
+\title{Analisi dei Requisiti}
+
+\author{Raffaele \textsc{Castagna}\\
+Alberto \textsc{Rovesti}\\
+Zeno \textsc{Saletti}}
+
+\newcommand{\groupNumber}{G17}
+
+% footnote without number
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+% —
+
+% Web address for the project (if any)
+% \newcommand{\homepage}{\url{https://www.}}
+
+% data
+\date{\today}
+
+\makeatletter{}
+
+% IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\begin{document}
+
+% La pagina di copertina si trova in un file .tex a parte
+% NON MODIFICARE QUESTO COMANDO!!!
+\input{materiale/copertina.tex}
+
+\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione del testo:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice.}
+
+
+\newpage
+\section*{Scopo del documento}
+
+
+\end{document}
