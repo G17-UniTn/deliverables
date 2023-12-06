@@ -934,17 +934,44 @@ all'interno del Diagramma dei Componenti.
 
 \subsubsection{Catalogo}
 \begin{description}
-    \item[Descrizione:]
+    \item[Descrizione:] questo componente consente ad un qualsiasi utente
+    (anonimo, autenticato e amministratore) di consultare la lista di problemi
+    disponibili sulla piattaforma, oltre a permettere di selezionare un singolo
+    problema per aprirlo e iniziare a risolverlo, passando quindi alla \textit{Pagina di
+    Esercitazione}.
+    Il Catalogo facilita la navigazione visualizzando i dati descrittivi di ogni
+    problema (nome, categoria, difficoltà), permettendo anche di eseguire ricerche
+    filtrate per nome o altri campi; consente di visualizzare i suggerimenti;
+    mostra lo stato di ogni problema e i
+    preferiti alla vista dell'utente autenticato (e amministratore); permette
+    agli utenti amministratori di gestire la lista dei problemi, aggiungendone di
+    nuovi, modificandoli o eliminandoli.
 
     \item[Interfacce richieste:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Problemi:}
-        \item \underline{Richiesta hint:}
-        \item \underline{Filtri:}
-        \item \underline{Video:}
-        \item \underline{Selezione problema:}
+        \item \underline{Problemi:} il Catalogo ottiene la lista dei problemi
+        memorizzati dal database.
+
+        \item \underline{Richiesta hint\footnote{I suggerimenti sono
+        qui denotati brevemente col termine inglese \textit{hint}.}:}
+        con questa interfaccia, il Catalogo rileva le richieste dei
+        suggerimenti associati ai problemi.
+
+        \item \underline{Video:} questa interfaccia ha lo scopo di
+        ricevere dall'attore esterno YouTube il video-suggerimento
+        richiesto dall'utente.
+
+        \item \underline{Filtri:} il Catalogo riceve le scelte dei filtri
+        che gli utenti intendono applicare alla lista di problemi da
+        visualizzare. Questa interfaccia include tutti quei tipi di
+        filtri specificati nel documento D1, cioè i dati descrittivi
+        \textit{nome}, \textit{tag(s)}, \textit{difficoltà}.
+
+        \item \underline{Selezione problema:} il Catalogo rileva la
+        selezione di un problema specificato dall'utetne
+
         \item \underline{Autorizzazione:}
         \item \underline{Modifiche preferiti:}
         \item \underline{Modifiche catalogo:}
@@ -1060,18 +1087,7 @@ all'interno del Diagramma dei Componenti.
 
 \subsubsection*{Catalogo}
 \begin{description}
-    \item[Descrizione:] questo componente consente ad un qualsiasi utente
-    (anonimo, autenticato e amministratore) di consultare la lista di problemi
-    disponibili sulla piattaforma, oltre a permettere di selezionare un singolo
-    problema per aprirlo e iniziare a risolverlo, passando quindi alla Pagina di
-    Esercitazione (Sezione \ref{exepag}).
-    Il Catalogo facilita la navigazione visualizzando i dati descrittivi di ogni
-    problema (nome, categoria, difficoltà), permettendo anche di eseguire ricerche
-    filtrate per nome o altri campi; consente di visualizzare i suggerimenti senza
-    la necessità di aprire il problema; mostra lo stato di ogni problema e i
-    preferiti alla vista dell'utente autenticato (e amministratore); fornisce gli
-    strumenti utili agli utenti amministratori per aggiungere, modificare ed
-    eliminare i problemi del catalogo.
+    \item[Descrizione:]
 
     \item[Interfacce richieste:]
     \begin{itemize}
