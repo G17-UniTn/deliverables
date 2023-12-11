@@ -112,10 +112,13 @@ Dal momento che tutte queste categorie condividono alcune funzionalità, è stat
 creata una classe \texttt{Utente}, che logicamente corrisponde alla categoria
 degli utenti anonimi, ovvero utenti che non hanno effettuato il login. Di fatto,
 non è prevista la memorizzazione di alcuna informazione riguardo a questa categoria
-di utenti (non sono previsti attributi), e le uniche operazioni disponibili sono:
+di utenti (non sono presenti attributi), e le uniche operazioni disponibili sono:
 \begin{itemize}
-    \item \texttt{login()}: richiesta di accesso.
-    \item \texttt{signUp()}: richiesta di registrazione.
+    \item \texttt{login()}: richiesta di accesso con sistema di credenziali interne.
+    \item \texttt{signUp()}: richiesta di registrazione con sistema di credenziali interne.
+    \item \texttt{loginGoogle(), signUpGoogle()}: controparti dei metodi precedenti, che
+    però si avvalgono dei servizi di autenticazione Google.
+
     \item \texttt{recuperaAccount()}: richiesta di avvio della procedura di recupero account.
 \end{itemize}
 Da questa prima classe viene definita, mediante generalizzazione, la classe
@@ -128,16 +131,14 @@ login:
 
     \item \texttt{username, email, password}: i dati richiesti per creare un
     account. In caso di autenticazione con Google, è richiesto che la classe
-    memorizzi solo l'indirizzo email impiegato.
+    memorizzi solo l'indirizzo email impiegato e l'username.
 
     \item \texttt{isGoogle}: parametro che distingue gli account collegati con
     Google da account registrati con il meccanismo di credenziali interne.
 
-    \item \texttt{risolti[*]}: insieme che raccoglie gli identificatori dei problemi
-    risolti dall'utente.
+    \item \texttt{risolti[*]}: insieme dei problemi risolti dall'utente.
 
-    \item \texttt{preferiti[*]}: insieme degli identificatori dei problemi
-    contrassegnati come preferiti, da parte dell'utente.
+    \item \texttt{preferiti[*]}: insieme dei problemi preferiti dell'utente.
 
     \item \texttt{logout()}: richiesta di logout.
     
@@ -148,14 +149,14 @@ login:
 
     \item \texttt{setPreferito}: questo metodo provvede ad aggiungere o
     eliminare dalla lista dei preferiti dell'utente il problema fornito: se
-    presente, il suo identificatore viene rimosso dalla lista, altrimenti
-    viene aggiunto.
+    presente, esso viene rimosso dalla lista, altrimenti viene aggiunto.
 
-    \item \texttt{getPreferiti}: affinché l'utente possa vedere i preferiti
-    della sua lista, questo metodo permette di restituire questo dato.
-
-    \item \texttt{getNumeroRisolti, getRisoltiPerDifficolta}: questi metodi
-    permettono di fornire informazioni riguardo ai progressi dell'utente.
+    \item \texttt{getPreferiti}: i preferiti dell'utente autenticato vengono
+    messi a diposizione all'esterno della classe grazie a questo metodo.
+    Come descritto nel diagramma dei componenti, in questo modo viene
+    realizzata l'interfaccia che passa i preferiti dell'utente dal Gestore
+    Utente verso il Catalogo, in modo da visualizzarli nella lista dei
+    problemi.
 \end{itemize}
 Infine, un'ulteriore generalizzazione specifica le funzionalità aggiuntive
 dell'utente amministratore, ovvero metodi utili alla gestione dei problemi
@@ -166,11 +167,18 @@ disponibili nel catalogo:
     \item \texttt{eliminaProblema}
 \end{itemize}
 Nella Figura \ref{utenti} sono mostrate in linguaggio UML le classi
-sopra descritte.
+sopra descritte. Facendo riferimento al Diagramma dei Componenti del
+documento D1, queste classi sono state in parte estratte da tre componenti
+distinti che si occupano dell'interazione con l'utente esterno: dalla
+\textit{Pagina di Autenticazione} sono stati raggruppate le interfacce che
+si trovano in \texttt{Utente}; in \texttt{UtenteAutenticato} sono state
+raccolte le interfacce presenti nel componente \textit{Gestore Utente};
+in \texttt{UtenteAmministratore} sono state raggruppate alcune delle interfacce
+definite nel componente \textit{Catalogo}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.7]{materiale/class-utenti.pdf}
+\includegraphics[scale = 1]{materiale/class-utenti.pdf}
 \caption{Definizione della classe \texttt{Utente}}
 \label{utenti}
 \end{figure}
@@ -184,28 +192,88 @@ sopra descritte.
 \newpage
 \subsection{Gestione autenticazione}
 Nel diagramma di contesto, l'autenticazione si avvale di due sistemi
-subordinati: \textit{Firebase DB}, che si occupa di memorizzare gli account
+subordinati: \textit{Firebase}, che si occupa di memorizzare gli account
 registrati con sistema di autenticazione interno, e \textit{Google SignIn},
 con il quale è possibile, per un utente, effettuare la registrazione o
 l'autenticazione mediante un account Google.
 
-Il componente \textit{Gestione Autenticazione} del rispettivo diagramma si
+Il componente \textit{Gestore Autenticazione} del rispettivo diagramma si
 occupa di interagire con tali sistemi esterni in modo da convalidare le
 operazioni di registrazione e autenticazione. Per questo motivo, nel diagramma
-delle classi viene individuata la classe \texttt{Autenticazione}:
+delle classi viene individuata la classe \texttt{Autenticazione} (Figura \ref{autenticaz}):
 \begin{itemize}
     \item \texttt{autorizzato}: questo attributo mantiene lo stato dell'autorizzazione
-    dell'utente
-    \item \texttt{isGoogle}:
+    dell'utente associato. Questo fatto viene evidenziato dall'associazione
+    uno-a-uno tra questa classe e l'\texttt{Utente}. Si assume che questa
+    associazione valga anche per \texttt{UtenteAutenticato} e \texttt{UntenteAmministratore},
+    grazie alla generalizzazione definita sui tipi di utenti a partire da \texttt{User}.
     \item \texttt{registraAccount}: questo metodo esegue la registrazione
     comunicando con il servizio di database.
     \item \texttt{autentica}: l'autenticazione mediante credenziali interne
     avviene grazie a questo metodo.
-    \item \texttt{registraGoogle}
-    \item \texttt{autenticaGoogle}
+    \item \texttt{registraGoogle, autenticaGoogle}: analoghi ai precedenti,
+    questi metodi si occupano delle operazioni di registrazine ed auteticazione
+    con Google.
 \end{itemize}
 Tutti i metodi comunicano all'esterno l'esito delle loro operazioni mediante
 un valore booleano di ritorno.
+
+\begin{figure}[H]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[scale = 0.9]{materiale/class-autenticazione.pdf}
+\caption{Definnizione della classe \texttt{Autenticazione}}
+\label{autenticaz}
+\end{figure}
+
+
+\subsection{Recupero dell'account}
+Nel Diagramma dei Componenti è stata individuata la \textit{Pagina di Recupero},
+che offre supporto agli utenti registrati, con sistema di credenziali interne,
+che hanno dimenticato la password e che intendono recuperare l'account.
+Nel Diagramma di Contesto, il servizio di posta elettronica rientra nello
+scambio di informazioni necessario per la procedura di recupero. Per
+questi motivi viene individuata la classe \texttt{RecuperoPwUtente} (Figura \ref{recupero}), che
+raccoglie attributi e metodi necessari per effettuare il recupero,
+interagendo tra l'altro con il servizio di posta elettronica.
+
+\begin{itemize}
+    \item \texttt{email}: l'indirizzo email di recupero viene memorizzato
+    per conservarlo durante tutta la procedura di recupero.
+
+    \item \texttt{mandaEmailRecupero}: il messaggio di recupero viene inviato
+    all'indirizzo specificato. Questo metodo rappresenta la richieste di
+    invio da parte del sistema nei confronti del servizio di posta.
+
+    \item \texttt{cambiaPassword}: la nuova password inserita dall'utente
+    viene aggiornata nel suo account. Come rappresentato dal Diagramma dei
+    Componenti, questa è la realizzazione dell'interfaccia fornita al
+    database. Questa operazione può essere effettuata solo su un account
+    già registrato e quindi esistente, come mostrato dal tipo del secondo
+    parametro richiesto (\texttt{UtenteAutenticato}).
+\end{itemize}
+Questa classe è coinvolta in una associazione con \texttt{User}, la quale
+richiede il recupero facendo riferimento ad una sola istanza di
+\texttt{RecuperoPwUtente}, mentre quest'ultima si occupa delle operazioni
+di recupero per un solo utente.
+
+\begin{figure}[H]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[scale = 0.8]{materiale/class-recupero.pdf}
+\caption{Definizione della classe \texttt{RecuperoPwUtente}}
+\label{recupero}
+\end{figure}
+
+
+
+\newpage
+\subsection{Catalogo}
+
+
+
+\subsection{Esercitazione}
+
 
 
 \newpage
@@ -223,8 +291,9 @@ sezioni precedenti.
 
 \begin{figure}[H]
 \centering
-%\includegraphics[options]{name}
-\caption{Diagramma delle classi arricchito dal codice OCL}
+\hspace*{-3.8cm}
+\includegraphics[scale = 0.53]{materiale/classdiagram.pdf}
+\caption{Diagramma delle classi arricchito da codice OCL}
 \label{umlocl}
 \end{figure}
 
