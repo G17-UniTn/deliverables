@@ -6,12 +6,14 @@
 \usepackage[utf8]{inputenc} % comment when using lualatex
 \usepackage[italian]{babel} % lingua e a-capo-sillabato
 \usepackage{graphicx}
-\usepackage[hidelinks]{hyperref,xcolor} % link di pagina
+\usepackage[hidelinks]{hyperref} % link di pagina
 \usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
 \usepackage{float} % per posizionamento immagini
 \usepackage{amsthm}
 \usepackage{fancyhdr}
 \usepackage[font=small,labelfont=bf]{caption} % small font for caption (and bold Figure word)
+\usepackage{tabularx} %tabelle
+\usepackage[table]{xcolor} %colore caselle
 
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
@@ -77,5 +79,75 @@ Zeno \textsc{Saletti}}
 \newpage
 \section*{Scopo del documento}
 
+
+
+
+\newpage
+\section{Approcci all'ingegneria del software}
+Nella presente sezione vengono riassunti brevemente i punti più significativi
+dei seminari tenutisi durante il corso, ponendo particolare attenzione ai
+metodi e ai principi fondanti dell'ingegneria del software.
+
+\subsection{BlueTensor}
+\subsection{Il metodo Kanban}
+\subsection{IBM}
+\subsection{Meta}
+\subsection{U-Hopper}
+\subsection{Red Hat}
+\subsection{Microsoft}
+\subsection{Sistemi Legacy}
+\subsection{Gestione del ciclo di vita del software e modernizzazione}
+\subsection{APSS e tecnologie per servizi pubblici}
+
+\newpage
+\section{Organizzazione del lavoro}
+\subsection{Ruoli e attività}
+\begin{center}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{|c||c||X|}
+      \hline
+      \cellcolor{red!70}Componente del team & \cellcolor{red!70}Ruolo & \cellcolor{red!70}Attività principali\\
+      \hline
+      Raffaele Castagna & &\\
+      \hline
+      Alberto Rovesti & &\\
+      \hline
+      Zeno Saletti & &\\
+      \hline
+  \end{tabularx}
+\end{center}
+
+\subsection{Distribuzione del carico di lavoro}
+\begin{center}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{|c||c||c||c||c||c||X|}
+      \hline
+      \cellcolor{red!70}Componente del team & \cellcolor{red!70}D1 & \cellcolor{red!70}D2 & \cellcolor{red!70}D3 & \cellcolor{red!70}D4 & \cellcolor{red!70}D5 & \cellcolor{red!70}Totale\\
+      \hline
+      Raffaele Castagna & 11111&11111&111111&11111&1111&\\
+      \hline
+      Alberto Rovesti & &&&&&\\
+      \hline
+      Zeno Saletti & &&&&&\\
+      \hline
+  \end{tabularx}
+\end{center}
+
+\section{Criticità}
+\section{Autovalutazione}
+\begin{center}
+  \footnotesize
+  \begin{tabularx}{\columnwidth}{|X||c|}
+      \hline
+      \cellcolor{red!70}Componente del team & \cellcolor{red!70}Voto\\
+      \hline
+      Raffaele Castagna & \\
+      \hline
+      Alberto Rovesti & \\
+      \hline
+      Zeno Saletti & \\
+      \hline
+  \end{tabularx}
+\end{center}
 
 \end{document}
