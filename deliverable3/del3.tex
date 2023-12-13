@@ -176,13 +176,9 @@ documento D2, queste classi sono state in parte estratte da tre componenti
 distinti che si occupano dell'interazione con l'utente esterno: dalla
 \textit{Pagina di Autenticazione} sono stati raggruppate le interfacce che
 si trovano in \texttt{Utente}; in \texttt{UtenteAutenticato} sono state
-raccolte le interfacce presenti nel componente \textit{Gestore Utente};
+raccolte le interfacce presenti nel componente \textit{Gestore Profilo};
 in \texttt{UtenteAmministratore} sono state raggruppate alcune delle interfacce
 definite nel componente \textit{Catalogo}.
-
-
-
-
 
 
 \newpage
@@ -273,6 +269,19 @@ amministratore, mantenendo dunque una definizione dei livelli di accesso
 coerente con quella dei documenti precedenti, oltre alla volontà di ridurre il
 carico di informazione della classe \texttt{Catalogo} rendendo il rispettivo
 componente del diagramma più modulare e non monolitico.
+\begin{figure}[H]
+\centering
+\hspace*{-0.8cm}
+\includegraphics[scale = 0.72]{materiale/class-catalogo.pdf}
+\caption{Specifica architetturale del componente \textit{Catalogo} con la classe \texttt{Catalogo}}
+\label{catalog}
+\end{figure}
+\noindent La Figura \ref{catalog} mostra anche la classe \texttt{Problema},
+descritta dettagliatamente nella prossima sezione. Il catalogo
+raccoglie i problemi disponibili sulla piattaforma, quindi \texttt{Catalogo}
+è legato a \texttt{Problema} da un'associazione di aggregazione.
+
+
 \begin{itemize}
     \item \texttt{problemi[1...*]}: questo attributo indica che il catalogo
     consiste in una lista di almeno un problema (si veda la prossima sezione
@@ -293,14 +302,6 @@ componente del diagramma più modulare e non monolitico.
     \item \texttt{mostraProblema}:
 \end{itemize}
 
-\begin{figure}[H]
-\centering
-%\hspace*{-1.5cm}
-\includegraphics[scale = 0.7]{materiale/class-catalogo.pdf}
-\caption{Specifica architetturale del componente \textit{Catalogo} con la classe \texttt{Catalogo}}
-\label{catalog}
-\end{figure}
-
 
 
 \newpage
@@ -311,14 +312,14 @@ La Figura \ref{esercitaz} illustra le classi che costituiscono il componente
 \begin{figure}[H]
 \centering
 %\hspace*{-1.5cm}
-\includegraphics[scale = 0.6]{materiale/class-esercitazione.pdf}
-\caption{Specifica architetturale del componente \textit{Catalogo} con la classe \texttt{Catalogo}}
+\includegraphics[scale = 0.8]{materiale/class-esercitazione.pdf}
+\caption{}
 \label{esercitaz}
 \end{figure}
 
 
-
-
+\newpage
+\subsection{Profilo utente}
 
 
 
