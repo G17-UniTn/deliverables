@@ -298,18 +298,18 @@ La complessità delle operazioni relative all'esercitazione è
 catturata dalla Figura \ref{acexercise}.
 Dato che l'utente può decidere di uscire dall'area di esercitazione
 a propria discrezione, il processo descritto nel diagramma
-può essere interrotto in qualsiasi momento—come indicato dalla codizione
-\textit{Esci} nel diagramma. La corsia \textit{Firebase} descrive le
-attività previste dallo use case \textit{Registrare i progressi} (Figura \ref{esercitaz}),
-tenendo ovviamente in conto l'utente autenticato del quale aggiornare
-i progressi.
+può essere interrotto in qualsiasi momento.
+La corsia \textit{Firebase} descrive le
+attività previste dallo use case \textit{Registrare i progressi}
+(Figura \ref{esercitaz}), tenendo ovviamente in conto l'utente
+autenticato del quale aggiornare i progressi.
 Si assume che l'attività \textit{Visualizza cronometro} includa
 implicitamente le funzionalità descritte dal relativo use case.
 
 \begin{figure}[H]
 \centering
-\hspace*{-0.4cm}
-\includegraphics[scale=0.57]{materiale/ucdiagrams/sldesercitazione.pdf}
+%\hspace*{-0.4cm}
+\includegraphics[scale=0.6]{materiale/ucdiagrams/swimlaneesercitazione.pdf}
 \caption{SD, arricchito da elementi di Activity Diagram,
 per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
 e \textit{Registrare i progressi}}
@@ -343,16 +343,16 @@ ai seguenti requisiti funzionali:
 La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all'aggiornamento
 dell'indirizzo di posta elettronica di un utente registrato con credenziali di sistema
 e autenticato, evidenziando i passi della procedura mediante uno Swimlane Diagram.
-Le condizioni \textit{annulla operazione} e \textit{conferma operazione}
-sottolineano il fatto che l'utente può interrompere la procedura di migrazione
-qualora lo ritenga opportuno. In più, viene specificato il comportamento che
-il sistema assume nel caso in cui venga inserita un'email già associata ad un
+Qualora lo ritenga opportuno, l'utente può interrompere questa procedura di migrazione,
+fino alla condizione \textit{conferma operazione}.
+In più, viene specificato il comportamento che
+il sistema adotta nel caso in cui venga inserita un'email già associata ad un
 altro account registrato sulla piattaforma.
 
 \begin{figure}[H]
 \centering
 \hspace*{-1cm}
-\includegraphics[scale = 0.85]{materiale/ucdiagrams/swimlaneemail.pdf}
+\includegraphics[scale = 0.89]{materiale/ucdiagrams/swimlaneemail.pdf}
 \caption{SD dello scenario di aggiornamento dell'indirizzo email}
 \label{slemail}
 \end{figure}
@@ -361,14 +361,12 @@ altro account registrato sulla piattaforma.
 La Figura \ref{slpassword} fa riferimento allo Use Case relativo all'aggiornamento
 della password dell'account di un utente registrato con credenziali di sistema e autenticato.
 Durante il processo di aggiornamento, l'utente ha la facoltà di interrompere
-la procedura qualora non intenda più modificare la password. Da qui il
-significato delle condizioni \textit{annulla operazione} e \textit{conferma
-operazione}.
+la procedura qualora non intenda più modificare la password.
 
 \begin{figure}[H]
 \centering
 \hspace*{-0.7cm}
-\includegraphics[scale = 0.95]{materiale/ucdiagrams/swimlanepassword.pdf}
+\includegraphics[scale = 1]{materiale/ucdiagrams/swimlanepassword.pdf}
 \caption{SD dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
