@@ -321,12 +321,27 @@ La classe \texttt{Problema} è definita come segue:
     \item \texttt{nome}, \texttt{tags}, \texttt{difficolta}, \texttt{url\_hint\_video}:
     questi rappresentano i \textit{campi descrittivi} del problema, come specificati nel
     documento D1. La difficoltà può assumere solamente uno dei valori
-    specificati dal dominio del tipo enumerato \texttt{Difficulty}.
+    definiti dal dominio del tipo enumerato \texttt{Difficulty}.
 
-    \item \texttt{titolo}, \texttt{testo}, \texttt{esempi}
+    \item \texttt{titolo}, \texttt{testo}, \texttt{esempi}: i dati strutturali del problema.
+    \item \texttt{tc}:
+    \item \texttt{driver\_code}:
 \end{itemize}
+Al fine di alleggerire la classe \texttt{Problema}, è stata accolta la scelta di
+dedicare una classe \texttt{TestCase}. Essa ha il compito di raccogliere le informazioni
+chiave necessarie al test del codice fornito dall'utente (il quale si esercita
+sul problema specifico): \texttt{input}, \texttt{output} e dei metodi che rendono
+questi attributi disponibili all'esterno.
+Si noti che la relazione che unisce \texttt{TestCase} e \texttt{Problema} è
+una \textbf{composizione} (indicato dall'estremità romboidale nera): i testcases
+sono infatti associati a specifici problemi, come espresso dalle cardinalità,
+ma non hanno alcun significato se il problema specifico al quale dovrebbero
+essere associati non esiste.
 
-
+Altra parte integrante della Pagina di Esercitazione è la classe \texttt{Cronometro},
+che prevede le semplici funzionalità per mostrare il tempo registrato,
+essere avviato, fermato e reimpostato a 0 secondi (condizioni più dettagliate
+di questa classe sono mostrate nel codice OCL delle prossime sezioni).
 
 \newpage
 \subsection{Profilo utente}
