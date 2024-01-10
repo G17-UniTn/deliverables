@@ -81,7 +81,7 @@ Constraint Language (OCL). Nel documento precedente (D2, \textit{Specifica
 dei Requisiti}) sono stati presentati il diagramma degli use case, quello
 di contesto e infine il Diagramma dei Componenti. Considerando tale
 progettazione, viene ora definita l'architettura del sistema specificando
-in modo più dettagliato le classi che dovranno essere implementate sotto forma di
+in modo più dettagliato le classi implementabili sotto forma di
 codice, insieme alla logica che regola il comportamento del software che
 si intende realizzare.
 
@@ -313,9 +313,17 @@ La Figura \ref{esercitaz} illustra le classi che costituiscono il componente
 \centering
 %\hspace*{-1.5cm}
 \includegraphics[scale = 0.8]{materiale/class-esercitazione.pdf}
-\caption{}
+\caption{Classi dedotte dal componente \textit{Pagina di esercitazione}}
 \label{esercitaz}
 \end{figure}
+La classe \texttt{Problema} è definita come segue:
+\begin{itemize}
+    \item \texttt{nome}, \texttt{tags}, \texttt{difficolta}, \texttt{url\_hint\_video}:
+    questi rappresentano i \textit{campi descrittivi} del problema, come specificati nel
+    documento D1. La difficoltà può assumere solamente uno dei valori
+    specificati dal dominio del tipo enumerato \texttt{Difficulty}.
+\end{itemize}
+
 
 
 \newpage
