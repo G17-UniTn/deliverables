@@ -16,7 +16,7 @@
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
 \fancyfoot[C]{\thepage} %add page number
-\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.3}
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.4}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -232,10 +232,6 @@ essere possibile:
         problema. Il suggerimento è disponibile solo dal catalogo e non
         dall'area di esercitazione (\textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}}}}).
     \end{itemize}
-    
-    \item Cercare uno o più problemi specifici mediante ricerca filtrata per campi.
-    Ai fini della consultazione del catalogo, i filtri applicabili riguardano i
-    campi \textit{nome, difficoltà, tags}.
 
     \item Selezionare dal catalogo un problema specifico, cosicché
     il contenuto dell'intero problema possa essere visionato per mezzo
@@ -291,11 +287,6 @@ del problema, accedendo alle seguenti funzionalità:
     
     %\item Visualizzare il suggerimento (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}).
 \end{enumerate}
-L'esercitazione non è da confondersi come "sessione" della quale la piattaforma
-registra lo stato. In altre parole, l'utente può accedere all'area di
-esercitazione (selezionando un problema) e abbandonarla in qualsiasi momento, ma
-nessun dato cronologico o di altra natura, riguardo a tali azioni, deve essere
-memorizzato, nemmeno nel caso in cui l'utente in questione sia autenticato.
 \end{funcreq}
 
 
@@ -375,13 +366,17 @@ piattaforma. Sono dunque inclusi l'\textit{account} (\textcolor{blue}{\underbar{
         per lui rilevanti deve poter contrassegnare tali problemi come \textit{preferiti}.
     \end{enumerate}
     Le informazioni riguardanti questi campi sono visibili all'utente autenticato,
-    sia durante la consultazione del catalogo che del singolo problema. Si sottolinea
-    che \textit{stato} e \textit{preferito} non sono attributi del problema in sé,
-    bensì essi caratterizzazno la relazione tra un particolare utente autenticato e i
-    problemi: ogni utente ha un proprio insieme di problemi preferiti e risolti,
-    potenzialmente diverso da quelli di altri utenti registrati.
+    sia durante la consultazione del catalogo che del singolo problema.
+
+    (il mio like si vede nel catalogo, dal catalogo non posso mettere like,
+    entrando nel problema vedo il numero di like)
 \end{funcreq}
 
+\begin{funcreq}
+\textbf{Codice } Il codice scritto dall'utente autenticato, all'interno della
+console, nell'area di esercitazione, viene salvato sul browser in locale, in
+modo che l'utente, rivisitando i diversi esercizi, continuare l'esercizio.
+\end{funcreq}
 
 \begin{funcreq}
 \label{stats}
@@ -396,12 +391,8 @@ i propri \textit{progressi}.
     \textit{risolto} (ciò modifica il campo \textit{stato} visibile nel catalogo
     e nell'area di consultazione ed esercitazione di quel problema).
 
-    \item L'utente deve poter monitorare i propri progressi, accedendo ai dati
-    seguenti:
-    \begin{itemize}
-        \item Il numero totale di problemi risolti.
-        \item Il numero di problemi risolti suddivisi per difficoltà.
-    \end{itemize}
+    \item L'utente deve poter monitorare i propri progressi, visualizzando il
+    numero totale di problemi risolti nel catalogo.
 \end{enumerate}
 \end{funcreq}
 
@@ -413,8 +404,8 @@ L'utente registrato e autenticato mediante il sistema di credenziali interno
 deve poter modificare i dati identificativi del proprio account, ovvero indirizzo
 email e password:
 \begin{enumerate}
-\item L'utente deve poter migrare ad un indirizzo email differente. La modifica
-deve avvenire previo inserimento della password attualmente in uso.
+\item L'utente deve poter eliminare il proprio account, e tutti i dati ad
+esso collegati.
 
 \item L'utente deve poter modificare la password del proprio account.
 La password può essere cambiata previo inserimento di quella attualmente
@@ -514,6 +505,19 @@ servizio in meno di 30 minuti.
 
 \begin{nonfuncreq}
 \textbf{Aspetto }
+\begin{enumerate}
+    \item Colore
+    \item Layout dinamico: all'interno della pagina di esercitazione, divisa
+    in console, riquadro dei test case e visualizzatore del contenuto del
+    problema, l'utente deve essere in grado di modificare le dimensioni dei
+    diversi riquadri a suo piacimento, comunque senza impattare l'usabilità
+    della pagina di esercitazione del sito.
+
+    \item Durante l'attesa di risposta del serve per qualsiasi richiesta
+    ad esso fatta, l'utente deve essere essere notificato dell'avvenuto
+    ricevimento della richiesta e dell'attesa conseguente, tramite opportuni
+    segnalazioni grafiche.
+\end{enumerate}
 L'interfaccia deve presentarsi gradevole alla vista dell'utente, preferendo
 gradazioni cromatiche scure e un contrasto sufficientemente equilibrato,
 al fine di garantire la leggibilità e contribuire alla riduzione
@@ -594,11 +598,11 @@ la stringa inserita deve rispettare le seguenti caratteristiche:
     \item Contenere almeno una lettera maiuscola.
     \item Contenere almeno una lettera minuscola.
     \item Contenere almeno un numero.
-    \item Contenere almeno un carattere speciale scelto tra i
-    seguenti:
-    \begin{center}
-        \verb|! ? # $ % & @ * + . , ; : / - = _ \ ( ) [ ] { }|
-    \end{center}
+    \item Contenere almeno un carattere speciale, non alfanumerico,
+    tra quelli specificati dalla libreria Yup,
+    %\begin{center}
+    %    \verb|! ? # $ % & @ * + . , ; : / - = _ \ ( ) [ ] { }|
+    %\end{center}
 \end{itemize}
 \end{nonfuncreq}
 
@@ -661,16 +665,6 @@ del problema e risoluzione di quest'ultimo.
 
 \newpage
 
-\begin{frontend}
-\textbf{Editor del catalogo }
-La seguente figura mostra l'interfaccia che si presenta ad un utente
-amministratore nel momento in cui desidera modificare il catalogo dei
-problemi.
-\end{frontend}
-\begin{figure}[H]
-\centering
-%\includegraphics[scale=0.5]{materiale/immaginife/boh.jpeg}
-\end{figure}
 
 \begin{frontend}
 \textbf{Logout }
