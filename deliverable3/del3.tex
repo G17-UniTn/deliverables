@@ -20,6 +20,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
+\fancyfoot[C]{\thepage} %add page number
 \fancyhead[C]{\footnotesize\textit{Documento:} D3 \hfill SleepCode \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
@@ -51,6 +52,13 @@ Zeno \textsc{Saletti}}
 
 \makeatletter{}
 
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 % IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -61,30 +69,30 @@ Zeno \textsc{Saletti}}
 % NON MODIFICARE QUESTO COMANDO!!!
 \input{materiale/elementi-copertina/copertina.tex}
 
-\tableofcontents
+\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione del testo:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice.}
 
 \newpage
 
 \section*{Scopo del documento}
 In questo documento viene riportata la definizione dell'architettura del
 progetto \textit{SleepCode} impiegando diagrammi delle classi, realizzati
-secondo gli standard di Unified Modeling Language (UML), e codice Object
+secondo gli standard di Unified Modeling Language (UML), e codice scritto in Object
 Constraint Language (OCL). Nel documento precedente (D2, \textit{Specifica
 dei Requisiti}) sono stati presentati il diagramma degli use case, quello
-di contesto e infine il diagramma dei componenti. Considerando tale
+di contesto e infine il Diagramma dei Componenti. Considerando tale
 progettazione, viene ora definita l'architettura del sistema specificando
-in modo più dettagliato le classi che dovranno essere implementate sotto forma di
+in modo più dettagliato le classi implementabili sotto forma di
 codice, insieme alla logica che regola il comportamento del software che
 si intende realizzare.
 
 Il linguaggio UML, utilizzato per descrivere le classi, è supportato da
-codice OCL, impiegato invece per specificare gli aspetti logici citati sopra
-che non sarebbero esprimibili formalmente mediante i soli diagrammi delle
+codice OCL, impiegato invece per catturare gli aspetti logici citati sopra,
+che non sarebbero altrimenti esprimibili formalmente mediante i soli diagrammi delle
 classi.
 
 
 \newpage
-\section{Diagramma delle classi}
+\section{Definizione delle classi}
 Nella presente sezione vengono illustrate in linguaggio UML le classi
 previste dal progetto \textit{SleepCode}. Ogni componente del diagramma
 dei componenti, presente nel documento D2, viene qui rappresentato
@@ -96,18 +104,28 @@ da alcune associazioni.
 
 \subsection{Utenti}
 L'attore che nel diagramma di contesto usufruisce delle funzionalità offerte
-dal servizio è l'utente. Come descritto nei documenti di Analisi dei Requisiti (D1)
+dal sistema è l'utente. Come descritto nei documenti di Analisi (D1) e
 e Specifica dei Requisiti (D2), esistono tre categorie di utenti: anonimo, autenticato
-e amministratore.
+e amministratore. La Figura \ref{utenti} illustra le rispettive classi.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.71]{materiale/class-utenti.pdf}
+\caption{Definizione della classe \texttt{Utente} e delle sue generalizzazioni}
+\label{utenti}
+\end{figure}
 
 Dal momento che tutte queste categorie condividono alcune funzionalità, è stata
 creata una classe \texttt{Utente}, che logicamente corrisponde alla categoria
 degli utenti anonimi, ovvero utenti che non hanno effettuato il login. Di fatto,
 non è prevista la memorizzazione di alcuna informazione riguardo a questa categoria
-di utenti (non sono previsti attributi), e le uniche operazioni disponibili sono:
+di utenti e le uniche operazioni disponibili sono:
 \begin{itemize}
-    \item \texttt{login()}: richiesta di accesso.
-    \item \texttt{signUp()}: richiesta di registrazione.
+    \item \texttt{login()}: richiesta di accesso con sistema di credenziali interne.
+    \item \texttt{signUp()}: richiesta di registrazione con sistema di credenziali interne.
+    \item \texttt{loginGoogle(), signUpGoogle()}: controparti dei metodi precedenti, che
+    però si avvalgono dei servizi di autenticazione Google.
+
     \item \texttt{recuperaAccount()}: richiesta di avvio della procedura di recupero account.
 \end{itemize}
 Da questa prima classe viene definita, mediante generalizzazione, la classe
@@ -120,16 +138,14 @@ login:
 
     \item \texttt{username, email, password}: i dati richiesti per creare un
     account. In caso di autenticazione con Google, è richiesto che la classe
-    memorizzi solo l'indirizzo email impiegato.
+    memorizzi solo l'indirizzo email impiegato e l'username.
 
     \item \texttt{isGoogle}: parametro che distingue gli account collegati con
     Google da account registrati con il meccanismo di credenziali interne.
 
-    \item \texttt{risolti[*]}: insieme che raccoglie gli identificatori dei problemi
-    risolti dall'utente.
+    \item \texttt{risolti[*]}: insieme dei problemi risolti dall'utente.
 
-    \item \texttt{preferiti[*]}: insieme degli identificatori dei problemi
-    contrassegnati come preferiti, da parte dell'utente.
+    \item \texttt{preferiti[*]}: insieme dei problemi preferiti dell'utente.
 
     \item \texttt{logout()}: richiesta di logout.
     
@@ -140,82 +156,234 @@ login:
 
     \item \texttt{setPreferito}: questo metodo provvede ad aggiungere o
     eliminare dalla lista dei preferiti dell'utente il problema fornito: se
-    presente, il suo identificatore viene rimosso dalla lista, altrimenti
-    viene aggiunto.
+    presente, esso viene rimosso dalla lista, altrimenti viene aggiunto.
 
-    \item \texttt{getPreferiti}: affinché l'utente possa vedere i preferiti
-    della sua lista, questo metodo permette di restituire questo dato.
-
-    \item \texttt{getNumeroRisolti, getRisoltiPerDifficolta}: questi metodi
-    permettono di fornire informazioni riguardo ai progressi dell'utente.
+    \item \texttt{getPreferiti}: i preferiti dell'utente autenticato vengono
+    messi a diposizione all'esterno della classe grazie a questo metodo.
+    Come descritto nel diagramma dei componenti, in questo modo viene
+    realizzata l'interfaccia che passa i preferiti dell'utente dal Gestore
+    Utente verso il Catalogo, in modo da visualizzarli nella lista dei
+    problemi.
 \end{itemize}
 Infine, un'ulteriore generalizzazione specifica le funzionalità aggiuntive
-dell'utente amministratore, ovvero metodi utili alla gestione dei problemi
-disponibili nel catalogo:
-\begin{itemize}
-    \item \texttt{aggiungiProblema}
-    \item \texttt{modificaProblema}
-    \item \texttt{eliminaProblema}
-\end{itemize}
-Nella Figura \ref{utenti} sono mostrate in linguaggio UML le classi
-sopra descritte.
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale = 0.7]{materiale/class-utenti.pdf}
-\caption{Definizione della classe \texttt{Utente}}
-\label{utenti}
-\end{figure}
+dell'utente amministratore, ovvero metodi utili alla gestione del catalogo
+e dei problemi:
+\texttt{aggiungiProblema}, \texttt{modificaProblema}, \texttt{eliminaProblema}.
 
 
-
-
-
+Facendo riferimento al Diagramma dei Componenti del
+documento D2, queste classi sono state in parte estratte da tre componenti
+distinti che si occupano dell'interazione con l'utente esterno: dalla
+\textit{Pagina di Autenticazione} sono stati raggruppate le interfacce che
+si trovano in \texttt{Utente}; in \texttt{UtenteAutenticato} sono state
+raccolte le interfacce presenti nel componente \textit{Gestore Profilo};
+in \texttt{UtenteAmministratore} sono state raggruppate alcune delle interfacce
+definite nel componente \textit{Catalogo}.
 
 
 \newpage
 \subsection{Gestione autenticazione}
 Nel diagramma di contesto, l'autenticazione si avvale di due sistemi
-subordinati: \textit{Firebase DB}, che si occupa di memorizzare gli account
+subordinati: \textit{Firebase}, che si occupa di memorizzare gli account
 registrati con sistema di autenticazione interno, e \textit{Google SignIn},
-con il quale è possibile, per un utente, effettuare la registrazione o
-l'autenticazione mediante un account Google.
+con il quale è possibile effettuare la registrazione o l'autenticazione
+mediante un account Google.
 
-Il componente \textit{Gestione Autenticazione} del rispettivo diagramma si
+Il componente \textit{Gestore Autenticazione} del rispettivo diagramma si
 occupa di interagire con tali sistemi esterni in modo da convalidare le
 operazioni di registrazione e autenticazione. Per questo motivo, nel diagramma
-delle classi viene individuata la classe \texttt{Autenticazione}:
+delle classi viene individuata la classe \texttt{Autenticazione} (Figura \ref{autenticaz}):
 \begin{itemize}
     \item \texttt{autorizzato}: questo attributo mantiene lo stato dell'autorizzazione
-    dell'utente
-    \item \texttt{isGoogle}:
+    dell'utente associato. Questo fatto viene evidenziato dall'associazione
+    uno-a-uno tra questa classe e l'\texttt{Utente}. Si assume che questa
+    associazione valga anche per \texttt{UtenteAutenticato} e \texttt{UntenteAmministratore},
+    in virtù della generalizzazione definita sui tipi di utenti a partire da \texttt{User}.
     \item \texttt{registraAccount}: questo metodo esegue la registrazione
     comunicando con il servizio di database.
     \item \texttt{autentica}: l'autenticazione mediante credenziali interne
     avviene grazie a questo metodo.
-    \item \texttt{registraGoogle}
-    \item \texttt{autenticaGoogle}
+    \item \texttt{registraGoogle, autenticaGoogle}: analoghi ai precedenti,
+    questi metodi si occupano delle operazioni di registrazine ed auteticazione
+    con Google.
 \end{itemize}
 Tutti i metodi comunicano all'esterno l'esito delle loro operazioni mediante
 un valore booleano di ritorno.
 
+\begin{figure}[H]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[scale = 0.9]{materiale/class-autenticazione.pdf}
+\caption{Definnizione della classe \texttt{Autenticazione}}
+\label{autenticaz}
+\end{figure}
+
+
+\subsection{Recupero dell'account}
+Nel Diagramma dei Componenti viene individuata la \textit{Pagina di Recupero},
+che offre supporto agli utenti registrati, con sistema di credenziali interne,
+che hanno dimenticato la password e che intendono recuperare l'account.
+Nel Diagramma di Contesto, il servizio di posta elettronica rientra nello
+scambio di informazioni necessario per la procedura di recupero. Per
+questi motivi viene definita la classe \texttt{RecuperoPwUtente} (Figura \ref{recupero}), che
+raccoglie attributi e metodi necessari per effettuare il recupero,
+interagendo tra l'altro con il servizio di posta elettronica.
+
+\begin{itemize}
+    \item \texttt{email}: l'indirizzo email di recupero viene memorizzato
+    per conservarlo durante tutta la procedura di recupero.
+
+    \item \texttt{mandaEmailRecupero}: il messaggio di recupero viene inviato
+    all'indirizzo specificato. Questo metodo rappresenta la richieste di
+    invio da parte del sistema nei confronti del servizio di posta.
+
+    \item \texttt{cambiaPassword}: la nuova password inserita dall'utente
+    viene aggiornata nel suo account. Come rappresentato dal Diagramma dei
+    Componenti, questa è la realizzazione dell'interfaccia fornita al
+    database. Questa operazione può essere effettuata solo su un account
+    già registrato e quindi esistente, come mostrato dal tipo del secondo
+    parametro richiesto (\texttt{UtenteAutenticato}).
+\end{itemize}
+Questa classe è coinvolta in una associazione con \texttt{User}, la quale
+richiede il recupero facendo riferimento ad una sola istanza di
+\texttt{RecuperoPwUtente}, mentre quest'ultima, a sua volta, si occupa
+delle operazioni di recupero per conto di un utente solo.
+
+\begin{figure}[H]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[scale = 0.8]{materiale/class-recupero.pdf}
+\caption{Specifica architetturale del componente \textit{Pagina di Recupero} con la classe \texttt{RecuperoPwUtente}}
+\label{recupero}
+\end{figure}
+
+
 
 \newpage
-\section{Codice in Object Constraint Language}
+\subsection{Catalogo}
+Il \textit{Catalogo} presente nel Diagramma dei Componenti è rappresentato in
+Figura \ref{catalog} sotto forma di due classi: \texttt{UtenteAmministratore}, descritto insieme
+alle altre categorie di utenti, e \texttt{Catalogo}. Tale scelta architetturale
+è giustificata dall'esigenza di identificare chiaramente il ruolo dell'utente
+amministratore, mantenendo dunque una definizione dei livelli di accesso
+coerente con quella dei documenti precedenti, oltre alla volontà di ridurre il
+carico di informazione della classe \texttt{Catalogo} rendendo il rispettivo
+componente del diagramma più modulare e non monolitico.
+\begin{figure}[H]
+\centering
+\hspace*{-0.8cm}
+\includegraphics[scale = 0.72]{materiale/class-catalogo.pdf}
+\caption{Specifica architetturale del componente \textit{Catalogo} con la classe \texttt{Catalogo}}
+\label{catalog}
+\end{figure}
+\noindent La Figura \ref{catalog} mostra anche la classe \texttt{Problema},
+descritta dettagliatamente nella prossima sezione. Il catalogo
+raccoglie i problemi disponibili sulla piattaforma, quindi \texttt{Catalogo}
+è legato a \texttt{Problema} da un'associazione di aggregazione.
+
+
+\begin{itemize}
+    \item \texttt{problemi[1...*]}: questo attributo indica che il catalogo
+    consiste in una lista di almeno un problema (si veda la prossima sezione
+    per i dettagli sui problemi).
+    
+    \item \texttt{cercaPerTag}:
+    \item \texttt{cercaPerNome}:
+    \item \texttt{filtraDifficolta}: questo metodo consente di filtrare i
+    problemi mostrati nel catalogo sulla base della loro difficoltà. Il
+    tipo enumerato \texttt{Difficulty} in Figura \ref{catalog}
+    raccoglie i livelli esistenti.
+
+    \item \texttt{mostraHint}: sulla base del metodo selezionato, il metodo
+    interagisce con YouTube per visualizzare il video-suggerimento.
+
+    \item \texttt{mostraPreferiti}:
+    \item \texttt{mostraStato}:
+    \item \texttt{mostraProblema}:
+\end{itemize}
+
+
+
+\newpage
+\subsection{Problemi ed Esercitazione}
+La Figura \ref{esercitaz} illustra le classi che costituiscono il componente
+\textit{Pagina di Esercitazione}.
+
+\begin{figure}[H]
+\centering
+%\hspace*{-1.5cm}
+\includegraphics[scale = 0.8]{materiale/class-esercitazione.pdf}
+\caption{Classi dedotte dal componente \textit{Pagina di esercitazione}}
+\label{esercitaz}
+\end{figure}
+La classe \texttt{Problema} è definita come segue:
+\begin{itemize}
+    \item \texttt{nome}, \texttt{tags}, \texttt{difficolta}, \texttt{url\_hint\_video}:
+    questi rappresentano i \textit{campi descrittivi} del problema, come specificati nel
+    documento D1. La difficoltà può assumere solamente uno dei valori
+    definiti dal dominio del tipo enumerato \texttt{Difficulty}.
+
+    \item \texttt{titolo}, \texttt{testo}, \texttt{esempi}: i dati strutturali del problema.
+    \item \texttt{tc}:
+    \item \texttt{driver\_code}:
+\end{itemize}
+Al fine di alleggerire la classe \texttt{Problema}, è stata accolta la scelta di
+dedicare una classe \texttt{TestCase}. Essa ha il compito di raccogliere le informazioni
+chiave necessarie al test del codice fornito dall'utente (il quale si esercita
+sul problema specifico): \texttt{input}, \texttt{output} e dei metodi che rendono
+questi attributi disponibili all'esterno.
+Si noti che la relazione che unisce \texttt{TestCase} e \texttt{Problema} è
+una \textbf{composizione} (indicato dall'estremità romboidale nera): i testcases
+sono infatti associati a specifici problemi, come espresso dalle cardinalità,
+ma non hanno alcun significato se il problema specifico al quale dovrebbero
+essere associati non esiste.
+
+Altra parte integrante della Pagina di Esercitazione è la classe \texttt{Cronometro},
+che prevede le semplici funzionalità per mostrare il tempo registrato,
+essere avviato, fermato e reimpostato a 0 secondi (condizioni più dettagliate
+di questa classe sono mostrate nel codice OCL delle prossime sezioni).
+
+\newpage
+\subsection{Profilo utente}
+
+
+
+
+\newpage
+\section{Specifiche in codice OCL}
 Nella sezione che segue viene descritta formalmente la logica prevista
 nel comportamento di alcune classi, in relazione alle loro operazioni
 possibili. Il codice OCL impiegato consente di esprimere tale logica,
 non descrivibile con i soli diagrammi delle classi in UML.
 
 
+\subsection{Autenticazione}
+\subsection{Recupero della password}
+\subsection{Modifica delle credenziali}
+\subsection{Cronometro}
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
 \section{Diagramma delle classi con codice OCL}
 In Figura \ref{umlocl} è riportato un diagramma che mostra nell'insieme
-sia le classi individuate che il relativo codice OCL.
+sia le classi individuate che il relativo codice OCL, definiti nelle
+sezioni precedenti.
 
 \begin{figure}[H]
 \centering
-%\includegraphics[options]{name}
-\caption{Diagramma delle classi arricchito dal codice OCL}
+\hspace*{-2.8cm}
+\includegraphics[scale = 0.53]{materiale/classdiagram.pdf}
+\caption{Diagramma delle classi arricchito da codice OCL}
 \label{umlocl}
 \end{figure}
 
