@@ -1,0 +1,161 @@
+\documentclass[11pt, a4paper]{article}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{fullpage}
+
+\usepackage[utf8]{inputenc} % comment when using lualatex
+\usepackage[italian]{babel} % lingua e a-capo-sillabato
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref} % link di pagina
+\usepackage[bottom]{footmisc} % note appiccicate al fondo della pagina
+\usepackage{float} % per posizionamento immagini
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\usepackage[font=small,labelfont=bf]{caption} % small font for caption (and bold Figure word)
+\usepackage{tabularx} %tabelle
+\usepackage[table]{xcolor} %colore caselle
+
+\pagestyle{fancy}
+\fancyhf{}% Clear header/footer
+\fancyfoot[C]{\thepage} %add page number
+\fancyhead[C]{\footnotesize\textit{Documento:} D5 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
+\setlength{\headheight}{22pt}
+
+%\pagestyle{myheadings}
+%\markright{John Smith\hfill On page styles\hfill}
+
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\theoremstyle{definition}
+
+\newtheorem{funcreq}{RF} %% numerazione dei requisiti funzionali
+\newtheorem{nonfuncreq}{RNF} %% requisiti non funzionali
+\newtheorem{backend}{BE}
+\newtheorem{frontend}{FE}
+
+\title{Report Finale}
+
+\author{Raffaele \textsc{Castagna}\\
+Alberto \textsc{Rovesti}\\
+Zeno \textsc{Saletti}}
+
+\newcommand{\groupNumber}{G17}
+
+% footnote without number
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+% —
+
+% Web address for the project (if any)
+% \newcommand{\homepage}{\url{https://www.}}
+
+% data
+\date{\today}
+
+\makeatletter{}
+
+% IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\begin{document}
+
+% La pagina di copertina si trova in un file .tex a parte
+% NON MODIFICARE QUESTO COMANDO!!!
+\input{materiale/copertina.tex}
+
+\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione del testo:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice.}
+
+
+\newpage
+\section*{Scopo del documento}
+Questo documento rappresenta il report finale del progetto. L'attenzione è
+rivolta all'impegno dedicato alla realizzazione di tutti i
+deliverables e del prototipo finale, l'organizzazione del lavoro e la sua
+distribuzione tra i membri del gruppo (specificando non solo punti di forza
+ma anche la consapevolezza delle criticità incontrate nel percorso), nonché
+alla rilevanza delle nozioni relative all'ingegneria del software acquisite,
+e applicate  questo progetto, durante il corso e i seminari.
+
+
+\newpage
+\section{Approcci all'ingegneria del software}
+Nella presente sezione vengono riassunti brevemente i punti più significativi
+dei seminari tenutisi durante il corso, ponendo particolare attenzione ai
+metodi e ai principi dell'ingegneria del software emersi e descritti dai
+relatori.
+
+\subsection{BlueTensor}
+\subsection{Il metodo Kanban}
+\subsection{IBM}
+\subsection{Meta}
+\subsection{U-Hopper}
+\subsection{Red Hat}
+\subsection{Microsoft}
+\subsection{Sistemi Legacy}
+\subsection{Gestione del ciclo di vita del software e modernizzazione}
+\subsection{APSS e tecnologie per servizi pubblici}
+
+\newpage
+\section{Organizzazione del lavoro}
+\subsection{Ruoli e attività}
+\begin{center}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{|c||X||X|}
+      \hline
+      \cellcolor{red!70}Componente del team & \cellcolor{red!70}Ruoli & \cellcolor{red!70}Attività principali\\
+      \hline
+      Raffaele Castagna & Sviluppatore, architetto, \textit{concept designer} & Ha contribuito in parte a tutti i deliverable, con particolare attenzione al D4. Ha concepito l'idea originale del progetto e la conseguente struttura, anche architetturale, del progetto finale.\\
+      \hline
+      Alberto Rovesti & Progettista, supporto cordinatore e correttore & Ha svolto un lavoro con particolare interesse nei deliverable D1, D2 e D3 e al D5. Ha revisionato le deliverable una volta finite e a dato supporto al Project nella fase di cordinazione\\
+      \hline
+      Zeno Saletti & Project leader, redattore, supporto architetturale & In quanto team leader ha organizzato, gestito e strutturato i meeting e ha coordinato gli sforzi di tutti i membri. Ha provveduto alla stesura definitiva dei documenti in LaTex, della cura della veste grafica.\\
+      \hline
+  \end{tabularx}
+\end{center}
+
+\subsection{Distribuzione del carico di lavoro}
+\begin{center}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{|X||c||c||c||c||c||c|}
+      \hline
+      \cellcolor{red!70}Componente del team & \cellcolor{red!70}D1 & \cellcolor{red!70}D2 & \cellcolor{red!70}D3 & \cellcolor{red!70}D4 & \cellcolor{red!70}D5 & \cellcolor{red!70}Totale\\
+      \hline
+      Raffaele Castagna & &&&&&\\
+      \hline
+      Alberto Rovesti & &&&&&\\
+      \hline
+      Zeno Saletti & &&&&&\\
+      \hline
+      \cellcolor{red!70}Totale & &&&&&\\
+      \hline
+  \end{tabularx}
+\end{center}
+
+\section{Criticità}
+\section{Autovalutazione}
+\begin{center}
+  \footnotesize
+  \begin{tabularx}{\columnwidth}{|X||c|}
+      \hline
+      \cellcolor{red!70}Componente del team & \cellcolor{red!70}Voto\\
+      \hline
+      Raffaele Castagna & \\
+      \hline
+      Alberto Rovesti & \\
+      \hline
+      Zeno Saletti & \\
+      \hline
+  \end{tabularx}
+\end{center}
+
+\end{document}
