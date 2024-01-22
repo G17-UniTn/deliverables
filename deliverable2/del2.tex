@@ -16,7 +16,7 @@
 
 \fancyhf{}% Clear header/footer
 \pagestyle{fancy}
-
+\fancyfoot[C]{\thepage} %add page number
 \fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
@@ -48,6 +48,13 @@ Zeno \textsc{Saletti}}
 
 \makeatletter{}
 
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 % IL PREAMBOLO FINISCE QUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -58,7 +65,7 @@ Zeno \textsc{Saletti}}
 % NON MODIFICARE QUESTO COMANDO!!!
 \input{materiale/elementi-copertina/copertina.tex}
 
-\tableofcontents
+\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione del testo:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice.}
 
 \afterpage{\cfoot{\thepage}}
 \newpage
@@ -66,7 +73,7 @@ Zeno \textsc{Saletti}}
 Il presente documento riporta la specifica dei requisiti di sistema
 del progetto SleepCode. Viene in particolare estesa la descrizione
 in linguaggio naturale, impiegato nel documento di Analisi dei Requisiti
-(\textit{D1}), attraverso strumenti di modellazione più formali—diagrammi
+(D1), attraverso strumenti di modellazione più formali—diagrammi
 realizzati secondo gli standard indicati da \textit{Unified Modeling Language}
 (UML) per quanto riguarda i requisiti funzionali; tabelle strutturate
 per i requisiti non funzionali.
@@ -78,21 +85,23 @@ design del sistema ricorrendo a diagrammi di contesto e dei componenti.
 \newpage
 \section{Requisiti funzionali}
 In questa sezione vengono descritti i requisiti funzionali (RF) del
-progetto utilizzando Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
+progetto, evidenziando la partecipazione degli attori esterni, ovvero
+l'utente finale e i servizi esterni a supporto del progetto. A tal
+proposito, vengono utilizzati Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
 disegnati secondo gli standard UML, ed eventualmente arricchiti da
 descrizioni in linguaggio naturale\footnote{Gli use cases più semplici
-presenti nei diagrammi non vengono descritti in altri modi, essendo
+presenti nei diagrammi non vengono descritti in altri modi, in quanto ritenuti
 autoesplicativi.}.
 
 \subsection{Accesso e autenticazione}
 La Figura \ref{access} mostra gli use cases che rappresentano i seguenti
-requisiti funzionali descritti nel documento D1: \textbf{RF 1}-Registrazione,
-\textbf{RF 2}-Login, \textbf{RF 3}-Autenticazione Google, \textbf{RF 4}-Recupero
+requisiti funzionali: \textbf{RF 1} - Registrazione,
+\textbf{RF 2} - Login, \textbf{RF 3} - Autenticazione Google, \textbf{RF 4} - Recupero
 password.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.72]{materiale/ucdiagrams/ucaccesso.pdf}
+\includegraphics[scale=0.63]{materiale/ucdiagrams/ucaccesso.pdf}
 \caption{UCD relativo ai RF inerenti all'accesso alla piattaforma}
 \label{access}
 \end{figure}
@@ -111,6 +120,7 @@ password.
         \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email e una password conforme. \verb|[exception 1]|
         \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 2]|
         \item I dati vengono raccolti e il relativo account viene registrato dal servizio di database.\texttt{[exception 3]}
+        \item L'utente riceve una conferma circa l'esito dell'operazione di registrazione.
     \end{enumerate}
     
     \item[Exceptions:]
@@ -124,7 +134,7 @@ password.
     \item[Extensions:]
     \begin{itemize}
         \item[]
-        \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un proprio account Google, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
+        \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un account Google in suo possesso, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
         In questo caso, oltre a scegliere l'email come previsto dal servizio di Google, l'utente specifica l'username.
     \end{itemize}
 \end{description}
@@ -140,8 +150,9 @@ password.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente anonimo accede alla pagina dedicata e sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item L'utente anonimo sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
         \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password, che saranno verificati grazie al servizio di database.\texttt{[exception 1]}
+        \item L'utente riceve la conferma di login.
     \end{enumerate}
     
     \item[Exceptions:]
@@ -199,8 +210,8 @@ del singolo problema (si vedano \textbf{FE 3}, \textbf{FE 4} e \textbf{FE pagina
 
 I requisiti descritti sono: \textbf{RF 5} - Consultazione del catalogo,
 \textbf{RF 6} - Consultazione di un problema, \textbf{RF 10} - Metadati aggiuntivi,
-\textbf{RF 11.2} - Visualizzare i Progressi, \textbf{RF 12}  Aggiungere un problema,
-\textbf{RF 13} - Modificare un problema, \textbf{RF 14} - Eliminare un problema.
+\textbf{RF 11.2} - Visualizzare i Progressi, \textbf{RF 14}  Aggiungere un problema,
+\textbf{RF 15} - Modificare un problema, \textbf{RF 16} - Eliminare un problema.
 Questi ultimi tre, relativi all'utente amministratore, sono riassunti nello use case
 \textit{Modificare il catalogo dei problemi}, che include le tre azioni opzionali (da
 cui le clausole \texttt{extend} nel diagramma).
@@ -208,8 +219,8 @@ cui le clausole \texttt{extend} nel diagramma).
 
 \begin{figure}[H]
 \centering
-\hspace*{-2cm}
-\includegraphics[scale=0.75]{materiale/ucdiagrams/ucproblemi.pdf}
+\hspace*{-1.5cm}
+\includegraphics[scale=0.68]{materiale/ucdiagrams/ucproblemi.pdf}
 \caption{UCD relativo alla consultazione dei problemi, modifica del catalogo e visualizzazione progressi}
 \label{catalogueprobs}
 \end{figure}
@@ -269,39 +280,37 @@ La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
 che in qualche modo fanno parte del contesto di esercitazione su uno specifico problema. Pertanto,
 i requisiti rappresentati qui sono i seguenti: \textbf{RF 7} - Effettuare l'esercitazione,
 \textbf{RF 8} - Verifica della correttezza dell'algoritmo, \textbf{RF 11.1} - Registrazione dei
-Progressi.
+Progressi, \textbf{RF 9} - Cronometro. Dal punto di vista del frontend, il diagramma
+raccoglie gran parte delle funzionalità utilizzabili interagendo nelle aree
+visibili in \textbf{FE 4} (si veda il documento D1).
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.8cm}
-\includegraphics[scale=0.9]{materiale/ucdiagrams/ucesercitazione.pdf}
-\caption{UCD con riferimenti ai requisiti relativi all'esercitazione}
+\hspace*{-1.5cm}
+\includegraphics[scale=0.91]{materiale/ucdiagrams/ucesercitazione.pdf}
+\caption{UCD con riferimenti ai requisiti relativi ai tools di esercitazione}
 \label{esercitaz}
 \end{figure}
 
+\newpage
 \subsection*{Descrizione dell'esercitazione}
-La Figura \ref{acexercise} mostra lo swimlane diagram che descrive gli
-use case relativi alla sessione di esercitazione. In particolare,
-viene mostrato in modo più preciso lo use case \textit{Effettuare
-l'esercitazione}, insieme a quelli correlati.
-
-Si intende soprattutto evidenziare la sequenza nella quale si
-susseguono eventuali azioni opzionali o eseguibili in parallelo,
-oltre alla reazione di altri attori (YouTube, Firebase DB) in
-risposta alla particolare categoria di utenti coinvolti, come in
-\textit{Registrare i progressi}, e alle scelte da loro effettuate,
-come \textit{Avviare e interrompere un cronometro} e \textit{Aprire
-il video di suggerimento}.
-
-Dal momento che l'utente può decidere di uscire dall'area di esercitazione
-a propria discrezione, si sottolinea che il processo descritto nel diagramma
-può essere interrotto in qualsiasi momento (ciò è indicato dalla codizione
-\textit{Esci} nel diagramma).
+La complessità delle operazioni relative all'esercitazione è
+catturata dalla Figura \ref{acexercise}.
+Dato che l'utente può decidere di uscire dall'area di esercitazione
+a propria discrezione, il processo descritto nel diagramma
+può essere interrotto in qualsiasi momento, prima che tutti i
+testcases vengano risolti.
+La corsia \textit{Firebase} descrive le
+attività previste dallo use case \textit{Registrare i progressi}
+(Figura \ref{esercitaz}), tenendo ovviamente in conto l'utente
+autenticato del quale aggiornare i progressi.
+Si assume che l'attività \textit{Visualizza cronometro} includa
+implicitamente le funzionalità descritte dal relativo use case.
 
 \begin{figure}[H]
 \centering
-\hspace*{-0.5cm}
-\includegraphics[scale=0.47]{materiale/acesercitazione.pdf}
+%\hspace*{-0.4cm}
+\includegraphics[scale=0.65]{materiale/ucdiagrams/swimlaneesercitazione.pdf}
 \caption{SD, arricchito da elementi di Activity Diagram,
 per gli use case \textit{Effetuare l'esercitazione}, gli use case correlati
 e \textit{Registrare i progressi}}
@@ -310,18 +319,22 @@ e \textit{Registrare i progressi}}
 
 
 \newpage
-\subsection{Gestione del profilo e dell'account}
-\begin{itemize}
-    \item \textbf{RF 9.2.} Progressi
-    \item \textbf{RF 10.} Aggiornamento dei dati dell'account
-    \item \textbf{RF 11.} Logout
-\end{itemize}
+\subsection{Gestione dell'account}
+In Figura \ref{accountfig} sono riassunti gli use cases che descrivono
+le operazioni possibili per gli utenti dotati di account. Come già accennato
+nel documento D1, \textit{Aggiornare l'indirizzo email dell'account} e
+\textit{Aggiornare la password dell'account} sono possibili solo a utenti
+autenticati con sistema di credenziali interno. Questo fatto è appunto
+sottolineato dalla presenza dell'attore \textit{Firebase}. Si fa riferimento
+ai seguenti requisiti funzionali:
+\textbf{RF 12} - Aggiornamento account, \textbf{RF 13} - Logout.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.4cm}
-\includegraphics[scale = 0.8]{materiale/ucdiagrams/ucaccount.pdf}
-\caption{UCD relativo alle funzionalità aggiuntive dell'utente autenticato}
+%\hspace*{-1.8cm}
+\includegraphics[scale = 0.88]{materiale/ucdiagrams/ucaccount.pdf}
+\caption{UCD relativo alle funzionalità dell'account}
+\label{accountfig}
 \end{figure}
 
 
@@ -331,13 +344,16 @@ e \textit{Registrare i progressi}}
 La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all'aggiornamento
 dell'indirizzo di posta elettronica di un utente registrato con credenziali di sistema
 e autenticato, evidenziando i passi della procedura mediante uno Swimlane Diagram.
-Le condizioni \textit{annulla operazione} e \textit{conferma operazione}
-sottolineano il fatto che l'utente può interrompere la procedura di migrazione
-qualora lo ritenga opportuno.
+Qualora lo ritenga opportuno, l'utente può interrompere questa procedura di migrazione,
+fino alla condizione \textit{conferma operazione}.
+In più, viene specificato il comportamento che
+il sistema adotta nel caso in cui venga inserita un'email già associata ad un
+altro account registrato sulla piattaforma.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.9]{materiale/ucdiagrams/swimlaneemail.pdf}
+\hspace*{-1cm}
+\includegraphics[scale = 0.89]{materiale/ucdiagrams/swimlaneemail.pdf}
 \caption{SD dello scenario di aggiornamento dell'indirizzo email}
 \label{slemail}
 \end{figure}
@@ -346,13 +362,12 @@ qualora lo ritenga opportuno.
 La Figura \ref{slpassword} fa riferimento allo Use Case relativo all'aggiornamento
 della password dell'account di un utente registrato con credenziali di sistema e autenticato.
 Durante il processo di aggiornamento, l'utente ha la facoltà di interrompere
-la procedura qualora non intenda più modificare la password. Da qui il
-significato delle condizioni \textit{annulla operazione} e \textit{conferma
-operazione}.
+la procedura qualora non intenda più modificare la password.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.85]{materiale/ucdiagrams/swimlanepassword.pdf}
+\hspace*{-0.7cm}
+\includegraphics[scale = 1]{materiale/ucdiagrams/swimlanepassword.pdf}
 \caption{SD dello scenario di aggiornamento della password}
 \label{slpassword}
 \end{figure}
@@ -539,7 +554,13 @@ e quantitativa di tali requisiti.
             \hline
             \cellcolor{red!70}Proprietà & \cellcolor{red!70}Descrizione & \cellcolor{red!70}Misura\\
             \hline
-            Password sicura & Quantità e varietà di caratteri necessari per comporre una password forte. & Una password conforme possiede da 8 a 64 caratteri, tra i quali sono presenti almeno: una lettera maiuscola, una minuscola, una cifra decimale e un carattere speciale tra ! ? \# \$ \% \& @ * + - / $\backslash$ = \_ . , ; : ( ) [ ] \{ \}.\\
+            Password sicura & Quantità e varietà di caratteri necessari per comporre una password forte e sicura. & Una password conforme rispetta:
+            \begin{itemize}[leftmargin = *]
+                \item Numero di caratteri: compreso tra 8 e 64
+                \item Maiuscola-minuscola: almeno una lettera maiuscola e una minuscola
+                \item Cifra decimale: almeno una cifra decimale
+                \item Carattere speciale: almeno un carattere tra  ! ? \# \$ \% \& @ * + - / $\backslash$ = \_ . , ; : ( ) [ ] \{ \}.
+            \end{itemize}\\
             \hline
         \end{tabularx}
     \end{center}
@@ -556,47 +577,58 @@ e quantitativa di tali requisiti.
 In questa sezione viene descritto il contesto di funzionamento del sistema
 \textit{SleepCode} e come esso interagisce con gli attori esterni. Si
 ricorre ad una descrizione testuale riassunta in una rappresentazione
-grafica mediante un Diagramma di Contesto (Figura \ref{contextdiagram}).
+grafica mediante un Diagramma di Contesto (Figura \ref{contextdiagram}),
+nel quale sono specificati, ad alto livello, i flussi di informazioni
+essenziali al funzionamento del sistema.
 
 \subsection{Utenti e sistemi esterni} % chi interagisce, chi usa e chi supporta (sia software che umano)
+Sono elencati di seguito gli attori esterni che compongono il contesto
+del sistema in sviluppo. Essi fanno riferimento ad alcuni dei requisiti
+funzionali definiti nel documento D1 e nei quali si evince la presenza
+attiva degli attori, come già mostrato negli UCDs.
+
 \subsubsection{Utente}
 L'utente rappresenta l'attore che usufruisce delle funzionalità del servizio
-—viene descritto nei requisiti dal \textbf{RF 1} al \textbf{RF 7} per quanto
-concerne il livello anonimo e quelli superiori; dal \textbf{RF 8} al
-\textbf{RF 11} in relazione ai livelli autenticato e amministratore; \textbf{RF 12},
-\textbf{RF 13} e \textbf{RF 14} per quanto riguarda il livello amministratore.
+—viene descritto nei requisiti dal \textbf{RF 1} al \textbf{RF 9} per quanto
+concerne il livello anonimo e quelli superiori; dal \textbf{RF 10} al
+\textbf{RF 13} in relazione ai livelli autenticato e amministratore; \textbf{RF 14},
+\textbf{RF 15} e \textbf{RF 16} per quanto riguarda il livello amministratore.
 
-\subsubsection{Firebase DB}
-Il servizio di database impiegato per gestire le credenziali e l'account
+\subsubsection{Firebase}
+Il servizio di database impiegato per gestire le credenziali e il profilo
 degli utenti registrati alla piattaforma—i requisiti coinvolti sono: \textbf{RF 1},
-\textbf{RF 2}, \textbf{RF 3}, \textbf{RF 9}, \textbf{RF 10}—e per gestire il
-catalogo dei problemi—\textbf{RF 12}, \textbf{RF 13}, \textbf{RF 14}.
+\textbf{RF 2}, \textbf{RF 3}, \textbf{RF 4}, \textbf{RF 10}, \textbf{RF 11.1},
+\textbf{RF 12}—e per gestire il catalogo dei problemi—\textbf{RF 5}, \textbf{RF 6},
+\textbf{RF 14}, \textbf{RF 15}, \textbf{RF 16}.
 
 \subsubsection{Google Sign-In}
-Servizio di autenticazione alternativo al sistema di credenziali interno
-—\textbf{RF 1}, \textbf{RF 2}.
+Il servizio di autenticazione alternativo al sistema di credenziali interno
+—\textbf{RF 3}.
 
 \subsubsection{YouTube}
 Il servizio di contenuti multimediali che fornisce i video che integrano
-i problemi, mettendo a disposizione dell'utente un suggerimento per lo
-svolgimento dell'esercizio—\textbf{RF 4.1}, \textbf{RF 6.6}.
+i problemi del catalogo, mettendo a disposizione dell'utente un suggerimento per lo
+svolgimento dell'esercizio—\textbf{RF 5.1}.
+%\textbf{RF 7.5}??
 
 \subsubsection{Servizio di posta elettronica}
-Sistema di notifica utilizzato per effettuare le operazioni di recupero
-dell'account (\textbf{RF 3}) e di migrazione a nuovo indirizzo di posta
-elettronica da associare all'account (\textbf{RF 10}).
+Sistema di notifica sul quale il progetto si poggia per creare un
+meccanismo di recupero dell'account—\textbf{RF 4}.
 
 \newpage
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
 La Figura \ref{contextdiagram} mostra il diagramma di contesto per il
-servizio \textit{SleepCode}. Seguono alcune descrizioni più dettagliate,
-che chiariscono il significato delle informazioni scambiate tra il sistema
-e gli attori esterni ad esso, facendo anche riferimento ai requisiti
-funzionali che vengono soddisfatti grazie a tali interazioni.
+servizio \textit{SleepCode}. Seguono alcune descrizioni più dettagliate
+che chiariscono il significato, per lo più ad alto livello, dell
+informazioni scambiate tra il sistema e gli attori esterni ad esso.
+Viene inoltre fatto riferimento ai requisiti funzionali che vengono
+soddisfatti grazie a tali interazioni. Proprio dai requisiti funzionali
+citati vengono rilevati i dati e le informazioni scambiate tra attori
+esterni e sistema.
 
 \begin{figure}[H]
 \centering
-\hspace*{-2.6cm}
+\hspace*{-2.1cm}
 \includegraphics[scale=0.65]{materiale/contextdiagram.pdf}
 \caption{Context Diagram della piattaforma \textit{SleepCode}}
 \label{contextdiagram}
@@ -605,58 +637,57 @@ funzionali che vengono soddisfatti grazie a tali interazioni.
 \subsubsection*{Utente}
 L'utente può richiedere di effettuare la registrazione alla piattaforma
 (\textbf{RF 1}), scegliendo di inviare i dati necessari per creare un
-account di sistema o di collegare il proprio account Google. Il sistema
+account di sistema o di collegare il proprio account Google (\textbf{RF 3}). Il sistema
 provvede a inviare la conferma dell'operazione di registrazione.
-
 L'utente registrato può inviare i dati necessari al login (\textbf{RF 2}) sulla piattaforma,
 inserendo quindi le credenziali di sistema oppure richiedendo l'autenticazione
 con Google. Il sistema risponde con l'autorizzazione all'accesso.
-
-In caso di richiesta di recupero dell'account (\textbf{RF 3}) da parte di un utente
+In caso di richiesta di recupero dell'account (\textbf{RF 4}) da parte di un utente
 registrato, il sistema riceve l'indirizzo email di recupero. Dall'email
 l'utente può collegarsi alla pagina di recupero, nella quale inserire la
 nuova password dell'account.
 
-L'utente riceve il catalogo e i dati in esso contenuti (\textbf{RF 4}, \textbf{RF 5},
-\textbf{RF 8}). L'utente propaga al proprio account le modifiche
-apportate ai preferiti (\textbf{RF 8}) e al catalogo stesso (\textbf{RF 12}, \textbf{RF 13}, \textbf{RF 14}), riceve le informazioni sui progressi personali (\textbf{RF 9})
-e può inviare una richiesta di logout (\textbf{RF 11}). Ovviamente
-i dati che realizzano il profilo dell'utente, quali stato dei problemi,
-preferiti e progressi, sono visibili all'utente.
+L'utente riceve il catalogo e i dati in esso contenuti (\textbf{RF 5}, \textbf{RF 6},
+\textbf{RF 10}), richiedendo l'applicazione dei filtri e la visualizzazione dei
+suggerimenti (\textbf{RF 5}). L'utente propaga al proprio profilo le modifiche
+apportate ai preferiti (\textbf{RF 10}). L'utente amministratore fornisce
+eventuali modifiche al catalogo (\textbf{RF 14}, \textbf{RF 15}, \textbf{RF 16}).
+L'utente riceve le informazioni sui progressi personali (\textbf{RF 11.2})
+e può inviare una richiesta di logout (\textbf{RF 13}). Ovviamente
+i dati che realizzano il profilo dell'utente autenticato, quali stato dei problemi,
+preferiti e progressi, sono visibili nel catalogo (\textbf{RF 10}).
+Durante un'esercitazione, l'utente può sottoporre il codice scritto e ricevere dati
+relativi all'esito dell'esecuzione di tale codice (\textbf{RF 7}, \textbf{RF 8}),
+oltre a vedere il tempo registrato dal cronometro e manipolarlo (\textbf{RF 9}).
+Per apportare modifiche ai dati del proprio account (\textbf{RF 12}), l'utente
+deve poter inviare le richieste specifiche, quali modifica della password
+o migrazione dell'indirizzo email, e fornire le nuove credenziali. La
+richiesta include l'inserimento, per questioni di sicurezza, della password
+attualmente in uso sull'account.
 
-Durante un'esercitazione, l'utente può inviare il codice scritto e ricevere dati
-relativi all'esito dell'esecuzione di tale codice; può essere inoltre richiesta la
-visualizzazione del video-suggerimento (\textbf{RF 6}, \textbf{RF 7}).
-
-Per apportare modifiche ai dati del proprio account (\textbf{RF 10}), l'utente
-deve poter inviare le richieste specifiche, come quelle di modifica della password
-o migrazione dell'indirizzo email, e fornire le nuove credenziali. Il
-sistema richiede la conferma di tali operazioni mediante l'invio, da parte
-dell'utente, delle opportune credenziali.
-
-\subsubsection*{Firebase DB}
-Firebase DB provvede alla memorizzazione del catalogo (con relativi problemi) e dei
-dati relativi agli utenti registrati ed eventualmente autenticati (credenziali
+\subsubsection*{Firebase}
+Firebase provvede alla memorizzazione del catalogo dei problemi e dei
+dati associati agli utenti registrati ed eventualmente autenticati (credenziali
 interne, preferiti, progressi) e alla ricezione di modifiche apportate a questi oggetti.
+In particolare, il sistema segnala l'aggiornamento dello stato di un problema
+in relazione all'utente autenticato che lo ha risolto (\textbf{RF 11.1}).
 
 \subsubsection*{Google Sign-In}
-Google Sign-In fornisce l'autorizzazione al collegamento e all'accesso
-mediante account Google, richiesti da utenti in sede di registrazione o
-login.
+Google Sign-In fornisce l'autorizzazione per eventuali richieste di
+registrazione e autenticazione mediante account Google (\textbf{RF 3}).
 
 \subsubsection*{YouTube}
 I video che l'utente intende visualizzare vengono richiesti a YouTube da
-parte del sistema, per poi visualizzarli.
+parte del sistema, per poi visualizzarli (\textbf{RF 5.1}).
 
 \subsubsection*{Servizio di posta elettronica}
 La piattaforma fornisce al sistema di posta elettronica i dati necessari
 per notificare e guidare l'utente che intende effettuare l'operazione di
-recupero dell'account.
+recupero dell'account (\textbf{RF 4}).
 
 
 
 \newpage
-\section{Analisi dei componenti}
 % diagramma componenti -> si intende componenti INTERNI AL SISTEMA:
 
 % vantaggi componenti: se cambia uno degli attori (in particolare software)
@@ -665,7 +696,9 @@ recupero dell'account.
 % il sistema non sarà un programma monolitico che si occupa di tutto con un unico codice
 % provo a dividere il mio sistema in componenti e ragiono su come le informazioni vengono passate tra i componenti
 
-Nella sezione seguente viene descritta l'architettura interna del sistema
+\section{Analisi dei componenti}
+
+Nella presente sezione viene introdotta l'architettura interna del sistema
 rilevandone i componenti, definiti nei loro compiti sulla base dei requisiti
 analizzati nelle sezioni e nei documenti precedenti. L'architettura viene
 qui mostrata attraverso un Diagramma dei Componenti (Figura \ref{compdiagram}), che evidenzia
@@ -673,124 +706,167 @@ l'interconnessione tra i componenti interni, le interfacce presenti tra di
 essi e quelle esposte agli attori esterni. Segue una descrizione testuale
 e più dettagliata di ogni componente.
 
+\subsection{Diagramma dei componenti}
+\begin{figure}[H]
+\centering
+\hspace*{-3cm}
+\includegraphics[scale = 0.86]{materiale/componentdiagram.pdf}
+\caption{Diagramma dei Componenti del sistema \textit{SleepCode}}
+\label{compdiagram}
+\end{figure}
 
-\subsection{Definizione dei componenti}
+\newpage
+\subsection{Definizione e descrizione dei componenti}
 In questa sezione sono descritti i componenti e le interfacce presenti
 all'interno del Diagramma dei Componenti.
 
-\iffalse
-\subsubsection{Pagina di Autenticazione}
-\begin{description}
-    \item[Descrizione:] questo componente ha il compito
-    principale di interagire con l'utente al fine di guidarlo
-    nelle procedure di accesso alla piattaforma.
-    La Pagina di Autenticazione si occupa della raccolta dei dati
-    utili ad effettuare il login e la registrazione
-    di un nuovo account. Essa offre inoltre la possibilità di
-    richiedere il recupero dell'account.
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-        \item \underline{Credenziali:} la pagina di accesso
-        richiede l'inserimento delle credenziali necessarie
-        per il login (una tupla email-password) e per la
-        registrazione (nome utente, email, password).
-
-        \item \underline{Richiesta registrazione:} con tale
-        interfaccia esposta all'utente, il componente è in grado
-        di distinguere dal login l'operazione di registrazione,
-        richiedendo, tramite l'interfaccia Credenziali, i dati
-        opportuni.
-
-        \item \underline{Richiesta Google:} con questa interfaccia,
-        la Pagina di Autenticazione può riconoscere che l'utente
-        intende registrarsi o autenticarsi mediante un account
-        Google.
-
-        \item \underline{Autorizzazione:} l'autorizzazione, da
-        parte dell'apposito Sistema di Autenticazione, consente
-        alla Pagina di Accesso di stabilire se il login o la
-        registrazione sono andate a buon fine. In questo modo, si
-        conferma all'utente l'accesso alla piattaforma, oppure lo
-        si avvisa di eventuali errori.
-
-        \item \underline{Richiesta recupero account:} dalla Pagina
-        di Autenticazione, l'utente fornisce una richiesta di
-        recupero dell'account qualora la password dovesse essere
-        dimenticata. Con questa interfaccia, il componente provvede
-        all'avvio della procedura di recupero.
-    \end{itemize}
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-        \item \underline{Login:} la pagina risponde ad una registrazione
-        o autenticazione andata a buon fine portando a termine un'operazione
-        di login. Questa interfaccia consente al sistema di distinguere
-        la transizione dello stato di un utente da anonimo ad autenticato.
-
-        \item \underline{Credenziali di accesso:} le credenziali per il login,
-        raccolte precedentemente, vengono inoltrate a componenti preposti alla
-        loro convalida.
-
-        \item \underline{Credenziali di registrazione:} le credenziali necessarie
-        alla registrazione, raccolte precedentemente, vengono inoltrate 
-
-        \item \underline{Richiesta Google:} questa interfaccia permette alla
-        pagina di accesso di comunicare il fatto che l'utente intende registrarsi
-        o autenticarsi con un account Google.
-
-        \item \underline{Richiesta recupero account:} il componente inoltra
-        al componente Pagina di Recupero la richiesta di recupero account, in modo
-        tale da effettuare separatamente questa operazione.
-    \end{itemize}
-\end{description}
-\fi
-
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-
-\subsubsection{Home Page}
-\begin{description}
-    \item[Descrizione:] il componente si occupa di guidare l'utente nella
-    navigazione, esponendo dunque sul front-end le funzionalità relative
-    al reindirizzamento ad altre pagine: Pagina di Autenticazione, Catalogo, pagina
-    di eserictazione e consultazione dei problemi. Se l'utente è autenticato,
-    questo componente ha il compito di mostrare i progressi dell'utente.
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-        \item \underline{Richiesta pagina di autenticazione:}
-        \item \underline{Richiesta catalogo:}
-        \item \underline{Richiesta}
-    \end{itemize}
-\end{description}
-
 \begin{center}
     \rule{5cm}{1pt}
 \end{center}
 
 \subsubsection{Pagina di Autenticazione}
+
 \begin{description}
-    \item[Descrizione:]
+    \item[Descrizione:] la Pagina di Autenticazione ha il compito
+    di interagire esternamente con l'utente la fine di guidarlo nelle
+    procedure di accesso alla piattaforma. Questo componente si occupa della
+    raccolta dei dati utili ad effettuare la registrazione e il
+    login. In più, esso raccoglie le richieste di recupero dell'account
+    (la procedura effettiva è presa in carico dal componente
+    \textit{Pagina di Recupero}).
 
     \item[Interfacce richieste:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Credenziali:}
-        \item \underline{Richiesta Google:}
+        \item \underline{Login:} questa interfaccia rappresenta
+        il canale attraverso il quale l'utente immette le credenziali
+        necessarie per richiedere di effettuare il login, ovvero
+        \textit{email} e \textit{password}.
+
+        \item \underline{Registrazione:} analogamente all'interfaccia
+        di login, questa interfaccia include le credenziali utili alla
+        creazione di un nuovo account (\textit{username, email, password}).
+
+        \item \underline{Richiesta autenticazione Google:} la Pagina di
+        Autenticazione accoglie eventuali richieste di autenticazione e
+        registrazione mediante i servizi Google.
+
+        \item \underline{Richiesta recupero account:} tramite il componente,
+        l'utente richiede il recupero dell'account in caso di password
+        dimenticata.
+
+        \item \underline{Conferma registrazione:} la Pagina di Autenticazione
+        riceve la conferma di registrazione (si veda \textit{Sistema di
+        Autenticazione}), in modo da avvisare l'utente riguardo l'esito
+        dell'operazione.
+
+        \item \underline{Autorizzazione:} l'autorizzazione, prodotta dal
+        componente \textit{Sistema di Autenticazione}, consente alla
+        Pagina di Autenticazione di valutare l'esito dell'operazione di
+        login, consentendo poi di avvisare l'utente.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Login:}
-        \item \underline{Registrazione:}
-        \item \underline{Conferma login:}
+        \item \underline{Esito autenticazione o registrazione:} sulla
+        base delle informazioni ricevute per mezzo delle interfacce
+        \textit{Autorizzazione} e \textit{Conferma registrazione},
+        la Pagina di Autenticazione può avvisare l'utente circa
+        l'esito delle operazioni, rispettivamente, di login e
+        registrazione.
+
+        \item \underline{Registrazione:} il componente inoltra la
+        richiesta di registrazione, con credenziali annesse, verso
+        il componente di competenza (\textit{Sistema di Autenticazione}).
+
+        \item \underline{Login:} la Pagina di Autenticazione inoltra
+        la richiesta di login, con credenziali annesse, verso il
+        componente \textit{Sistema di Autenticazione}.
+
+        \item \underline{Google:} il componente specifica eventuali
+        richieste di autenticazione (o registrazione) con Google
+        esponendo questa interfaccia.
+
+        \item \underline{Richiesta recupero account:} le richieste di
+        recupero vengono inoltrate al componente predisposto a questa
+        operazione (\textit{Pagina di Recupero}).
+    \end{itemize}
+\end{description}
+
+
+\begin{center}
+    \rule{5cm}{1pt}
+\end{center}
+
+\subsubsection{Sistema di Autenticazione}
+\begin{description}
+    \item[Descrizione:] il Sistema di Autenticazione si occupa della
+    gestione delle operazioni di login, occupandosi in particolare
+    dell'autorizzazione dell'utente, determinandone il livello di
+    accesso e di conseguenza la possibilità di usufruire di funzionalità
+    fornite da alcuni componenti; inoltre, questo componente gestisce
+    le operazioni di registrazione, dialogando esternamente con il
+    servizio di database e Google.
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Registrazione:} dalla Pagina di Autenticazione,
+        questo componente riceve le credenziali allegate alla richiesta
+        di registrazione.
+
+        \item \underline{Login:} dalla Pagina di Autenticazione, il
+        componente riceve le credenziali allegate alla richiesta di
+        login.
+
+        \item \underline{Google:} con la richiesta di questa interfaccia,
+        il Sistema di Autenticazione viene a conoscenza di richieste di
+        autenticazione con Google, in modo da effettuare la registrazione
+        o il login interagendo appunto con Google.
+
+        \item \underline{Risposta autenticazione:} questa interfaccia
+        rappresenta l'esito, ricevuto tramite l'interazione con
+        l'attore esterno \textit{Firebase}, sia dell'operazione di
+        login che di quella di registrazione. Nel primo caso l'esito
+        dipende dall'esistenza dell'account specificato tramite le
+        credenziali ricevute dalla Pagina di Autenticazione e alla
+        corrispondenza della tupla email-password, mentre
+        nel secondo la risposta dipende dall'esistenza o meno di
+        un account registrato con la stessa email specificata nella
+        richiesta di registrazione.
+
+        \item \underline{Risposta Google:} questa interfaccia rappresenta
+        la controparte di quella precedente, ma essa permette al componente
+        di comunicare con il servizio Google, sia per ricevere l'esito
+        della registrazione che per quello del login.
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Richiesta autenticazione:} la richiesta di
+        autenticazione viene rivolta dal Sistema di Autenticazione
+        al servizio di database. Questa interfaccia permette di effettuare
+        la validazione delle credenziali fornite nella richiesta di
+        login.
+
+        \item \underline{Richiesta autenticazione Google:} questa
+        interfaccia è molto simile alla precedente, ma è predisposta
+        all'invio della richiesta di login verso il servizio Google.
+
+        \item \underline{Conferma registrazione:} il componente avvisa
+        ad altri componenti (Pagina di Autenticazione) l'esito della
+        registrazione mediante questo canale di conferma.
+
+        \item \underline{Autorizzazione:} il componente comunica
+        l'esito del login agli altri componenti del sistema, in modo
+        tale da adattare la disponibilità delle funzionalità del sistema
+        interno allo specifico livello di accesso dell'utente.
     \end{itemize}
 \end{description}
 
@@ -798,22 +874,129 @@ all'interno del Diagramma dei Componenti.
     \rule{5cm}{1pt}
 \end{center}
 
-\subsubsection{Gestore account}
+\subsubsection{Pagina di Recupero}
 \begin{description}
-    \item[Descrizione:]
+    \item[Descrizione:] il componente si occupa dell'operazione
+    di recupero dell'account, offrendo assistenza a eventuali utenti,
+    registrati con sistema di credenziali interno, che hanno dimenticato
+    la propria password. La Pagina di Recupero si avvale del supporto
+    del servizio di posta elettronica, per guidare l'utente nel recupero
+    dell'account.
 
     \item[Interfacce richieste:]
     \begin{itemize}
         \item[]
 
-        \item
+        \item \underline{Richiesta recupero account:} il componente
+        agisce su richiesta dell'utente. Per scelte architetturali,
+        questa richiesta proviene dal componente intermediario
+        \textit{Pagina di Autenticazione}.
+
+        \item \underline{Email di recupero:} l'utente fornisce l'email
+        associata all'account che si intende recuperare.
+
+        \item \underline{Nuova password:} dall'utente, il componente
+        ottiene la nuova password. L'inserimento include anche la
+        conferma della password, come descritto nel documento D1.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
 
-        \item
+        \item \underline{Invio messaggio di recupero:} questa interfaccia
+        rappresenta l'interazione del componente verso
+        il servizio esterno di posta elettronica. Da qui, il
+        componente richiede l'invio del messaggio di recupero,
+        specificando inoltre l'email fornita dall'utente e il
+        contenuto del messaggio.
+
+        \item \underline{Esito:} l'esito dell'operazione viene
+        fornito all'utente. Da qui, il componente può comunicare
+        anche eventuali errori incontrati durante il recupero,
+        come specificato nella descrizione dello use case
+        \textit{Recuperare la password}, nella sezione relativa
+        alla specifica dei requisiti funzionali.
+
+        \item \underline{Aggiornamento password:} la Pagina di
+        Recupero indica al database che la password dell'account
+        deve essere modificata. L'interfaccia fornisce dunque
+        la nuova password, allegata ad una richiesta di modifica
+        delle credenziali presso l'account con email precedentemente
+        specificata dall'utente.
+    \end{itemize}
+\end{description}
+
+\begin{center}
+    \rule{5cm}{1pt}
+\end{center}
+
+\subsubsection{Gestore Profilo}
+\begin{description}
+    \item[Descrizione:] il Gestore Profilo raccoglie le funzionalità
+    associate principalmente all'utente autenticato, dedicandosi appunto alla
+    gestione del profilo (account, progressi e preferiti). In generale, questo
+    componente deriva dalla scelta architetturale di gestire la disponibilità
+    delle funzionalità fruibili dall'utente sulla base dei livelli di accesso
+    anonimo e autenticato, definiti nel documento D1.
+
+    \item[Interfacce richieste:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Autorizzazione:} il Gestore Profilo richiede l'autorizzazione
+        prodotta dal Sistema di Autenticazione, in modo da rendere disponibili o
+        meno le funzionalità accessibili a livello autenticato.
+
+        \item \underline{Richiesta logout:} da qui l'utente può effettuare il logout.
+
+        \item \underline{Modifiche preferiti:} questa interfaccia riceve le
+        modifiche apportate ai preferiti dell'utente durante la navigazione
+        nel catalogo, consentendo di aggiungere o rimuovere preferiti dal
+        profilo.
+
+        \item \underline{Nuove credenziali:} attraverso questa interfaccia,
+        l'utente può fornire le nuove credenziali del suo account (email e
+        password), con lo scopo di aggiornarlo.
+
+        \item \underline{Problema risolto:} da questa interfaccia, il Gestore
+        Utente viene avvisato del fatto che l'utente ha risolto un problema.
+        Sulla base dell'autorizzazione, che determina la distinzione tra
+        utenti anonimi e autenticati, il componente può dunque valutare se
+        sia necessario aggiornare i progressi dell'utente eventualmente autenticato.
+    \end{itemize}
+
+    \item[Interfacce fornite:]
+    \begin{itemize}
+        \item[]
+
+        \item \underline{Preferiti:} il componente comunica al Catalogo la
+        lista di problemi preferiti dell'utente autenticato, in modo da
+        evidenziarli durante la navigazione.
+
+        \item \underline{Modifiche preferiti:} le modifiche dei preferiti
+        vengono memorizzate.
+
+        \item \underline{Progressi:} il componente mostra i progressi dell'utente,
+        come descritto in \textbf{RF 11.2}.
+
+        \item \underline{Aggiorna progressi:} questa interfaccia comunica al
+        database di aggiornare i progressi dell'utente autenticato, nel caso
+        in cui egli abbia risolto un problema.
+
+        \item \underline{Problemi risolti:} il componente comunica al Catalogo
+        quali sono i problemi risolti dall'utente autentiato, in modo da
+        evidenziarli durante la navigazione.
+
+        \item \underline{Aggiorna credenziali:} il componente interagisce con
+        il database per aggiornare le credenziali dell'account, sulla base delle
+        modifiche richieste dall'utente.
+        
+        \item \underline{Logout:} questa interfaccia propaga al
+        Sistema di Autenticazione la richiesta di logout dell'utente autenticato.
+        Questa interfaccia evidenzia come l'architettura stessa preveda che,
+        dopo il logout, sia necessario eseguire il login passando ai componenti
+        di competenza (Pagina e Sistema di Autenticazione).
     \end{itemize}
 \end{description}
 
@@ -826,124 +1009,127 @@ all'interno del Diagramma dei Componenti.
     \item[Descrizione:] questo componente consente ad un qualsiasi utente
     (anonimo, autenticato e amministratore) di consultare la lista di problemi
     disponibili sulla piattaforma, oltre a permettere di selezionare un singolo
-    problema per aprirlo e iniziare a risolverlo, passando quindi alla Pagina di
-    Esercitazione (Sezione \ref{exepag}).
+    problema per aprirlo e iniziare a risolverlo, passando quindi alla \textit{Pagina di
+    Esercitazione}.
     Il Catalogo facilita la navigazione visualizzando i dati descrittivi di ogni
     problema (nome, categoria, difficoltà), permettendo anche di eseguire ricerche
-    filtrate per nome o altri campi; consente di visualizzare i suggerimenti senza
-    la necessità di aprire il problema; mostra lo stato di ogni problema e i
-    preferiti alla vista dell'utente autenticato (e amministratore); fornisce gli
-    strumenti utili agli utenti amministratori per aggiungere, modificare ed
-    eliminare i problemi del catalogo.
+    filtrate per nome o altri campi; consente di visualizzare i suggerimenti;
+    mostra lo stato di ogni problema e i
+    preferiti alla vista dell'utente autenticato (e amministratore); permette
+    agli utenti amministratori di gestire la lista dei problemi, aggiungendone di
+    nuovi, modificandoli o eliminandoli.
 
     \item[Interfacce richieste:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Lista dei problemi:} il Catalogo ha il compito di
-        mostrare i problemi memorizzati grazie al servizio di database impiegato.
-        Per questo motivo, questa interfaccia consente al catalogo di recuperare
-        dal database i problemi disponibili.
+        \item \underline{Problemi:} il Catalogo ottiene la lista dei problemi
+        memorizzati dal database.
 
-        \item \underline{Filtro:} il Catalogo rileva i filtri di ricerca selezionati
-        dall'utente, cosicché i problemi che corrispondono ai criteri di ricerca possano
-        essere visualizzati. I filtri includono la ricerca per nome, per difficoltà e categoria.
+        \item \underline{Richiesta hint:}\footnote{I suggerimenti sono
+        qui denotati brevemente col termine \textit{hint}.}
+        con questa interfaccia, il Catalogo rileva le richieste dei
+        suggerimenti associati ai problemi.
 
-        \item \underline{Richiesta suggerimento:} questa interfaccia permette all'utente
-        di visualizzare il video-suggerimento associato al problema in questione.
+        \item \underline{Video:} questa interfaccia ha lo scopo di
+        ricevere dall'attore esterno YouTube il video-suggerimento
+        richiesto dall'utente.
 
-        \item \underline{Video:} il Catalogo interagisce con YouTube per ottenere il
-        video-suggerimento da visualizzare su richiesta dell'utente.
+        \item \underline{Filtri:} il Catalogo riceve le scelte dei filtri
+        che gli utenti intendono applicare alla lista di problemi da
+        visualizzare. Questa interfaccia include tutti quei tipi di
+        filtri specificati nel documento D1, cioè i dati descrittivi
+        \textit{nome}, \textit{tag(s)}, \textit{difficoltà}.
 
-        \item \underline{Conferma login:} il Catalogo richiede l'esito dell'operazione di
-        login in modo da mostrare i preferiti e lo stato dei problemi associati
-        all'utente autenticato.
+        \item \underline{Selezione problema:} il Catalogo rileva la
+        selezione di un problema specificato dall'utetne, così da
+        poter avviare un'esercitazione su quel problema (il componente
+        \textit{Pagina di Esercitazione} si occupa dell'esercitazione).
 
-        \item \underline{Preferiti:} il Catalogo riceve i preferiti dell'utente autenticato,
-        in modo da visualizzarli nella lista dei problemi.
-        
-        \item \underline{Problemi risolti:} il Catalogo riceve i problemi risolti dall'utente,
-        cosicché lo stato dei problemi sia visibile nella lista.
+        \item \underline{Autorizzazione:} ricevendo l'autorizzazione
+        da parte del Sistema di Autenticazione, il Catalogo può adattare
+        la modalità di visualizzazione della lista dei problemi sulla
+        base del profilo (preferiti, progressi) dell'eventuale utente
+        autenticato. Inoltre, questa interfaccia indica al Catalogo
+        se l'utente ha il permesso di modificare la lista dei problemi,
+        riconoscendo l'accesso di un utente amministratore.
 
-        \item \underline{Modifica preferiti:} gli utenti autenticati possono interagire
-        con il Catalogo al fine di contrassegnare come preferiti i problemi visualizzati.
-        Mediante questa interfaccia è altresì possibile rimuovere un problema dai preferiti.
+        \item \underline{Preferiti:} da questa interfaccia il Catalogo
+        ottiene informazioni sui problemi preferiti dell'utente
+        eventualmente autenticato, potendo così visualizzarli sulla
+        lista, nel campo dedicato.
 
-        \item \underline{Modifica problema:} il Catalogo accetta eventuali modifiche
-        che vengono richieste da utenti amministratori. Da questa interfaccia, il
-        Catalogo consente agli amministratori di aggiungere, modificare o eliminare
-        i problemi del catalogo.
+        \item \underline{Modifiche preferiti:} il Catalogo riceve
+        dall'utente richieste di modifica dei preferiti, quali
+        l'aggiunta o la rimozione di problemi specifici selezionati
+        dalla lista.
+
+        \item \underline{Problemi risolti:} il Catalogo riceve la
+        lista di problemi risolti contenuti nel profilo dell'utente
+        autenticato, in modo da poter contrassegnare tali problemi
+        nel campo \textit{stato} durante la consultazione del
+        catalogo.
+
+        \item \underline{Modifiche catalogo:} da questa interfaccia,
+        il Catalogo riceve i dati necessari per aggiungere o modificare
+        un problema selezionato dall'utente amministratore, come
+        descritto nelle specifiche dei requisiti funzionali. Infine,
+        sempre da questa interfaccia vengono accolte richieste di
+        eliminazione di problemi da parte di utenti amministratori.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
-        
-        \item \underline{Lista:} il Catalogo visualizza la lista dei problemi e i
-        dati descrittivi affini di ogni problema.
 
-        \item \underline{Visualizzazione suggerimento:} il Catalogo visualizza il
-        video suggerimento relativo ad uno specifico problema e richiesto precedentemente
-        dall'utente.
+        \item \underline{Lista:} il Catalogo mette a disposizione
+        dell'utente la lista di problemi disponibili sulla piattaforma.
+        Questa interfaccia include i dati descrittivi di ogni problema.
 
-        \item \underline{Richiesta problema:} il Catalogo rileva la selezione di
-        un problema consentendo all'utente di accedere alla pagina dedicata alla
-        consultazione ed esercitazione (Pagina Esercitazione, Sezione \ref{exepag}).
-        
-        \item \underline{Stato:} lo stato dei problemi risolti è visibile all'utente
-        autenticato. Il Catalogo segnala eventuali problemi risolti
-        mediante un apposito simbolo in un campo \textit{stato}.
+        \item \underline{Richiesta video:} il Catalogo interagisce con
+        YouTube per inviare la richiesta del video corrispondente al
+        suggerimento selezionato dall'utente.
 
-        \item \underline{Preferiti:} i preferiti vengono visualizzati qualora
-        l'utente che naviga il Catalogo sia già autenticato. Il Catalogo consente
-        di riconoscere i preferiti visualizzando un apposito simbolo in un campo
-        \textit{preferiti}.
+        \item \underline{Hint:} (indichiamo brevemente con \textit{hint}
+        il \textit{suggerimento}) il Catalogo visualizza il suggerimento
+        richiesto dall'utente.
 
-        \item \underline{Modifiche preferiti:} il Catalogo comunica al database le
-        modifiche approtate ai preferiti di un particolare utente.
+        \item \underline{Problema:} una volta che l'utente sceglie quale
+        problema egli intende risolvere, il Catalogo fornisce tutti i
+        dati di quel problema al componente \textit{Pagina di Esercitazione}.
 
-        \item \underline{Modifiche problemi:} il Catalogo comunica al database eventuali
-        modifiche apportate alla lista dei problemi.
+        \item \underline{Stati:} sulla base del profilo ottenuto
+        dal componente \textit{Gestore Profilo}, il Catalogo rende
+        visibile all'utente autenticato il campo \textit{stato},
+        dove vengono contrassegnati i problemi risolti dall'utente
+        autenticato.
+
+        \item \underline{Preferiti:} come per lo stato, questa
+        interfaccia si riferisce alla visualizzazione, verso l'utente
+        autenticato, dei problemi preferiti, come sempre in un
+        campo dedicato durante la visualizzazione della lista.
+
+        \item \underline{Modifiche preferiti:} questa interfaccia
+        si occupa di comunicare al Gestore Profilo le modifiche
+        apportate ai preferiti, su richiesta dell'utente autenticato
+        che naviga nel catalogo dei problemi.
+
+        \item \underline{Modifiche catalogo:} questa interfaccia
+        comunica al database le modifiche apportate al catalogo
+        da parte dell'utente amministratore.
     \end{itemize}
 \end{description}
-
-%\subsubsection{Video Player?}
-%\begin{description}
-%    \item[Descrizione:] questo componente si occupa di interagire con l'attore esterno
-%    YouTube, inviando le richieste dei video di suggerimento, ricevendo tali video e
-%    permettendo la loro visualizzazione sulla piattaforma.
-%
-%    \item[Interfacce richieste:]
-%    \begin{itemize}
-%        \item[]
-%
-%        \item \underline{Richiesta suggerimento:} questa interfaccia permette ad altri
-%        componenti interni (Pagina Esercitazione e Catalogo) di inviare le richieste di
-%        visualizzazione dei suggerimenti.
-%
-%        \item \underline{Video:} questa interfaccia rappresenta il punto di ricezione
-%        del video di YouTube, che poi verrà visualizzato all'interno della piattaforma.
-%    \end{itemize}
-%
-%    \item[Interfacce fornite:]
-%    \begin{itemize}
-%        \item[]
-%
-%        \item \underline{Richiesta video:}
-%        \item \underline{Visualizzazione video:}
-%    \end{itemize}
-%\end{description}
 
 \begin{center}
     \rule{5cm}{1pt}
 \end{center}
 
-\subsubsection{Pagina di Esercitazione}\label{exepag}
+\subsubsection{Pagina di Esercitazione}
 \begin{description}
     \item[Descrizione:] il componente consente di consultare il contenuto del problema
     precedentemente selezionato nel catalogo. Inoltre, la Pagina di Esercitazione mette
     a disposizione gli strumenti utili alla risoluzione dell'esercizio, provvede alla
-    gestione della sottomissione del codice e avvisa l'utente circa la correttezza dell'algoritmo.
+    gestione della sottoposizione del codice e avvisa l'utente circa la correttezza dell'algoritmo.
     Qualora il codice sia corretto, questo componente si occupa di aggiornare i progressi
     dell'utente (autenticato) che ha risolto il problema, insieme allo stato di quest'ultimo
     in relazione all'utente in esame.
@@ -952,280 +1138,46 @@ all'interno del Diagramma dei Componenti.
     \begin{itemize}
         \item[]
 
-        \item \underline{Problema:} per operare, il componente deve ricevere il problema
-        selezionato nel catalogo.
+        \item \underline{Problema:} per operare, la Pagina di Esercitazione
+        deve ricevere il problema selezionato precedentemente dal Catalogo.
 
-        \item \underline{Scelta linguaggio:} il componente riconosce dall'utente il
+        \item \underline{Selezione linguaggio:} il componente riconosce dall'utente il
         linguaggio di programmazione scelto per scrivere il codice (i linguaggi disponibili
         sono mostrati mediante un'interfaccia descritta tra le \textit{interfacce fornite}).
 
-        \item \underline{Codice:} il codice scritto dall'utente viene raccolto
-        per sottoporlo ai test cases.
+        \item \underline{Codice:} il componente ricevei il codice scritto
+        dall'utente, in modo da poterlo sottoporre ai test cases.
 
-        \item \underline{Avvia-ferma cronometro:} su richiesta, è possibile avviare, fermare o
-        reimpostare a 0 il cronometro.
+        \item \underline{Richiesta submit:} dall'utente, la Pagina di Esercitazione
+        riceve la richiesta di sottoposizione del codice.
 
-        \item \underline{Richiesta suggerimento:}
-    
-        \item \underline{Video:}
-
-        \item \underline{Conferma login:} la Pagina di Esercitazione richiede l'esito
-        del login da parte del Sistema di Autenticazione, cosicché i progressi dell'utente
-        autenticato possano essere aggiornati.
+        \item \underline{Start/stop/reset cronometro:} il cronometro integrato
+        può essere manipolato dall'utente mediante questa interfaccia.
     \end{itemize}
 
     \item[Interfacce fornite:]
     \begin{itemize}
         \item[]
 
-        \item \underline{Visualizzazione contenuto:} il problema viene visualizzato nella
-        totalità dei suoi contenuti: titolo, testo, esempi.
+        \item \underline{Contenuto problema:} il componente si occupa di mostrare
+        all'utente il contenuto del problema scelto (si intendono i dati strutturali:
+        titolo, testo, esempi).
 
-        \item \underline{Linguaggi disponibili:} il componente mostra all'utente quali
-        linguaggi di programmazione sono disponibili per scrivere il codice.
+        \item \underline{Linguaggi:} la Pagina di Esercitazione mostra quali
+        linguaggi di programmazione sono disponibili e selezionabili dall'utente.
 
-        \item \underline{Visualizzazione suggerimento:}
+        \item \underline{Test cases:} il componente visualizza i test cases
+        (input fornito e output restituito dall'algoritmo scritto), insieme ai
+        loro esiti.
 
-        \item \underline{Cronometro:} viene visualizzato il tempo registrato dal
-        cronometro.
+        \item \underline{Tempo:} il componente si occupa di mostrare il tempo
+        registrato dal cronometro.
 
-        \item \underline{Esito:} il componente comunica all'utente l'esito dell'esecuzione
-        del codice scritto e sottoposto.
-
-        \item \underline{Aggiorna progressi:} in caso di esito positivo di tutti i
-        test cases, il componente ha il compito di comunicare al database l'aggiornamento
-        dello stato del problema in relazione all'utente \textit{autenticato} che lo ha
-        risolto, oltre a incrementare i progressi di quello stesso utente.
+        \item \underline{Problema risolto:} nel caso in cui tutti i test cases
+        fossero corretti, in seguito ad una sottoposizione, il componente comunica
+        tale informazione ad altri componenti (si veda \textit{Gestore Profilo}) per
+        mezzo di questa interfaccia.
     \end{itemize}
 \end{description}
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-\subsubsection{Pagina di Recupero}
-\begin{description}
-    \item[Descrizione:] il componente Pagina di Recupero si occupa dell'operazione
-    di recupero dell'account, al fine di assistere eventuali utenti, registrati
-    con sistema di credenziali interno, che hanno dimenticato la propria
-    password. La Pagina di Recupero si avvale del supporto del servizio di
-    posta elettronica, per guidare l'utente nel recupero dell'account.
-
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Richiesta recupero account:} dalla Pagina di Autenticazione,
-        il componente riceve la richiesta di recupero, attivando così la procedura.
-
-        \item \underline{Email di recupero:} viene richiesta all'utente l'email
-        dell'account da recuperare e del quale reimpostare la password.
-
-        \item \underline{Nuova password:} viene richiesta la nuova password per
-        l'account da recuperare (questa interfaccia è disponibile solo dopo il momento
-        in cui l'utente ha effettuato il collegamento mediante il link fornito dal messaggio di
-        recupero, vedi \textit{Invio email di recupero} in \textit{interfacce fornite}).
-
-        \item \underline{Aggiorna password:} il componente comunica al database
-        che la password dell'account recuperato è stata aggiornata.
-    \end{itemize}
-
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Invio email di recupero:} la Pagina di Recupero
-        richiede al servizio di posta elettronica di inviare un messaggio
-        contenente, tra le altre informazioni, un link di recupero (il link
-        consentirà poi all'utente di ritornare alla Pagina di Recupero per
-        reimpostare la password).
-
-        \item \underline{Esito:} il componente avvisa l'utente riguardo
-        a eventuali errori avvenuti durante l'operazione di recupero.
-    \end{itemize}
-\end{description}
-
-\begin{center}
-    \rule{5cm}{1pt}
-\end{center}
-
-\subsubsection{Sistema di Autenticazione}
-\begin{description}
-    \item[Descrizione:] il Sistema di Autenticazione provvede ad
-    autorizzare le operazioni di login e registrazione alla piattaforma.
-
-    \item[Interfacce richieste:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Login:} il componente riceve la richiesta di
-        login, contenente le credenziali (email, password).
-
-        \item \underline{Registrazione:} il componente riceve la richiesta
-        di registrazione, insieme ai dati necessari (username, email, password).
-
-        \item \underline{Richiesta Google:} il componente è in grado di
-        distinguere le richieste di login e registrazione con Google.
-
-        \item \underline{Risposta autenticazione:} il componente riceve
-        dal database l'esito dell'autenticazione delle credenziali fornite.
-        In questa interfaccia sono compresi sia l'esito dell'operazione di
-        autenticazione ai fini del login, che di quella di memorizzazione
-        di nuove credenziali ai fini della registrazione. In entrambi i casi,
-        l'interfaccia è dedicata alla comunicazione col database.
-
-        \item \underline{Risposta autenticazione Google:} il componente
-        riceve la risposta di autenticazione da parte di Google.
-    \end{itemize}
-
-    \item[Interfacce fornite:]
-    \begin{itemize}
-        \item[]
-
-        \item \underline{Richiesta autenticazione:} questa interfaccia viene
-        utilizzata per il login e la registrazione con credenziali interne.
-        Tramite l'interfaccia, il componente comunica al database le
-        credenziali fornite dalla Pagina di Autenticazione per memorizzarle
-        nel caso della registrazione
-
-        \item \underline{Richiesta autenticazione Google:} il componente
-        interagisce con il servizio di autenticazione Google nel caso
-        di login o registrazione con account Google.
-
-        \item \underline{Conferma login:} tramite questa risposta di autorizzazione,
-        il Sistema di Autenticazione comunica agli altri componenti l'esito
-        del login.
-
-        \item \underline{Conferma registrazione:} il componente comunica
-        l'esito della registrazione alla Pagina di Autenticazione.
-    \end{itemize}
-\end{description}
-
-
-\newpage
-%\subsubsection{Utente non autenticato}
-%L'utente non autenticato è un qualsiasi utente collegato al sito che non si sia ancora autenticato tramite il sistema di login/registrazione descritto nel \textbf{RF 2}.\\
-%L'utente non autenticato ha disponibile a sè tutte le funzioni del sito tranne alcune funzioni che verranno descritte in componenti futuri.\\
-%\\
-%\textbf{Interfaccie fornite}\\
-%\underline{Indirizzamento al sito}: Un qualsiasi utente che prova a connettersi al sito dovrà essere reindirizzato alla Home Page.
-%\subsubsection{Home Page}
-%Il componente si occupa di rendere accessibile la navigazione del sito, avrà dei bottoni apposta per il login (il componente di login è raffigurato nel 2 diagramma), e la visualizzazione del catalogo dei problemi.
-%\\\\\textbf{Interfaccie fornite}\\
-%\underline{Richiesta Pagina Problemi}: Un qualsiasi utente connesso al sito deve poter accedere al catalogo dei problemi, indipendetemente se autenticato o no.
-
-%\subsubsection{Catalogo Dei Problemi}
-%Il seguente componente deve permettere a un qualsiasi utente, autenticato o no, di accedere alla pagina di un specifico problema, attivare un timer per la sessione di allenamento,
-%accedere ai video con le soluzioni dei problemi, e filtrare i problemi in base alla categoria.
-%\\\\\textbf{Interfaccie richieste}\\
-%\underline{Video Soluzioni}: I video delle soluzioni vengono hostati su un altra piattaforma (Youtube),quindi dobbiamo richiedere il permesso di visualizzare i video attraverso l'API di Youtube.
-%\\\\
-%\underline{Filtro Problemi}: L'utente a sua discrezione può decidere se applicare dei filtri per avere una lista di problemi basata su dei tag predefiniti, di default nessun filtro è applicato.
-%\\\\
-%\textbf{Interfaccie Fornite}
-%\\
-%\underline{Richiesta Home Page}: L'utente deve essere in grado di tornare alla Home Page.
-%\\\\
-%\underline{Timer attivo/non attivo}: L'utente deve essere in grado, a suo piacimento, di attivare o disattivere il timer di allenamento.
-%\\\\
-%\underline{Richiesta di un problema specifico}: L'utente deve essere in grado di poter accedere a qualsiasi problema presente sul catalogo
-
-%\subsubsection{Utente Amministratore}
-%L'utente amministratore ha gli stessi privilegi forniti all'utente autenticato e non, l'unico privilegio che possiede in più è il permesso di modificare il catalogo,
-%per modifica si intende sia aggiungere che rimuovere un qualsiasi problema.
-%\\\\\textbf{Interfaccie Fornite}\\
-%\underline{Modifica Catalogo}: Un utente amministratore deve essere in grado di poter modificare il catalogo a suo piacimento.
-
-%\subsubsection{Pagina Problema Specifico}
-%Dopo aver specificato a quale problema si vuole accedere, l'utente verra indirizzato ad una pagina dove poter visualizzare il testo del problema,inserire codice e sottometterlo,e se
-%si è autenticati aggiungerlo ai problemi preferiti,inoltre se l'utente autentico riesce a risolvere il problema, lo stato del problema dovrà essere riflesso nel catalogo.
-%\\\\\textbf{Interfaccie Fornite}\\
-%\underline{Sottomisione Codice}: Attraverso un bottone apposito l'utente autenticato o non, dovrà poter sottomettere il codice per la valutazione.
-%\\
-%\underline{Aggiornamento Stato Problema}: Se l'utente è in grado di risolvere il problema, allora lo "stato" del problema dovrà essere aggiornato, in modo che un utente autenticato sia in grado di riconoscere i problemi già svolti.
-%\\
-%\underline{Richiesta Home Page}: Un qualsiasi utente, autenticato o non, deve essere in grado di tornare al catalogo dei problemi.
-%\\\\\textbf{Interfaccie Richieste}
-%\\\underline{Codice}: Un qualsiasi utente deve essere in grado di poter scrivere (nelle aree opportune) testo,che poi verrà interpretato come codice nel linguaggio di programmazione specificato.
-
-%\subsubsection{Utente Autenticato}
-%L'utente autenticato possiede tutti i privilegi di un utente non autenticato, l'unico privilegio in più rispetto ad un utente non autenticato è il tracciamento dei preferiti e dei problemi svolti.
-%\\\\\textbf{Interfaccie Fornite}
-%\\
-%\underline{Aggiungere ai Preferiti}: Un utente autenticato deve essere in grado di aggiungere tra i preferiti un qualsiasi Problema.
-%
-%\subsubsection{Pagina Autenticazione}:
-%La pagina di autenticazione è accessibile all'utente in qualsiasi momento,indipendetemente dalla pagina in cui si trova, dentro questa pagina
-%l'utente avrà a disposizione dei campi dove immettere email e password, un link per il recupero password, e dei bottoni dove poter decidere se eseguire login o registrazione.
-%\\\\\textbf{Interfaccie Richieste}
-%\\underline{Credenziali}: L'utente deve poter immetere le proprie credenziali (tupla di password e email).
-%\\\\\textbf{Interfaccie Fornite}
-%\underline{Login}: L'utente deve essere in grado di poter effetuare il login attraverso apposito bottone.
-%\\
-%\underbar{Registrazione}: L'utente deve essere in grado di effettuare la registrazione tramite apposito bottone.
-%\\
-%\underbar{Richiesta Recupero password}: L'utente deve essere in grado di poter iniziare la procedura di recupero password.
-%\subsubsection{Autenticazione}
-%Tramite questo componente siamo in grado di autenticare l'utente, indipendetemente se si è registrato tramite Google oppure tramite il nostro sistema di registrazione.
-%\\\\textbf{Interfaccie Richieste}
-%\underbar{Richiesta Autenticazione Google}: Se l'utente decide di effettuare il login/registrazione tramite Google, deve essere in grado di farlo, perciò comunicheremo tramite apposite API Google.
-%\\
-%\underbar{Risposta Autenticazione Google}: Risposta fornite da Google.
-%\\
-%\underbar{Richiesta Autenticazione}: Se l'utente decide di effetuare login/registrazione tramite il sistema implementato da noi, deve poter farlo tramite vie apposite.
-%\\
-%\underbar{Risposta Autenticazione}: Risposta dell'autenticazione
-%\\\\\textbf{Interfaccie Fornite}\\
-%\underline{Credenziali Account}: Email e password Forniti dall'utente durante login/registrazione
-%\subsubsection{Gestore Account}
-%Tramite questo componenti raggrupiamo tutti gli utenti autenticati, e di conseguenza forniamo le azioni disponibili solo ad utenti autenticati.
-%\\\\\textbf{Interfaccie Fornite}
-%\\\underline{Esito}: Forniamo l'esito dell'accesso.
-%\\\underline{Richiesta Modifica Password}: tramite bottone apposito l'utente deve essere in grado di poter iniziare il processo di modifica password.
-%\\\underline{Richiesta Modifica Email}: tramite bottone apposito l'utente deve essere in grado di iniziare la procedure di modifica email.
-%\\\underbar{Logout}: l'utente deve essere in grado di effetuare il logout.
-
-%\subsubsection{Modifica Password}
-%Tramite questo componente l'utente deve essere in grado di modificare la propria password fornendo le nuove credenziali.
-%\\\\\textbf{Interfaccie Fornite}\\
-%\underline{Nuove Credenziali}: L'utente deve essere in grado di modificare le proprie credenziali, perciò dovremmo notificare il database delle nuove credenziali
-%\\\\\textbf{Interfaccie Richieste}\\
-%\underline{Esito}: Notifichiamo l'utente se l'esito è stato positivo\\\\
-%\underline{Nuova Password}: l'utente deve dare una nuova password che sia conforme alle regola stabilite.
-
-%\subsubsection{Modifica Email}
-%Tramite questo componente l'utente deve essere in grado di modificare la propria email fornendo le nuove credenziali.
-%\\\\\textbf{Interfaccie Fornite}\\
-%\underline{Nuove Credenziali}: L'utente deve essere in grado di modificare le proprie credenziali, perciò dovremmo notificare il database delle nuove credenziali
-%\\\\\textbf{Interfaccie Richieste}\\
-%\underline{Esito}: Notifichiamo l'utente se l'esito è stato positivo
-%\\\\
-%\underline{Nuova Email}: l'utente deve dare una nuova email che sia conforme alle regola stabilite.
-
-%\subsubsection{Pagina Recupero Password}
-%Tramite questo componente l'utente sarà in grado di recuperare il proprio account a patto che l'email inserita sia valida.
-%\\\\\textbf{Interfaccie Fornite}\\
-%\underline{Invio Email Recupero Password}: una email di recupero password verrà inviata all'utente all'email specificata
-%\\\\\textbf{Interfaccie Richieste}\\
-%\underbar{Email}: L'utente deve fornire un indirizzo email.
-%\subsection{Diagrammi dei componenti}
-%\begin{center}
-%    \hspace*{-1cm}
-%    \includegraphics[width=1.2\textwidth]{materiale/site-ux.jpg}
-%\end{center}
-  
-%\begin{center}
-%    \hspace*{-1cm}
-%    \includegraphics[width=1.2\textwidth]{materiale/login-component.jpg}
-%\end{center}
-    
-\begin{figure}[H]
-\centering
-%\includegraphics[]{}
-\caption{Diagramma dei Componenti}
-\label{compdiagram}
-\end{figure}
-    
-
 
 \end{document}
