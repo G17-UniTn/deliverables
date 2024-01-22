@@ -16,7 +16,7 @@
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
 \fancyfoot[C]{\thepage} %add page number
-\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.4}
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill Sleep Code \hfill \textit{Versione:} 2.4}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -71,14 +71,14 @@ Zeno \textsc{Saletti}}
 % NON MODIFICARE QUESTO COMANDO!!!
 \input{materiale/copertina.tex}
 
-\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione del testo:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice. I riferimenti interni, sottolineati e colorati in azzurro, agiscono nello stesso modo.}
+\tableofcontents\blfootnote{\textbf{Consigli utili per la consultazione:} Se il lettore per file \texttt{.pdf} attualmente in uso lo consente, è possible navigare con più semplicità e velocità all'interno di questo documento cliccando sugli elementi dell'indice. I riferimenti interni, sottolineati e colorati in azzurro, agiscono nello stesso modo.}
 
 
 \newpage
 \section{Introduzione}
 \subsection{Scopo del documento}
 Le informazioni contenute in questo documento concorrono ad esporre l'analisi
-dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
+dei requisiti relativa al progetto \textit{Sleep Code}. In particolare, dopo
 aver specificato gli obiettivi e il pubblico di riferimento, verranno definiti i requisiti
 funzionali e non funzionali; verrà presentata una proposta di design di
 front-end; infine saranno riportati i servizi esterni di back-end coi quali il
@@ -125,9 +125,9 @@ di più ampia portata.
 \noindent Le funzionalità sono inoltre suddivise secondo alcuni livelli di accesso
 degli utenti (di seguito in ordine "crescente"):
 \begin{itemize}
-    \item \textit{Utente anonimo} (Sezioni 2.1, 2.2, 2.3).
-    \item \textit{Utente autenticato} (Sezione 2.4).
-    \item \textit{Utente amministratore} (Sezione 2.5).
+    \item \textit{Utente anonimo} (Sezioni \ref{accessauth}, \ref{consultaprobl}, \ref{secesercitazione}).
+    \item \textit{Utente autenticato} (Sezione \ref{gestprofilo}).
+    \item \textit{Utente amministratore} (Sezione \ref{gestcatalogo}).
 \end{itemize}
 Si precisa che un utente presente ad un dato livello di accesso può usufurire
 delle funzionalità disponibili a quel livello \textit{più} le funzionalità
@@ -139,7 +139,7 @@ messe a disposizione a eventuali livelli superiori.
 \end{center}
 
 
-\subsection{Accesso e autenticazione}
+\subsection{Accesso e autenticazione}\label{accessauth}
 
 
 \begin{funcreq}
@@ -193,6 +193,7 @@ procedura di recupero deve prevedere:
     che reindirizza l'utente ad una pagina dedicata, sulla piattaforma, nella
     quale completare l'operazione di recupero.
 
+    %controlla di preciso che succede
     \item L'inserimento di una nuova password nella pagina dedicata. La password, come in fase di
     registrazione, deve essere confermata e conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{itemize}
@@ -202,7 +203,7 @@ e non riguarda gli utenti registratisi mediante autenticazione Google
 (\textcolor{blue}{\underbar{\hyperref[google]{RF \ref*{google}}}}).
 \end{funcreq}
 
-\subsection{Consultazione dei problemi}
+\subsection{Consultazione dei problemi}\label{consultaprobl}
 
 \begin{funcreq}
 \label{probcatalogue}
@@ -215,15 +216,15 @@ essere possibile:
     \item Visualizzare tale catalogo, che mostra i campi \textit{descrittivi}
     di ogni problema elencato:
     \begin{itemize}
-        \item \textit{Nome:} una parola chiave priva di spazi.
-        
+        \item \textit{Nome:} un breve nome del problema.
+
         \item \textit{Difficoltà:} i problemi sono categorizzati in base alla
         loro difficoltà. Vengono definiti tre livelli indicativi:
         bassa, intermedia, alta.
         
         \item \textit{Tags:} un insieme di parole chiave che individuano una
         o più aree di interesse affrontate nel problema (ad esempio ricerca,
-        grafi, ordinamento, hashing, ecc.)
+        grafi, ordinamento, programmazione dinamica, ecc.)
 
         \item \textit{Suggerimento:} viene messo a disposizione, per ogni
         problema nel catalogo, un video in cui vengono trattate nozioni che
@@ -254,14 +255,15 @@ problema (\textit{dati strutturali}):
     matematiche possono accompagnare i testi.
 
     \item Almeno due esempi\footnote{Non si devono confondere questi \textit{esempi}
-    con i \textit{test cases} (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}})}
+    con i \textit{test cases} (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}}}})}
     di esecuzione, ognuno costituito da un input e il relativo output atteso.
 \end{itemize}
 Qualora l'utente desideri consultare il problema, vengono contemporaneamente
-messe a dispoizione le funzionalità di cui al \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}}}}.
+messe a dispoizione le funzionalità di cui al \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}}}},
+che nel complesso costituiscono l'\textit{area di esercitazione}.
 \end{funcreq}
 
-\subsection{Esercitazione}
+\subsection{Esercitazione}\label{secesercitazione}
 \begin{funcreq}
 \label{exesession}
 \textbf{Effettuare un'esercitazione }
@@ -279,30 +281,17 @@ del problema, accedendo alle seguenti funzionalità:
     linguaggi, si veda \textcolor{blue}{\underbar{\hyperref[scalabilita]{RNF \ref*{scalabilita}.2}}}.}.
 
     \item Scrivere, sotto forma di codice nel linguaggio di programmazione
-    scelto, l'algoritmo risolutivo del problema selezionato.
+    scelto, l'algoritmo risolutivo del problema selezionato. Accedendo all'area
+    di esercitazione, viene fornito un frammento di \textit{driver code}
+    (un esempio è visibile in \textcolor{blue}{\underbar{\hyperref[areaexercise]{FE \ref*{areaexercise}}}}).
+    Il codice scritto dall'utente anonimo non viene conservato dopo aver
+    abbandonato l'area di esercitazione.
 
     \item Richiedere la sottoposizione del codice scritto e visualizzare i test cases insieme al loro esito (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}}}}).
 
-    \item Utilizzare un cronometro (\textcolor{blue}{\underbar{\hyperref[chrono]{RF \ref*{chrono}}}}).
-    
-    %\item Visualizzare il suggerimento (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}).
+    \item Visualizzare ed utilizzare un cronometro (\textcolor{blue}{\underbar{\hyperref[chrono]{RF \ref*{chrono}}}}).
 \end{enumerate}
 \end{funcreq}
-
-
-%\begin{funcreq}
-%\label{sintax}
-%\textbf{Correttezza sintattica del codice }
-%L'utente deve poter verificare che il codice scritto sia corretto e in grando di essere eseguito in maniera appropriata.
-%Quindi devono essere messe a disposizione le seguenti funzionalità:
-%\begin{enumerate}
-%    \item Compilazione del codice.
-%    \item Visualizzazione di avvisi relativi a eventuali errori di compilazione
-%    \textit{oppure} di compilazione andata a buon fine. In caso di errori
-%    di scrittura, l'utente deve poter correggere tali errori riscrivendo
-%    nell'area destinata al codice.
-%\end{enumerate}
-%\end{funcreq}
 
 \begin{funcreq}
 \label{test}
@@ -311,9 +300,10 @@ L'utente deve poter verificare la correttezza del codice scritto eseguendolo
 e testandolo:
 \begin{enumerate}
     \item Il codice deve essere eseguito sottoponendolo ad un certo numero
-    di test cases, cioè fornendo opportune istanze di input e controllando
-    l'output restituito. Il numero minimo di test cases per ogni problema
-    corrisponde a 3.
+    di test cases, cioè fornendo opportune istanze di input, previste dallo
+    specifico problema selezionato, e controllando l'output atteso con quello
+    restituito dal programma dell'utente.
+    Il numero minimo di test cases per ogni problema corrisponde a 3.
 
     \item L'utente deve poter conoscere l'esito dei test case—per ognuno
     di questi, l'input e l'output atteso sono visibili. Inoltre, l'utente
@@ -322,8 +312,9 @@ e testandolo:
 
     Nel caso in cui l'esito dei test cases dovesse risultare negativo, l'utente
     viene avvisato senza fare riferimento agli errori commessi, siano essi
-    relativi alla correttezza sintattica del codice oppure riguardanti la
-    correttezza risolutiva dell'algoritmo—l'output fornito non è corretto.
+    relativi alla correttezza sintattica del codice oppure alla
+    correttezza risolutiva dell'algoritmo—casi nei quali l'output fornito
+    non corrisponde a quello atteso.
 \end{enumerate}
 \end{funcreq}
 
@@ -332,7 +323,7 @@ e testandolo:
     \textbf{Cronometro }
     L'utente deve poter tenere traccia del tempo impiegato per risolvere un problema.
     Pertanto, deve essere possibile avviare, interrompere e reimpostare a 0 secondi un
-    cronometro. Il cronometro è disponibile durante l'esercitazione, dopo aver scelto
+    cronometro. Il cronometro è disponibile nell'area di esercitazione, dopo aver scelto
     il problema da risolvere, insieme a tutti gli altri strumenti descritti in
     \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}}}}.
 \end{funcreq}
@@ -346,12 +337,12 @@ Nei seguenti requisiti funzionali, si suppone che l'utente appartenga al livello
 di accesso \textit{autenticato}, qualora tale informazione dovesse essere omessa.
 Si sottolinea nuovamente che l'utente autenticato eredita le stesse funzionalità
 accessibili all'utente anonimo e descritte precedentemente.
-In questo e nei documenti successivi, indichiamo con il termine \textit{profilo}
-tutti i dati relativi all'attività di un utente registrato e/o autenticato sulla
-piattaforma. Sono dunque inclusi l'\textit{account} (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup}}}}) e i \textit{progressi}
-(\textcolor{blue}{\underbar{\hyperref[stats]{RF \ref*{stats}}}}).
+Il livello autenticato aggiunge un certo grado di personalizzazione all'esperienza
+fornita dal servizio, consentendo la gestione di dati personali come
+l'\textit{account} (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup}}}}) e i
+\textit{progressi} (\textcolor{blue}{\underbar{\hyperref[stats]{RF \ref*{stats}}}}).
 \\
-\subsection{Gestione del profilo}
+\subsection{Gestione dei dati personali}\label{gestprofilo}
 
 \begin{funcreq}
     \textbf{Metadati aggiuntivi }
@@ -359,23 +350,28 @@ piattaforma. Sono dunque inclusi l'\textit{account} (\textcolor{blue}{\underbar{
     l'utente autenticato deve poter visualizzare e influenzare i seguenti dati aggiuntivi in
     ogni problema:
     \begin{enumerate}
-        \item \textit{Stato:} i problemi risolti dall'utente devono essere contrassegnati,
-        grazie alla disponibilità di questo ulteriore campo.
-    
+        \item \textit{Stato:} lo stato permette di indicare all'utente se un certo problema
+        è stato risolto o meno. I problemi risolti con successo dall'utente devono essere
+        contrassegnati in questo apposito campo.
+
         \item \textit{Preferito:} l'utente che desidera tener traccia dei problemi
         per lui rilevanti deve poter contrassegnare tali problemi come \textit{preferiti}.
+        Nel catalogo, l'utente autenticato può distinguere i problemi contrassegnati
+        personalmente, ma entrando nell'area di esercitazione è possibile visualizzare
+        anche il numero di utenti che hanno contrassegnato quello stesso problema come
+        preferito.
     \end{enumerate}
     Le informazioni riguardanti questi campi sono visibili all'utente autenticato,
-    sia durante la consultazione del catalogo che del singolo problema.
-
-    (il mio like si vede nel catalogo, dal catalogo non posso mettere like,
-    entrando nel problema vedo il numero di like)
+    sia durante la consultazione del catalogo che del singolo problema, nell'area di
+    esercitazione.
 \end{funcreq}
 
 \begin{funcreq}
-\textbf{Codice } Il codice scritto dall'utente autenticato, all'interno della
-console, nell'area di esercitazione, viene salvato sul browser in locale, in
-modo che l'utente, rivisitando i diversi esercizi, continuare l'esercizio.
+\textbf{Codice } Il codice scritto dall'utente autenticato, al contrario di
+quanto accade per gli utenti anonimi in
+\textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}.3}}},
+non viene perso al momento dell'uscita dall'area del problema, cosicché
+quanto scritto possa essere ripreso in momenti successivi.
 \end{funcreq}
 
 \begin{funcreq}
@@ -399,20 +395,12 @@ i propri \textit{progressi}.
 
 \begin{funcreq}
 \label{updateaccount}
-\textbf{Aggiornamento account }
+\textbf{Aggiornamento password }
 L'utente registrato e autenticato mediante il sistema di credenziali interno
-deve poter modificare i dati identificativi del proprio account, ovvero indirizzo
-email e password:
-\begin{enumerate}
-\item L'utente deve poter eliminare il proprio account, e tutti i dati ad
-esso collegati.
-
-\item L'utente deve poter modificare la password del proprio account.
-La password può essere cambiata previo inserimento di quella attualmente
-associata all'account. La nuova password deve essere digitata due volte
-per conferma e deve rispettare quanto specificato dal
-\textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
-\end{enumerate}
+deve poter modificare la password del proprio account. Essa può essere cambiata
+previo inserimento di quella attualmente associata all'account. La nuova
+password deve essere digitata due volte per conferma e deve rispettare quanto
+specificato dal \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
 \end{funcreq}
     
 \begin{funcreq}
@@ -423,14 +411,17 @@ al servizio. Questa procedura di \textit{logout} realizza il passaggio dell'uten
 dallo stato autenticato a quello anonimo.
 \end{funcreq}
 
+\begin{funcreq}
+\textbf{Eliminazione account }
+L'utente registrato e autenticato deve poter eliminare il proprio account,
+insieme ai dati ad esso collegati (preferiti, progressi ecc.).
+\end{funcreq}
+
 \begin{center}
     \section*{Utente amministratore}
 \end{center}
 
-%Le funzionalità elencate di seguito sono usufruibili esclusivamente dall'utente
-%amministratore. Inoltre, l'utente amministratore non può accedere alle funzionalità
-%precedentemente descritte, cioè quelle caratteristiche dei livelli anonimo e autenticato.
-\subsection{Gestione del catalogo dei problemi}
+\subsection{Gestione del catalogo dei problemi}\label{gestcatalogo}
 
 \begin{funcreq}
 \textbf{Aggiungere un problema }
@@ -504,35 +495,41 @@ servizio in meno di 30 minuti.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
-\textbf{Aspetto }
+\textbf{Aspetto } L'interfaccia deve presentarsi gradevole alla vista dell'utente.
+Devono essere curate le seguenti caratteristiche visive:
 \begin{enumerate}
-    \item Colore
-    \item Layout dinamico: all'interno della pagina di esercitazione, divisa
-    in console, riquadro dei test case e visualizzatore del contenuto del
-    problema, l'utente deve essere in grado di modificare le dimensioni dei
-    diversi riquadri a suo piacimento, comunque senza impattare l'usabilità
-    della pagina di esercitazione del sito.
+    \item Colore: si preferiscono gradazioni cromatiche scure e un contrasto
+    sufficientemente equilibrato, al fine di garantire la leggibilità e
+    contribuire alla riduzione dell'affaticamento della vista. Una motivazione
+    a supporto di questo requisito è il potenziale rischio di sessioni eccessivamente
+    prolungate sulla piattaforma.
 
-    \item Durante l'attesa di risposta del serve per qualsiasi richiesta
-    ad esso fatta, l'utente deve essere essere notificato dell'avvenuto
-    ricevimento della richiesta e dell'attesa conseguente, tramite opportuni
-    segnalazioni grafiche.
+    \item Layout dinamico: le pagine che contengono un grande numero di
+    elementi grafici devono essere organizate razionalmente e devono poter
+    essere in parte personalizzabili nelle loro dimensioni. Perciò, la
+    pagina di esercitazione deve essere strutturata mediante un layout
+    dinamico, con il quale le dimensioni delle aree di consultazione del
+    problema, di scrittura di codice e visualizzazione dell'esito dei
+    test possono essere adattate a piacimento da parte dell'utente
+    (\textcolor{blue}{\underbar{\hyperref[exepage]{FE \ref*{exepage}}}}
+    mostra un prototipo dell'area di esercitazione).
+
+    \item Durante eventuali attese di risposta della piattaforma che
+    in qualche modo coinvolgono transazioni sul lato back-end (ad esempio
+    richieste effettuate tra client e server), l'utente deve poter
+    essere segnalato riguardo lo stato di questi momenti di attesa,
+    per mezzo di opportune segnalazioni grafiche come \textit{skeleton
+    screens}\footnote{Una breve descrizione degli skeleton screens è
+    reperibile \href{https://www.nngroup.com/articles/skeleton-screens/}{\textcolor{blue}{\underbar{qui}}}.}
+    o \textit{popup}. Alcuni esempi di queste situazioni di attesa sono
+    l'apertura di un problema o la conferma di registrazione dell'account.
 \end{enumerate}
-L'interfaccia deve presentarsi gradevole alla vista dell'utente, preferendo
-gradazioni cromatiche scure e un contrasto sufficientemente equilibrato,
-al fine di garantire la leggibilità e contribuire alla riduzione
-dell'affaticamento della vista. Una motivazione a supporto di questo requisito
-è il potenziale rischio di sessioni di navigazione eccessivamente prolungate sulla piattaforma.
 \end{nonfuncreq}
 
 %QUESTIONE LINGUA: dato che gli amministratori possono essere persone qualunque, chi garantisce che scriveranno testi e useranno video-suggerimento in ita/eng? specifichiamo una policy?
 \begin{nonfuncreq}
 \textbf{Lingua di sistema }
 Il servizio viene erogato in lingua italiana.
-
-%Altrettanto viene fatto per i
-%testi dei problemi. I video relativi alla soluzione dei problemi possono
-%essere in italiano oppure in inglese.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -598,10 +595,9 @@ la stringa inserita deve rispettare le seguenti caratteristiche:
     \item Contenere almeno una lettera maiuscola.
     \item Contenere almeno una lettera minuscola.
     \item Contenere almeno un numero.
-    \item Contenere almeno un carattere speciale, non alfanumerico,
-    tra quelli specificati dalla libreria Yup,
+    \item Contenere almeno un carattere speciale non alfanumerico.
     %\begin{center}
-    %    \verb|! ? # $ % & @ * + . , ; : / - = _ \ ( ) [ ] { }|
+    %    \verb|! ? # $ % & @ * + . , ; : / | \ - = _ ( ) [ ] { }|
     %\end{center}
 \end{itemize}
 \end{nonfuncreq}
@@ -632,6 +628,7 @@ la piattaforma online espone all'utente.
 \end{figure}
 
 \begin{frontend}
+\label{areaexercise}
 \textbf{Pagina di registrazione }
 \end{frontend}
 \begin{figure}[H]
@@ -654,6 +651,7 @@ per contrassegnare i \textit{preferiti}).
 \end{figure}
 
 \begin{frontend}
+\label{exepage}
 \textbf{Pagina di esercitazione }
 Una pagina dedicata raccoglie le funzionalità di consultazione dettagliata
 del problema e risoluzione di quest'ultimo.
@@ -679,7 +677,7 @@ autenticato.
 \newpage
 \section{Design back-end}
 Nella sezione seguente vengono elencati i servizi esterni con i quali
-la piattaforma \textit{SleepCode} interagisce per funzionare
+la piattaforma \textit{Sleep Code} interagisce per funzionare
 correttamente, o per ricevere supporto mirato a soddisfare i propri requisiti.
 In Figura \ref{backend} viene riassunto l'insieme di questi servizi esterni
 e il ruolo che essi svolgono nell'interazione, in ambito back-end (BE),
@@ -728,6 +726,7 @@ L'invio dei messaggi email, ai fini del recupero dell'account (\textcolor{blue}{
 %    \item \textit{Versione 2.1:} ridefinizione delle funzionalità del livello amministratore.
 %    \item \textit{Versione 2.2:} eliminazione RF sulla correttezza sintattica del codice; aggiornato il ruolo amministratore.
 %    \item \textit{Versione 2.3:} chiarificazioni sul ruolo e sulle funzionalità del cronometro.
+%    \item \textit{Versione 2.4:} eliminazione di alcune funzionalità, chiarimenti in vista della consegna.
 %\end{itemize}
 
 \end{document}
