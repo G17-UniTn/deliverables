@@ -129,7 +129,7 @@ degli utenti (di seguito in ordine "crescente"):
     \item \textit{Utente autenticato} (Sezione \ref{gestprofilo}).
     \item \textit{Utente amministratore} (Sezione \ref{gestcatalogo}).
 \end{itemize}
-Si precisa che un utente presente ad un dato livello di accesso può usufurire
+Si precisa che un utente presente ad un dato livello di accesso può usufruire
 delle funzionalità disponibili a quel livello \textit{più} le funzionalità
 presenti al livello inferiore. Non è invece possibile utilizzare le funzionalità
 messe a disposizione a eventuali livelli superiori.
@@ -164,7 +164,7 @@ richiede la compilazione dei seguenti campi:
 Il sistema deve permettere all'utente registrato di autenticarsi,
 accedendo al proprio account, mediante l'inserimento dell'indirizzo
 email e la password impostate in fase di registrazione. L'utente deve
-essere notificato qualora non sia possibile concludere correttamente
+essere notificato qualora non fosse possibile concludere correttamente
 l'operazione di login, quindi se l'email inserita non è associata ad alcun
 account registrato in precedenza oppure se la password è errata;
 è comunque possibile ritentare il login un numero illimitato di volte.
@@ -187,7 +187,7 @@ In caso di registrazione, oltre alle operazioni previste dal servizio Google
 L'utente registrato e anonimo deve poter recuperare la password del proprio
 account qualora tale dato dovesse essere dimenticato in fase di login. La
 procedura di recupero deve prevedere:
-\begin{itemize}
+\begin{enumerate}
     \item L'invio di un messaggio all'indirizzo email attualmente associato
     all'account dell'utente—l'email contiene un collegamento ipertestuale
     che reindirizza l'utente ad una pagina dedicata, sulla piattaforma, nella
@@ -196,7 +196,7 @@ procedura di recupero deve prevedere:
     %controlla di preciso che succede
     \item L'inserimento di una nuova password nella pagina dedicata. La password, come in fase di
     registrazione, deve essere confermata e conforme al \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}}.
-\end{itemize}
+\end{enumerate}
 Il recupero deve essere accessibile a tutti gli utenti registrati mediante
 sistema di credenziali interno (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup}}}}, \textcolor{blue}{\underbar{\hyperref[login]{RF \ref*{login}}}}),
 e non riguarda gli utenti registratisi mediante autenticazione Google
@@ -268,9 +268,9 @@ che nel complesso costituiscono l'\textit{area di esercitazione}.
 \label{exesession}
 \textbf{Effettuare un'esercitazione }
 L'utente deve poter scegliere dal catalogo il problema desiderato e cominciare
-a risolverlo. L'esercitazione deve avvenire in una vista apposita, dove
-l'utente deve poter disporre di tutti gli strumenti necessari alla risoluzione
-del problema, accedendo alle seguenti funzionalità:
+a risolverlo. L'esercitazione deve avvenire in una vista apposita (l'area di
+esercitazione), dove l'utente deve poter disporre di tutti gli strumenti
+necessari alla risoluzione del problema, accedendo alle seguenti funzionalità:
 \begin{enumerate}
     \item Visualizzare il contenuto dell'esercizio (\textcolor{blue}{\underbar{\hyperref[seeproblem]{RF \ref*{seeproblem}}}}).
 
@@ -285,11 +285,20 @@ del problema, accedendo alle seguenti funzionalità:
     di esercitazione, viene fornito un frammento di \textit{driver code}
     (un esempio è visibile in \textcolor{blue}{\underbar{\hyperref[areaexercise]{FE \ref*{areaexercise}}}}).
     Il codice scritto dall'utente anonimo non viene conservato dopo aver
-    abbandonato l'area di esercitazione.
+    abbandonato l'area di esercitazione e viene sovrascritto dal driver
+    code.
 
     \item Richiedere la sottoposizione del codice scritto e visualizzare i test cases insieme al loro esito (\textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}}}}).
 
     \item Visualizzare ed utilizzare un cronometro (\textcolor{blue}{\underbar{\hyperref[chrono]{RF \ref*{chrono}}}}).
+    
+    \item Modificare le dimensioni delle aree dedicate
+    alla visualizzazione del contenuto del problema, alla scrittura di codice
+    e consultazione dei test. Ciò avviene grazie ad un \textit{layout dinamico},
+    con il quale l'utente può adattare la visibilità di alcuni elementi
+    dell'area di esercitazione a propria discrezione\footnote{Ciò può avvenire entro alcuni limiti,
+    in modo da non ledere la visibilità degli elementi grafici: per esempio, non è consentito modificare
+    il layout al punto da nascondere completamente il testo del problema.}.
 \end{enumerate}
 \end{funcreq}
 
@@ -305,7 +314,7 @@ e testandolo:
     restituito dal programma dell'utente.
     Il numero minimo di test cases per ogni problema corrisponde a 3.
 
-    \item L'utente deve poter conoscere l'esito dei test case—per ognuno
+    \item L'utente deve poter conoscere l'esito dei test cases—per ognuno
     di questi, l'input e l'output atteso sono visibili. Inoltre, l'utente
     deve poter riscrivere e perfezionare l'algoritmo e sottoporre ripetutamente
     il codice ai test cases.
@@ -334,7 +343,7 @@ e testandolo:
 \end{center}
 
 Nei seguenti requisiti funzionali, si suppone che l'utente appartenga al livello
-di accesso \textit{autenticato}, qualora tale informazione dovesse essere omessa.
+di accesso autenticato \textit{autenticato}, qualora tale informazione dovesse essere omessa.
 Si sottolinea nuovamente che l'utente autenticato eredita le stesse funzionalità
 accessibili all'utente anonimo e descritte precedentemente.
 Il livello autenticato aggiunge un certo grado di personalizzazione all'esperienza
@@ -367,6 +376,7 @@ l'\textit{account} (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup
 \end{funcreq}
 
 \begin{funcreq}
+\label{code}
 \textbf{Codice } Il codice scritto dall'utente autenticato, al contrario di
 quanto accade per gli utenti anonimi in
 \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}.3}}},
@@ -445,6 +455,7 @@ problema, sia i dati strutturali (il contenuto), sia i relativi test cases.
 \begin{funcreq}
 \textbf{Eliminare un problema }
 L'utente amministratore deve poter eliminare i problemi dal catalogo.
+%i progressi degli utenti che hanno risolto quel problema cosa fanno?
 \end{funcreq}
 
 \newpage
@@ -490,8 +501,12 @@ La piattaforma del servizio deve permettere all'utente di sfruttare le
 funzionalità disponibili al proprio livello di accesso senza l'ausilio di
 istruzioni scritte e verbose. L'intuitività dell'interfaccia deve essere
 sufficiente a guidare l'utente nella realizzazione dei suoi scopi,
-permettendo di venire a conoscenza di almeno il 90\% delle funzionalità del
-servizio in meno di 30 minuti. 
+permettendo di venire a conoscenza di almeno il 90\%\footnote{La percentuale
+esprime il rapporto tra il numero di funzionalità alle quali l'utente di un
+dato livello di accesso viene a conoscenza entro l'intervallo di tempo specificato
+e il numero totale di funzionalità, utilizzando come riferimento il
+numero di requisiti funzionali elencati precedentemente.} delle funzionalità
+del servizio in meno di 30 minuti.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -503,16 +518,6 @@ Devono essere curate le seguenti caratteristiche visive:
     contribuire alla riduzione dell'affaticamento della vista. Una motivazione
     a supporto di questo requisito è il potenziale rischio di sessioni eccessivamente
     prolungate sulla piattaforma.
-
-    \item Layout dinamico: le pagine che contengono un grande numero di
-    elementi grafici devono essere organizate razionalmente e devono poter
-    essere in parte personalizzabili nelle loro dimensioni. Perciò, la
-    pagina di esercitazione deve essere strutturata mediante un layout
-    dinamico, con il quale le dimensioni delle aree di consultazione del
-    problema, di scrittura di codice e visualizzazione dell'esito dei
-    test possono essere adattate a piacimento da parte dell'utente
-    (\textcolor{blue}{\underbar{\hyperref[exepage]{FE \ref*{exepage}}}}
-    mostra un prototipo dell'area di esercitazione).
 
     \item Durante eventuali attese di risposta della piattaforma che
     in qualche modo coinvolgono transazioni sul lato back-end (ad esempio
@@ -529,7 +534,9 @@ Devono essere curate le seguenti caratteristiche visive:
 %QUESTIONE LINGUA: dato che gli amministratori possono essere persone qualunque, chi garantisce che scriveranno testi e useranno video-suggerimento in ita/eng? specifichiamo una policy?
 \begin{nonfuncreq}
 \textbf{Lingua di sistema }
-Il servizio viene erogato in lingua italiana.
+Il servizio viene erogato in lingua italiana. I video di suggerimento
+(\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}}}})
+potrebbero essere distribuiti in lingua inglese.
 \end{nonfuncreq}
 
 \begin{nonfuncreq}
@@ -574,7 +581,11 @@ vigenti disposizioni di legge in materia di tutela della privacy e
 trattamento dei dati:
 \begin{enumerate}
     \item L'applicazione fornita dal servizio deve essere conforme
-    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}} (GDPR) per la protezione dei dati.
+    al regolamento \href{https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018}{\textcolor{blue}{\underbar{UE n.2016/679}}}
+    (GDPR) per la protezione dei dati.
+
+    \item Il codice scritto dagli utenti autenticati (\textcolor{blue}{\underbar{\hyperref[code]{RF \ref*{code}}}})
+    viene memorizzato da parte del client e non al di fuori di esso.
 \end{enumerate}
 \end{nonfuncreq}
 
@@ -595,23 +606,13 @@ la stringa inserita deve rispettare le seguenti caratteristiche:
     \item Contenere almeno una lettera maiuscola.
     \item Contenere almeno una lettera minuscola.
     \item Contenere almeno un numero.
-    \item Contenere almeno un carattere speciale non alfanumerico.
-    %\begin{center}
-    %    \verb|! ? # $ % & @ * + . , ; : / | \ - = _ ( ) [ ] { }|
-    %\end{center}
+    \item Contenere almeno un carattere speciale non alfanumerico
+    scelto tra i seguenti:
+    \begin{center}
+        \verb|! ? # $ % & @ * + . , ; : / \ - = _ ( ) [ ] { }|
+    \end{center}
 \end{itemize}
 \end{nonfuncreq}
-
-%\begin{nonfuncreq}
-%\textbf{Integrità e operazioni su dati sensibili }
-%L'integrità di dati sensibili dell'account, quali email ma soprattutto password,
-%è garantita da opportune procedure di conferma e notifica all'utente.
-%Data la natura di queste operazioni di sicurezza, i requisiti funzionali
-%relativi alla gestione dei dati sensibili (RF \ref{signup}, RF \ref{savepassword},
-%RF \ref{updateaccount}) provvedono a descrivere il comportamento del
-%servizio nel caso di errori e incongruenze.
-%\end{nonfuncreq}
-
 
 
 \newpage
@@ -639,11 +640,12 @@ la piattaforma online espone all'utente.
 \newpage
 \begin{frontend}
 \textbf{Home page }
-Il catalogo e il profilo utente, insieme a tutti i collegamenti che consentono
-di usufruire della maggior parte delle funzionalità del servizio, sono
-contenute in una pagina principale. Il seguente mock-up mostra la vista che si
-presenta ad un utente autenticato (è presente il campo \textit{stato}, oltre all'icona
-per contrassegnare i \textit{preferiti}).
+Il catalogo, i progressi dell'utente autenticato, insieme a tutti i
+collegamenti che consentono di usufruire della maggior parte delle
+funzionalità del servizio, sono contenute in una pagina principale.
+Il seguente mock-up mostra la vista che si presenta ad un utente
+autenticato (è presente il campo \textit{stato}, oltre all'icona per
+contrassegnare i \textit{preferiti}).
 \end{frontend}
 \begin{figure}[H]
 \centering
@@ -667,7 +669,8 @@ del problema e risoluzione di quest'ultimo.
 \begin{frontend}
 \textbf{Logout }
 Un pulsante di logout è raggiungibile in ogni momento da parte dell'utente
-autenticato.
+autenticato, all'interno di una barra di navigazione che mostra anche lo
+\textit{username} scelto in fase di registrazione.
 \end{frontend}
 \begin{figure}[H]
 \centering
@@ -694,7 +697,7 @@ descritto in \textcolor{blue}{\underbar{\hyperref[google]{RF \ref*{google}}}}.
 \begin{backend}
 \textbf{Contenuti multimediali }
 Per reperire e riprodurre i video contenenti i suggerimenti dei problemi (\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}}),
-il servizio si ricorre alla piattaforma YouTube.
+il servizio ricorre alla piattaforma YouTube.
 \end{backend}
 
 \begin{backend}
