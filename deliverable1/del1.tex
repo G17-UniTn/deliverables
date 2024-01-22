@@ -317,9 +317,10 @@ e testandolo:
     \item L'utente deve poter conoscere l'esito dei test cases—per ognuno
     di questi, l'input e l'output atteso sono visibili. Inoltre, l'utente
     deve poter riscrivere e perfezionare l'algoritmo e sottoporre ripetutamente
-    il codice ai test cases.
+    il codice ai test cases. Un problema viene risolto con successo se
+    il codice sottoposto supera tutti i test cases previsti dal problema.
 
-    Nel caso in cui l'esito dei test cases dovesse risultare negativo, l'utente
+    Nel caso in cui l'esito di qualche test case dovesse risultare negativo, l'utente
     viene avvisato senza fare riferimento agli errori commessi, siano essi
     relativi alla correttezza sintattica del codice oppure alla
     correttezza risolutiva dell'algoritmo—casi nei quali l'output fornito
@@ -392,7 +393,7 @@ i propri \textit{progressi}.
     \item Il servizio deve prevedere il tracciamento dei progressi di ogni
     utente autenticato, incrementando il numero di problemi risolti ad ogni
     sessione di esercitazione andata a buon fine: con riferimento al
-    \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}}}},
+    \textcolor{blue}{\underbar{\hyperref[test]{RF \ref*{test}.2}}},
     dopo la risoluzione, il problema deve essere contrassegnato come
     \textit{risolto} (ciò modifica il campo \textit{stato} visibile nel catalogo
     e nell'area di consultazione ed esercitazione di quel problema).
@@ -639,7 +640,7 @@ la piattaforma online espone all'utente.
 
 \newpage
 \begin{frontend}
-\textbf{Home page }
+\textbf{Pagina del catalogo }
 Il catalogo, i progressi dell'utente autenticato, insieme a tutti i
 collegamenti che consentono di usufruire della maggior parte delle
 funzionalità del servizio, sono contenute in una pagina principale.
@@ -654,7 +655,7 @@ contrassegnare i \textit{preferiti}).
 
 \begin{frontend}
 \label{exepage}
-\textbf{Pagina di esercitazione }
+\textbf{Area di esercitazione }
 Una pagina dedicata raccoglie le funzionalità di consultazione dettagliata
 del problema e risoluzione di quest'ultimo.
 \end{frontend}
