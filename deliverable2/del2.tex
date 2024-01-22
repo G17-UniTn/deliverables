@@ -17,7 +17,7 @@
 \fancyhf{}% Clear header/footer
 \pagestyle{fancy}
 \fancyfoot[C]{\thepage} %add page number
-\fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill Sleep Code \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -71,7 +71,7 @@ Zeno \textsc{Saletti}}
 \newpage
 \section*{Scopo del documento}
 Il presente documento riporta la specifica dei requisiti di sistema
-del progetto SleepCode. Viene in particolare estesa la descrizione
+del progetto Sleep Code. Viene in particolare estesa la descrizione
 in linguaggio naturale, impiegato nel documento di Analisi dei Requisiti
 (D1), attraverso strumenti di modellazione più formali—diagrammi
 realizzati secondo gli standard indicati da \textit{Unified Modeling Language}
@@ -79,14 +79,14 @@ realizzati secondo gli standard indicati da \textit{Unified Modeling Language}
 per i requisiti non funzionali.
 
 In ultima analisi, contemplando i suddetti requisiti, viene presentato il
-design del sistema ricorrendo a diagrammi di contesto e dei componenti.
+design del sistema ricorrendo ai diagrammi di contesto e dei componenti.
 
 
 \newpage
 \section{Requisiti funzionali}
 In questa sezione vengono descritti i requisiti funzionali (RF) del
 progetto, evidenziando la partecipazione degli attori esterni, ovvero
-l'utente finale e i servizi esterni a supporto del progetto. A tal
+l'utente finale e i servizi esterni di back-end (BE) a supporto del progetto. A tal
 proposito, vengono utilizzati Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
 disegnati secondo gli standard UML, ed eventualmente arricchiti da
 descrizioni in linguaggio naturale\footnote{Gli use cases più semplici
@@ -116,7 +116,7 @@ password.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente anonimo accede alla pagina dedicata, raggiungibile da quella di login, e sceglie tra la modalità di registrazione con il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item L'utente anonimo accede alla pagina dedicata, raggiungibile da quella di login, e sceglie la modalità di registrazione con il sistema di credenziali interno.\texttt{[extension 1]}
         \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email e una password conforme. \verb|[exception 1]|
         \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 2]|
         \item I dati vengono raccolti e il relativo account viene registrato dal servizio di database.\texttt{[exception 3]}
@@ -134,7 +134,7 @@ password.
     \item[Extensions:]
     \begin{itemize}
         \item[]
-        \item \texttt{[extension 1]} L'utente può scegliere di registrarsi alla piattaforma collegando un account Google in suo possesso, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
+        \item \texttt{[extension 1]} In alternativa, l'utente può scegliere di registrarsi alla piattaforma collegando un account Google in suo possesso, secondo quanto indicato dal servizio di registrazione e autenticazione Google.
         In questo caso, oltre a scegliere l'email come previsto dal servizio di Google, l'utente specifica l'username.
     \end{itemize}
 \end{description}
@@ -150,7 +150,7 @@ password.
     \item[Descrizione:]
     \begin{enumerate}
         \item[]
-        \item L'utente anonimo sceglie tra l'autenticazione mediante il sistema di credenziali interno oppure per mezzo di un account Google.\texttt{[extension 1]}
+        \item L'utente anonimo accede alla pagina di login.\texttt{[extension 1]}
         \item L'utente che si autentica con credenziali interne inserisce indirizzo email e password, che saranno verificati grazie al servizio di database.\texttt{[exception 1]}
         \item L'utente riceve la conferma di login.
     \end{enumerate}
@@ -159,6 +159,7 @@ password.
     \begin{itemize}
         \item[]
         \item \verb|[exception 1]| Se le credenziali fornite non sono valide, il login non può essere eseguito e l'utente viene avvisato.
+        È comunque possibile ritentare il login, senza alcun limite nel numero di tentativi.
     \end{itemize}
 
     \item[Extensions:]
@@ -181,8 +182,8 @@ password.
     \begin{enumerate}
         \item[]
         \item L'utente accede alla pagina di recupero, attraverso quella di login.
-        \item La pagina indica all'utente di inserire l'email di recupero, ovvero quella associata all'account. \verb|[exception 1]|
-        \item Il sistema richiede al servizio di posta elettronica l'invio di un link di recupero mediane un messaggio email, specificando l'indirizzo fornito dall'utente e il contenuto del messaggio.
+        \item La pagina indica all'utente di inserire l'email di recupero, ovvero quella attualmente associata all'account. \verb|[exception 1]|
+        \item Il sistema richiede al servizio di posta elettronica l'invio di un link di recupero mediante un messaggio email, specificando l'indirizzo fornito dall'utente e il contenuto del messaggio.
         \item Il link guida l'utente dal messaggio alla pagina del sistema dedicata alla creazione di una nuova password.
         \item L'utente inserisce una nuova password conforme e la conferma, inserendola nuovamente. \verb|[exception 2]|
         \item Il servizio di database provvede all'aggiornamento della password.
@@ -203,15 +204,16 @@ password.
 \subsection{Consultazione dei problemi e profilo}
 In Figura \ref{catalogueprobs} sono mostrati gli use cases che illustrano
 le funzionalità che interessano l'utente (anonimo, autenticato e amministratore)
-nell'ambito della constultazione e manipolazione del catalogo e del contenuto
-dei problemi. In particolar modo, sono stati isolate nel diagramma le funzionalità
-fruibili nella home page e nella pagina di consultazione
-del singolo problema (si vedano \textbf{FE 3}, \textbf{FE 4} e \textbf{FE pagina edit catalogo} nel documento D1).
+nell'ambito della constultazione del catalogo e del contenuto
+dei problemi. In particolar modo, sono state isolate nel diagramma le funzionalità
+fruibili nella pagina del catalogo e nella pagina di consultazione
+del singolo problema dell'area di esercitazione (\textbf{FE 3} e \textbf{FE 4}
+nel documento D1).
 
 I requisiti descritti sono: \textbf{RF 5} - Consultazione del catalogo,
 \textbf{RF 6} - Consultazione di un problema, \textbf{RF 10} - Metadati aggiuntivi,
-\textbf{RF 11.2} - Visualizzare i Progressi, \textbf{RF 14}  Aggiungere un problema,
-\textbf{RF 15} - Modificare un problema, \textbf{RF 16} - Eliminare un problema.
+\textbf{RF 12.2} - Visualizzare i Progressi, \textbf{RF 16} - Aggiungere un problema,
+\textbf{RF 17} - Modificare un problema, \textbf{RF 18} - Eliminare un problema.
 Questi ultimi tre, relativi all'utente amministratore, sono riassunti nello use case
 \textit{Modificare il catalogo dei problemi}, che include le tre azioni opzionali (da
 cui le clausole \texttt{extend} nel diagramma).
@@ -219,8 +221,8 @@ cui le clausole \texttt{extend} nel diagramma).
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.5cm}
-\includegraphics[scale=0.68]{materiale/ucdiagrams/ucproblemi.pdf}
+\hspace*{-1.7cm}
+\includegraphics[scale=0.76]{materiale/ucdiagrams/ucproblemi.pdf}
 \caption{UCD relativo alla consultazione dei problemi, modifica del catalogo e visualizzazione progressi}
 \label{catalogueprobs}
 \end{figure}
@@ -237,7 +239,7 @@ cui le clausole \texttt{extend} nel diagramma).
     \begin{enumerate}
         \item[]
         \item L'utente amministratore accede alla pagina del catalogo e sceglie di aggiungere un nuovo problema.
-        \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno due esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link al video-suggerimento.
+        \item L'utente compila i campi necessari alla creazione di un nuovo problema: i dati relativi alla struttura, quali titolo, descrizione e almeno due esempi di input e output atteso; dati descrittivi, ovvero nome, selezione della difficoltà (bassa, intermedia, alta), categoria e link di YouTube al video-suggerimento.
         \item L'utente inserisce almeno 3 test cases; ogni test case consiste in un dato in input e il rispettivo output corretto.
         \item L'utente conferma la creazione del problema, che viene quindi aggiunto al catalogo; alternativamente, l'utente può scegliere di annullare la creazione del nuovo problema, previo avviso e conferma da parte del sistema.\texttt{[exception 1]}\texttt{[exception 2]}
     \end{enumerate}
@@ -277,17 +279,17 @@ cui le clausole \texttt{extend} nel diagramma).
 \newpage
 \subsection{Esercitazione}
 La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
-che in qualche modo fanno parte del contesto di esercitazione su uno specifico problema. Pertanto,
+che costituiscono l'area di esercitazione dello specifico problema. Pertanto,
 i requisiti rappresentati qui sono i seguenti: \textbf{RF 7} - Effettuare l'esercitazione,
-\textbf{RF 8} - Verifica della correttezza dell'algoritmo, \textbf{RF 11.1} - Registrazione dei
-Progressi, \textbf{RF 9} - Cronometro. Dal punto di vista del frontend, il diagramma
-raccoglie gran parte delle funzionalità utilizzabili interagendo nelle aree
-visibili in \textbf{FE 4} (si veda il documento D1).
+\textbf{RF 8} - Verifica della correttezza dell'algoritmo, \textbf{RF 9} - Cronometro,
+\textbf{RF 11} - Codice, \textbf{RF 12.1} - Registrazione dei Progressi. Dal punto di
+vista del frontend, il diagramma raccoglie gran parte delle funzionalità utilizzabili
+interagendo con gli strumenti dell'area di esercitazione visibili in \textbf{FE 4}.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.5cm}
-\includegraphics[scale=0.91]{materiale/ucdiagrams/ucesercitazione.pdf}
+\hspace*{-2cm}
+\includegraphics[scale = 0.95]{materiale/ucdiagrams/ucesercitazione.pdf}
 \caption{UCD con riferimenti ai requisiti relativi ai tools di esercitazione}
 \label{esercitaz}
 \end{figure}
@@ -296,7 +298,7 @@ visibili in \textbf{FE 4} (si veda il documento D1).
 \subsection*{Descrizione dell'esercitazione}
 La complessità delle operazioni relative all'esercitazione è
 catturata dalla Figura \ref{acexercise}.
-Dato che l'utente può decidere di uscire dall'area di esercitazione
+Dal momento che l'utente può decidere di uscire dall'area di esercitazione
 a propria discrezione, il processo descritto nel diagramma
 può essere interrotto in qualsiasi momento, prima che tutti i
 testcases vengano risolti.
@@ -321,13 +323,14 @@ e \textit{Registrare i progressi}}
 \newpage
 \subsection{Gestione dell'account}
 In Figura \ref{accountfig} sono riassunti gli use cases che descrivono
-le operazioni possibili per gli utenti dotati di account. Come già accennato
+le operazioni possibili per gli utenti autenticati dotati di account. Come già accennato
 nel documento D1, \textit{Aggiornare l'indirizzo email dell'account} e
 \textit{Aggiornare la password dell'account} sono possibili solo a utenti
 autenticati con sistema di credenziali interno. Questo fatto è appunto
 sottolineato dalla presenza dell'attore \textit{Firebase}. Si fa riferimento
 ai seguenti requisiti funzionali:
-\textbf{RF 12} - Aggiornamento account, \textbf{RF 13} - Logout.
+\textbf{RF 13} - Aggiornamento password, \textbf{RF 14} - Logout,
+\textbf{RF 15} - Eliminazione account.
 
 \begin{figure}[H]
 \centering
@@ -340,24 +343,6 @@ ai seguenti requisiti funzionali:
 
 
 \newpage
-\subsection*{\textit{Aggiornare l'indirizzo email dell'account}}
-La Figura \ref{slemail} mostra nel dettaglio lo Use Case relativo all'aggiornamento
-dell'indirizzo di posta elettronica di un utente registrato con credenziali di sistema
-e autenticato, evidenziando i passi della procedura mediante uno Swimlane Diagram.
-Qualora lo ritenga opportuno, l'utente può interrompere questa procedura di migrazione,
-fino alla condizione \textit{conferma operazione}.
-In più, viene specificato il comportamento che
-il sistema adotta nel caso in cui venga inserita un'email già associata ad un
-altro account registrato sulla piattaforma.
-
-\begin{figure}[H]
-\centering
-\hspace*{-1cm}
-\includegraphics[scale = 0.89]{materiale/ucdiagrams/swimlaneemail.pdf}
-\caption{SD dello scenario di aggiornamento dell'indirizzo email}
-\label{slemail}
-\end{figure}
-
 \subsection*{\textit{Aggiornare la password dell'account}}
 La Figura \ref{slpassword} fa riferimento allo Use Case relativo all'aggiornamento
 della password dell'account di un utente registrato con credenziali di sistema e autenticato.
@@ -391,11 +376,11 @@ e quantitativa di tali requisiti.
         \hline
         \cellcolor{red!70}Proprietà & \cellcolor{red!70}Descrizione & \cellcolor{red!70}Misura\\
         \hline
-        Elaborazione con un numero crescente di utenti. & Capacità del sistema di gestire un numero crescente di utenti in simultanea. & Viene garantito l'accesso in simultanea di almeno 300 utenti nel primo anno dal lancio.\\
+        Elaborazione con un numero crescente di utenti & Capacità del sistema di gestire un numero crescente di utenti in simultanea. & Viene garantito l'accesso in simultanea di almeno 300 utenti nel primo anno dal lancio.\\
         \hline
         Memorizzazione dei dati degli utenti & Capacità del sistema di gestire i dati generati da un numero crescente di utenti utilizzatori. & Capacità sufficiente per almeno 400 utenti.\\
         \hline
-        Eterogeneità dei linguaggi di programmazione & Capacità di supportare un numero crescente di linguaggi di programmazione, utili alla scrittura degli algoritmi risolutivi. & Al lancio della piattaforma, vengono supportate le versioni maggiormente utilizzate dei linguaggi di programmazione più popolari (C++11). Il sistema può gestire algoritmi scritti in almeno 5 linguaggi differenti.\\
+        Eterogeneità dei linguaggi di programmazione & Capacità di supportare un numero crescente di linguaggi di programmazione, utili alla scrittura degli algoritmi risolutivi. & Al lancio della piattaforma, viene supportato JavaScript. Il sistema potrà gestire algoritmi scritti in almeno 5 linguaggi differenti.\\
         \hline
     \end{tabularx}
 \end{center}
@@ -434,7 +419,7 @@ e quantitativa di tali requisiti.
             \hline
             \cellcolor{red!70}Proprietà & \cellcolor{red!70}Descrizione & \cellcolor{red!70}Misura\\
             \hline
-            Usabilità & Intuitività e facilità nell'apprendimento, accesso e impiego delle funzionalità fornite dal servizio. & Il nuovo utente deve poter conoscere e utilizzare il 90\% delle funzionalità (disponibili al proprio livello di accesso) in meno di 30 minuti.\\
+            Usabilità & Intuitività e facilità nell'apprendimento, accesso e impiego delle funzionalità fornite dal servizio. & Il nuovo utente deve poter conoscere e utilizzare il 90\% (rapporto tra RF scoperti e RF totali) delle funzionalità disponibili al proprio livello di accesso in meno di 30 minuti.\\
             \hline
         \end{tabularx}
     \end{center}
@@ -452,6 +437,8 @@ e quantitativa di tali requisiti.
             \hline
             Contrasto & Accostamento dei colori all'interno dell'interfaccia utente. Mira alla leggibilità e alla limitazione dell'affaticamento della vista. & Regola dei complementari; cerchio di Itten.\\
             \hline
+            Segnalazioni grafiche di attesa & Indicazioni visive che notificano all'utente lo stato di caricamento delle pagine, in particolare durante le transizioni client-server. & Impiego di skeleton screens per le transizioni, popup per le operazioni di autenticazione.\\
+            \hline
         \end{tabularx}
     \end{center}
 \end{nonfuncreq}
@@ -464,7 +451,7 @@ e quantitativa di tali requisiti.
             \hline
             \cellcolor{red!70}Proprietà & \cellcolor{red!70}Descrizione & \cellcolor{red!70}Misura\\
             \hline
-            Lingua di sistema           & Lingua presente nell'interfaccia e nelle risorse fornite dal servizio. & L'interfaccia generale della piattaforma contiene testo in italiano (100\%); i testi dei problemi sono scritti in italiano (100\%); le risorse multimediali (video-suggerimento) devono essere in italiano oppure in inglese.\\
+            Lingua di sistema           & Lingua presente nell'interfaccia e nelle risorse fornite dal servizio. & Percentuale di testo scritto in una data lingua. L'interfaccia generale della piattaforma contiene testo in italiano (100\%); al lancio del servizio, i testi dei problemi saranno scritti in italiano (100\%); le risorse multimediali (video-suggerimento) devono essere in italiano oppure in inglese.\\
             \hline
         \end{tabularx}
     \end{center}
@@ -526,7 +513,7 @@ e quantitativa di tali requisiti.
             \hline
             \cellcolor{red!70}Proprietà & \cellcolor{red!70}Descrizione & \cellcolor{red!70}Misura\\
             \hline
-            Normativa & Conformità con le vigenti norme relative al trattamento e alla protezione dei dati (GDPR). In particolare, i dati personali dell'utente registrato (nome, email e password) non devono essere divulgati in alcun modo e, qualora lo ritenga opportuno, l'utente ha il diritto di richiedere l'eliminazione delle proprie informazioni dal servizio al fine di interrompere il trattamento. & Conformità del servizio e funzionalità a supporto dell'utente (eliminazione account).\\
+            Normativa & Conformità con le vigenti norme relative al trattamento e alla protezione dei dati (GDPR). In particolare, i dati personali dell'utente registrato (nome, email e password) non devono essere divulgati in alcun modo e, qualora lo ritenga opportuno, l'utente ha il diritto di richiedere l'eliminazione delle proprie informazioni dal servizio al fine di interrompere il trattamento. & Conformità del servizio e funzionalità a supporto dell'utente (eliminazione account—\textbf{RF 15}—memorizzazione del codice scritto da utenti autenticati solo da parte del client).\\
             \hline
         \end{tabularx}
     \end{center}
@@ -546,6 +533,7 @@ e quantitativa di tali requisiti.
     \end{center}
 \end{nonfuncreq}
 
+\newpage
 \begin{nonfuncreq}
     \textbf{Password strength }
     \begin{center}
@@ -575,11 +563,11 @@ e quantitativa di tali requisiti.
 % riguarda il backend e i componenti esterni al sistema: tutto il codice che utilizzate ma che non avete scritto voi
 % flusso di informazioni tra il nostro sistema e quelli esterni
 In questa sezione viene descritto il contesto di funzionamento del sistema
-\textit{SleepCode} e come esso interagisce con gli attori esterni. Si
+Sleep Code e come esso interagisce con gli attori esterni. Si
 ricorre ad una descrizione testuale riassunta in una rappresentazione
-grafica mediante un Diagramma di Contesto (Figura \ref{contextdiagram}),
-nel quale sono specificati, ad alto livello, i flussi di informazioni
-essenziali al funzionamento del sistema.
+grafica mediante un Diagramma di Contesto riportato in
+Figura \ref{contextdiagram}, nel quale sono specificati, ad alto livello,
+i flussi di informazioni essenziali al funzionamento del sistema.
 
 \subsection{Utenti e sistemi esterni} % chi interagisce, chi usa e chi supporta (sia software che umano)
 Sono elencati di seguito gli attori esterni che compongono il contesto
@@ -591,15 +579,15 @@ attiva degli attori, come già mostrato negli UCDs.
 L'utente rappresenta l'attore che usufruisce delle funzionalità del servizio
 —viene descritto nei requisiti dal \textbf{RF 1} al \textbf{RF 9} per quanto
 concerne il livello anonimo e quelli superiori; dal \textbf{RF 10} al
-\textbf{RF 13} in relazione ai livelli autenticato e amministratore; \textbf{RF 14},
-\textbf{RF 15} e \textbf{RF 16} per quanto riguarda il livello amministratore.
+\textbf{RF 15} in relazione ai livelli autenticato e amministratore; \textbf{RF 16},
+\textbf{RF 17} e \textbf{RF 18} per quanto riguarda il livello amministratore.
 
 \subsubsection{Firebase}
 Il servizio di database impiegato per gestire le credenziali e il profilo
 degli utenti registrati alla piattaforma—i requisiti coinvolti sono: \textbf{RF 1},
-\textbf{RF 2}, \textbf{RF 3}, \textbf{RF 4}, \textbf{RF 10}, \textbf{RF 11.1},
-\textbf{RF 12}—e per gestire il catalogo dei problemi—\textbf{RF 5}, \textbf{RF 6},
-\textbf{RF 14}, \textbf{RF 15}, \textbf{RF 16}.
+\textbf{RF 2}, \textbf{RF 3}, \textbf{RF 4}, \textbf{RF 10}, \textbf{RF 12.1},
+\textbf{RF 13}, \textbf{RF 15}—e per gestire il catalogo dei problemi—\textbf{RF 5}, \textbf{RF 6},
+\textbf{RF 16}, \textbf{RF 17}, \textbf{RF 18}.
 
 \subsubsection{Google Sign-In}
 Il servizio di autenticazione alternativo al sistema di credenziali interno
@@ -609,16 +597,15 @@ Il servizio di autenticazione alternativo al sistema di credenziali interno
 Il servizio di contenuti multimediali che fornisce i video che integrano
 i problemi del catalogo, mettendo a disposizione dell'utente un suggerimento per lo
 svolgimento dell'esercizio—\textbf{RF 5.1}.
-%\textbf{RF 7.5}??
 
 \subsubsection{Servizio di posta elettronica}
 Sistema di notifica sul quale il progetto si poggia per creare un
-meccanismo di recupero dell'account—\textbf{RF 4}.
+meccanismo di recupero della password dell'account—\textbf{RF 4}.
 
 \newpage
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
 La Figura \ref{contextdiagram} mostra il diagramma di contesto per il
-servizio \textit{SleepCode}. Seguono alcune descrizioni più dettagliate
+servizio Sleep Code. Seguono alcune descrizioni più dettagliate
 che chiariscono il significato, per lo più ad alto livello, dell
 informazioni scambiate tra il sistema e gli attori esterni ad esso.
 Viene inoltre fatto riferimento ai requisiti funzionali che vengono
@@ -630,7 +617,7 @@ esterni e sistema.
 \centering
 \hspace*{-2.1cm}
 \includegraphics[scale=0.65]{materiale/contextdiagram.pdf}
-\caption{Context Diagram della piattaforma \textit{SleepCode}}
+\caption{Context Diagram della piattaforma Sleep Code}
 \label{contextdiagram}
 \end{figure}
 
@@ -647,30 +634,29 @@ registrato, il sistema riceve l'indirizzo email di recupero. Dall'email
 l'utente può collegarsi alla pagina di recupero, nella quale inserire la
 nuova password dell'account.
 
-L'utente riceve il catalogo e i dati in esso contenuti (\textbf{RF 5}, \textbf{RF 6},
-\textbf{RF 10}), richiedendo l'applicazione dei filtri e la visualizzazione dei
-suggerimenti (\textbf{RF 5}). L'utente propaga al proprio profilo le modifiche
-apportate ai preferiti (\textbf{RF 10}). L'utente amministratore fornisce
-eventuali modifiche al catalogo (\textbf{RF 14}, \textbf{RF 15}, \textbf{RF 16}).
-L'utente riceve le informazioni sui progressi personali (\textbf{RF 11.2})
-e può inviare una richiesta di logout (\textbf{RF 13}). Ovviamente
-i dati che realizzano il profilo dell'utente autenticato, quali stato dei problemi,
-preferiti e progressi, sono visibili nel catalogo (\textbf{RF 10}).
-Durante un'esercitazione, l'utente può sottoporre il codice scritto e ricevere dati
-relativi all'esito dell'esecuzione di tale codice (\textbf{RF 7}, \textbf{RF 8}),
-oltre a vedere il tempo registrato dal cronometro e manipolarlo (\textbf{RF 9}).
-Per apportare modifiche ai dati del proprio account (\textbf{RF 12}), l'utente
-deve poter inviare le richieste specifiche, quali modifica della password
-o migrazione dell'indirizzo email, e fornire le nuove credenziali. La
-richiesta include l'inserimento, per questioni di sicurezza, della password
-attualmente in uso sull'account.
+L'utente riceve il catalogo contenente la lista di problemi disponibili,
+con i relativi dati descrittivi (\textbf{RF 5}). Da qui, l'utente può
+richiedere il suggerimento, con la conseguente visualizzazione da parte del
+sistema. L'utente, selezionando uno dei problemi del catalogo, accede
+all'area di esercitazione per consultare il contenuto del problema (\textbf{RF 6})
+ed utilizzare gli strumenti di esercitazione (\textbf{RF 7}), con i quali
+è possibile inoltrare al sistema il codice scritto e ottenere l'esito della
+sua valutazione (\textbf{RF 8}). L'utente può inoltre manipolare il cronometro
+(\textbf{RF 9}).
+
+L'utente autenticato riceve informazioni sui preferiti, lo stato dei problemi
+e sui progressi (\textbf{RF 10}, \textbf{RF 12.2}), fornisce la nuova password
+per il proprio account (\textbf{RF 13}), la richiesta di logout (\textbf{RF 14})
+e la richiesta di eliminazione dell'account (\textbf{RF 15}).
+L'utente amministratore fornisce eventuali modifiche apportate al catalogo
+(\textbf{RF 16}, \textbf{RF 17}, \textbf{RF 18}).
 
 \subsubsection*{Firebase}
 Firebase provvede alla memorizzazione del catalogo dei problemi e dei
 dati associati agli utenti registrati ed eventualmente autenticati (credenziali
 interne, preferiti, progressi) e alla ricezione di modifiche apportate a questi oggetti.
 In particolare, il sistema segnala l'aggiornamento dello stato di un problema
-in relazione all'utente autenticato che lo ha risolto (\textbf{RF 11.1}).
+in relazione all'utente autenticato che lo ha risolto (\textbf{RF 12.1}).
 
 \subsubsection*{Google Sign-In}
 Google Sign-In fornisce l'autorizzazione per eventuali richieste di
@@ -711,7 +697,7 @@ e più dettagliata di ogni componente.
 \centering
 \hspace*{-3cm}
 \includegraphics[scale = 0.86]{materiale/componentdiagram.pdf}
-\caption{Diagramma dei Componenti del sistema \textit{SleepCode}}
+\caption{Diagramma dei Componenti del sistema Sleep Code}
 \label{compdiagram}
 \end{figure}
 
