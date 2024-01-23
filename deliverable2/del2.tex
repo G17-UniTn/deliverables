@@ -93,7 +93,7 @@ descrizioni in linguaggio naturale\footnote{Gli use cases più semplici
 presenti nei diagrammi non vengono descritti in altri modi, in quanto ritenuti
 autoesplicativi.}.
 
-\subsection{Accesso e autenticazione}
+\subsection{Accesso e autenticazione}\label{accessoeautenticazione}
 La Figura \ref{access} mostra gli use cases che rappresentano i seguenti
 requisiti funzionali: \textbf{RF 1} - Registrazione,
 \textbf{RF 2} - Login, \textbf{RF 3} - Autenticazione Google, \textbf{RF 4} - Recupero
@@ -201,7 +201,7 @@ password.
 
 
 \newpage
-\subsection{Consultazione dei problemi e profilo}
+\subsection{Consultazione e gestione dei problemi}\label{consultazione}
 In Figura \ref{catalogueprobs} sono mostrati gli use cases che illustrano
 le funzionalità che interessano l'utente (anonimo, autenticato e amministratore)
 nell'ambito della constultazione del catalogo e del contenuto
@@ -606,7 +606,7 @@ meccanismo di recupero della password dell'account—\textbf{RF 4}.
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
 La Figura \ref{contextdiagram} mostra il diagramma di contesto per il
 servizio Sleep Code. Seguono alcune descrizioni più dettagliate
-che chiariscono il significato, per lo più ad alto livello, dell
+che chiariscono il significato, per lo più ad alto livello, delle
 informazioni scambiate tra il sistema e gli attori esterni ad esso.
 Viene inoltre fatto riferimento ai requisiti funzionali che vengono
 soddisfatti grazie a tali interazioni. Proprio dai requisiti funzionali
@@ -615,16 +615,16 @@ esterni e sistema.
 
 \begin{figure}[H]
 \centering
-\hspace*{-2.1cm}
-\includegraphics[scale=0.65]{materiale/contextdiagram.pdf}
+\hspace*{-2.6cm}
+\includegraphics[scale=0.7]{materiale/contextdiagram.pdf}
 \caption{Context Diagram della piattaforma Sleep Code}
 \label{contextdiagram}
 \end{figure}
 
 \subsubsection*{Utente}
-L'utente può richiedere di effettuare la registrazione alla piattaforma
-(\textbf{RF 1}), scegliendo di inviare i dati necessari per creare un
-account di sistema o di collegare il proprio account Google (\textbf{RF 3}). Il sistema
+L'utente può richiedere di effettuare la registrazione alla piattaforma,
+scegliendo di inviare i dati necessari per creare un
+account di sistema (\textbf{RF 1}) o di collegare il proprio account Google (\textbf{RF 3}). Il sistema
 provvede a inviare la conferma dell'operazione di registrazione.
 L'utente registrato può inviare i dati necessari al login (\textbf{RF 2}) sulla piattaforma,
 inserendo quindi le credenziali di sistema oppure richiedendo l'autenticazione
@@ -641,8 +641,8 @@ sistema. L'utente, selezionando uno dei problemi del catalogo, accede
 all'area di esercitazione per consultare il contenuto del problema (\textbf{RF 6})
 ed utilizzare gli strumenti di esercitazione (\textbf{RF 7}), con i quali
 è possibile inoltrare al sistema il codice scritto e ottenere l'esito della
-sua valutazione (\textbf{RF 8}). L'utente può inoltre manipolare il cronometro
-(\textbf{RF 9}).
+sua valutazione (\textbf{RF 8}). L'utente può inoltre manipolare il cronometro,
+del quale il sistema mostra all'utente il tempo registrato (\textbf{RF 9}).
 
 L'utente autenticato riceve informazioni sui preferiti, lo stato dei problemi
 e sui progressi (\textbf{RF 10}, \textbf{RF 12.2}), fornisce la nuova password
@@ -651,12 +651,36 @@ e la richiesta di eliminazione dell'account (\textbf{RF 15}).
 L'utente amministratore fornisce eventuali modifiche apportate al catalogo
 (\textbf{RF 16}, \textbf{RF 17}, \textbf{RF 18}).
 
+Per non appesantire il diagramma, sono stati omessi alcuni flussi di informazioni
+di feedback ed esito da parte del sistema verso l'utente, che si ripetono in molti
+scenari: \textit{Modifica password} (il sistema notifica la conformità della
+nuova password inserita), \textit{Modifiche catalogo} (il sistema avvisa l'utente
+circa eventuali modifiche non valide, come specificato dalle clausole
+\texttt{[exception]} degli UC \textit{Aggiungere un problema} e \textit{Modificare
+problemi}, Sezione \ref{consultazione}), \textit{Indirizzo di recupero} e
+\textit{Nuova password} nell'ambito del recupero della password dell'account
+(come specificato dalle eccezioni presenti nello UC \textit{Recuperare la
+password}, Sezione \ref{accessoeautenticazione})
+
 \subsubsection*{Firebase}
-Firebase provvede alla memorizzazione del catalogo dei problemi e dei
-dati associati agli utenti registrati ed eventualmente autenticati (credenziali
-interne, preferiti, progressi) e alla ricezione di modifiche apportate a questi oggetti.
-In particolare, il sistema segnala l'aggiornamento dello stato di un problema
-in relazione all'utente autenticato che lo ha risolto (\textbf{RF 12.1}).
+Firebase provvede alla memorizzazione del catalogo dei problemi, fornendoli
+al sistema ai fini della loro visualizzazione, e dei dati associati agli utenti
+registrati ed eventualmente autenticati (credenziali interne, preferiti,
+progressi). Il sistema fornisce al database le informazioni ottenute in sede
+di registrazione, consentendo agli utenti registrati mediante credenziali
+interne o Google Sign-In di memorizzare un nuovo account (\textbf{RF 1},
+\textbf{RF 3}); vengono inoltre fornite le credenziali specificate
+dall'utente durante il login. Infine, l'esito della registrazione e del
+login viene rappresentato dall'\textit{Autorizzazione}.
+
+Questo attore esterno riceve anche le modifiche apportate
+ai problemi (\textbf{RF 16}, \textbf{RF 17}, \textbf{RF 18}), ai dati
+dell'account di un dato utente, quali preferiti, progressi, password e
+accoglie richieste di eliminazione dell'account (\textbf{RF 10}, \textbf{RF 12},
+\textbf{RF 13}, \textbf{RF 15}). In particolare, il sistema segnala al database
+l'aggiornamento dello stato di un problema in relazione all'utente autenticato
+che lo ha risolto, indicato da \textit{Aggiornamento progressi}
+(\textbf{RF 12.1}).
 
 \subsubsection*{Google Sign-In}
 Google Sign-In fornisce l'autorizzazione per eventuali richieste di
@@ -669,7 +693,8 @@ parte del sistema, per poi visualizzarli (\textbf{RF 5.1}).
 \subsubsection*{Servizio di posta elettronica}
 La piattaforma fornisce al sistema di posta elettronica i dati necessari
 per notificare e guidare l'utente che intende effettuare l'operazione di
-recupero dell'account (\textbf{RF 4}).
+recupero dell'account (\textbf{RF 4}), quindi l'indirizzo di recupero e
+il contenuto del messaggio che include il link di recupero.
 
 
 
