@@ -594,9 +594,9 @@ Il servizio di autenticazione alternativo al sistema di credenziali interno
 —\textbf{RF 3}.
 
 \subsubsection{YouTube}
-Il servizio di contenuti multimediali che fornisce i video che integrano
-i problemi del catalogo, mettendo a disposizione dell'utente un suggerimento per lo
-svolgimento dell'esercizio—\textbf{RF 5.1}.
+Il servizio di contenuti multimediali che fornisce e visualizza i video
+che integrano i problemi del catalogo, mettendo a disposizione dell'utente
+un suggerimento per lo svolgimento dell'esercizio—\textbf{RF 5.1}.
 
 \subsubsection{Servizio di posta elettronica}
 Sistema di notifica sul quale il progetto si poggia per creare un
@@ -729,7 +729,11 @@ e più dettagliata di ogni componente.
 \newpage
 \subsection{Definizione e descrizione dei componenti}
 In questa sezione sono descritti i componenti e le interfacce presenti
-all'interno del Diagramma dei Componenti.
+all'interno del Diagramma dei Componenti, raffigurato in Figura \ref{compdiagram}.
+Per ogni componente, viene fornita una breve descrizione che riassume gli
+scopi e i principali compiti del componente in esame, elencando poi
+le rispettive interfacce, a loro volta suddivise tra \textit{interfacce
+richieste} e \textit{interfacce fornite}.
 
 \begin{center}
     \rule{5cm}{1pt}
@@ -739,7 +743,7 @@ all'interno del Diagramma dei Componenti.
 
 \begin{description}
     \item[Descrizione:] la Pagina di Autenticazione ha il compito
-    di interagire esternamente con l'utente la fine di guidarlo nelle
+    di interagire esternamente con l'utente al fine di guidarlo nelle
     procedure di accesso alla piattaforma. Questo componente si occupa della
     raccolta dei dati utili ad effettuare la registrazione e il
     login. In più, esso raccoglie le richieste di recupero dell'account
@@ -833,6 +837,10 @@ all'interno del Diagramma dei Componenti.
         \item \underline{Login:} dalla Pagina di Autenticazione, il
         componente riceve le credenziali allegate alla richiesta di
         login.
+        
+        \item \underline{Logout:} dal Gestore Profilo, il componente
+        riceve la richiesta di logout, permettendo di modificare di
+        conseguenza il livello di accesso dell'utente.
 
         \item \underline{Google:} con la richiesta di questa interfaccia,
         il Sistema di Autenticazione viene a conoscenza di richieste di
@@ -871,13 +879,15 @@ all'interno del Diagramma dei Componenti.
         all'invio della richiesta di login verso il servizio Google.
 
         \item \underline{Conferma registrazione:} il componente avvisa
-        ad altri componenti (Pagina di Autenticazione) l'esito della
+        al componente Pagina di Autenticazione l'esito della
         registrazione mediante questo canale di conferma.
 
         \item \underline{Autorizzazione:} il componente comunica
         l'esito del login agli altri componenti del sistema, in modo
         tale da adattare la disponibilità delle funzionalità del sistema
         interno allo specifico livello di accesso dell'utente.
+        Le informazioni erogate da questa interfaccia sono inoltre
+        influenzate da eventuali richieste di logout da parte dell'utente.
     \end{itemize}
 \end{description}
 
@@ -887,28 +897,25 @@ all'interno del Diagramma dei Componenti.
 
 \subsubsection{Pagina di Recupero}
 \begin{description}
-    \item[Descrizione:] il componente si occupa dell'operazione
+    \item[Descrizione:] il componente, avvalendosi del servizio di posta
+    elettronica, si occupa dell'operazione
     di recupero dell'account, offrendo assistenza a eventuali utenti,
     registrati con sistema di credenziali interno, che hanno dimenticato
-    la propria password. La Pagina di Recupero si avvale del supporto
-    del servizio di posta elettronica, per guidare l'utente nel recupero
-    dell'account.
+    la propria password.
 
     \item[Interfacce richieste:]
     \begin{itemize}
         \item[]
 
         \item \underline{Richiesta recupero account:} il componente
-        agisce su richiesta dell'utente. Per scelte architetturali,
-        questa richiesta proviene dal componente intermediario
-        \textit{Pagina di Autenticazione}.
+        può attivare la procedura di recupero ricevendo la richiesta
+        da parte della Pagina di Autenticazione.
 
         \item \underline{Email di recupero:} l'utente fornisce l'email
         associata all'account che si intende recuperare.
 
-        \item \underline{Nuova password:} dall'utente, il componente
-        ottiene la nuova password. L'inserimento include anche la
-        conferma della password, come descritto nel documento D1.
+        %\item \underline{Nuova password:} dall'utente, il componente
+        %ottiene la nuova password.
     \end{itemize}
 
     \item[Interfacce fornite:]
@@ -946,7 +953,8 @@ all'interno del Diagramma dei Componenti.
 \begin{description}
     \item[Descrizione:] il Gestore Profilo raccoglie le funzionalità
     associate principalmente all'utente autenticato, dedicandosi appunto alla
-    gestione del profilo (account, progressi e preferiti). In generale, questo
+    gestione del suo \textit{profilo}, inteso come l'insieme delle informazioni
+    raccolte nell'account, nei progressi e nei preferiti. In generale, questo
     componente deriva dalla scelta architetturale di gestire la disponibilità
     delle funzionalità fruibili dall'utente sulla base dei livelli di accesso
     anonimo e autenticato, definiti nel documento D1.
@@ -966,9 +974,8 @@ all'interno del Diagramma dei Componenti.
         nel catalogo, consentendo di aggiungere o rimuovere preferiti dal
         profilo.
 
-        \item \underline{Nuove credenziali:} attraverso questa interfaccia,
-        l'utente può fornire le nuove credenziali del suo account (email e
-        password), con lo scopo di aggiornarlo.
+        \item \underline{Nuova password:} attraverso questa interfaccia,
+        l'utente può aggiornare la password del proprio account.
 
         \item \underline{Problema risolto:} da questa interfaccia, il Gestore
         Utente viene avvisato del fatto che l'utente ha risolto un problema.
@@ -985,11 +992,11 @@ all'interno del Diagramma dei Componenti.
         lista di problemi preferiti dell'utente autenticato, in modo da
         evidenziarli durante la navigazione.
 
-        \item \underline{Modifiche preferiti:} le modifiche dei preferiti
-        vengono memorizzate.
+        \item \underline{Modifiche preferiti:} le modifiche dei preferiti,
+        apportate dall'utente, vengono memorizzate nel database.
 
         \item \underline{Progressi:} il componente mostra i progressi dell'utente,
-        come descritto in \textbf{RF 11.2}.
+        come descritto in \textbf{RF 12.2}.
 
         \item \underline{Aggiorna progressi:} questa interfaccia comunica al
         database di aggiornare i progressi dell'utente autenticato, nel caso
@@ -1007,7 +1014,7 @@ all'interno del Diagramma dei Componenti.
         Sistema di Autenticazione la richiesta di logout dell'utente autenticato.
         Questa interfaccia evidenzia come l'architettura stessa preveda che,
         dopo il logout, sia necessario eseguire il login passando ai componenti
-        di competenza (Pagina e Sistema di Autenticazione).
+        di competenza, ovvero la Pagina di Autenticazione e il Sistema di Autenticazione.
     \end{itemize}
 \end{description}
 
@@ -1037,20 +1044,9 @@ all'interno del Diagramma dei Componenti.
         \item \underline{Problemi:} il Catalogo ottiene la lista dei problemi
         memorizzati dal database.
 
-        \item \underline{Richiesta hint:}\footnote{I suggerimenti sono
-        qui denotati brevemente col termine \textit{hint}.}
-        con questa interfaccia, il Catalogo rileva le richieste dei
-        suggerimenti associati ai problemi.
-
-        \item \underline{Video:} questa interfaccia ha lo scopo di
-        ricevere dall'attore esterno YouTube il video-suggerimento
-        richiesto dall'utente.
-
-        \item \underline{Filtri:} il Catalogo riceve le scelte dei filtri
-        che gli utenti intendono applicare alla lista di problemi da
-        visualizzare. Questa interfaccia include tutti quei tipi di
-        filtri specificati nel documento D1, cioè i dati descrittivi
-        \textit{nome}, \textit{tag(s)}, \textit{difficoltà}.
+        \item \underline{Richiesta suggerimento:} questa interfaccia
+        viene esposta all'utente che intende selezionare, e visualizzare,
+        il video-suggerimento associato ad un problema del catalogo.
 
         \item \underline{Selezione problema:} il Catalogo rileva la
         selezione di un problema specificato dall'utetne, così da
@@ -1094,16 +1090,13 @@ all'interno del Diagramma dei Componenti.
         \item[]
 
         \item \underline{Lista:} il Catalogo mette a disposizione
-        dell'utente la lista di problemi disponibili sulla piattaforma.
-        Questa interfaccia include i dati descrittivi di ogni problema.
+        dell'utente la lista di problemi disponibili sulla piattaforma,
+        mostrandone quindi i dati descrittivi, incluso il suggerimento.
 
-        \item \underline{Richiesta video:} il Catalogo interagisce con
-        YouTube per inviare la richiesta del video corrispondente al
-        suggerimento selezionato dall'utente.
-
-        \item \underline{Hint:} (indichiamo brevemente con \textit{hint}
-        il \textit{suggerimento}) il Catalogo visualizza il suggerimento
-        richiesto dall'utente.
+        \item \underline{Richiesta video:} questa interfaccia ha lo scopo
+        di interagire con l'attore esterno YouTube per richiedere la
+        riproduzione del video-suggerimento selezionato dall'utente
+        nel catalogo.
 
         \item \underline{Problema:} una volta che l'utente sceglie quale
         problema egli intende risolvere, il Catalogo fornisce tutti i
@@ -1143,7 +1136,8 @@ all'interno del Diagramma dei Componenti.
     gestione della sottoposizione del codice e avvisa l'utente circa la correttezza dell'algoritmo.
     Qualora il codice sia corretto, questo componente si occupa di aggiornare i progressi
     dell'utente (autenticato) che ha risolto il problema, insieme allo stato di quest'ultimo
-    in relazione all'utente in esame.
+    in relazione all'utente in esame. Nel complesso, la Pagina di Esercitazione
+    gestisce gli strumenti che compongono l'area di esercitazione.
 
     \item[Interfacce richieste:]
     \begin{itemize}
