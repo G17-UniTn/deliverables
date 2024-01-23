@@ -343,11 +343,12 @@ ai seguenti requisiti funzionali:
 
 
 \newpage
-\subsection*{\textit{Aggiornare la password dell'account}}
+\subsection*{Descrizione Use Case \textit{Aggiornare la password dell'account}}
 La Figura \ref{slpassword} fa riferimento allo Use Case relativo all'aggiornamento
 della password dell'account di un utente registrato con credenziali di sistema e autenticato.
 Durante il processo di aggiornamento, l'utente ha la facoltà di interrompere
-la procedura qualora non intenda più modificare la password.
+la procedura qualora non intenda più modificare la password, purché ciò avvenga
+prima della conferma.
 
 \begin{figure}[H]
 \centering
@@ -357,6 +358,20 @@ la procedura qualora non intenda più modificare la password.
 \label{slpassword}
 \end{figure}
 
+\newpage
+\subsection*{Descrizione Use Case \textit{Eliminazione account}}
+Lo Swimlane Diagram rappresentato in Figura \ref{deleteaccount} mostra
+i dettagli dello Use Case \textit{Eliminazione account}. In seguito
+all'eliminazione, l'utente interessato ritorna al livello di accesso
+anonimo.
+
+\begin{figure}[H]
+\centering
+%\hspace*{-0.7cm}
+\includegraphics[scale = 1]{materiale/ucdiagrams/swimlaneeliminaaccount.pdf}
+\caption{SD per lo Use Case \textit{Eliminazione account}}
+\label{deleteaccount}
+\end{figure}
 
 \newpage
 \section{Requisiti non funzionali}
