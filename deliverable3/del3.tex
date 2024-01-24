@@ -21,7 +21,7 @@
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
 \fancyfoot[C]{\thepage} %add page number
-\fancyhead[C]{\footnotesize\textit{Documento:} D3 \hfill SleepCode \hfill \textit{Versione:} 1.0}
+\fancyhead[C]{\footnotesize\textit{Documento:} D3 \hfill Sleep Code \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -75,7 +75,7 @@ Zeno \textsc{Saletti}}
 
 \section*{Scopo del documento}
 In questo documento viene riportata la definizione dell'architettura del
-progetto \textit{SleepCode} impiegando diagrammi delle classi, realizzati
+progetto Sleep Code impiegando diagrammi delle classi, realizzati
 secondo gli standard di Unified Modeling Language (UML), e codice scritto in Object
 Constraint Language (OCL). Nel documento precedente (D2, \textit{Specifica
 dei Requisiti}) sono stati presentati il diagramma degli use case, quello
@@ -94,7 +94,7 @@ classi.
 \newpage
 \section{Definizione delle classi}
 Nella presente sezione vengono illustrate in linguaggio UML le classi
-previste dal progetto \textit{SleepCode}. Ogni componente del diagramma
+previste dal progetto Sleep Code. Ogni componente del diagramma
 dei componenti, presente nel documento D2, viene qui rappresentato
 in forma di una o più classi. Le classi individuate sono costituite
 da un nome, un insieme di attributi che identificano i dati gestiti dalla
@@ -110,7 +110,7 @@ e amministratore. La Figura \ref{utenti} illustra le rispettive classi.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.71]{materiale/class-utenti.pdf}
+\includegraphics[scale = 0.67]{materiale/class-utenti.pdf}
 \caption{Definizione della classe \texttt{Utente} e delle sue generalizzazioni}
 \label{utenti}
 \end{figure}
@@ -132,9 +132,8 @@ Da questa prima classe viene definita, mediante generalizzazione, la classe
 \texttt{UtenteAutenticato}, che aggiunge metodi e attributi accessibili previo
 login:
 \begin{itemize}
-    \item \texttt{user\_id}: dal momento che email e password dell'account di sistema
-    possono essere modificate dall'utente autenticato, la classe contiene questo
-    attributo con ruolo di identificatore univoco.
+    \item \texttt{user\_id}: questo attributo riveste il ruolo di identificatore
+    univoco dell'account dell'utente registrato ed eventualmente autenticato.
 
     \item \texttt{username, email, password}: i dati richiesti per creare un
     account. In caso di autenticazione con Google, è richiesto che la classe
@@ -143,27 +142,33 @@ login:
     \item \texttt{isGoogle}: parametro che distingue gli account collegati con
     Google da account registrati con il meccanismo di credenziali interne.
 
-    \item \texttt{risolti[*]}: insieme dei problemi risolti dall'utente.
-
-    \item \texttt{preferiti[*]}: insieme dei problemi preferiti dell'utente.
+    \item \texttt{risolti[*], preferiti[*]}: insiemi dei problemi, rispettivamente,
+    risolti dall'utente e salvati come preferiti dall'utente.
 
     \item \texttt{logout()}: richiesta di logout.
     
-    \item \texttt{setEmail, setPassword}: procedure utili a modificare le credenziali
-    dell'account. Oltre alle nuove credenziali, viene richiesta, per questioni di sicurezza,
-    la password attualmente in uso. Entrambi i metodi restituiscono una risposta
-    di tipo booleana per segnalare il successo o l'insuccesso delle rispettive operazioni.
+    \item \texttt{setPassword(...)}: procedura atta a modificare la password
+    dell'account. Oltre alla nuova password, viene richiesta, per ragioni di
+    sicurezza, la password attualmente in uso. Viene restituita una risposta
+    di tipo booleana per segnalare il successo o l'insuccesso dell'operazione.
 
-    \item \texttt{setPreferito}: questo metodo provvede ad aggiungere o
+    \item \texttt{setPreferito(...)}: questo metodo provvede ad aggiungere o
     eliminare dalla lista dei preferiti dell'utente il problema fornito: se
     presente, esso viene rimosso dalla lista, altrimenti viene aggiunto.
 
-    \item \texttt{getPreferiti}: i preferiti dell'utente autenticato vengono
+    \item \texttt{getPreferiti()}: i preferiti dell'utente autenticato vengono
     messi a diposizione all'esterno della classe grazie a questo metodo.
     Come descritto nel diagramma dei componenti, in questo modo viene
     realizzata l'interfaccia che passa i preferiti dell'utente dal Gestore
     Utente verso il Catalogo, in modo da visualizzarli nella lista dei
     problemi.
+
+    \item \texttt{deleteUser()}: il metodo per l'eliminazione dell'account
+    restituisce un valore booleano per notificare l'esito dell'operazione.
+
+    \item \texttt{getNumeroRisolti()}: il valore restituito rappresenta i
+    progressi dell'utente, appunto il numero di problemi risolti rispetto
+    al totale presente nel catalogo.
 \end{itemize}
 Infine, un'ulteriore generalizzazione specifica le funzionalità aggiuntive
 dell'utente amministratore, ovvero metodi utili alla gestione del catalogo
@@ -177,7 +182,7 @@ distinti che si occupano dell'interazione con l'utente esterno: dalla
 \textit{Pagina di Autenticazione} sono stati raggruppate le interfacce che
 si trovano in \texttt{Utente}; in \texttt{UtenteAutenticato} sono state
 raccolte le interfacce presenti nel componente \textit{Gestore Profilo};
-in \texttt{UtenteAmministratore} sono state raggruppate alcune delle interfacce
+in \texttt{UtenteAmministratore} sono state raggruppate le interfacce
 definite nel componente \textit{Catalogo}.
 
 
@@ -195,10 +200,8 @@ operazioni di registrazione e autenticazione. Per questo motivo, nel diagramma
 delle classi viene individuata la classe \texttt{Autenticazione} (Figura \ref{autenticaz}):
 \begin{itemize}
     \item \texttt{autorizzato}: questo attributo mantiene lo stato dell'autorizzazione
-    dell'utente associato. Questo fatto viene evidenziato dall'associazione
-    uno-a-uno tra questa classe e l'\texttt{Utente}. Si assume che questa
-    associazione valga anche per \texttt{UtenteAutenticato} e \texttt{UntenteAmministratore},
-    in virtù della generalizzazione definita sui tipi di utenti a partire da \texttt{User}.
+    dell'utente
+
     \item \texttt{registraAccount}: questo metodo esegue la registrazione
     comunicando con il servizio di database.
     \item \texttt{autentica}: l'autenticazione mediante credenziali interne
@@ -212,14 +215,14 @@ un valore booleano di ritorno.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.5cm}
+%\hspace*{-1.9cm}
 \includegraphics[scale = 0.9]{materiale/class-autenticazione.pdf}
 \caption{Definnizione della classe \texttt{Autenticazione}}
 \label{autenticaz}
 \end{figure}
 
-
-\subsection{Recupero dell'account}
+\newpage
+\subsection{Recupero della password}
 Nel Diagramma dei Componenti viene individuata la \textit{Pagina di Recupero},
 che offre supporto agli utenti registrati, con sistema di credenziali interne,
 che hanno dimenticato la password e che intendono recuperare l'account.
@@ -233,7 +236,7 @@ interagendo tra l'altro con il servizio di posta elettronica.
     \item \texttt{email}: l'indirizzo email di recupero viene memorizzato
     per conservarlo durante tutta la procedura di recupero.
 
-    \item \texttt{mandaEmailRecupero}: il messaggio di recupero viene inviato
+    \item \texttt{inviaEmailRecupero}: il messaggio di recupero viene inviato
     all'indirizzo specificato. Questo metodo rappresenta la richieste di
     invio da parte del sistema nei confronti del servizio di posta.
 
@@ -251,7 +254,7 @@ delle operazioni di recupero per conto di un utente solo.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.5cm}
+\hspace*{-1cm}
 \includegraphics[scale = 0.8]{materiale/class-recupero.pdf}
 \caption{Specifica architetturale del componente \textit{Pagina di Recupero} con la classe \texttt{RecuperoPwUtente}}
 \label{recupero}
@@ -262,17 +265,18 @@ delle operazioni di recupero per conto di un utente solo.
 \newpage
 \subsection{Catalogo}
 Il \textit{Catalogo} presente nel Diagramma dei Componenti è rappresentato in
-Figura \ref{catalog} sotto forma di due classi: \texttt{UtenteAmministratore}, descritto insieme
+Figura \ref{catalog} sotto forma di due classi principali: \texttt{UtenteAmministratore}, descritto insieme
 alle altre categorie di utenti, e \texttt{Catalogo}. Tale scelta architetturale
 è giustificata dall'esigenza di identificare chiaramente il ruolo dell'utente
 amministratore, mantenendo dunque una definizione dei livelli di accesso
 coerente con quella dei documenti precedenti, oltre alla volontà di ridurre il
 carico di informazione della classe \texttt{Catalogo} rendendo il rispettivo
-componente del diagramma più modulare e non monolitico.
+componente del diagramma più modulare e meno monolitico.
+
 \begin{figure}[H]
 \centering
-\hspace*{-0.8cm}
-\includegraphics[scale = 0.72]{materiale/class-catalogo.pdf}
+\hspace*{-1.2cm}
+\includegraphics[scale = 0.9]{materiale/class-catalogo.pdf}
 \caption{Specifica architetturale del componente \textit{Catalogo} con la classe \texttt{Catalogo}}
 \label{catalog}
 \end{figure}
@@ -284,22 +288,22 @@ raccoglie i problemi disponibili sulla piattaforma, quindi \texttt{Catalogo}
 
 \begin{itemize}
     \item \texttt{problemi[1...*]}: questo attributo indica che il catalogo
-    consiste in una lista di almeno un problema (si veda la prossima sezione
-    per i dettagli sui problemi).
-    
-    \item \texttt{cercaPerTag}:
-    \item \texttt{cercaPerNome}:
-    \item \texttt{filtraDifficolta}: questo metodo consente di filtrare i
-    problemi mostrati nel catalogo sulla base della loro difficoltà. Il
-    tipo enumerato \texttt{Difficulty} in Figura \ref{catalog}
-    raccoglie i livelli esistenti.
+    consiste in una lista di almeno un problema.
 
-    \item \texttt{mostraHint}: sulla base del metodo selezionato, il metodo
-    interagisce con YouTube per visualizzare il video-suggerimento.
+    \item \texttt{mostraSuggerimento(...)}: sulla base del metodo selezionato, il metodo
+    interagisce con YouTube per richiedere la riproduzione del video-suggerimento.
 
-    \item \texttt{mostraPreferiti}:
-    \item \texttt{mostraStato}:
-    \item \texttt{mostraProblema}:
+    \item \texttt{mostraPreferiti(...)}: sulla base dei dati dell'account
+    dell'utente (autenticato), vengono contrassegnati i problemi preferiti
+    all'interno del catalogo.
+
+    \item \texttt{mostraStato(...)}: come per il metodo precedente, il
+    \texttt{Catalogo} mostra lo stato dei problemi, evidenziando quelli
+    già risolti dall'utente autenticato.
+
+    \item \texttt{mostraProblema(...)}: questo metodo richiede l'apertura
+    di un problema selezionato dall'utente, permettendo di consultare il
+    contenuto e accedere alla rispettiva area di esercitazione.
 \end{itemize}
 
 
@@ -312,11 +316,12 @@ La Figura \ref{esercitaz} illustra le classi che costituiscono il componente
 \begin{figure}[H]
 \centering
 %\hspace*{-1.5cm}
-\includegraphics[scale = 0.8]{materiale/class-esercitazione.pdf}
+\includegraphics[scale = 0.85]{materiale/class-esercitazione.pdf}
 \caption{Classi dedotte dal componente \textit{Pagina di esercitazione}}
 \label{esercitaz}
 \end{figure}
-La classe \texttt{Problema} è definita come segue:
+
+\noindent La classe \texttt{Problema} è definita come segue:
 \begin{itemize}
     \item \texttt{nome}, \texttt{tags}, \texttt{difficolta}, \texttt{url\_hint\_video}:
     questi rappresentano i \textit{campi descrittivi} del problema, come specificati nel
@@ -324,8 +329,16 @@ La classe \texttt{Problema} è definita come segue:
     definiti dal dominio del tipo enumerato \texttt{Difficulty}.
 
     \item \texttt{titolo}, \texttt{testo}, \texttt{esempi}: i dati strutturali del problema.
-    \item \texttt{tc}:
-    \item \texttt{driver\_code}:
+
+    \item \texttt{tests}: i test cases utilizzati per verificare il codice
+    sottoposto dall'utente.
+
+    \item \texttt{driver\_code}: il frammento di codice predefinito che
+    viene mostrato nella zona di inserimento del codice, nell'area di
+    esercitazione.
+
+    \item \texttt{preferito:} contatore che registra la quantità di utenti
+    registrati che hanno contrassegnato questo specifico problema.
 \end{itemize}
 Al fine di alleggerire la classe \texttt{Problema}, è stata accolta la scelta di
 dedicare una classe \texttt{TestCase}. Essa ha il compito di raccogliere le informazioni
@@ -342,10 +355,6 @@ Altra parte integrante della Pagina di Esercitazione è la classe \texttt{Cronom
 che prevede le semplici funzionalità per mostrare il tempo registrato,
 essere avviato, fermato e reimpostato a 0 secondi (condizioni più dettagliate
 di questa classe sono mostrate nel codice OCL delle prossime sezioni).
-
-\newpage
-\subsection{Profilo utente}
-
 
 
 
@@ -381,9 +390,9 @@ sezioni precedenti.
 
 \begin{figure}[H]
 \centering
-\hspace*{-2.8cm}
-\includegraphics[scale = 0.53]{materiale/classdiagram.pdf}
-\caption{Diagramma delle classi arricchito da codice OCL}
+\hspace*{-2cm}
+\includegraphics[scale = 0.54]{materiale/classdiagram.pdf}
+\caption{Diagramma delle classi insieme al codice OCL}
 \label{umlocl}
 \end{figure}
 
