@@ -355,6 +355,7 @@ l'\textit{account} (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup
 \subsection{Gestione dei dati personali}\label{gestprofilo}
 
 \begin{funcreq}
+\label{metadata}
     \textbf{Metadati aggiuntivi }
     Oltre ai campi descrittivi specificati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}},
     l'utente autenticato deve poter visualizzare e influenzare i seguenti dati aggiuntivi in
@@ -425,11 +426,15 @@ dallo stato autenticato a quello anonimo.
 \begin{funcreq}
 \textbf{Eliminazione account }
 L'utente registrato e autenticato deve poter eliminare il proprio account,
-insieme ai dati ad esso collegati (preferiti, progressi ecc.). L'eliminazione
-è consentita sia a utenti registrati mediante il sistema di credenziali
-interno sia a coloro che hanno effettuato la registrazione per mezzo di un
-account Google. L'operazione di eliminazione prevede la digitazione della
-parola chiave \texttt{conferma}.
+insieme ai dati ad esso collegati (preferiti, progressi ecc.). In particolare,
+i problemi contrassegnati come preferiti vedranno diminuire il loro valore
+del campo \textit{preferito} visibile nell'area di esercitazione
+(\textcolor{blue}{\underbar{\hyperref[metadata]{RF \ref*{metadata}.2}}}).
+
+L'eliminazione è consentita sia a utenti registrati mediante il sistema di
+credenziali interno sia a coloro che hanno effettuato la registrazione per
+mezzo di un account Google. L'operazione di eliminazione prevede la
+digitazione della parola chiave \texttt{conferma}.
 \end{funcreq}
 
 \begin{center}
@@ -460,7 +465,9 @@ problema, sia i dati strutturali (il contenuto), sia i relativi test cases.
 \begin{funcreq}
 \textbf{Eliminare un problema }
 L'utente amministratore deve poter eliminare i problemi dal catalogo.
-%i progressi degli utenti che hanno risolto quel problema cosa fanno?
+L'eliminazione di un problema comporta il decremento dei progressi degli
+utenti (autenticati) che in precedenza hanno risolto quello stesso
+problema con successo.
 \end{funcreq}
 
 \newpage

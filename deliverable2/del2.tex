@@ -276,6 +276,23 @@ cui le clausole \texttt{extend} nel diagramma).
     \end{itemize}
 \end{description}
 
+\subsubsection*{Descrizione Use Case \textit{Rimuovere problemi}}
+\begin{description}
+    \item[Titolo:] Rimuovere un problema
+    
+    \item[Riassunto:] Questo Use Case descrive come l'utente amministratore
+    deve eliminare i problemi.
+
+    \item[Descrizione:]
+    \begin{enumerate}
+        \item[]
+        \item L'utente amministratore accede alla pagina del catalogo e seleziona un problema da eliminare.
+        \item L'utente conferma l'operazione di eliminazione.
+        \item Con il supporto del database, il sistema elimina il problema e decrementa i progressi (numero di
+        problemi risolti) agli utenti registrati che in precedenza avevano risolto il problema eliminato.
+    \end{enumerate}
+\end{description}
+
 \newpage
 \subsection{Esercitazione}
 La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
@@ -361,14 +378,17 @@ prima della conferma.
 \newpage
 \subsection*{Descrizione Use Case \textit{Eliminazione account}}
 Lo Swimlane Diagram rappresentato in Figura \ref{deleteaccount} mostra
-i dettagli dello Use Case \textit{Eliminazione account}. In seguito
-all'eliminazione, l'utente interessato ritorna al livello di accesso
-anonimo.
+i dettagli dello Use Case \textit{Eliminazione account}. Viene in particolare
+specificato che i problemi preferiti, salvati nell'account, vengono aggiornati
+nel loro valore di preferito (ovvero il numero di utenti registrati che
+hanno contrassegnato come preferito quel particolare problema).
+In seguito all'eliminazione, l'utente interessato ritorna al livello di
+accesso anonimo.
 
 \begin{figure}[H]
 \centering
-%\hspace*{-0.7cm}
-\includegraphics[scale = 1]{materiale/ucdiagrams/swimlaneeliminaaccount.pdf}
+\hspace*{-0.8cm}
+\includegraphics[scale = 0.9]{materiale/ucdiagrams/swimlaneeliminaaccount.pdf}
 \caption{SD per lo Use Case \textit{Eliminazione account}}
 \label{deleteaccount}
 \end{figure}
@@ -1021,9 +1041,13 @@ richieste} e \textit{interfacce fornite}.
         quali sono i problemi risolti dall'utente autentiato, in modo da
         evidenziarli durante la navigazione.
 
-        \item \underline{Aggiorna credenziali:} il componente interagisce con
-        il database per aggiornare le credenziali dell'account, sulla base delle
+        \item \underline{Aggiorna password:} il componente interagisce con
+        il database per aggiornare la password dell'account, sulla base delle
         modifiche richieste dall'utente.
+
+        \item \underline{Elimina account:} questa interfaccia comunica al
+        database che un utente desidera eliminare il proprio account e i
+        dati annessi.
         
         \item \underline{Logout:} questa interfaccia propaga al
         Sistema di Autenticazione la richiesta di logout dell'utente autenticato.
