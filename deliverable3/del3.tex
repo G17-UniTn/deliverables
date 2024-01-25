@@ -142,7 +142,7 @@ login:
     \item \texttt{isGoogle}: parametro che distingue gli account collegati con
     Google da account registrati con il meccanismo di credenziali interne.
 
-    \item \texttt{risolti[*], preferiti[*]}: insiemi dei problemi, rispettivamente,
+    \item \texttt{risolti, preferiti}: insiemi dei problemi, rispettivamente,
     risolti dall'utente e salvati come preferiti dall'utente.
 
     \item \texttt{logout()}: richiesta di logout.
@@ -154,7 +154,9 @@ login:
 
     \item \texttt{setPreferito(...)}: questo metodo provvede ad aggiungere o
     eliminare dalla lista dei preferiti dell'utente il problema fornito: se
-    presente, esso viene rimosso dalla lista, altrimenti viene aggiunto.
+    presente, esso viene rimosso dalla lista, altrimenti viene aggiunto
+    (viene inoltre incrementato il valore dell'attributo \texttt{preferito}
+    della classe \texttt{Problema}, descritta nelle prossime sezioni).
 
     \item \texttt{getPreferiti()}: i preferiti dell'utente autenticato vengono
     messi a diposizione all'esterno della classe grazie a questo metodo.
@@ -167,8 +169,10 @@ login:
     restituisce un valore booleano per notificare l'esito dell'operazione.
 
     \item \texttt{getNumeroRisolti()}: il valore restituito rappresenta i
-    progressi dell'utente, appunto il numero di problemi risolti rispetto
-    al totale presente nel catalogo.
+    progressi dell'utente, ovvero il numero di problemi risolti rispetto
+    al totale presente nel catalogo. Questo valore viene calcolato in base
+    al numero di problemi presenti in \texttt{risolti} e attualmente
+    memorizzati nel database.
 \end{itemize}
 Infine, un'ulteriore generalizzazione specifica le funzionalità aggiuntive
 dell'utente amministratore, ovvero metodi utili alla gestione del catalogo
@@ -244,18 +248,14 @@ interagendo tra l'altro con il servizio di posta elettronica.
     viene aggiornata nel suo account. Come rappresentato dal Diagramma dei
     Componenti, questa è la realizzazione dell'interfaccia fornita al
     database. Questa operazione può essere effettuata solo su un account
-    già registrato e quindi esistente, come mostrato dal tipo del secondo
-    parametro richiesto (\texttt{UtenteAutenticato}).
+    già registrato con l'email specificata e quindi esistente, come
+    mostrato dal tipo del secondo parametro richiesto
+    (\texttt{UtenteAutenticato}).
 \end{itemize}
-Questa classe è coinvolta in una associazione con \texttt{User}, la quale
-richiede il recupero facendo riferimento ad una sola istanza di
-\texttt{RecuperoPwUtente}, mentre quest'ultima, a sua volta, si occupa
-delle operazioni di recupero per conto di un utente solo.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1cm}
-\includegraphics[scale = 0.8]{materiale/class-recupero.pdf}
+\includegraphics[scale = 0.9]{materiale/class-recupero.pdf}
 \caption{Specifica architetturale del componente \textit{Pagina di Recupero} con la classe \texttt{RecuperoPwUtente}}
 \label{recupero}
 \end{figure}
@@ -324,7 +324,7 @@ La Figura \ref{esercitaz} illustra le classi che costituiscono il componente
 \noindent La classe \texttt{Problema} è definita come segue:
 \begin{itemize}
     \item \texttt{nome}, \texttt{tags}, \texttt{difficolta}, \texttt{url\_hint\_video}:
-    questi rappresentano i \textit{campi descrittivi} del problema, come specificati nel
+    questi rappresentano i campi descrittivi del problema, come specificati nel
     documento D1. La difficoltà può assumere solamente uno dei valori
     definiti dal dominio del tipo enumerato \texttt{Difficulty}.
 
@@ -352,8 +352,8 @@ ma non hanno alcun significato se il problema specifico al quale dovrebbero
 essere associati non esiste.
 
 Altra parte integrante della Pagina di Esercitazione è la classe \texttt{Cronometro},
-che prevede le semplici funzionalità per mostrare il tempo registrato,
-essere avviato, fermato e reimpostato a 0 secondi (condizioni più dettagliate
+che prevede le semplici funzionalità per mostrare il tempo registrato in secondi,
+essere avviato, fermato e reimpostato a 0 (condizioni più dettagliate
 di questa classe sono mostrate nel codice OCL delle prossime sezioni).
 
 
@@ -367,10 +367,76 @@ non descrivibile con i soli diagrammi delle classi in UML.
 
 
 \subsection{Autenticazione}
-\subsection{Recupero della password}
-\subsection{Modifica delle credenziali}
-\subsection{Cronometro}
 
+\subsection{Recupero della password}
+Con riferimento alla classe \texttt{RecuperoPwUtente},
+l'attributo \texttt{email} deve essere sempre presente affinché la classe
+possa essere impiegata.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 1]{materiale/ocl-recuperoemail.pdf}
+\end{figure}
+\noindent Inoltre, \texttt{cambiaPassword}, può essere utilizzato per il
+recupero di account non-Google e solo se viene fornita una password
+valida da associare ad un account esistente (da recuperare) con indirizzo
+email specificato.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.9]{materiale/ocl-recuperopassword.pdf}
+\end{figure}
+
+\subsection{Modifica della password}
+
+\subsection{Modifica del catalogo}
+Nei documenti precedenti viene sottolineato che i campi descrittivi e
+strutturali di ogni problema del catalogo devono essere sempre presenti.
+Con riferimento alla classe \texttt{UtenteAmministratore}, oltre alle
+cardinalità specificate tra parentesi quadre per alcuni parametri in input
+dei metodi \texttt{aggiungiProblema} e \texttt{modificaProblema}, vengono
+definite queste ulteriori condizioni:
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.8]{materiale/ocl-amministratore.pdf}
+\end{figure}
+
+\newpage
+\subsection{Test Cases}
+La classe \texttt{TestCase} prevede che i suoi attributi non siano mai
+vuoti, affinché i test cases possano essere utilizzati per verificare
+la correttezza del codice sottoposto dall'utente.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.8]{materiale/ocl-testcase.pdf}
+\end{figure}
+
+\subsection{Cronometro}
+Sono elencati di seguito i dettagli riguardanti il funzionamento del
+\texttt{Cronometro}:
+\begin{itemize}
+    \item Il \texttt{tempo\_attuale} registrato può assumere solamente
+    valori positivi.
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.8]{materiale/ocl-tempo.pdf}
+    \end{figure}
+
+    \item Il metodo \texttt{start()} esegue l'avvio della registrazione
+    del tempo trascorso, a partire dal valore contenuto in
+    \texttt{tempo\_attuale}, nella situazione in cui il cronometro non è
+    attivo. L'attributo \texttt{attivo} viene opportunamente aggiornato.
+    L'operazione opposta è rappresentata da \texttt{stop()}. Il
+    metodo \texttt{reset()} riporta il cronometro al suo stato iniziale,
+    quindi inattivo e tempo registrato 0.
+
+    \begin{figure}[H]
+    \includegraphics[scale = 0.8]{materiale/ocl-start.pdf}
+    \includegraphics[scale = 0.8]{materiale/ocl-stop.pdf}
+    \centering
+    \includegraphics[scale = 0.8]{materiale/ocl-reset.pdf}
+    \end{figure}
+\end{itemize}
 
 
 
