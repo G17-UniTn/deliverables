@@ -16,7 +16,7 @@
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
 \fancyfoot[C]{\thepage} %add page number
-\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill Sleep Code \hfill \textit{Versione:} 2.4}
+\fancyhead[C]{\footnotesize\textit{Documento:} D1 \hfill SleepCode \hfill \textit{Versione:} 2.4}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -78,7 +78,7 @@ Zeno \textsc{Saletti}}
 \section{Introduzione}
 \subsection{Scopo del documento}
 Le informazioni contenute in questo documento concorrono ad esporre l'analisi
-dei requisiti relativa al progetto \textit{Sleep Code}. In particolare, dopo
+dei requisiti relativa al progetto \textit{SleepCode}. In particolare, dopo
 aver specificato gli obiettivi e il pubblico di riferimento, verranno definiti i requisiti
 funzionali e non funzionali; verrà presentata una proposta di design di
 front-end; infine saranno riportati i servizi esterni di back-end coi quali il
@@ -121,8 +121,8 @@ del progetto. Ogni sottosezione di questa parte del documento
 risponde a diversi scopi precedentemente accennati, suddividendo
 eventuali macro-funzionalità in requisiti minori nel caso di obiettivi
 di più ampia portata.
-\\\\
-\noindent Le funzionalità sono inoltre suddivise secondo alcuni livelli di accesso
+
+Le funzionalità sono inoltre suddivise secondo alcuni livelli di accesso
 degli utenti (di seguito in ordine "crescente"):
 \begin{itemize}
     \item \textit{Utente anonimo} (Sezioni \ref{accessauth}, \ref{consultaprobl}, \ref{secesercitazione}).
@@ -149,7 +149,8 @@ utente che abbia precedentemente effettuato la registrazione e pertanto dotato d
 I nuovi utenti devono poter registrarsi al servizio, ovvero creare un \textit{account} che
 richiede la compilazione dei seguenti campi:
 \begin{itemize}
-    \item Nome utente (\textit{username}).
+    \item Nome utente (\textit{username}): è richiesto che la sua lunghezza sia
+    compresa tra i 6 e i 64 caratteri.
     \item Indirizzo di posta elettronica (\textit{email}).
     \item \textit{Password}: data la sensibilità di questo campo, è importante
     che siano rispettati i vincoli riportati in \textcolor{blue}{\underbar{\hyperref[legalpassword]{RNF \ref*{legalpassword}}}};
@@ -358,28 +359,26 @@ l'\textit{account} (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup
 \label{metadata}
     \textbf{Metadati aggiuntivi }
     Oltre ai campi descrittivi specificati nel \textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}},
-    l'utente autenticato deve poter visualizzare e influenzare i seguenti dati aggiuntivi in
-    ogni problema:
+    l'utente autenticato deve poter visualizzare e influenzare i seguenti dati aggiuntivi di
+    qualsiasi problema:
     \begin{enumerate}
         \item \textit{Stato:} lo stato permette di indicare all'utente se un certo problema
         è stato risolto o meno. I problemi risolti con successo dall'utente devono essere
         contrassegnati in questo apposito campo.
 
-        \item \textit{Preferito:} l'utente che desidera tener traccia dei problemi
-        per lui rilevanti deve poter contrassegnare tali problemi come \textit{preferiti}.
+        \item \textit{Preferito:} i problemi ritenuti rilevanti dall'utente devono poter
+        essere contrassegnati come \textit{preferiti}, aprendo e consultando il problema
+        nell'area di esercitazione.
         Nel catalogo, l'utente autenticato può distinguere i problemi contrassegnati
-        personalmente, ma entrando nell'area di esercitazione è possibile visualizzare
-        anche il numero di utenti che hanno contrassegnato quello stesso problema come
-        preferito.
+        personalmente, in prossimità dello stato, ma entrando nell'area di esercitazione
+        è possibile visualizzare anche il numero di utenti che hanno contrassegnato
+        quello stesso problema come preferito.
     \end{enumerate}
-    Le informazioni riguardanti questi campi sono visibili all'utente autenticato,
-    sia durante la consultazione del catalogo che del singolo problema, nell'area di
-    esercitazione.
 \end{funcreq}
 
 \begin{funcreq}
 \label{code}
-\textbf{Codice } Il codice scritto dall'utente autenticato, al contrario di
+\textbf{Salvataggio codice } Il codice scritto dall'utente autenticato, al contrario di
 quanto accade per gli utenti anonimi in
 \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}.3}}},
 non viene perso al momento dell'uscita dall'area del problema, cosicché
@@ -430,7 +429,7 @@ insieme ai dati ad esso collegati (preferiti, progressi ecc.).
 L'eliminazione è consentita sia a utenti registrati mediante il sistema di
 credenziali interno sia a coloro che hanno effettuato la registrazione per
 mezzo di un account Google. L'operazione di eliminazione prevede la
-digitazione della parola chiave \texttt{conferma}.
+digitazione della parola chiave \texttt{CONFERMA}.
 \end{funcreq}
 
 \begin{center}
@@ -652,8 +651,8 @@ Il catalogo, i progressi dell'utente autenticato, insieme a tutti i
 collegamenti che consentono di usufruire della maggior parte delle
 funzionalità del servizio, sono contenute in una pagina principale.
 Il seguente mock-up mostra la vista che si presenta ad un utente
-autenticato (è presente il campo \textit{stato}, oltre all'icona per
-contrassegnare i \textit{preferiti}).
+autenticato (è presente il campo \textit{stato}, oltre all'icona
+dei \textit{preferiti}).
 \end{frontend}
 \begin{figure}[H]
 \centering
@@ -688,7 +687,7 @@ autenticato, all'interno di una barra di navigazione che mostra anche lo
 \newpage
 \section{Design back-end}
 Nella sezione seguente vengono elencati i servizi esterni con i quali
-la piattaforma \textit{Sleep Code} interagisce per funzionare
+la piattaforma \textit{SleepCode} interagisce per funzionare
 correttamente, o per ricevere supporto mirato a soddisfare i propri requisiti.
 In Figura \ref{backend} viene riassunto l'insieme di questi servizi esterni
 e il ruolo che essi svolgono nell'interazione, in ambito back-end (BE),
@@ -717,9 +716,9 @@ da Firebase.
 
 \begin{backend}
 \textbf{Notifica via posta elettronica }
-L'invio dei messaggi email, ai fini del recupero dell'account (\textcolor{blue}{\underbar{\hyperref[savepassword]{RF \ref*{savepassword}}}}), viene gestito da servizi di posta elettronica di terze parti.
+L'invio dei messaggi email, ai fini del recupero dell'account (\textcolor{blue}{\underbar{\hyperref[savepassword]{RF \ref*{savepassword}}}}),
+viene gestito da servizi di posta elettronica di terze parti.
 \end{backend}
-% possibili candidati: gmail
 
 \begin{figure}[H]
 \centering

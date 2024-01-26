@@ -17,7 +17,7 @@
 \fancyhf{}% Clear header/footer
 \pagestyle{fancy}
 \fancyfoot[C]{\thepage} %add page number
-\fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill Sleep Code \hfill \textit{Versione:} 1.0}
+\fancyhead[C]{\footnotesize\textit{Documento:} D2 \hfill SleepCode \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -71,7 +71,7 @@ Zeno \textsc{Saletti}}
 \newpage
 \section*{Scopo del documento}
 Il presente documento riporta la specifica dei requisiti di sistema
-del progetto Sleep Code. Viene in particolare estesa la descrizione
+del progetto \textit{SleepCode}. Viene in particolare estesa la descrizione
 in linguaggio naturale, impiegato nel documento di Analisi dei Requisiti
 (D1), attraverso strumenti di modellazione più formali—diagrammi
 realizzati secondo gli standard indicati da \textit{Unified Modeling Language}
@@ -89,9 +89,10 @@ progetto, evidenziando la partecipazione degli attori esterni, ovvero
 l'utente finale e i servizi esterni di back-end (BE) a supporto del progetto. A tal
 proposito, vengono utilizzati Use Case Diagrams (UCD) e Swimlane Diagrams (SD),
 disegnati secondo gli standard UML, ed eventualmente arricchiti da
-descrizioni in linguaggio naturale\footnote{Gli use cases più semplici
-presenti nei diagrammi non vengono descritti in altri modi, in quanto ritenuti
-autoesplicativi.}.
+descrizioni in linguaggio naturale\footnote{Alcuni use cases presenti
+nei diagrammi potrebbero non essere ulteriormente descritti mediante
+altre forme, in quanto ritenuti più semplici rispetto ad altri e pertanto
+autoesplicativi}.
 
 \subsection{Accesso e autenticazione}\label{accessoeautenticazione}
 La Figura \ref{access} mostra gli use cases che rappresentano i seguenti
@@ -101,7 +102,7 @@ password.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.63]{materiale/ucdiagrams/ucaccesso.pdf}
+\includegraphics[scale=0.62]{materiale/ucdiagrams/ucaccesso.pdf}
 \caption{UCD relativo ai RF inerenti all'accesso alla piattaforma}
 \label{access}
 \end{figure}
@@ -117,8 +118,8 @@ password.
     \begin{enumerate}
         \item[]
         \item L'utente anonimo accede alla pagina dedicata, raggiungibile da quella di login, e sceglie la modalità di registrazione con il sistema di credenziali interno.\texttt{[extension 1]}
-        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username, un'email e una password conforme. \verb|[exception 1]|
-        \item La password deve essere confermata reinserendola in un secondo campo.\verb|[exception 2]|
+        \item La registrazione con sistema di credenziali interno prevede l'inserimento di un username valido, un'email e una password conforme. \texttt{[exception 1]}
+        \item La password deve essere confermata reinserendola in un secondo campo.\texttt{[exception 2]}
         \item I dati vengono raccolti e il relativo account viene registrato dal servizio di database.\texttt{[exception 3]}
         \item L'utente riceve una conferma circa l'esito dell'operazione di registrazione.
     \end{enumerate}
@@ -126,7 +127,7 @@ password.
     \item[Exceptions:]
     \begin{itemize}
         \item[]
-        \item \texttt{[exception 1]} Se la password non è conforme, la registrazione non può proseguire e l'utente viene avvisato.
+        \item \texttt{[exception 1]} In caso di username non valido, cioè di lunghezza non compresa tra 6 e 64 caratteri (\textbf{RF 1}), o se la password non è conforme secondo quanto indicato in \textbf{RNF 11}, la registrazione non può proseguire e l'utente viene avvisato.
         \item \texttt{[exception 2]} Se i campi di inserimento e di conferma della password contengono stringhe che non coincidono, la registrazione non può proseguire e l'utente viene avvisato.
         \item \texttt{[exception 3]} Se l'email inserita dall'utente risulta essere già impiegata in un altro account, la registrazione non può proseguire e l'utente viene avvisato.
     \end{itemize}
@@ -221,7 +222,7 @@ cui le clausole \texttt{extend} nel diagramma).
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.7cm}
+\hspace*{-1.8cm}
 \includegraphics[scale=0.76]{materiale/ucdiagrams/ucproblemi.pdf}
 \caption{UCD relativo alla consultazione dei problemi, modifica del catalogo e visualizzazione progressi}
 \label{catalogueprobs}
@@ -293,6 +294,32 @@ cui le clausole \texttt{extend} nel diagramma).
     \end{enumerate}
 \end{description}
 
+\subsubsection*{Descrizione Use Case \textit{Vedere i preferiti}}
+\begin{description}
+    \item[Titolo:] Gestione preferiti
+    
+    \item[Riassunto:] Questo Use Case descrive come l'utente autenticato
+    può visualizzare e personalizzare l'insieme dei suoi problemi preferiti.
+
+    \item[Descrizione:]
+    \begin{enumerate}
+        \item[]
+        \item L'utente accede alla pagina dedicata al catalogo,
+        da cui il sistema evidenzia gli eventuali preferiti.
+
+        \item L'utente seleziona ed apre un problema, accedendo alla
+        relativa pagina di esercitazione. Da qui è visibile anche il valore
+        di preferenza del problema specifico (numero di utenti che lo
+        hanno già contrassegnato).
+
+        \item L'utente può contrassegnare il problema come \textit{preferito},
+        oppure, se già contrassegnato, lo rimuove dai suoi preferiti.
+
+        \item Firebase provvede al salvataggio degli aggiornamenti apportati
+        ai preferiti dell'utente.
+    \end{enumerate}
+\end{description}
+
 \newpage
 \subsection{Esercitazione}
 La Figura \ref{esercitaz} raggruppa use cases associati ai requisiti funzionali
@@ -307,7 +334,7 @@ interagendo con gli strumenti dell'area di esercitazione visibili in \textbf{FE 
 \centering
 \hspace*{-2cm}
 \includegraphics[scale = 0.95]{materiale/ucdiagrams/ucesercitazione.pdf}
-\caption{UCD con riferimenti ai requisiti relativi ai tools di esercitazione}
+\caption{UCD con riferimenti ai requisiti relativi agli strumenti dell'area di esercitazione}
 \label{esercitaz}
 \end{figure}
 
@@ -600,7 +627,7 @@ e quantitativa di tali requisiti.
 % riguarda il backend e i componenti esterni al sistema: tutto il codice che utilizzate ma che non avete scritto voi
 % flusso di informazioni tra il nostro sistema e quelli esterni
 In questa sezione viene descritto il contesto di funzionamento del sistema
-Sleep Code e come esso interagisce con gli attori esterni. Si
+\textit{SleepCode} e come esso interagisce con gli attori esterni. Si
 ricorre ad una descrizione testuale riassunta in una rappresentazione
 grafica mediante un Diagramma di Contesto riportato in
 Figura \ref{contextdiagram}, nel quale sono specificati, ad alto livello,
@@ -642,7 +669,7 @@ meccanismo di recupero della password dell'account—\textbf{RF 4}.
 \newpage
 \subsection{Diagramma di contesto} % frecce = dati che si scambiano. Utente --atuenticaz--> sistema (è l'utente che fornisce i dati al sistema; la freccia indica il verso del flusso)
 La Figura \ref{contextdiagram} mostra il diagramma di contesto per il
-servizio Sleep Code. Seguono alcune descrizioni più dettagliate
+servizio \textit{SleepCode}. Seguono alcune descrizioni più dettagliate
 che chiariscono il significato, per lo più ad alto livello, delle
 informazioni scambiate tra il sistema e gli attori esterni ad esso.
 Viene inoltre fatto riferimento ai requisiti funzionali che vengono
@@ -654,7 +681,7 @@ esterni e sistema.
 \centering
 \hspace*{-2.6cm}
 \includegraphics[scale=0.7]{materiale/contextdiagram.pdf}
-\caption{Context Diagram della piattaforma Sleep Code}
+\caption{Context Diagram della piattaforma \textit{SleepCode}}
 \label{contextdiagram}
 \end{figure}
 
@@ -673,8 +700,8 @@ nuova password dell'account.
 
 L'utente riceve il catalogo contenente la lista di problemi disponibili,
 con i relativi dati descrittivi (\textbf{RF 5}). Da qui, l'utente può
-richiedere il suggerimento, con la conseguente visualizzazione da parte del
-sistema. L'utente, selezionando uno dei problemi del catalogo, accede
+richiedere il suggerimento, con la conseguente riproduzione supportata da
+YouTube. L'utente, selezionando uno dei problemi del catalogo, accede
 all'area di esercitazione per consultare il contenuto del problema (\textbf{RF 6})
 ed utilizzare gli strumenti di esercitazione (\textbf{RF 7}), con i quali
 è possibile inoltrare al sistema il codice scritto e ottenere l'esito della
@@ -758,8 +785,8 @@ e più dettagliata di ogni componente.
 \begin{figure}[H]
 \centering
 \hspace*{-3cm}
-\includegraphics[scale = 0.86]{materiale/componentdiagram.pdf}
-\caption{Diagramma dei Componenti del sistema Sleep Code}
+\includegraphics[scale = 0.87]{materiale/componentdiagram.pdf}
+\caption{Diagramma dei Componenti del sistema \textit{SleepCode}}
 \label{compdiagram}
 \end{figure}
 
@@ -973,12 +1000,12 @@ richieste} e \textit{interfacce fornite}.
         \textit{Recuperare la password}, nella sezione relativa
         alla specifica dei requisiti funzionali.
 
-        \item \underline{Aggiornamento password:} la Pagina di
-        Recupero indica al database che la password dell'account
-        deve essere modificata. L'interfaccia fornisce dunque
-        la nuova password, allegata ad una richiesta di modifica
-        delle credenziali presso l'account con email precedentemente
-        specificata dall'utente.
+        %\item \underline{Aggiornamento password:} la Pagina di
+        %Recupero indica al database che la password dell'account
+        %deve essere modificata. L'interfaccia fornisce dunque
+        %la nuova password, allegata ad una richiesta di modifica
+        %delle credenziali presso l'account con email precedentemente
+        %specificata dall'utente.
     \end{itemize}
 \end{description}
 
@@ -1007,9 +1034,9 @@ richieste} e \textit{interfacce fornite}.
         \item \underline{Richiesta logout:} da qui l'utente può effettuare il logout.
 
         \item \underline{Modifiche preferiti:} questa interfaccia riceve le
-        modifiche apportate ai preferiti dell'utente durante la navigazione
-        nel catalogo, consentendo di aggiungere o rimuovere preferiti dal
-        profilo.
+        modifiche apportate ai preferiti dell'utente durante la consultazione
+        del problema nell'area di esercitazione, consentendo di aggiungere o
+        rimuovere preferiti dal profilo.
 
         \item \underline{Nuova password:} attraverso questa interfaccia,
         l'utente può aggiornare la password del proprio account.
@@ -1107,11 +1134,6 @@ richieste} e \textit{interfacce fornite}.
         eventualmente autenticato, potendo così visualizzarli sulla
         lista, nel campo dedicato.
 
-        \item \underline{Modifiche preferiti:} il Catalogo riceve
-        dall'utente richieste di modifica dei preferiti, quali
-        l'aggiunta o la rimozione di problemi specifici selezionati
-        dalla lista.
-
         \item \underline{Problemi risolti:} il Catalogo riceve la
         lista di problemi risolti contenuti nel profilo dell'utente
         autenticato, in modo da poter contrassegnare tali problemi
@@ -1130,7 +1152,7 @@ richieste} e \textit{interfacce fornite}.
     \begin{itemize}
         \item[]
 
-        \item \underline{Lista:} il Catalogo mette a disposizione
+        \item \underline{Lista problemi:} il Catalogo mette a disposizione
         dell'utente la lista di problemi disponibili sulla piattaforma,
         mostrandone quindi i dati descrittivi, incluso il suggerimento.
 
@@ -1153,11 +1175,6 @@ richieste} e \textit{interfacce fornite}.
         interfaccia si riferisce alla visualizzazione, verso l'utente
         autenticato, dei problemi preferiti, come sempre in un
         campo dedicato durante la visualizzazione della lista.
-
-        \item \underline{Modifiche preferiti:} questa interfaccia
-        si occupa di comunicare al Gestore Profilo le modifiche
-        apportate ai preferiti, su richiesta dell'utente autenticato
-        che naviga nel catalogo dei problemi.
 
         \item \underline{Modifiche catalogo:} questa interfaccia
         comunica al database le modifiche apportate al catalogo

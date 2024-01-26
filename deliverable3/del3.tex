@@ -21,7 +21,7 @@
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
 \fancyfoot[C]{\thepage} %add page number
-\fancyhead[C]{\footnotesize\textit{Documento:} D3 \hfill Sleep Code \hfill \textit{Versione:} 1.0}
+\fancyhead[C]{\footnotesize\textit{Documento:} D3 \hfill SleepCode \hfill \textit{Versione:} 1.0}
 \renewcommand{\headrule}{{\color{red!70}\rule{\textwidth}{2pt}}}
 \setlength{\headheight}{22pt}
 
@@ -75,7 +75,7 @@ Zeno \textsc{Saletti}}
 
 \section*{Scopo del documento}
 In questo documento viene riportata la definizione dell'architettura del
-progetto Sleep Code impiegando diagrammi delle classi, realizzati
+progetto \textit{SleepCode} impiegando diagrammi delle classi, realizzati
 secondo gli standard di Unified Modeling Language (UML), e codice scritto in Object
 Constraint Language (OCL). Nel documento precedente (D2, \textit{Specifica
 dei Requisiti}) sono stati presentati il diagramma degli use case, quello
@@ -94,7 +94,7 @@ classi.
 \newpage
 \section{Definizione delle classi}
 Nella presente sezione vengono illustrate in linguaggio UML le classi
-previste dal progetto Sleep Code. Ogni componente del diagramma
+previste dal progetto \textit{SleepCode}. Ogni componente del diagramma
 dei componenti, presente nel documento D2, viene qui rappresentato
 in forma di una o più classi. Le classi individuate sono costituite
 da un nome, un insieme di attributi che identificano i dati gestiti dalla
@@ -385,7 +385,28 @@ email specificato.
 \includegraphics[scale = 0.9]{materiale/ocl-recuperopassword.pdf}
 \end{figure}
 
+\subsection{Utente autenticato}
+La classe \texttt{UtenteAutenticato} prevede che i campi \texttt{user\_id},
+\texttt{username} e \texttt{email} non siano mai vuoti, affinché un
+account (anche se creato con Google-SignIn) possa essere ufficialmente registrato
+sulla piattaforma.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.9]{materiale/ocl-utenteautenticato.pdf}
+\end{figure}
+
 \subsection{Modifica della password}
+Gli utenti registrati con account Google non possono creare una nuova
+password, non avendo la necessità di utilizzare quel tipo di dato.
+La password dell'account può essere modificata qualora la password
+attuale venga inserita correttamente e solo se la nuova password
+è valida (\textbf{RNF 11} - Password sicura).
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.9]{materiale/ocl-newpassword.pdf}
+\end{figure}
 
 \subsection{Modifica del catalogo}
 Nei documenti precedenti viene sottolineato che i campi descrittivi e
@@ -411,8 +432,8 @@ la correttezza del codice sottoposto dall'utente.
 \end{figure}
 
 \subsection{Cronometro}
-Sono elencati di seguito i dettagli riguardanti il funzionamento del
-\texttt{Cronometro}:
+Sono elencati di seguito i dettagli riguardanti il funzionamento della
+classe \texttt{Cronometro}:
 \begin{itemize}
     \item Il \texttt{tempo\_attuale} registrato può assumere solamente
     valori positivi.
@@ -426,7 +447,8 @@ Sono elencati di seguito i dettagli riguardanti il funzionamento del
     del tempo trascorso, a partire dal valore contenuto in
     \texttt{tempo\_attuale}, nella situazione in cui il cronometro non è
     attivo. L'attributo \texttt{attivo} viene opportunamente aggiornato.
-    L'operazione opposta è rappresentata da \texttt{stop()}. Il
+    L'operazione opposta è rappresentata da \texttt{stop()}, utilizzabile
+    quando il cronometro è attivo. Il
     metodo \texttt{reset()} riporta il cronometro al suo stato iniziale,
     quindi inattivo e tempo registrato 0.
 
