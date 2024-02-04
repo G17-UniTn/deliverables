@@ -99,7 +99,7 @@ In particolare, presenta:
 
 \newpage
 \section{User Flows}
-In questa sezione del documento di sviluppo vengono riportati gli user Flows. Lo scopo degli User Flows
+In questa sezione del documento di sviluppo vengono riportati gli User Flows. Lo scopo degli User Flows
 è quello di poter specificare le azioni disponibili all'utente e le conseguenza di esse. Sono stati individuati 2 tipi di User flow, uno per 
 tutto ciò che riguarda l'autenticazione e il profilo utente, e un'altro che riguarda le azioni disponibili ai diversi ruoli di utente.
 Teniamo a ricordare che tutte le immagini sono disponibili ad alta risoluzione nell'appropriata cartella del D4.
@@ -126,9 +126,9 @@ ma non dialoga col database, ci scusiamo per l'incovenienza. Ricordiamo che tram
 \section{Documentazione e implementazione dell'applicazione}
 Nella precedente sezione abbiamo illustrato tutte le funzioni attualmente implementate nell'applicazione e un'idea di come l'utente può interagire con esse.
 L'applicazione \textbf{SleepCode} è stata sviluppata utilizzando \href{https://nextjs.org/}{Next.js} vers. 14.0.3, un framework Javascript free-open source basato su \href{https://react.dev/}{React}
-\newpage
+
 \subsection{Struttura del Progetto}
-Il software utilizzato per version control utilizzato è \href{https://git-scm.com/}{Git}, come repository abbiamo utilizzato \href{www.github.com}{Github},
+Il software utilizzato per version control utilizzato è \href{https://git-scm.com/}{Git}, come remote repository abbiamo utilizzato \href{www.github.com}{Github},
 il codice e la sua history è presente su una repository del membro del Team Raffaele Castagna, l'ultima versione stabile e quella utilizzata per hostare il sito è disponibile presso la repository CodeBase, all'interno di essa,
 troveremo le seguenti cartelle:
 \\
@@ -161,7 +161,7 @@ Questa cartella contiente tutte le parti del progetto sia front-end che back-end
 \subsubsection{.env.local}
 Questa file contiene tutte le \textbf{variabili locali}, utilizzate per la connessione al database e necessarie per il corretto funzionamento dell'applicativo.
 \subsubsection{.gitignore}
-Questa cartella specifica quali file \textbf{git} non deve includere nelle varie pull/push requests. (.env.local è più importante in quanto contiente la \textbf{Chiave segreta})
+Questa cartella specifica quali file \textbf{git} non deve includere nelle varie pull/push requests. (.env.local è la più importante in quanto contiente la \textbf{Chiave segreta})
 \subsubsection{jest.config.js}
 Questo file contiene la configurazione di \textbf{Jest}, libreria utilizzata nel testing.
 \subsubsection{package.json}
@@ -190,7 +190,7 @@ Il progetto utilizza diverse librerie, procediamo ad elencarne le più important
 \end{itemize}
 Oltre a queste abbia altre dipendenze minore tra vari \textbf{hooks} e pacchetti necessari per altri pacchetti inutili da elencare.
 \subsection{Dati del Progetti e Database}
-Per il corretto funzionamento del sito, l'applicazione necessità della consultazione di alcuni file locali in seguito elencheremo alcune strutture dati utilizzate.
+Per il corretto funzionamento del sito, l'applicazione necessità della consultazione di alcuni file locali, in seguito elencheremo alcune strutture dati utilizzate.
 \subsubsection{Database}
 Il database scelto per memorizzare i dati è \href{https://firebase.google.com}{\textbf{Firebase}},per essere più specifici \textbf{Firestore}, il sottoinsieme che si occupa della memorizazzione dei dati in cloud.
 Sono state individuate due collezioni da dover inserire nel database e due collezioni da tenere in locale per facilitare lo sviluppo così da poter operare in maniera 'strict'
@@ -205,7 +205,7 @@ Ci sono alcuni campi la quale funzione non è immediatiamente chiara, quindi ele
   \item \textbf{examples}: Contiente tutti gli esempi che vogliamo mostrare all'utente.
   \item \textbf{constraints}: Nel caso gli input e/o output abbiano certe regole da rispettare questa campo le conterrà.
   \item \textbf{order}: Ad ogni problema assegneremo un numero che verrà utilizzato nell'ordinamento dei problema nella pagina principale.
-  \item \textbf{startedCode}: Le linee di testo presenti appena si apre un problema per la prima volta
+  \item \textbf{starterCode}: Le linee di testo presenti appena si apre un problema per la prima volta
   \item \textbf{handlerFunction}: Funzione associata ad ogni problema che permette la sottomissione e il controllo del codice scritto dall'utente.
   \item \textbf{starterFunctionName}: Nome della funzione associata al problema.
 \end{itemize}
@@ -229,7 +229,7 @@ Questo modello rappresenta i dati che vengono raccolti dal database riguardanti 
 \end{center}
 \newpage
 \textbullet \textbf{ userData}
-Questo Modello rappresenta i dati che riguardano ogni utente al momento della registrazione, il ruole di "\textbf{User}" viene assegnato inizialmente ad ogni utente e successivamente attraverso console di Firestore verrà cambiato manualmente a "\textbf{Administrator}"
+Questo Modello rappresenta i dati che riguardano ogni utente al momento della registrazione, il ruolo di "\textbf{User}" viene assegnato inizialmente ad ogni utente e successivamente attraverso console di Firestore verrà cambiato manualmente a "\textbf{Administrator}"
 se si vuole promuovere l'utente.
 \begin{center}
   \includegraphics[width=5cm]{materiale/User Template.png}
