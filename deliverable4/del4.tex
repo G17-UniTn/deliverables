@@ -12,6 +12,7 @@
 \usepackage{amsthm}
 \usepackage{fancyhdr}
 \usepackage[font=small,labelfont=bf]{caption} % small font for caption (and bold Figure word)
+\usepackage{fontawesome} % for github icons
 
 \pagestyle{fancy}
 \fancyhf{}% Clear header/footer
@@ -21,7 +22,7 @@
 \setlength{\headheight}{22pt}
 \hypersetup{
     colorlinks=true,
-    linkcolor=cyan,
+    linkcolor=black,
     filecolor=magenta,      
     urlcolor=blue,
     }
@@ -354,15 +355,16 @@ Questa pagina permette ad un utente autenticato di accedere alle funzioni di mod
 \includegraphics[width=\textwidth]{materiale/sito/Pagina Profilo.png}
 \newpage
 \subsection{Catalogo}
-Questa pagina raccoglie tutti i problemi disponibili, la loro difficoltà,categoria,ordine,titolo,e videoId, e gli offre a tutti gli utenti, in caso l'utente sia autenticato, verrà mostrato un componente che traccia i progressi del singolo utente, e i problemi risolto e/o aggiunti ai preferiti.
+Questa pagina raccoglie tutti i problemi disponibili, la loro difficoltà,categoria,ordine,titolo,e videoId, e gli offre a tutti gli utenti, in caso l'utente sia autenticato, verrà mostrato un componente che traccia i progressi del singolo utente, e i problemi risolto e/o aggiunti ai preferiti. Oltre a questo un qualsiasi
+utente cliccando sull'icona nella colonna "\textbf{Soluzione}" verrà aperta una overlay per visualizzare un video che offre suggerimenti su come risolvere il problema e la soluzione in linguaggio Javascript.
 Quando un qualsiasi utente si connette verrano mostrati degli "Scheletri" per mostrare all'utente che la pagina sta aspettando informazioni dal server, e che di conseguenza dovrà aspettare.\\\\
 \includegraphics[width=\textwidth]{materiale/sito/Catalogo.png}
 \newpage
 \subsection{Problema}
-Questa pagina esiste per ogni problema al momento disponibile è suddivisa in 3 parti:
+Questa pagina esiste per ogni problema al momento disponibile ed è suddivisa in 3 parti:
 \begin{itemize}
   \item Descrizione: Contiene tutte le informazioni e/o immagini relative al problema, oltre ad indicaticare e permettere di aggiungere un problema ai preferiti e visualizzare il numero di "like" e capire se il problema è gia stato risolto. Oltre a questo abbiamo un numero variabile di esempi per aiutare l'utente nella risoluzione del problema.
-  \item Console: Dove l'utente può scrivere codice e selezionare il proprio linguaggio preferito, al momento l'unico linguaggio disponibile è Javascript, siccome altri linguaggi richiederebbero server dedicati per la compilazione del file. Ricordiamo di non modificare la firma della funziona.
+  \item Console: Dove l'utente può scrivere codice e selezionare il linguaggio con cui risolvere il problema, al momento l'unico linguaggio disponibile è Javascript, siccome altri linguaggi richiederebbero server dedicati per la compilazione del file. Ricordiamo di non modificare la firma della funziona.
   \item Testcase: Dove l'utente è in grado di selezione quale test case vedere e sottomettere o provare a risolvere il problema attraverso appositi bottoni. (\textbf{Sottometti o Runna})
 \end{itemize}
 Oltre a questo ogni utente (anche non autenticato) è in grado di cliccare sull'icona a forma di orologio e cronometrare il proprio tempo di risoluzione del problema, il fermare o resettare il cronometro è compito dell'utente.\\\\
@@ -375,5 +377,48 @@ La repository del progetto è disponibile al seguente link:
 \begin{center}
   \href{https://github.com/G17-UniTn}{G17-UniTn}
 \end{center}
+La repository è suddivisa in 3 parti:
+\begin{itemize}
+  \item "Deliverables" contentente tutti i PDF e le immagini dei deliverables assieme ai file .tex
+  \item "Documents" contentente tutti i PDF e solo i PDF.
+  \item "CodeBase" contiene tutto il codice relativo al FrontEnd ed al BackEnd.
+\end{itemize}Il gruppo che ha sviluppato il progetto è composto dai seguenti membri:
+\begin{itemize}
+  \item Raffaele Castagna \href{https://github.com/Raffaele-Castagna}{\faGithub}
+  \item Zeno Saletti \href{https://github.com/zenosalty}{\faGithub}
+  \item Alberto Rovesti \href{https://github.com/uniBeto}{\faGithub}
+\end{itemize}Il sito è attualmente attivo ed hostato sulla piattaforma vercel, di seguito riportiamo il link per visualizzare la pagina web.
+\begin{center}
+  \url{https://sleepcode-dev.vercel.app/}
+\end{center}
+Per poter testare il sito abbiamo creato un account che ha i privilegi di amministratore:
 
+\begin{itemize}
+  \item Email: "admin@gmail.com", password: "PasswordAdmin2024!"
+\end{itemize}
+Ricordiamo che pultroppo non siamo stati in grado di dare tutte le funzionalità descritte nel D2 all'amministratore, tuttavia il pannello accessibile solo ad utenti amministratore è funzionante.\\\\
+Ricordiamo anche che il processo di invio email per recupero password e la pagina dove immettere la nuova password è gestito da terze parti, e le regole per la password non possono essere utilizzate se si richiede un recupero password.
+\newpage
+\section{Testing}
+Per eseguire il testi abbiamo utilizzato il pacchetto \href{https://jestjs.io/}{Jest} e l'abbiamo integrato con Firebase con il pacchetto \href{https://www.npmjs.com/package/firestore-jest-mock}{Jest-firestore-mock}, per simulare le richieste API abbiamo
+utilizzato il pacchetti \href{https://www.npmjs.com/package/node-mocks-http}{node-mocks-http}.\\
+Abbiamo definito 2 cartelle "\href{https://github.com/G17-UniTn/CodeBase/tree/master/__mocks__}{\_\_mocks\_\_} e \href{https://github.com/G17-UniTn/CodeBase/tree/master/__test__}{\_\_test\_\_}, la prima è stata creata per utilizzare le funzioni di "mock" di jest 
+che permettono a jest di "imitare" connessioni al database e/o credenziali, molto utile nel testing di API che richiedevano funzioni disponibili solo alla \href{https://firebase.google.com/docs/reference/admin}{SDK admin} di firebase
+\\\\
+Di seguito riportiamo le diverse test suite create\\\\
+\includegraphics[width=\textwidth]{materiale/testing/test-overview.png}
+\subsection{Test API}
+Di seguito sono mostrati i risultati delle test suite applicate sulle diverse API
+\subsubsection{test api/signup}
+\includegraphics[width=\textwidth]{materiale/testing/Signup.png}
+\subsubsection{test api/changepassword}
+\includegraphics[width=\textwidth]{materiale/testing/ChangePw.png}
+\subsubsection{test api/deleteAccount}
+\includegraphics[width=\textwidth]{materiale/testing/DeleteAccount.png}
+\subsubsection{test api/getProblems}
+\includegraphics[width=\textwidth]{materiale/testing/GetProblems.png}
+\newpage
+\subsection{Code Coverage}
+Di seguito riportiamo il code coverage generato da JEST.\\\\
+\includegraphics[width=\textwidth]{materiale/testing/Code Coverage.png}
 \end{document}
