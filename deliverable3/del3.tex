@@ -90,17 +90,22 @@ codice OCL, impiegato invece per catturare gli aspetti logici citati sopra,
 che non sarebbero altrimenti esprimibili formalmente mediante i soli diagrammi delle
 classi.
 
+Il diagramma finale, comprensivo di classi e codice OCL, è mostrato in
+Figura \ref{umlocl} presente nell'ultima pagina di questo documento
+
 
 \newpage
 \section{Definizione delle classi}
 Nella presente sezione vengono illustrate in linguaggio UML le classi
 previste dal progetto \textit{SleepCode}. Ogni componente del diagramma
 dei componenti, presente nel documento D2, viene qui rappresentato
-in forma di una o più classi. Le classi individuate sono costituite
-da un nome, un insieme di attributi che identificano i dati gestiti dalla
-classe stessa e una lista di metodi che definiscono le operazioni
-eseguibili da quella classe. Eventuali relazioni tra classi sono evidenziate
-da alcune associazioni.
+in forma di una o più classi.
+
+%Le classi individuate sono costituite
+%da un nome, un insieme di attributi che identificano i dati gestiti dalla
+%classe stessa e una lista di metodi che definiscono le operazioni
+%eseguibili da quella classe. Eventuali relazioni tra classi sono evidenziate
+%da alcune associazioni.
 
 \subsection{Utenti}
 L'attore che nel diagramma di contesto usufruisce delle funzionalità offerte
@@ -110,8 +115,8 @@ e amministratore. La Figura \ref{utenti} illustra le rispettive classi.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.67]{materiale/class-utenti.pdf}
-\caption{Definizione della classe \texttt{Utente} e delle sue generalizzazioni}
+\includegraphics[scale = 0.65]{materiale/class-utenti.pdf}
+\caption{Definizione della classe \texttt{Utente} e delle sue sottoclassi}
 \label{utenti}
 \end{figure}
 
@@ -119,14 +124,14 @@ Dal momento che tutte queste categorie condividono alcune funzionalità, è stat
 creata una classe \texttt{Utente}, che logicamente corrisponde alla categoria
 degli utenti anonimi, ovvero utenti che non hanno effettuato il login. Di fatto,
 non è prevista la memorizzazione di alcuna informazione riguardo a questa categoria
-di utenti e le uniche operazioni disponibili sono:
+di utenti e le operazioni disponibili sono:
 \begin{itemize}
-    \item \texttt{login()}: richiesta di accesso con sistema di credenziali interne.
-    \item \texttt{signUp()}: richiesta di registrazione con sistema di credenziali interne.
-    \item \texttt{loginGoogle(), signUpGoogle()}: controparti dei metodi precedenti, che
+    \item \texttt{login}: richiesta di accesso con sistema di credenziali interne.
+    \item \texttt{signUp}: richiesta di registrazione con sistema di credenziali interne.
+    \item \texttt{loginGoogle, signUpGoogle}: controparti dei metodi precedenti, che
     però si avvalgono dei servizi di autenticazione Google.
 
-    \item \texttt{recuperaAccount()}: richiesta di avvio della procedura di recupero account.
+    \item \texttt{recuperaAccount}: richiesta di avvio della procedura di recupero account.
 \end{itemize}
 Da questa prima classe viene definita, mediante generalizzazione, la classe
 \texttt{UtenteAutenticato}, che aggiunge metodi e attributi accessibili previo
@@ -145,30 +150,30 @@ login:
     \item \texttt{risolti, preferiti}: insiemi dei problemi, rispettivamente,
     risolti dall'utente e salvati come preferiti dall'utente.
 
-    \item \texttt{logout()}: richiesta di logout.
+    \item \texttt{logout}: richiesta di logout.
     
-    \item \texttt{setPassword(...)}: procedura atta a modificare la password
+    \item \texttt{setPassword}: procedura atta a modificare la password
     dell'account. Oltre alla nuova password, viene richiesta, per ragioni di
     sicurezza, la password attualmente in uso. Viene restituita una risposta
     di tipo booleana per segnalare il successo o l'insuccesso dell'operazione.
 
-    \item \texttt{setPreferito(...)}: questo metodo provvede ad aggiungere o
+    \item \texttt{setPreferito}: questo metodo provvede ad aggiungere o
     eliminare dalla lista dei preferiti dell'utente il problema fornito: se
     presente, esso viene rimosso dalla lista, altrimenti viene aggiunto
     (viene inoltre incrementato il valore dell'attributo \texttt{preferito}
     della classe \texttt{Problema}, descritta nelle prossime sezioni).
 
-    \item \texttt{getPreferiti()}: i preferiti dell'utente autenticato vengono
+    \item \texttt{getPreferiti}: i preferiti dell'utente autenticato vengono
     messi a diposizione all'esterno della classe grazie a questo metodo.
     Come descritto nel diagramma dei componenti, in questo modo viene
     realizzata l'interfaccia che passa i preferiti dell'utente dal Gestore
     Utente verso il Catalogo, in modo da visualizzarli nella lista dei
     problemi.
 
-    \item \texttt{deleteUser()}: il metodo per l'eliminazione dell'account
+    \item \texttt{deleteUser}: il metodo per l'eliminazione dell'account
     restituisce un valore booleano per notificare l'esito dell'operazione.
 
-    \item \texttt{getNumeroRisolti()}: il valore restituito rappresenta i
+    \item \texttt{getNumeroRisolti}: il valore restituito rappresenta i
     progressi dell'utente, ovvero il numero di problemi risolti rispetto
     al totale presente nel catalogo. Questo valore viene calcolato in base
     al numero di problemi presenti in \texttt{risolti} e attualmente
@@ -181,16 +186,15 @@ e dei problemi:
 
 
 Facendo riferimento al Diagramma dei Componenti del
-documento D2, queste classi sono state in parte estratte da tre componenti
+documento D2, queste classi sono state estratte da tre componenti
 distinti che si occupano dell'interazione con l'utente esterno: dalla
 \textit{Pagina di Autenticazione} sono stati raggruppate le interfacce che
-si trovano in \texttt{Utente}; in \texttt{UtenteAutenticato} sono state
+si trovano in \texttt{Utente}; nella classe \texttt{UtenteAutenticato} sono state
 raccolte le interfacce presenti nel componente \textit{Gestore Profilo};
 in \texttt{UtenteAmministratore} sono state raggruppate le interfacce
 definite nel componente \textit{Catalogo}.
 
 
-\newpage
 \subsection{Gestione autenticazione}
 Nel diagramma di contesto, l'autenticazione si avvale di due sistemi
 subordinati: \textit{Firebase}, che si occupa di memorizzare gli account
@@ -204,7 +208,7 @@ operazioni di registrazione e autenticazione. Per questo motivo, nel diagramma
 delle classi viene individuata la classe \texttt{Autenticazione} (Figura \ref{autenticaz}):
 \begin{itemize}
     \item \texttt{autorizzato}: questo attributo mantiene lo stato dell'autorizzazione
-    dell'utente
+    dell'utente.
 
     \item \texttt{registraAccount}: questo metodo esegue la registrazione
     comunicando con il servizio di database.
@@ -220,12 +224,12 @@ un valore booleano di ritorno.
 \begin{figure}[H]
 \centering
 %\hspace*{-1.9cm}
-\includegraphics[scale = 0.9]{materiale/class-autenticazione.pdf}
+\includegraphics[scale = 1.1]{materiale/class-autenticazione.pdf}
 \caption{Definnizione della classe \texttt{Autenticazione}}
 \label{autenticaz}
 \end{figure}
 
-\newpage
+
 \subsection{Recupero della password}
 Nel Diagramma dei Componenti viene individuata la \textit{Pagina di Recupero},
 che offre supporto agli utenti registrati, con sistema di credenziali interne,
@@ -243,19 +247,14 @@ interagendo tra l'altro con il servizio di posta elettronica.
     \item \texttt{inviaEmailRecupero}: il messaggio di recupero viene inviato
     all'indirizzo specificato. Questo metodo rappresenta la richieste di
     invio da parte del sistema nei confronti del servizio di posta.
-
-    \item \texttt{cambiaPassword}: la nuova password inserita dall'utente
-    viene aggiornata nel suo account. Come rappresentato dal Diagramma dei
-    Componenti, questa è la realizzazione dell'interfaccia fornita al
-    database. Questa operazione può essere effettuata solo su un account
-    già registrato con l'email specificata e quindi esistente, come
-    mostrato dal tipo del secondo parametro richiesto
-    (\texttt{UtenteAutenticato}).
 \end{itemize}
+Questa classe non si occupa dell'operazione di modifica effettiva della
+password, a carico di Firebase. Essa interagisce solo con il servizio
+di posta.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.9]{materiale/class-recupero.pdf}
+\includegraphics[scale = 0.85]{materiale/class-recupero.pdf}
 \caption{Specifica architetturale del componente \textit{Pagina di Recupero} con la classe \texttt{RecuperoPwUtente}}
 \label{recupero}
 \end{figure}
@@ -275,7 +274,7 @@ componente del diagramma più modulare e meno monolitico.
 
 \begin{figure}[H]
 \centering
-\hspace*{-1.2cm}
+\hspace*{-3cm}
 \includegraphics[scale = 0.9]{materiale/class-catalogo.pdf}
 \caption{Specifica architetturale del componente \textit{Catalogo} con la classe \texttt{Catalogo}}
 \label{catalog}
@@ -290,18 +289,18 @@ raccoglie i problemi disponibili sulla piattaforma, quindi \texttt{Catalogo}
     \item \texttt{problemi[1...*]}: questo attributo indica che il catalogo
     consiste in una lista di almeno un problema.
 
-    \item \texttt{mostraSuggerimento(...)}: sulla base del metodo selezionato, il metodo
+    \item \texttt{mostraSuggerimento}: sulla base del metodo selezionato, il metodo
     interagisce con YouTube per richiedere la riproduzione del video-suggerimento.
 
-    \item \texttt{mostraPreferiti(...)}: sulla base dei dati dell'account
+    \item \texttt{mostraPreferiti}: sulla base dei dati dell'account
     dell'utente (autenticato), vengono contrassegnati i problemi preferiti
     all'interno del catalogo.
 
-    \item \texttt{mostraStato(...)}: come per il metodo precedente, il
+    \item \texttt{mostraStato}: come per il metodo precedente, il
     \texttt{Catalogo} mostra lo stato dei problemi, evidenziando quelli
     già risolti dall'utente autenticato.
 
-    \item \texttt{mostraProblema(...)}: questo metodo richiede l'apertura
+    \item \texttt{mostraProblema}: questo metodo richiede l'apertura
     di un problema selezionato dall'utente, permettendo di consultare il
     contenuto e accedere alla rispettiva area di esercitazione.
 \end{itemize}
@@ -339,7 +338,28 @@ La Figura \ref{esercitaz} illustra le classi che costituiscono il componente
 
     \item \texttt{preferito:} contatore che registra la quantità di utenti
     registrati che hanno contrassegnato questo specifico problema.
+
+    \item \texttt{mostraContenuto}: questo metodo permette di comporre
+    l'area di consultazione del problema, con il suo titolo, testo ed
+    esempi.
+
+    \item \texttt{getSuggerimento}: questo metodo rende disponibile
+    all'esterno l'indirizzo del video YouTube associato (il suggerimento),
+    in particolare per permettere al catalogo di riprodurlo.
+
+    \item \texttt{submitCodice}: il codice scritto dall'utente viene
+    sottoposto ai test.
+
+    \item \texttt{aggiornaProgressi}: questo metodo viene utilizzato
+    quando un utente autenticato risolve il problema con successo.
+
+    \item \texttt{getTestCase}: i test cases associati al problema
+    vengono forniti esternamente per mostrarli nell'area di esercitazione.
+
 \end{itemize}
+Ogni problema memorizzato nel database viene identificato grazie a
+\texttt{prob\_id}.
+\\\\
 Al fine di alleggerire la classe \texttt{Problema}, è stata accolta la scelta di
 dedicare una classe \texttt{TestCase}. Essa ha il compito di raccogliere le informazioni
 chiave necessarie al test del codice fornito dall'utente (il quale si esercita
@@ -357,6 +377,34 @@ essere avviato, fermato e reimpostato a 0 (condizioni più dettagliate
 di questa classe sono mostrate nel codice OCL delle prossime sezioni).
 
 
+\newpage
+\subsection{Gestione profilo: preferiti e progressi}
+Il componente \textit{Gestore Profilo}, descritto nel diagramma dei componenti
+del documento D1, è costituito dalla classe \texttt{UtenteAutenticato},
+come anticipato nelle sezioni precedenti. In Figura \ref{profile} sono
+mostrate le associazioni che mettono in relazione la classe \texttt{UtenteAutenticato}
+e la classe \texttt{Problema}, al fine di descrivere le seguenti
+caratteristiche:
+\begin{itemize}
+    \item Risolve: questa relazione di aggregazione evidenzia la possibilità
+    per un utente autenticato di memorizzare (automaticamente) i problemi
+    risolti con successo, definendo i progressi.
+
+    \item Preferisce: con questa relazione di aggregazione, le classi
+    \texttt{Problema} e \texttt{UtenteAutenticato} vengono unite per realizzare i preferiti
+    dell'utente.
+\end{itemize}
+
+\begin{figure}[H]
+\hspace*{-2.7cm}
+\centering
+\includegraphics[scale = 0.8]{materiale/class-profilo.pdf}
+\caption{Associazioni tra \texttt{Problema} e \texttt{UtenteAutenticato}}
+\label{profile}
+\end{figure}
+
+
+
 
 \newpage
 \section{Specifiche in codice OCL}
@@ -367,6 +415,10 @@ non descrivibile con i soli diagrammi delle classi in UML.
 
 
 \subsection{Autenticazione}
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.9]{materiale/ocl-autenticazione.pdf}
+\end{figure}
 
 \subsection{Recupero della password}
 Con riferimento alla classe \texttt{RecuperoPwUtente},
@@ -376,14 +428,14 @@ possa essere impiegata.
 \centering
 \includegraphics[scale = 1]{materiale/ocl-recuperoemail.pdf}
 \end{figure}
-\noindent Inoltre, \texttt{cambiaPassword}, può essere utilizzato per il
-recupero di account non-Google e solo se viene fornita una password
-valida da associare ad un account esistente (da recuperare) con indirizzo
-email specificato.
-\begin{figure}[H]
-\centering
-\includegraphics[scale = 0.9]{materiale/ocl-recuperopassword.pdf}
-\end{figure}
+%\noindent Inoltre, \texttt{cambiaPassword}, può essere utilizzato per il
+%recupero di account non-Google e solo se viene fornita una password
+%valida da associare ad un account esistente (da recuperare) con indirizzo
+%email specificato.
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale = 0.9]{materiale/ocl-recuperopassword.pdf}
+%\end{figure}
 
 \subsection{Utente autenticato}
 La classe \texttt{UtenteAutenticato} prevede che i campi \texttt{user\_id},
@@ -405,7 +457,7 @@ attuale venga inserita correttamente e solo se la nuova password
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.9]{materiale/ocl-newpassword.pdf}
+\includegraphics[scale = 1.1]{materiale/ocl-newpassword.pdf}
 \end{figure}
 
 \subsection{Modifica del catalogo}
@@ -413,14 +465,30 @@ Nei documenti precedenti viene sottolineato che i campi descrittivi e
 strutturali di ogni problema del catalogo devono essere sempre presenti.
 Con riferimento alla classe \texttt{UtenteAmministratore}, oltre alle
 cardinalità specificate tra parentesi quadre per alcuni parametri in input
-dei metodi \texttt{aggiungiProblema} e \texttt{modificaProblema}, vengono
+dei metodi di tale classe, vengono
 definite queste ulteriori condizioni:
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.8]{materiale/ocl-amministratore.pdf}
+\includegraphics[scale = 1]{materiale/ocl-amministratore.pdf}
 \end{figure}
 
-\newpage
+\subsection{Problema}
+Ogni problema potrebbe avere un numero diverso di test case (sempre e
+comunque maggiore o uguale a 3). Viene dunque posto il seguente vincolo
+sulla selezione dei test case disponibili per ogni problema nel catalogo,
+facendo riferimento alla classe \texttt{Problema}:
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 1.1]{materiale/ocl-problemaindicetc.pdf}
+\end{figure}
+
+\noindent Tenendo sempre in considerazione la classe \texttt{Problema}, è
+previsto che il valore di \textit{preferito} sia sempre non negativo:
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 1.1]{materiale/ocl-problemainv.pdf}
+\end{figure}
+
 \subsection{Test Cases}
 La classe \texttt{TestCase} prevede che i suoi attributi non siano mai
 vuoti, affinché i test cases possano essere utilizzati per verificare
@@ -428,9 +496,10 @@ la correttezza del codice sottoposto dall'utente.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = 0.8]{materiale/ocl-testcase.pdf}
+\includegraphics[scale = 1.1]{materiale/ocl-testcase.pdf}
 \end{figure}
 
+\newpage
 \subsection{Cronometro}
 Sono elencati di seguito i dettagli riguardanti il funzionamento della
 classe \texttt{Cronometro}:
@@ -440,23 +509,23 @@ classe \texttt{Cronometro}:
 
     \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.8]{materiale/ocl-tempo.pdf}
+    \includegraphics[scale = 1]{materiale/ocl-tempo.pdf}
     \end{figure}
 
-    \item Il metodo \texttt{start()} esegue l'avvio della registrazione
+    \item Il metodo \texttt{start} esegue l'avvio della registrazione
     del tempo trascorso, a partire dal valore contenuto in
     \texttt{tempo\_attuale}, nella situazione in cui il cronometro non è
     attivo. L'attributo \texttt{attivo} viene opportunamente aggiornato.
-    L'operazione opposta è rappresentata da \texttt{stop()}, utilizzabile
+    L'operazione opposta è rappresentata da \texttt{stop}, utilizzabile
     quando il cronometro è attivo. Il
-    metodo \texttt{reset()} riporta il cronometro al suo stato iniziale,
+    metodo \texttt{reset} riporta il cronometro al suo stato iniziale,
     quindi inattivo e tempo registrato 0.
 
     \begin{figure}[H]
-    \includegraphics[scale = 0.8]{materiale/ocl-start.pdf}
-    \includegraphics[scale = 0.8]{materiale/ocl-stop.pdf}
+    \includegraphics[scale = 0.9]{materiale/ocl-start.pdf}
+    \includegraphics[scale = 0.9]{materiale/ocl-stop.pdf}
     \centering
-    \includegraphics[scale = 0.8]{materiale/ocl-reset.pdf}
+    \includegraphics[scale = 0.9]{materiale/ocl-reset.pdf}
     \end{figure}
 \end{itemize}
 
@@ -468,18 +537,14 @@ classe \texttt{Cronometro}:
 
 
 
-
-
 \newpage
 \section{Diagramma delle classi con codice OCL}
-In Figura \ref{umlocl} è riportato un diagramma che mostra nell'insieme
-sia le classi individuate che il relativo codice OCL, definiti nelle
-sezioni precedenti.
+La Figura \ref{umlocl} unisce le classi e le specifiche in OCL precedentemente definite.
 
 \begin{figure}[H]
 \centering
-\hspace*{-2cm}
-\includegraphics[scale = 0.54]{materiale/classdiagram.pdf}
+\hspace*{-2.5cm}
+\includegraphics[scale = 0.6]{materiale/classdiagram.pdf}
 \caption{Diagramma delle classi insieme al codice OCL}
 \label{umlocl}
 \end{figure}
