@@ -381,7 +381,7 @@ l'\textit{account} (\textcolor{blue}{\underbar{\hyperref[signup]{RF \ref*{signup
 \textbf{Salvataggio codice } Il codice scritto dall'utente autenticato, al contrario di
 quanto accade per gli utenti anonimi in
 \textcolor{blue}{\underbar{\hyperref[exesession]{RF \ref*{exesession}.3}}},
-non viene perso al momento dell'uscita dall'area del problema, cosicché
+non viene perso al momento dell'uscita dall'area di esercitazione, cosicché
 quanto scritto possa essere ripreso in momenti successivi.
 \end{funcreq}
 
@@ -430,6 +430,8 @@ L'eliminazione è consentita sia a utenti registrati mediante il sistema di
 credenziali interno sia a coloro che hanno effettuato la registrazione per
 mezzo di un account Google. L'operazione di eliminazione prevede la
 digitazione della parola chiave \texttt{CONFERMA}.
+
+
 \end{funcreq}
 
 \begin{center}
@@ -533,8 +535,11 @@ Devono essere curate le seguenti caratteristiche visive:
     per mezzo di opportune segnalazioni grafiche come \textit{skeleton
     screens}\footnote{Una breve descrizione degli skeleton screens è
     reperibile al seguente \href{https://www.nngroup.com/articles/skeleton-screens/}{\textcolor{blue}{\underbar{link}}}.}
-    o \textit{popup}. Alcuni esempi di queste situazioni di attesa sono
-    l'apertura di un problema o la conferma di registrazione dell'account.
+    o \textit{popup}.
+    
+    Alcuni esempi di queste situazioni di attesa sono
+    il caricamento della lista dei problemi del catalogo,
+    l'apertura di un problema e la conferma di registrazione dell'account.
 \end{enumerate}
 \end{nonfuncreq}
 
@@ -542,7 +547,7 @@ Devono essere curate le seguenti caratteristiche visive:
 \begin{nonfuncreq}
 \textbf{Lingua di sistema }
 Il servizio viene erogato in lingua italiana. I video di suggerimento
-(\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}}}})
+(\textcolor{blue}{\underbar{\hyperref[probcatalogue]{RF \ref*{probcatalogue}.1}}})
 potrebbero essere distribuiti in lingua inglese.
 \end{nonfuncreq}
 
@@ -663,7 +668,13 @@ dei \textit{preferiti}).
 \label{exepage}
 \textbf{Area di esercitazione }
 Una pagina dedicata raccoglie le funzionalità di consultazione dettagliata
-del problema e risoluzione di quest'ultimo.
+del problema e risoluzione di quest'ultimo. Vengono distinte tre zone
+principali: l'area di consultazione del problema (a sinistra), che mostra
+il suo contenuto; l'area dedicata alla scrittura di codice (a destra,
+dove è visibile il \textit{driver code}), con i linguaggi selezionabili;
+una console dove gestire la sottomissione del codice e visualizzare
+l'esito dei test.
+
 \end{frontend}
 \begin{figure}[H]
 \centering
@@ -677,7 +688,9 @@ del problema e risoluzione di quest'ultimo.
 \textbf{Logout }
 Un pulsante di logout è raggiungibile in ogni momento da parte dell'utente
 autenticato, all'interno di una barra di navigazione che mostra anche lo
-\textit{username} scelto in fase di registrazione.
+\textit{username} scelto in fase di registrazione. Come è possibile notare
+in tutti i mock-up, la barra di navigazione è raggiungibile in ogni momento,
+al fine di rendere più rapidi i movimenti all'interno della piattaforma.
 \end{frontend}
 \begin{figure}[H]
 \centering
