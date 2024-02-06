@@ -86,19 +86,38 @@ Zeno \textsc{Saletti}}
 \subsection{Scopo del documento}
 Il presente documento riporta tutte le informazioni richieste e necessarie per lo sviluppo
 di una parte dell'applicazione SleepCode. In particolare, esso presenta:
-\begin{itemize}
-  \item user flow diagrams relativi alle operazioni che l'utente può effettuare sull'applicazione;
-  \item documentazione delle API attraverso API Model e Modello delle Risorse;
-  \item API fornite per interagire con l'applicazione e loro descrizione;
-  \item presentazione del design finale del front-end;
-  \item informazioni su GitHub repositories e deployment;
-  \item risultati delle test suite applicata sulle API realizzate.
-\end{itemize}
+user flow diagrams relativi alle operazioni che l'utente può effettuare sull'applicazione;
+documentazione delle API attraverso API Model e Modello delle Risorse;
+API fornite per interagire con l'applicazione e loro descrizione;
+presentazione del design finale del front-end;
+informazioni su GitHub repositories e deployment;
+risultati delle test suite applicata sulle API realizzate.
+
+
+%\begin{itemize}
+%  \item user flow diagrams relativi alle operazioni che l'utente può effettuare sull'applicazione;
+%  \item documentazione delle API attraverso API Model e Modello delle Risorse;
+%  \item API fornite per interagire con l'applicazione e loro descrizione;
+%  \item presentazione del design finale del front-end;
+%  \item informazioni su GitHub repositories e deployment;
+%  \item risultati delle test suite applicata sulle API realizzate.
+%\end{itemize}
 
 \subsection{Soddisfacimento dei requisiti}
-Vengono specificati di seguito i requisiti funzionali (RF) e non funzionali
-(RNF) implementati interamente nell'applicazione finale. Essi fanno riferimento
+Vengono specificati di seguito i requisiti funzionali (RF)
+implementati nell'applicazione finale, insieme ai requisiti non funzionali
+(RNF) ai quali è stata dedicata particolare attenzione durante
+lo sviluppo. Essi fanno riferimento
 ai requisiti presentati nel documento D1:
+\begin{description}
+  \item[Requisiti Funzionali] 1 - Registrazione, 2 - Login, 4 - Recupero password, 5 - Consultazione del catalogo, 6 - Consultazione di un problema, 7 - Effettuare un'esercitazione, 8 - Verifica della correttezza dell'algoritmo, 9 - Cronometro, 10 - Metadati aggiuntivi, 11 - Salvataggio codice, 12 - Progressi, 13 - Aggiornamento password, 14 - Logout, 15 - Eliminazione account.
+  \item[Requisiti Non Funzionali] 2 - Compatibilità, 3 - Usabilità, 4 - Aspetto, 5 - Lingua di sistema, 6 - Prestazioni, 10 - Connessione sicura, 11 - Password Strength.
+\end{description}
+Non rientrano nella realizzazione finale del progetto i seguenti requisiti funzionali:
+RF 3 - Autenticazione Google, RF 16 - Aggiungere un problema, RF 17 - Modificare un problema, RF 18 - Eliminare un problema.
+
+
+
 
 \newpage
 \section{User Flows}
@@ -273,8 +292,9 @@ Analizzando il diagramma delle classi sono state individuate due risorse princip
 \end{itemize}
 
 \begin{figure}[H]
+  \hspace*{-2cm}
   \centering
-  \includegraphics[width=\textwidth]{materiale/Resource diagram.png}
+  \includegraphics[scale = 0.6]{materiale/Resource diagram.pdf}
 \end{figure}
 
 \subsubsection{Resource Models}
@@ -282,11 +302,16 @@ Il Resource model esprime, per ogni API, le diverse risposte, come le richieste 
 Ogni API dovrà elaborare il body (se lo richiede), ovvero le informazioni necessarie per il corretto funzionamento, e risponderà appropriatamente con uno \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Status}{Status Code}.
 Il body viene rappresentato tramite una freccia che uscente e le risposte sono rappresentate tramite delle freccie entranti.\\
 
-\textbullet \textbf{ User API}\\
-\includegraphics[width=\textwidth]{materiale/Resource Models Users.png}
+\subsubsection*{User API}
+\begin{figure}[H]
+  \hspace*{-2.4cm}
+  \centering
+  \includegraphics[scale = 0.64]{materiale/Resource Models Users.pdf}
+\end{figure}
+
 \newpage
 \textbullet \textbf{ Problem API}\\
-\includegraphics[width=\textwidth]{materiale/Resource Models Problems.png}
+\includegraphics[width=\textwidth]{materiale/Resource Models Problems.pdf}
 
 \subsection{Sviluppo API}
 In questa sezione mostreremo il codice relativo alle API.
@@ -437,8 +462,11 @@ Questa pagina esiste per ogni problema al momento disponibile ed è suddivisa in
   \item Console: Dove l'utente può scrivere codice e selezionare il linguaggio con cui risolvere il problema, al momento l'unico linguaggio disponibile è Javascript, siccome altri linguaggi richiederebbero server dedicati per la compilazione del file. Ricordiamo di non modificare la firma della funziona.
   \item Testcase: Dove l'utente è in grado di selezione quale test case vedere e sottomettere o provare a risolvere il problema attraverso appositi bottoni. (\textbf{Sottometti o Runna})
 \end{itemize}
-Oltre a questo ogni utente (anche non autenticato) è in grado di cliccare sull'icona a forma di orologio e cronometrare il proprio tempo di risoluzione del problema, il fermare o resettare il cronometro è compito dell'utente.\\\\
-In caso l'utente connesso alla pagina non è autenticato esso non potrà tracciare i propri progressi nè aggiungere problemi ai preferiti, in caso si prova a eseguire quest'ultima azione verrà riportato un messaggio di errore.\\\\
+Oltre a questo ogni utente (anche non autenticato) è in grado di cliccare sull'icona a forma di orologio e cronometrare il proprio tempo di risoluzione del problema, il fermare o resettare il cronometro è compito dell'utente.
+\\\\
+In caso l'utente connesso alla pagina non è autenticato esso non potrà tracciare i propri progressi nè aggiungere problemi ai preferiti, in caso si prova a eseguire quest'ultima azione verrà riportato un messaggio di errore.
+\\\\
+
 
 \begin{figure}[H]
   \centering
@@ -460,22 +488,30 @@ L'organizzazione è suddivisa in tre repositories:
 \end{itemize}
 Il gruppo che ha sviluppato il progetto all'interno dell'organizzazione G17-UniTn, sul sito GitHub, è composto dai seguenti membri:
 \begin{itemize}
-  \item Raffaele Castagna \href{https://github.com/Raffaele-Castagna}{\faGithub}
-  \item Zeno Saletti \href{https://github.com/zenosalty}{\faGithub}
-  \item Alberto Rovesti \href{https://github.com/uniBeto}{\faGithub}
+  \item Raffaele Castagna \href{https://github.com/Raffaele-Castagna}{\textcolor{black}{\faGithub}}
+  \item Zeno Saletti \href{https://github.com/zenosalty}{\textcolor{black}{\faGithub}}
+  \item Alberto Rovesti \href{https://github.com/uniBeto}{\textcolor{black}{\faGithub}}
 \end{itemize}
 Il sito è attualmente attivo ed hostato sulla piattaforma Vercel. Di seguito è riportato il link per visualizzare il sito web:
 \begin{center}
   \url{https://sleepcode-dev.vercel.app/}
 \end{center}
-Per poter testare il sito è stato creato un account che gode dei privilegi di amministratore:
+Per poter testare il sito a livello di accesso amministratore, è stato creato un account che gode dei privilegi di amministratore:
 
 \begin{center}
   Email: \texttt{admin@gmail.com}, password: \texttt{PasswordAdmin2024!}
 \end{center}
+Per testare agevolmente il funzionamento dei test cases, viene fornito
+in CodeBase il file
+\begin{center}
+  \texttt{soluzioni.txt}
+\end{center}
+contenente algoritmi corretti per risolvere tutti i problemi
+presenti nel catalogo al momento del completamento del progetto (è sufficiente
+copiare e incollare i codici nella console dell'area di esercitazione).
 
 \noindent Ricordiamo che pultroppo non siamo stati in grado di dare tutte le funzionalità descritte nel D2 all'amministratore, tuttavia il pannello accessibile solo ad utenti amministratore è funzionante.\\\\
-Ricordiamo anche che il processo di invio email per recupero password e la pagina dove immettere la nuova password è gestito da terze parti, e le regole per la password non possono essere utilizzate se si richiede un recupero password.
+Ricordiamo anche che il processo di invio email per recupero password e la pagina dove immettere la nuova password è gestito da terze parti, e le regole per la password non possono essere utilizzate se si richiede un recupero password. In altre parole, non è stato possibile applicare il RNF 11 durante il recupero della password.
 
 
 
