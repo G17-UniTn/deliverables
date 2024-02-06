@@ -90,8 +90,8 @@ codice OCL, impiegato invece per catturare gli aspetti logici citati sopra,
 che non sarebbero altrimenti esprimibili formalmente mediante i soli diagrammi delle
 classi.
 
-Il diagramma finale, comprensivo di classi e codice OCL, è mostrato in
-Figura \ref{umlocl} presente nell'ultima pagina di questo documento
+Il diagramma finale, comprensivo di classi e codice OCL, è mostrato nella
+Figura \ref{umlocl}, presente nell'ultima pagina di questo documento.
 
 
 \newpage
@@ -207,6 +207,12 @@ occupa di interagire con tali sistemi esterni in modo da convalidare le
 operazioni di registrazione e autenticazione. Per questo motivo, nel diagramma
 delle classi viene individuata la classe \texttt{Autenticazione} (Figura \ref{autenticaz}):
 \begin{itemize}
+    \item \texttt{email}
+    \item \texttt{password}
+    \item \texttt{isGoogle}: parametro che distingue autenticazioni mediate
+    da Google, quindi relative ad account Google collegati alla piattaforma.
+    In caso di account Google, la password non è necessaria per questa classe.
+
     \item \texttt{autorizzato}: questo attributo mantiene lo stato dell'autorizzazione
     dell'utente.
 
@@ -224,7 +230,7 @@ un valore booleano di ritorno.
 \begin{figure}[H]
 \centering
 %\hspace*{-1.9cm}
-\includegraphics[scale = 1.1]{materiale/class-autenticazione.pdf}
+\includegraphics[scale = 0.85]{materiale/class-autenticazione.pdf}
 \caption{Definnizione della classe \texttt{Autenticazione}}
 \label{autenticaz}
 \end{figure}
@@ -240,6 +246,13 @@ questi motivi viene definita la classe \texttt{RecuperoPwUtente} (Figura \ref{re
 raccoglie attributi e metodi necessari per effettuare il recupero,
 interagendo tra l'altro con il servizio di posta elettronica.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.85]{materiale/class-recupero.pdf}
+\caption{Specifica architetturale del componente \textit{Pagina di Recupero} con la classe \texttt{RecuperoPwUtente}}
+\label{recupero}
+\end{figure}
+
 \begin{itemize}
     \item \texttt{email}: l'indirizzo email di recupero viene memorizzato
     per conservarlo durante tutta la procedura di recupero.
@@ -251,13 +264,6 @@ interagendo tra l'altro con il servizio di posta elettronica.
 Questa classe non si occupa dell'operazione di modifica effettiva della
 password, a carico di Firebase. Essa interagisce solo con il servizio
 di posta.
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale = 0.85]{materiale/class-recupero.pdf}
-\caption{Specifica architetturale del componente \textit{Pagina di Recupero} con la classe \texttt{RecuperoPwUtente}}
-\label{recupero}
-\end{figure}
 
 
 

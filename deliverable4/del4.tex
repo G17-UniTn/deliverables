@@ -115,35 +115,88 @@ ai requisiti presentati nel documento D1:
 \end{description}
 Non rientrano nella realizzazione finale del progetto i seguenti requisiti funzionali:
 RF 3 - Autenticazione Google, RF 16 - Aggiungere un problema, RF 17 - Modificare un problema, RF 18 - Eliminare un problema.
-
+\\
+Si sottolinea che il RF 16 è stato in parte implementato, ma solo sotto forma di mock-up di un \textit{admin panel}, in quanto esso non è stato soddisfatto nella sua interezza.
+Inoltre, il recupero della password non permette la realizzazione del RNF 11 all'atto dell'inserimento della nuova password, dal momento che
+parte del recupero della password è gestito per mezzo di Firebase.
 
 
 
 \newpage
 \section{User Flows}
-In questa sezione del documento di sviluppo vengono riportati gli User Flows. Lo scopo degli User Flows
-è quello di poter specificare le azioni disponibili all'utente e le conseguenza di esse.
+In questa sezione del documento di sviluppo vengono riportati gli
+User Flows. Lo scopo degli User Flows
+è quello di poter specificare le azioni disponibili all'utente e
+le conseguenza di esse.
 
-Sono stati individuati 2 tipi di User flow, uno per 
-tutto ciò che riguarda l'autenticazione e il profilo utente, e un'altro che riguarda le azioni disponibili ai diversi ruoli di utente.
-Teniamo a ricordare che tutte le immagini sono disponibili ad alta risoluzione nell'appropriata cartella del D4.
-Di seguito esponiamo la legenda per i simboli utilizzati
+Sono stati individuati diversi user flows, suddivisi in base ad
+alcune tasks raggiungibili dall'utente che naviga nella piattaforma.
+Teniamo a ricordare che tutte le immagini sono disponibili ad
+alta risoluzione nell'appropriata cartella del D4.
+Di seguito esponiamo la legenda per i simboli utilizzati.
 
 \begin{center}
-  \includegraphics{materiale/UserFlow Symbols.png}
+  \includegraphics{materiale/uflegenda.pdf}
 \end{center}
-\newpage
-\subsection{Azioni riguardanti l'autenticazione}
-Questo User Flow è specifico per tutte le azioni che riguardo l'autenticazion e ciò che fa parte di essa. Si ricorda che in ogni momento della navigazione
-l'utente è in grado di poter autenticarsi,tornare alla home e al catalogo tramite una apposita Navbar che è presente in ogni pagina del sito web. Parte di queste interazioni sono state rimosse per
-rendere l'User Flow pià leggibile.
-  \includegraphics[width=\textwidth]{materiale/UserFlow Autenticazione.png}
-\newpage
-\subsection{Azioni riguardanti l'utilizzo del sito}
-Questo User Flow è specifico per tutte le azioni che ogni tipo di utente può intraprendere nell'utilizzo del sito, teniamo a precisare che la funzione di aggiunta di un problema tramite DB non è stata sviluppata, al momento il form esiste
-ma non dialoga col database, ci scusiamo per l'incovenienza. Ricordiamo che tramite Navbar l'utente è in grado di intraprendere tutte le azioni descritte nell'User Flow precedente.
+I punti di partenza (ellisse verde) e i punti di arrivo (ellisse rossa)
+possono eventualmente specificare la pagina nella quale la task
+termina.
+\\\\
+Si sottolinea che l'aspetto sequenziale degli user flows mostrato
+nei diagrammi può essere interrotto, in ogni momento e pagina del
+sito, da interazioni effettuate con la \textit{barra di navigazione}.
+In particolare, dalla barra di navigazione è sempre possibile tornare
+alla home page e al catalogo. Inoltre, la barra di navigazinoe può
+adattarsi a seconda del livello di accesso dell'utente, aggiungendo
+ulteriori interazioni possibili. Per semplificare i diagrammi ed
+evitare eccessive ridondanze, le funzionalità della barra di navigazione
+vengono descritte nella sezione dedicata al front-end.
 
-  \includegraphics[width=\textwidth]{materiale/UserFlow Utilizzo.png}
+\subsection{Registrazione e login}
+\begin{figure}[H]
+\centering
+\includegraphics[width = \linewidth]{materiale/ufsignuplogin.pdf}
+\end{figure}
+
+\subsection{Risolvere un problema}
+\begin{figure}[H]
+\centering
+\includegraphics[width = \linewidth]{materiale/ufesercizio.pdf}
+\end{figure}
+  
+
+\subsection{Gestire il profilo}
+In questa sezione sono mostrati user flows legati alla gestione dei
+dati personalizzabili dall'utente, principalmente legati all'account.
+
+\subsubsection*{Modificare la password ed eliminare l'account}
+Questi user flows mostrano rispettivamente come l'utente autenticato può modificare
+la password e come può eliminare il proprio account.
+\begin{figure}[H]
+\centering
+\includegraphics[width = \linewidth]{materiale/ufuserpage.pdf}
+\end{figure}
+Notare come, al termine dell'eliminazione dell'account, la piattaforma
+reagisce conducendo l'utente alla home page.
+
+\newpage\subsubsection*{Gestire i preferiti}
+Questo user flow mostra come un utente può interagire con la piattaforma
+al fine di modificare i problemi preferiti. Il diagramma distingue il
+comportamento del flow a seconda del livello di accesso dell'utente.
+\begin{figure}[H]
+\centering
+\includegraphics[width = \linewidth]{materiale/uflike.pdf}
+\end{figure}
+    
+
+\subsection{Aggiungere un problema}
+In questo user flow si assume che l'utente abbia i privilegi
+del livello amministratore.
+\begin{figure}[H]
+\centering
+\includegraphics[width = \linewidth]{materiale/ufadmin.pdf}
+\end{figure}
+  
 
 \newpage
 \section{Documentazione e implementazione dell'applicazione}
@@ -271,7 +324,7 @@ se si intende promuovere l'utente al livello di amministratore.
   \includegraphics[width=5cm]{materiale/User Template.png}
 \end{figure}
 
-\newpage
+
 \subsection{Project API}
 In questa parte del documento sono presentate le API dell'applicazione SleepCode.
 Esse saranno prima descritte e, successivamente, verrà mostrato il loro codice.
@@ -300,7 +353,7 @@ Analizzando il diagramma delle classi sono state individuate due risorse princip
 \subsubsection{Resource Models}
 Il Resource model esprime, per ogni API, le diverse risposte, come le richieste sono strutturate e come ci si può accedere.
 Ogni API dovrà elaborare il body (se lo richiede), ovvero le informazioni necessarie per il corretto funzionamento, e risponderà appropriatamente con uno \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Status}{Status Code}.
-Il body viene rappresentato tramite una freccia che uscente e le risposte sono rappresentate tramite delle freccie entranti.\\
+Il body viene rappresentato tramite una freccia che uscente e le risposte sono rappresentate tramite delle freccie entranti.
 
 \subsubsection*{User API}
 \begin{figure}[H]
@@ -313,11 +366,15 @@ Il body viene rappresentato tramite una freccia che uscente e le risposte sono r
 \textbullet \textbf{ Problem API}\\
 \includegraphics[width=\textwidth]{materiale/Resource Models Problems.pdf}
 
+\newpage
 \subsection{Sviluppo API}
 In questa sezione mostreremo il codice relativo alle API.
-
 \subsubsection{Signup}
-\includegraphics[width=\textwidth,height=19cm]{materiale/API/signup.png}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale = 0.8]{materiale/API/signup.png}
+\end{figure}
+
 Questa API permette ad un utente di registrarsi all'interno dell'applicazione: essa richiede un'email, un username e una password.
 Attraverso la libreria Yup viene verificato che le informazioni inserite dall'utente siano accettabili; se accettabili, il sistema proverà a registrare l'utente.
 In caso vi siano problemi di conflitto nella creazione dell'utente, l'HTTP response avrà Status Code 409; in caso di una password e/o username malformati avremo uno Status code 400;
@@ -384,8 +441,8 @@ La Home è la prima schermata che un utente vede appena si connette al sito. Ess
 \begin{itemize}
   \item Home: Questo bottone, se cliccato, riporterà l'utente alla pagina principale.
   \item Catalogo: Questo bottone, se cliccato, porterà l'utente alla pagina del catalogo contente tutti i problemi.
-  \item Admin Panel: Questo bottone appare solo se nel Database l'utente ha come ruolo "Administrator", ricordiamo che come precedentemente illustrato il ruole di ogni utente è "User" e per promuovere un utente
-  si dovrà interagire con la \textbf{CLI} di Firebase per modificare il ruolo del singolo utente, questo può essere fatto solo da persone connesse al progetto sul sito di Firebase.
+  \item Admin Panel: Questo bottone appare solo se nel Database l'utente ha come ruolo ``Administrator". Eicordiamo che il ruolo di ogni utente è ``User" e per promuovere un utente
+  si dovrà interagire con la \textbf{CLI} di Firebase per modificare il ruolo del singolo utente. Questo può essere fatto solo da persone connesse al progetto sul sito di Firebase.
   \item Pagina Profilo: Questo Bottone appare solo se l'utente è autenticato. Se si posiziona il cursore del mouse al di sopra, verrà visualizzata l'email dell'utente attualmente collegato; se cliccato, si arriverà alla pagina del profilo utente.
   \item Bottone di Login: Questo bottone compare solo se l'utente non è attualmente autenticato; ha lo scopo di aprire il form di login.
   \item Bottone di Logout: Questo bottone compare solo se l'utente è autenticato, e se cliccato effettua l'operazione di logout.
@@ -397,10 +454,9 @@ La Home è la prima schermata che un utente vede appena si connette al sito. Ess
 \end{figure}
 
 \subsection{Login}
-Questo componente permette ad un utente non ancora autenticato ma registrato di entrare con le proprie credenziali.
-A causa di regole imposte da firebase e non modificabili,
+Questo componente permette ad un utente non ancora autenticato ma registrato di entrare con le proprie credenziali\footnote{A causa di regole imposte da firebase e non modificabili,
 la password che viene data non viene controllata se conforme dato che il modello
-di recupero password di Firebase non permette l'impostazione di regole per la password strength nel piano gratuito.
+di recupero password di Firebase non permette l'impostazione di regole per la password strength nel piano gratuito}.
 Se l'utente ha inserito le proprie credenziali e sono corrette allora verrà autenticato con messaggio di conferma,
 altrimenti avrà un messaggio di errore.
 
@@ -428,7 +484,7 @@ a causa di limitazioni col piano Firebase non possiamo impostare regole per le p
 \end{figure}
 
 \subsection{Pannello Admin}
-Questo componente (non completamente sviluppato) permette ad un utente amministratore di aggiungere problemi al database, pultroppo per mancanza di tempo non siamo riusciti a sviluppare la funzione in tempo, ci scusiamo per l'incovenienza.\\\\
+Questo componente (non completamente sviluppato) permette ad un utente amministratore di aggiungere problemi al database.
 
 \begin{figure}[H]
   \centering
@@ -444,8 +500,8 @@ Questa pagina permette ad un utente autenticato di accedere alle funzioni di mod
 \end{figure}
 
 \subsection{Catalogo}
-Questa pagina raccoglie tutti i problemi disponibili, la loro difficoltà,categ-\\
-oria,ordine,titolo,e videoId, e gli offre a tutti gli utenti, in caso l'utente sia autenticato, verrà mostrato un componente
+Questa pagina raccoglie tutti i problemi disponibili, la loro difficoltà, categoria
+ordine, titolo e videoId, e gli offre a tutti gli utenti, in caso l'utente sia autenticato, verrà mostrato un componente
  che traccia i progressi del singolo utente, e i problemi risolto e/o aggiunti ai preferiti. Oltre a questo un qualsiasi
 utente cliccando sull'icona nella colonna "\textbf{Soluzione}" verrà aperta una overlay per visualizzare un video che offre suggerimenti su come risolvere il problema e la soluzione in linguaggio Javascript.
 Quando un qualsiasi utente si connette verrano mostrati degli "Scheletri" per mostrare all'utente che la pagina sta aspettando informazioni dal server, e che di conseguenza dovrà aspettare.\\\\
@@ -464,7 +520,7 @@ Questa pagina esiste per ogni problema al momento disponibile ed è suddivisa in
 \end{itemize}
 Oltre a questo ogni utente (anche non autenticato) è in grado di cliccare sull'icona a forma di orologio e cronometrare il proprio tempo di risoluzione del problema, il fermare o resettare il cronometro è compito dell'utente.
 \\\\
-In caso l'utente connesso alla pagina non è autenticato esso non potrà tracciare i propri progressi nè aggiungere problemi ai preferiti, in caso si prova a eseguire quest'ultima azione verrà riportato un messaggio di errore.
+In caso l'utente connesso alla pagina non dovesse essere autenticato, egli non potrà tracciare i propri progressi, né aggiungere problemi ai preferiti; in caso si tenti di eseguire quest'ultima azione, verrà riportato un messaggio di errore.
 \\\\
 
 
@@ -509,11 +565,6 @@ in CodeBase il file
 contenente algoritmi corretti per risolvere tutti i problemi
 presenti nel catalogo al momento del completamento del progetto (è sufficiente
 copiare e incollare i codici nella console dell'area di esercitazione).
-
-\noindent Ricordiamo che pultroppo non siamo stati in grado di dare tutte le funzionalità descritte nel D2 all'amministratore, tuttavia il pannello accessibile solo ad utenti amministratore è funzionante.\\\\
-Ricordiamo anche che il processo di invio email per recupero password e la pagina dove immettere la nuova password è gestito da terze parti, e le regole per la password non possono essere utilizzate se si richiede un recupero password. In altre parole, non è stato possibile applicare il RNF 11 durante il recupero della password.
-
-
 
 
 \newpage
